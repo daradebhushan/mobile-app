@@ -1,0 +1,87 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar class="bg-white dark:bg-black text-gray-900 dark:text-white">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="font-black">{{ 'OWNER_DASHBOARD' | translate }}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="fetchStats()">
+                <ion-icon name="refresh-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+            <ion-button (click)="logout()" color="danger">
+                <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-[#F8FAFC] dark:bg-black">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <div class="p-4 space-y-4">
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-2 gap-4">
+            <div
+                class="bg-white dark:bg-gray-900 p-5 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col items-center text-center">
+                <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-3">
+                    <ion-icon name="shield-checkmark-outline" class="text-xl"></ion-icon>
+                </div>
+                <div class="text-2xl font-black text-gray-900 dark:text-white">{{ stats.totalAdmins }}</div>
+                <div class="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">{{
+                    'TOTAL_ADMINS' | translate
+                    }}</div>
+            </div>
+
+            <div
+                class="bg-white dark:bg-gray-900 p-5 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col items-center text-center">
+                <div class="w-10 h-10 rounded-xl bg-green-50 text-green-600 flex items-center justify-center mb-3">
+                    <ion-icon name="people-outline" class="text-xl"></ion-icon>
+                </div>
+                <div class="text-2xl font-black text-gray-900 dark:text-white">{{ stats.totalUsers }}</div>
+                <div class="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">{{
+                    'TOTAL_USERS' | translate
+                    }}</div>
+            </div>
+
+            <div
+                class="bg-white dark:bg-gray-900 p-5 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col items-center text-center">
+                <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-3">
+                    <ion-icon name="card-outline" class="text-xl"></ion-icon>
+                </div>
+                <div class="text-2xl font-black text-gray-900 dark:text-white">{{ stats.activeSubscriptions }}</div>
+                <div class="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">{{
+                    'SUBSCRIPTIONS' |
+                    translate }}</div>
+            </div>
+
+            <div
+                class="bg-white dark:bg-gray-900 p-5 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col items-center text-center">
+                <div class="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center mb-3">
+                    <ion-icon name="server-outline" class="text-xl"></ion-icon>
+                </div>
+                <div class="text-xl font-black text-gray-800 dark:text-white">{{ stats.totalDataUsageBytes | fileSize }}
+                </div>
+                <div class="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">Data Usage
+                </div>
+            </div>
+        </div>
+
+        <!-- Placeholders for Charts (Visual Parity) -->
+        <div class="space-y-4">
+            <div
+                class="bg-white dark:bg-gray-900 p-6 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-800 h-64 flex items-center justify-center">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">User Distribution Graph (Coming
+                    Soon)</p>
+            </div>
+            <div
+                class="bg-white dark:bg-gray-900 p-6 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-800 h-64 flex items-center justify-center">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Data Usage Trends (Coming Soon)
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <ion-loading [isOpen]="loading" message="Loading Stats..."></ion-loading>
+</ion-content>

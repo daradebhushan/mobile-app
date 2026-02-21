@@ -1,0 +1,48 @@
+<ion-tabs #tabs>
+
+    <ion-tab-bar slot="bottom"
+        class="border-t border-gray-100 dark:border-gray-800 bg-white/95 dark:bg-black/95 backdrop-blur-md pb-1 pt-1">
+
+        <!-- OWNER TABS -->
+        <ng-container *ngIf="isOwner$ | async">
+            <ion-tab-button tab="owner/dashboard">
+                <ion-icon name="stats-chart-outline"></ion-icon>
+                <ion-label>Dashboard</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="owner/admin-management">
+                <ion-icon name="people-circle-outline"></ion-icon>
+                <ion-label>Admins</ion-label>
+            </ion-tab-button>
+        </ng-container>
+
+        <!-- ADMIN / STAFF TABS -->
+        <ng-container *ngIf="!(isOwner$ | async)">
+            <ion-tab-button tab="home">
+                <ion-icon name="grid-outline"></ion-icon>
+                <ion-label>{{ 'NAV_HOME' | translate }}</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="tasks">
+                <ion-icon name="list-outline"></ion-icon>
+                <ion-label>{{ 'NAV_TASKS' | translate }}</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="complaints">
+                <ion-icon name="alert-circle-outline"></ion-icon>
+                <ion-label>{{ 'NAV_COMPLAINTS' | translate }}</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="admin/users" *ngIf="isAdmin$ | async">
+                <ion-icon name="people-outline"></ion-icon>
+                <ion-label>{{ 'NAV_STAFF' | translate }}</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="admin/settings" *ngIf="isAdmin$ | async">
+                <ion-icon name="settings-outline"></ion-icon>
+                <ion-label>{{ 'NAV_SETTINGS' | translate }}</ion-label>
+            </ion-tab-button>
+        </ng-container>
+    </ion-tab-bar>
+
+</ion-tabs>

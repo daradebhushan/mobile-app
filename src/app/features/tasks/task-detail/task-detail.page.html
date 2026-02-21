@@ -1,0 +1,371 @@
+<ion-header class="ion-no-border group relative z-50">
+    <!-- Premium Glass Header -->
+    <div class="bg-white/80 dark:bg-[#0B0F19]/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 px-4 pt-4 pb-3 shadow-sm transition-all duration-300 relative"
+        style="padding-top: calc(1rem + var(--ion-safe-area-top));">
+
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <ion-buttons slot="start">
+                    <ion-back-button defaultHref="/tabs/tasks" class="text-gray-800 dark:text-white"
+                        icon="chevron-back"></ion-back-button>
+                </ion-buttons>
+                <h1 class="text-xl font-black text-gray-900 dark:text-white tracking-tight">{{ 'TASK_DETAILS' |
+                    translate }}</h1>
+            </div>
+
+            <ion-buttons slot="end" class="space-x-1">
+                <ion-button (click)="onEdit()" [disabled]="!task"
+                    class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">
+                    <ion-icon name="create" slot="icon-only" class="text-xl"></ion-icon>
+                </ion-button>
+                <ion-button (click)="onDelete()" [disabled]="!task"
+                    class="w-10 h-10 rounded-full bg-red-50 text-red-500 dark:bg-red-900/20 dark:text-red-400">
+                    <ion-icon name="trash" slot="icon-only" class="text-xl"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+        </div>
+    </div>
+</ion-header>
+
+<ion-content class="bg-[#F8FAFC] dark:bg-[#0B0F19]">
+    <div class="p-5 pb-32 space-y-6" *ngIf="task; else loading">
+
+        <!-- Title & Description Hero Card -->
+        <div
+            class="bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800/50 p-6 rounded-[1.5rem] border border-gray-100 dark:border-gray-800 relative overflow-hidden shadow-sm">
+            <!-- Accent Bar -->
+            <div class="absolute top-0 left-0 bottom-0 w-1.5 bg-gradient-to-b from-saffron-400 to-orange-600"></div>
+            <!-- Decorative Pattern -->
+            <div class="absolute -right-8 -top-8 w-32 h-32 bg-saffron-500/5 rounded-full blur-2xl pointer-events-none">
+            </div>
+
+            <div class="relative z-10">
+                <div class="flex items-center justify-between mb-4 pl-2">
+                    <span
+                        class="text-[11px] font-black text-saffron-600 dark:text-saffron-400 tracking-widest uppercase bg-saffron-50 dark:bg-saffron-900/20 px-3 py-1.5 rounded-lg border border-saffron-100 dark:border-saffron-800/50">
+                        {{ task.type === 'Complaint' ? 'COMPLAINT' : 'NP-' + task.id }}
+                    </span>
+
+                    <!-- View Complaint Button -->
+                    <button *ngIf="task.relatedComplaint || task.relatedComplaintId"
+                        (click)="viewComplaint(task.relatedComplaint?.id || task.relatedComplaintId)"
+                        class="flex items-center space-x-1.5 bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 px-3 py-1.5 rounded-lg border border-blue-100 dark:border-blue-800/50 text-[10px] font-bold uppercase tracking-wide active:scale-95 transition-all shadow-sm">
+                        <ion-icon name="document-text" class="text-sm"></ion-icon>
+                        <span>View Source</span>
+                    </button>
+                </div>
+
+                <h1 class="text-2xl font-black text-gray-900 dark:text-white mb-3 leading-tight pl-2">{{ task?.title }}
+                </h1>
+                <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-0 pl-2 font-medium">{{
+                    task?.description }}</p>
+            </div>
+        </div>
+
+        <!-- Meta Grid -->
+        <div class="grid grid-cols-2 gap-4">
+
+            <!-- Due Date -->
+            <div
+                class="bg-white dark:bg-gray-900 p-4 rounded-[1.25rem] border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col items-center text-center justify-center space-y-2">
+                <div
+                    class="w-10 h-10 rounded-full bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-orange-500 mb-1">
+                    <ion-icon name="calendar" class="text-xl"></ion-icon>
+                </div>
+                <div class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">{{ 'DUE_DATE' | translate }}
+                </div>
+                <div class="text-[13px] font-bold text-gray-900 dark:text-white w-full truncate px-2">
+                    {{ task?.dueDate ? (task.dueDate | date:'mediumDate') : ('NO_DATE' | translate) }}
+                </div>
+            </div>
+
+            <!-- Department -->
+            <div
+                class="bg-white dark:bg-gray-900 p-4 rounded-[1.25rem] border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col items-center text-center justify-center space-y-2">
+                <div
+                    class="w-10 h-10 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-500 mb-1">
+                    <ion-icon name="business" class="text-xl"></ion-icon>
+                </div>
+                <div class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">{{ 'DEPARTMENT_LABEL' |
+                    translate }}</div>
+                <div class="text-[13px] font-bold text-gray-900 dark:text-white w-full truncate px-2">
+                    {{ task?.department?.name || ('GENERAL' | translate) }}
+                </div>
+            </div>
+
+            <!-- Assigned To -->
+            <div
+                class="bg-white dark:bg-gray-900 p-4 rounded-[1.25rem] border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col items-center text-center justify-center space-y-2">
+                <div
+                    class="w-10 h-10 rounded-full bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-1 font-black text-lg border border-purple-100 dark:border-purple-800/50">
+                    {{ task?.assignedStaff?.name ? task.assignedStaff.name.charAt(0).toUpperCase() : '?' }}
+                </div>
+                <div class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">{{ 'ASSIGNED_TO' | translate
+                    }}</div>
+                <div class="text-[13px] font-bold text-gray-900 dark:text-white w-full truncate px-2">
+                    {{ task?.assignedStaff?.name || ('UNASSIGNED' | translate) }}
+                </div>
+            </div>
+
+            <!-- Location -->
+            <div
+                class="bg-white dark:bg-gray-900 p-4 rounded-[1.25rem] border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col items-center text-center justify-center space-y-2">
+                <div
+                    class="w-10 h-10 rounded-full bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-red-500 mb-1">
+                    <ion-icon name="location" class="text-xl"></ion-icon>
+                </div>
+                <div class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">{{ 'LOCATION' | translate }}
+                </div>
+                <div class="text-[13px] font-bold text-gray-900 dark:text-white w-full truncate px-2">
+                    {{ task?.location || 'General' }}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Timeline -->
+        <div class="space-y-4">
+            <h3
+                class="text-[11px] font-black text-gray-900 dark:text-white uppercase tracking-widest flex items-center px-1">
+                <ion-icon name="time" class="mr-2 text-saffron-500 text-lg"></ion-icon>
+                {{ 'TIMELINE' | translate }}
+            </h3>
+            <div
+                class="bg-white dark:bg-gray-900 p-6 rounded-[1.5rem] shadow-sm border border-gray-100 dark:border-gray-800">
+                <div class="relative pl-6 border-l-2 border-dashed border-gray-200 dark:border-gray-700 py-2 space-y-8">
+
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[33px] top-1 bg-green-500 h-4 w-4 rounded-full border-4 border-white dark:border-gray-900 shadow-sm">
+                        </div>
+                        <div class="text-[10px] text-gray-400 font-bold mb-1 uppercase tracking-widest">{{
+                            task?.createdDate | date:'short' }}</div>
+                        <div class="text-sm font-black text-gray-900 dark:text-white">{{ 'TASK_CREATED' | translate }}
+                        </div>
+                    </div>
+
+                    <div class="relative" *ngIf="task?.assignedStaff">
+                        <div
+                            class="absolute -left-[33px] top-1 bg-blue-500 h-4 w-4 rounded-full border-4 border-white dark:border-gray-900 shadow-sm">
+                        </div>
+                        <div class="text-[10px] text-gray-400 font-bold mb-1 uppercase tracking-widest">{{ 'ASSIGNED' |
+                            translate }}</div>
+                        <div class="text-sm font-black text-gray-900 dark:text-white">To {{ task?.assignedStaff?.name }}
+                        </div>
+                    </div>
+
+                    <div class="relative opacity-60">
+                        <div
+                            class="absolute -left-[33px] top-1 bg-gray-300 dark:bg-gray-600 h-4 w-4 rounded-full border-4 border-white dark:border-gray-900 shadow-sm">
+                        </div>
+                        <div class="text-sm font-black text-gray-500">{{ 'IN_PROGRESS' | translate }}</div>
+                        <div class="text-[10px] text-gray-400 font-bold mt-1">Pending Completion</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Attachments -->
+        <div class="space-y-4">
+            <h3
+                class="text-[11px] font-black text-gray-900 dark:text-white uppercase tracking-widest flex items-center px-1">
+                <ion-icon name="attach" class="mr-2 text-saffron-500 text-lg"></ion-icon>
+                {{ 'ATTACHMENTS' | translate }}
+            </h3>
+
+            <!-- List -->
+            <div class="space-y-3" *ngIf="attachments?.length">
+                <div *ngFor="let file of attachments"
+                    class="bg-white dark:bg-gray-900 p-4 rounded-[1.25rem] shadow-sm border border-gray-100 dark:border-gray-800 flex items-center justify-between active:scale-[0.98] transition-transform">
+                    <div class="flex items-center overflow-hidden flex-1" (click)="downloadFile(file)">
+                        <div
+                            class="w-12 h-12 rounded-[1rem] bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mr-4 text-blue-500 shrink-0 border border-blue-100 dark:border-blue-800/50">
+                            <ion-icon name="document-text" class="text-2xl"></ion-icon>
+                        </div>
+                        <div class="truncate">
+                            <div class="text-[13px] font-bold text-gray-900 dark:text-white truncate mb-0.5">{{
+                                file.fileName }}</div>
+                            <div class="text-[9px] text-blue-500 uppercase font-bold tracking-widest">{{ file.fileType
+                                }}</div>
+                        </div>
+                    </div>
+                    <button
+                        class="w-10 h-10 flex items-center justify-center text-red-500 bg-red-50 dark:bg-red-900/20 rounded-full ml-3 hover:bg-red-100 active:scale-90 transition-all"
+                        (click)="deleteAttachment(file); $event.stopPropagation()">
+                        <ion-icon name="trash" class="text-lg"></ion-icon>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Upload Box -->
+            <div class="bg-white dark:bg-gray-900 p-6 rounded-[1.5rem] border-2 border-dashed border-gray-200 dark:border-gray-700 hover:border-saffron-400 hover:bg-saffron-50 dark:hover:bg-saffron-900/10 transition-all cursor-pointer group"
+                (click)="fileInput.click()">
+                <div class="flex flex-col items-center justify-center space-y-3 text-center">
+                    <input type="file" multiple (change)="onTaskFileSelected($event)" #fileInput class="hidden" />
+
+                    <div
+                        class="w-14 h-14 rounded-full bg-gray-50 dark:bg-gray-800 group-hover:bg-white dark:group-hover:bg-gray-900 flex items-center justify-center text-gray-400 group-hover:text-saffron-500 shadow-sm transition-all">
+                        <ion-icon name="cloud-upload" class="text-3xl"></ion-icon>
+                    </div>
+
+                    <div *ngIf="!newTaskFiles || newTaskFiles.length === 0">
+                        <span class="text-[13px] font-black text-gray-900 dark:text-white block mb-1">{{ 'ADD_FILES' |
+                            translate }}</span>
+                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Tap to browse</span>
+                    </div>
+
+                    <div *ngIf="newTaskFiles && newTaskFiles.length > 0" class="w-full text-center space-y-3">
+                        <div
+                            class="inline-flex items-center px-4 py-1.5 bg-saffron-50 dark:bg-saffron-500/20 text-saffron-600 dark:text-saffron-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-saffron-200 dark:border-saffron-500/30">
+                            <ion-icon name="document-attach" class="mr-1.5 text-sm"></ion-icon>
+                            {{ newTaskFiles.length }} Selected: <span class="ml-1 truncate max-w-[100px]">{{
+                                taskFileNames }}</span>
+                        </div>
+
+                        <div class="flex gap-2 justify-center" (click)="$event.stopPropagation()">
+                            <button (click)="fileInput.click()"
+                                class="px-5 py-2.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-[1rem] text-[10px] font-black uppercase tracking-widest transition-all hover:bg-gray-200 active:scale-95">
+                                {{ 'CHANGE' | translate }}
+                            </button>
+                            <button (click)="uploadTaskAttachments()"
+                                class="px-6 py-2.5 bg-gradient-to-br from-saffron-500 to-orange-600 text-white rounded-[1rem] text-[10px] font-black uppercase tracking-widest shadow-lg shadow-orange-500/30 transition-all active:scale-95">
+                                {{ 'UPLOAD' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comments -->
+        <div class="space-y-4">
+            <h3
+                class="text-[11px] font-black text-gray-900 dark:text-white uppercase tracking-widest flex items-center px-1">
+                <ion-icon name="chatbubbles" class="mr-2 text-saffron-500 text-lg"></ion-icon>
+                {{ 'COMMENTS' | translate }}
+            </h3>
+
+            <!-- List -->
+            <div class="space-y-4" *ngIf="comments?.length">
+                <div *ngFor="let comment of comments"
+                    class="bg-white dark:bg-gray-900 p-5 rounded-[1.5rem] shadow-sm border border-gray-100 dark:border-gray-800 relative">
+
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-10 h-10 rounded-full bg-indigo-50 dark:bg-indigo-900/20 flex items-center justify-center text-sm font-black text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-800/50">
+                                {{ comment?.user?.name ? comment.user.name.charAt(0).toUpperCase() : 'U' }}
+                            </div>
+                            <div>
+                                <div class="font-black text-[13px] text-gray-900 dark:text-white">{{ comment?.user?.name
+                                    || 'User' }}</div>
+                                <div class="text-[9px] text-gray-400 font-bold uppercase tracking-widest">{{
+                                    comment?.timestamp | date:'short' }}</div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="canEdit(comment) && editingCommentId !== comment.id"
+                            class="flex space-x-1 border border-gray-100 dark:border-gray-800 rounded-full p-1 bg-gray-50 dark:bg-gray-800/50">
+                            <button (click)="startEditing(comment)"
+                                class="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-blue-500 hover:bg-white dark:hover:bg-gray-700 transition-all">
+                                <ion-icon name="create" class="text-sm"></ion-icon>
+                            </button>
+                            <button (click)="deleteComment(comment.id)"
+                                class="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-white dark:hover:bg-gray-700 transition-all">
+                                <ion-icon name="trash" class="text-sm"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div *ngIf="editingCommentId === comment.id; else displayComment" class="mt-3">
+                        <textarea [(ngModel)]="editedCommentText"
+                            class="w-full bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-200 dark:border-gray-700 rounded-[1rem] px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-saffron-500/20 focus:border-saffron-500 mb-3 min-h-[80px] font-medium leading-relaxed"></textarea>
+                        <div class="flex justify-end space-x-2">
+                            <button (click)="cancelEditing()"
+                                class="text-[10px] font-black uppercase tracking-widest text-gray-500 px-4 py-2 rounded-[1rem] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                                {{ 'CANCEL' | translate }}
+                            </button>
+                            <button (click)="saveEdit(comment.id)"
+                                class="bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-[10px] font-black uppercase tracking-widest px-5 py-2 rounded-[1rem] shadow-sm active:scale-95 transition-all">
+                                {{ 'SAVE' | translate }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <ng-template #displayComment>
+                        <p
+                            class="text-[13px] text-gray-700 dark:text-gray-300 whitespace-pre-wrap leading-relaxed font-medium mt-1">
+                            {{ comment?.text }}</p>
+                    </ng-template>
+
+                    <!-- Comment Attachments -->
+                    <div *ngIf="comment?.attachments?.length"
+                        class="mt-4 flex flex-wrap gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
+                        <div *ngFor="let att of comment.attachments" (click)="downloadFile(att)"
+                            class="flex items-center bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 active:scale-95 transition-all cursor-pointer hover:border-blue-300">
+                            <ion-icon name="document-attach" class="text-sm text-blue-500 mr-2"></ion-icon>
+                            <span
+                                class="text-[10px] font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 truncate max-w-[120px]">{{
+                                att.fileName }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="!comments?.length" class="text-center py-6">
+                <p class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">No comments yet</p>
+            </div>
+        </div>
+
+    </div>
+
+    <ng-template #loading>
+        <div class="flex flex-col items-center justify-center h-full space-y-5 pb-20">
+            <div class="w-16 h-16 relative">
+                <div class="absolute inset-0 border-4 border-gray-100 dark:border-gray-800 rounded-full"></div>
+                <div
+                    class="absolute inset-0 border-4 border-saffron-500 rounded-full border-t-transparent animate-spin">
+                </div>
+            </div>
+            <div class="text-[11px] font-black text-gray-400 uppercase tracking-widest">{{ 'LOADING' | translate }}...
+            </div>
+        </div>
+    </ng-template>
+</ion-content>
+
+<!-- Stick Note Input -->
+<div
+    class="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-[#0B0F19]/95 backdrop-blur-xl border-t border-gray-200/50 dark:border-gray-800/50 p-4 pb-6 z-50">
+    <div class="max-w-screen-md mx-auto">
+        <div class="relative flex items-end gap-3">
+            <div class="flex-1 relative">
+                <textarea type="text" [(ngModel)]="newComment" [placeholder]="'WRITE_A_NOTE' | translate" rows="1"
+                    class="block w-full bg-gray-100 dark:bg-gray-800 dark:text-white border border-transparent rounded-[1.25rem] pl-5 pr-14 py-4 text-[14px] font-medium focus:ring-2 focus:ring-saffron-500/20 focus:border-saffron-500 focus:bg-white outline-none transition-all resize-none max-h-32 min-h-[52px] shadow-sm placeholder-gray-400"></textarea>
+
+                <input type="file" multiple (change)="onCommentFileSelected($event)" #commentFileInput class="hidden" />
+                <button (click)="commentFileInput.click()"
+                    class="absolute right-3 bottom-2 p-2.5 text-gray-400 hover:text-saffron-600 transition-colors rounded-full hover:bg-gray-200/50 dark:hover:bg-gray-700">
+                    <ion-icon name="attach" class="text-xl"></ion-icon>
+                    <span *ngIf="newCommentFiles && newCommentFiles.length > 0"
+                        class="absolute top-1 right-1 h-2.5 w-2.5 rounded-full bg-red-500 border-2 border-white dark:border-gray-800"></span>
+                </button>
+            </div>
+
+            <button (click)="addComment()"
+                [disabled]="!newComment.trim() && (!newCommentFiles || newCommentFiles.length === 0)"
+                class="h-[52px] w-[52px] flex items-center justify-center bg-gradient-to-br from-saffron-500 to-orange-600 disabled:opacity-50 disabled:from-gray-300 disabled:to-gray-400 disabled:shadow-none text-white rounded-[1.25rem] shadow-lg shadow-orange-500/30 active:scale-90 transition-all flex-shrink-0">
+                <ion-icon name="send" class="text-xl ml-1"></ion-icon>
+            </button>
+        </div>
+
+        <!-- File Preview strip -->
+        <div *ngIf="newCommentFiles && newCommentFiles.length > 0" class="mt-3 flex gap-2 overflow-x-auto pb-1 px-1">
+            <div
+                class="bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-3 py-1.5 rounded-lg text-[10px] font-black tracking-widest uppercase flex items-center whitespace-nowrap shadow-sm">
+                <ion-icon name="document-attach" class="mr-1.5 text-sm"></ion-icon>
+                {{ newCommentFiles.length }} files attached
+            </div>
+        </div>
+    </div>
+</div>

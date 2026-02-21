@@ -1,0 +1,140 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Chatbot Settings</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-segment [value]="activeTab" (ionChange)="segmentChanged($event)">
+            <ion-segment-button value="sim">
+                <ion-label>Simulator</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="config">
+                <ion-label>Config</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding bg-gray-50 dark:bg-black">
+
+    <!-- CONFIG TAB -->
+    <div *ngIf="activeTab === 'config'" class="animate-fade-in-up">
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>Twilio Connection</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-item>
+                    <ion-label position="stacked">Account SID</ion-label>
+                    <ion-input [(ngModel)]="settings.accountSid" placeholder="AC..."></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="stacked">Auth Token</ion-label>
+                    <ion-input type="password" [(ngModel)]="settings.authToken" placeholder="Auth Token"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="stacked">WhatsApp Number</ion-label>
+                    <ion-input [(ngModel)]="settings.phoneNumber" placeholder="whatsapp:+91..."></ion-input>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>Fallback Messages</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-item>
+                    <ion-label position="stacked">Welcome (Legacy)</ion-label>
+                    <ion-textarea [(ngModel)]="settings.welcomeMsgEn" rows="3"
+                        placeholder="Welcome text..."></ion-textarea>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>Chatbot Flow Configuration (JSON)</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-item>
+                    <ion-label position="stacked">Flow JSON</ion-label>
+                    <ion-textarea [(ngModel)]="settings.chatbotFlow" rows="10" placeholder='{"questions": [...]}'
+                        class="font-mono text-xs"></ion-textarea>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
+
+        <div class="ion-padding">
+            <ion-button expand="block" (click)="save()" [disabled]="isLoading">
+                <span *ngIf="!isLoading">Save Configuration</span>
+                <span *ngIf="isLoading">Saving...</span>
+            </ion-button>
+        </div>
+    </div>
+
+    <!-- SIMULATOR TAB -->
+    <div *ngIf="activeTab === 'sim'" class="flex flex-col h-full">
+        <div class="bg-green-600 dark:bg-green-900 text-white p-3 flex items-center shadow-md rounded-t-lg">
+            <div class="w-8 h-8 bg-gray-300 rounded-full mr-3 overflow-hidden flex items-center justify-center">
+                <ion-icon name="logo-whatsapp" class="text-xl text-green-700"></ion-icon>
+            </div>
+            <div>
+                <h3 class="font-bold text-sm">Chatbot Simulator</h3>
+                <p class="text-xs opacity-75">Online</p>
+            </div>
+            <ion-button slot="end" size="small" fill="clear" color="light" (click)="clearChat()" class="ml-auto">
+                Reset
+            </ion-button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#e5ddd5] dark:bg-gray-900 min-h-[400px]">
+            <div *ngIf="chatHistory.length === 0"
+                class="text-center text-xs text-gray-500 bg-yellow-100 p-2 rounded shadow mb-4">
+                Send "Hi" to start testing your flow.
+            </div>
+
+            <div *ngFor="let msg of chatHistory" class="flex w-full" [ngClass]="{'justify-end': msg.sender === 'user'}">
+                <div class="max-w-[80%] rounded-lg p-2 text-sm shadow-sm whitespace-pre-wrap"
+                    [ngClass]="msg.sender === 'user' ? 'bg-[#dcf8c6] dark:bg-green-700 text-gray-800 dark:text-white' : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100'">
+                    {{ msg.text }}
+                </div>
+            </div>
+
+            <div *ngIf="simLoading" class="flex justify-start w-full">
+                <div class="bg-white rounded-lg p-2 shadow-sm"><span class="animate-pulse">...</span></div>
+            </div>
+        </div>
+
+    </div>
+
+
+</ion-content>
+
+<ion-footer *ngIf="activeTab === 'sim'" class="ion-no-border">
+    <div class="bg-gray-200 dark:bg-gray-950 p-2 flex flex-col">
+        <div *ngIf="selectedFile"
+            class="px-3 py-1 mb-2 text-xs text-blue-600 flex items-center bg-blue-50 rounded-lg self-start">
+            <span class="truncate max-w-[200px]">{{ selectedFile.name }}</span>
+            <ion-icon name="close-circle" (click)="selectedFile = null; fileInput.value = ''"
+                class="ml-2 text-red-500 text-lg"></ion-icon>
+        </div>
+        <div class="flex items-center space-x-2 w-full">
+            <input type="file" #fileInput (change)="onFileSelected($event)" class="hidden"
+                accept="image/*,application/pdf">
+            <button (click)="fileInput.click()" [class.text-blue-600]="selectedFile"
+                class="h-10 px-3 bg-white text-gray-500 rounded-full flex items-center justify-center shadow-md">
+                <ion-icon name="attach" class="text-xl mr-1"></ion-icon>
+                <span class="text-xs font-bold uppercase">Attach</span>
+            </button>
+            <input type="text" [(ngModel)]="simMessage" (keyup.enter)="sendSimMessage()" placeholder="Type a message..."
+                class="flex-1 rounded-full px-4 py-2 border-none outline-none text-sm bg-white dark:bg-gray-800 dark:text-white h-10">
+            <button (click)="sendSimMessage()"
+                class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white shadow-md">
+                <ion-icon name="send"></ion-icon>
+            </button>
+        </div>
+    </div>
+</ion-footer>

@@ -1,0 +1,210 @@
+<ion-header class="ion-no-border group">
+    <div class="bg-white/90 dark:bg-black/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 px-6 pt-4 pb-6 shadow-sm transition-all duration-300 relative z-20"
+        style="padding-top: calc(1rem + var(--ion-safe-area-top));">
+
+        <div class="max-w-3xl mx-auto w-full">
+            <!-- Header Title -->
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-2xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">{{
+                        'TASK_LIST' | translate }}
+                    </h2>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{{ tasks.length }} {{
+                        'TASKS' |
+                        translate }}</p>
+                </div>
+                <button routerLink="/tabs/home"
+                    class="w-10 h-10 rounded-2xl bg-gray-50 dark:bg-gray-800 flex items-center justify-center text-gray-400 active:scale-95 transition-transform hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <ion-icon name="home-outline" class="text-lg"></ion-icon>
+                </button>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="relative group mb-6">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <ion-icon name="search-outline"
+                        class="text-gray-400 text-lg group-focus-within:text-gray-900 dark:group-focus-within:text-white transition-colors"></ion-icon>
+                </div>
+                <input type="text" [ngModel]="searchText" (ngModelChange)="onSearch($event)"
+                    class="block w-full pl-12 pr-4 py-4 bg-white dark:bg-gray-800 border-none rounded-2xl text-sm font-bold text-gray-900 dark:text-white placeholder-gray-400 focus:ring-0 modern-shadow transition-all"
+                    [placeholder]="'SEARCH' | translate">
+            </div>
+
+            <!-- Filters Grid -->
+            <div class="space-y-4">
+                <!-- Type Tabs -->
+                <div class="md:grid md:grid-cols-2 md:gap-4">
+                    <div class="bg-gray-100 dark:bg-gray-800 p-1.5 rounded-2xl flex relative overflow-hidden h-fit">
+                        <button (click)="setType('')"
+                            class="flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 relative z-10"
+                            [ngClass]="taskType === '' ? 'bg-black text-white dark:bg-white dark:text-black shadow-md' : 'text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700'">
+                            {{ 'FILTER_ALL' | translate }}
+                        </button>
+                        <button (click)="setType('Complaint')"
+                            class="flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 relative z-10"
+                            [ngClass]="taskType === 'Complaint' ? 'bg-black text-white dark:bg-white dark:text-black shadow-md' : 'text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700'">
+                            {{ 'TYPE_COMPLAINT' | translate }}
+                        </button>
+                        <button (click)="setType('Internal')"
+                            class="flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 relative z-10"
+                            [ngClass]="taskType === 'Internal' ? 'bg-black text-white dark:bg-white dark:text-black shadow-md' : 'text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700'">
+                            {{ 'TYPE_DIRECT' | translate }}
+                        </button>
+                    </div>
+
+                    <!-- Priority & Status Dropdowns -->
+                    <div class="grid grid-cols-2 gap-3 mt-3 md:mt-0">
+                        <div class="relative">
+                            <select [(ngModel)]="priorityFilter" (change)="loadTasks()"
+                                class="w-full bg-white dark:bg-gray-800 border border-transparent rounded-2xl px-4 py-3.5 pr-8 text-[10px] font-black uppercase tracking-widest text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 appearance-none transition-all modern-shadow">
+                                <option value="">{{ 'PRIORITY' | translate }}</option>
+                                <option value="CRITICAL">{{ 'PRIORITY_CRITICAL' | translate }}</option>
+                                <option value="HIGH">{{ 'PRIORITY_HIGH' | translate }}</option>
+                                <option value="MEDIUM">{{ 'PRIORITY_MEDIUM' | translate }}</option>
+                                <option value="LOW">{{ 'PRIORITY_LOW' | translate }}</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+                                <ion-icon name="chevron-down-outline" class="text-gray-400"></ion-icon>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <select [(ngModel)]="statusFilter" (change)="loadTasks()"
+                                class="w-full bg-white dark:bg-gray-800 border border-transparent rounded-2xl px-4 py-3.5 pr-8 text-[10px] font-black uppercase tracking-widest text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 appearance-none transition-all modern-shadow">
+                                <option value="">{{ 'STATUS' | translate }}</option>
+                                <option value="TO_DO">{{ 'STATUS_TO_DO' | translate }}</option>
+                                <option value="IN_PROGRESS">{{ 'STATUS_IN_PROGRESS' | translate }}</option>
+                                <option value="ON_HOLD">{{ 'STATUS_ON_HOLD' | translate }}</option>
+                                <option value="COMPLETED">{{ 'STATUS_COMPLETED' | translate }}</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+                                <ion-icon name="chevron-down-outline" class="text-gray-400"></ion-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status Tabs -->
+                <div class="flex space-x-2 overflow-x-auto pb-2 scrollbar-hide md:justify-center">
+                    <button *ngFor="let tab of tabs" (click)="setTab(tab.label)"
+                        class="px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 border flex items-center space-x-2 whitespace-nowrap active:scale-95 hover:scale-105"
+                        [ngClass]="activeTab === tab.label 
+                      ? 'bg-black dark:bg-white text-white dark:text-gray-900 border-transparent shadow-lg' 
+                      : 'bg-white dark:bg-gray-800 text-gray-400 border-transparent modern-shadow hover:bg-gray-50'">
+                        <span>{{ tab.label | translate }}</span>
+                        <span
+                            [ngClass]="activeTab === tab.label ? 'bg-white/20 dark:bg-black/20 text-white dark:text-gray-900' : 'bg-gray-100 dark:bg-gray-700 text-gray-400'"
+                            class="px-2 py-0.5 rounded-md text-[9px] ml-1 font-bold">
+                            {{ tab.count }}
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-header>
+
+<ion-content class="bg-[#F8FAFC] dark:bg-black">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <div class="p-5 space-y-4 pb-32">
+
+        <!-- Loader -->
+        <div *ngIf="isLoading && tasks.length === 0" class="space-y-4">
+            <div *ngFor="let i of [1,2,3,4]"
+                class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-transparent modern-shadow animate-pulse">
+                <div class="h-3 bg-gray-100 rounded-full w-1/4 mb-4"></div>
+                <div class="h-5 bg-gray-100 rounded-full w-3/4 mb-6"></div>
+                <div class="flex space-x-4">
+                    <div class="h-8 bg-gray-100 rounded-xl w-24"></div>
+                    <div class="h-8 bg-gray-100 rounded-xl w-24"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task Items -->
+        <div *ngFor="let task of tasks; let i = index"
+            class="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-transparent modern-shadow active:scale-[0.99] transition-all duration-300 group relative overflow-hidden animate-fade-in-up stagger-item"
+            [style.animation-delay]="i * 0.05 + 's'" (click)="openTask(task)">
+
+            <!-- Priority Indicator -->
+            <div class="absolute left-0 top-0 bottom-0 w-1.5" [ngClass]="{
+                    'bg-red-500': task.priority === 'CRITICAL',
+                    'bg-orange-500': task.priority === 'HIGH',
+                    'bg-yellow-500': task.priority === 'MEDIUM',
+                    'bg-blue-500': task.priority === 'LOW'
+                }"></div>
+
+            <div class="pl-3">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-[10px] font-bold tracking-wider text-gray-400 uppercase">
+                        {{ task.type === 'Complaint' ? 'COMPLAINT' : 'NP-' + task.id }}
+                    </span>
+                    <div *ngIf="task.priority === 'CRITICAL'"
+                        class="flex items-center space-x-1.5 px-2 py-0.5 bg-red-50 dark:bg-red-900/20 rounded text-red-600 dark:text-red-400">
+                        <span class="w-1.5 h-1.5 bg-current rounded-full animate-pulse"></span>
+                        <span class="text-[9px] font-black uppercase tracking-widest">Critical</span>
+                    </div>
+                </div>
+
+                <h3
+                    class="text-lg font-bold text-gray-900 dark:text-white mb-3 leading-snug line-clamp-2 group-active:text-gray-700 transition-colors tracking-tight">
+                    {{ task.title }}
+                </h3>
+
+                <div class="flex items-center space-x-3 mb-4">
+                    <div
+                        class="flex items-center space-x-2 bg-gray-50 dark:bg-gray-900/50 px-2.5 py-1.5 rounded-lg border border-gray-100 dark:border-gray-800">
+                        <ion-icon name="calendar-clear-outline" class="text-gray-400 text-xs"></ion-icon>
+                        <span class="text-[11px] font-semibold text-gray-600 dark:text-gray-400"
+                            [class.text-red-500]="isOverdue(task)">
+                            {{ task.dueDate | date:'d MMM' }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-3 border-t border-gray-50 dark:border-gray-700/50">
+                    <div class="flex items-center space-x-2">
+                        <div
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-[9px] font-black text-gray-600 dark:text-gray-300 ring-2 ring-white dark:ring-gray-800">
+                            {{ (task.assignedStaff?.name | slice:0:1) || '?' }}
+                        </div>
+                        <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400 truncate max-w-[100px]">
+                            {{ task.assignedStaff?.name || ('UNASSIGNED' | translate) }}
+                        </span>
+                    </div>
+
+                    <span class="px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest border"
+                        [ngClass]="{
+                            'bg-blue-50 text-blue-700 border-blue-100': task.status === 'IN_PROGRESS',
+                            'bg-green-50 text-green-700 border-green-100': task.status === 'COMPLETED',
+                            'bg-gray-50 text-gray-500 border-gray-100': task.status === 'TO_DO',
+                            'bg-yellow-50 text-yellow-700 border-yellow-100': task.status === 'ON_HOLD'
+                        }">
+                        {{ task.status | translate }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="tasks.length === 0 && !isLoading"
+            class="flex flex-col items-center justify-center py-20 opacity-30">
+            <div class="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-4">
+                <ion-icon name="clipboard-outline" class="text-4xl"></ion-icon>
+            </div>
+            <p class="text-xs font-black uppercase tracking-widest">{{ 'NO_RECORDS' | translate }}</p>
+        </div>
+    </div>
+
+    <!-- Floating Add Button -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="mb-6 mr-4">
+        <ion-fab-button routerLink="/tabs/tasks/create"
+            class="w-14 h-14 shadow-xl shadow-orange-500/30 overflow-hidden rounded-full">
+            <div class="bg-gradient-to-br from-orange-400 to-orange-600 w-full h-full flex items-center justify-center">
+                <ion-icon name="add" class="text-3xl text-white font-bold"></ion-icon>
+            </div>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

@@ -1,0 +1,154 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar class="bg-white dark:bg-black text-gray-900 dark:text-white">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="font-black">{{ 'TASK_BOARD' | translate }}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="loadTasks()">
+                <ion-icon name="refresh-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-gray-100 dark:bg-black" scrollX="true" scrollY="true">
+    <div class="kanban-container" cdkDropListGroup>
+
+        <!-- TO DO -->
+        <div class="kanban-column bg-gray-50 dark:bg-gray-900/50 rounded-xl">
+            <div class="p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-800">
+                <h3 class="text-xs font-black uppercase tracking-widest text-gray-400">{{ 'TO_DO' | translate }}</h3>
+                <span
+                    class="bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full text-[10px] font-bold">{{
+                    todoTasks.length }}</span>
+            </div>
+            <div cdkDropList [cdkDropListData]="todoTasks" (cdkDropListDropped)="drop($event, 'TO_DO')"
+                class="task-list">
+                <div *ngFor="let task of todoTasks" cdkDrag class="task-card" (click)="viewTask(task)">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <span [style.background-color]="getPriorityColor(task.priority)"
+                            class="w-1 h-3 rounded-full"></span>
+                        <span class="text-[9px] font-black text-gray-400 uppercase tracking-tighter">NP/T-{{ task.id
+                            }}</span>
+                    </div>
+                    <div class="text-xs font-bold text-gray-800 dark:text-gray-200 leading-snug mb-2">{{ task.title }}
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <ion-icon name="calendar-outline" class="text-[10px] text-gray-400 mr-1"></ion-icon>
+                            <span class="text-[9px] font-bold text-gray-400">{{ task.dueDate | date:'shortDate'
+                                }}</span>
+                        </div>
+                        <div
+                            class="w-5 h-5 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-[8px] font-black">
+                            {{ task.assignedStaff?.name ? task.assignedStaff.name.charAt(0) : '?' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IN PROGRESS -->
+        <div class="kanban-column">
+            <div class="p-4 flex justify-between items-center border-b border-gray-200">
+                <h3 class="text-xs font-black uppercase tracking-widest text-blue-500">{{ 'IN_PROGRESS' | translate }}
+                </h3>
+                <span class="bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full text-[10px] font-bold">{{
+                    inProgressTasks.length }}</span>
+            </div>
+            <div cdkDropList [cdkDropListData]="inProgressTasks" (cdkDropListDropped)="drop($event, 'IN_PROGRESS')"
+                class="task-list">
+                <div *ngFor="let task of inProgressTasks" cdkDrag class="task-card" (click)="viewTask(task)">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <span [style.background-color]="getPriorityColor(task.priority)"
+                            class="w-1 h-3 rounded-full"></span>
+                        <span class="text-[9px] font-black text-gray-400 uppercase tracking-tighter">NP/T-{{ task.id
+                            }}</span>
+                    </div>
+                    <div class="text-xs font-bold text-gray-800 leading-snug mb-2">{{ task.title }}</div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <ion-icon name="calendar-outline" class="text-[10px] text-gray-400 mr-1"></ion-icon>
+                            <span class="text-[9px] font-bold text-gray-400">{{ task.dueDate | date:'shortDate'
+                                }}</span>
+                        </div>
+                        <div
+                            class="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[8px] font-black">
+                            {{ task.assignedStaff?.name ? task.assignedStaff.name.charAt(0) : '?' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ON HOLD -->
+        <div class="kanban-column">
+            <div class="p-4 flex justify-between items-center border-b border-gray-200">
+                <h3 class="text-xs font-black uppercase tracking-widest text-yellow-500">{{ 'ON_HOLD' | translate }}
+                </h3>
+                <span class="bg-yellow-100 text-yellow-600 px-2 py-0.5 rounded-full text-[10px] font-bold">{{
+                    onHoldTasks.length }}</span>
+            </div>
+            <div cdkDropList [cdkDropListData]="onHoldTasks" (cdkDropListDropped)="drop($event, 'ON_HOLD')"
+                class="task-list">
+                <div *ngFor="let task of onHoldTasks" cdkDrag class="task-card" (click)="viewTask(task)">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <span [style.background-color]="getPriorityColor(task.priority)"
+                            class="w-1 h-3 rounded-full"></span>
+                        <span class="text-[9px] font-black text-gray-400 uppercase tracking-tighter">NP/T-{{ task.id
+                            }}</span>
+                    </div>
+                    <div class="text-xs font-bold text-gray-800 leading-snug mb-2">{{ task.title }}</div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <ion-icon name="calendar-outline" class="text-[10px] text-gray-400 mr-1"></ion-icon>
+                            <span class="text-[9px] font-bold text-gray-400">{{ task.dueDate | date:'shortDate'
+                                }}</span>
+                        </div>
+                        <div
+                            class="w-5 h-5 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center text-[8px] font-black">
+                            {{ task.assignedStaff?.name ? task.assignedStaff.name.charAt(0) : '?' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPLETED -->
+        <div class="kanban-column" style="margin-right: 0;">
+            <div class="p-4 flex justify-between items-center border-b border-gray-200">
+                <h3 class="text-xs font-black uppercase tracking-widest text-green-500">{{ 'COMPLETED' | translate }}
+                </h3>
+                <span class="bg-green-100 text-green-600 px-2 py-0.5 rounded-full text-[10px] font-bold">{{
+                    completedTasks.length }}</span>
+            </div>
+            <div cdkDropList [cdkDropListData]="completedTasks" (cdkDropListDropped)="drop($event, 'COMPLETED')"
+                class="task-list">
+                <div *ngFor="let task of completedTasks" cdkDrag class="task-card" (click)="viewTask(task)">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <span [style.background-color]="getPriorityColor(task.priority)"
+                            class="w-1 h-3 rounded-full"></span>
+                        <span class="text-[9px] font-black text-gray-400 uppercase tracking-tighter">NP/T-{{ task.id
+                            }}</span>
+                    </div>
+                    <div class="text-xs font-bold text-gray-800 leading-snug mb-2">{{ task.title }}</div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <ion-icon name="calendar-outline" class="text-[10px] text-gray-400 mr-1"></ion-icon>
+                            <span class="text-[9px] font-bold text-gray-400">{{ task.dueDate | date:'shortDate'
+                                }}</span>
+                        </div>
+                        <div
+                            class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[8px] font-black">
+                            {{ task.assignedStaff?.name ? task.assignedStaff.name.charAt(0) : '?' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <ion-loading [isOpen]="loading" [message]="'LOADING' | translate"></ion-loading>
+</ion-content>

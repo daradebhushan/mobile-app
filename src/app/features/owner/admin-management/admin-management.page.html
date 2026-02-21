@@ -1,0 +1,149 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/owner/dashboard"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="font-bold text-lg">{{ 'ADMIN_MANAGEMENT' | translate }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-gray-50">
+    <div class="px-4 pb-20 pt-4 space-y-4">
+
+        <!-- Admin List -->
+        <div *ngFor="let admin of admins"
+            class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-4">
+            <!-- Header -->
+            <div class="flex justify-between items-start">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-lg font-bold">
+                        {{ admin.name ? admin.name.charAt(0).toUpperCase() : 'A' }}
+                    </div>
+                    <div>
+                        <div class="text-base font-bold text-gray-900">{{ admin.name }}</div>
+                        <div class="text-xs text-gray-500">{{ admin.email }}</div>
+                    </div>
+                </div>
+                <span [ngClass]="admin.active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'"
+                    class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide">
+                    {{ (admin.active ? 'ACTIVE' : 'INACTIVE') | translate }}
+                </span>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-3 gap-2 border-t border-gray-50 pt-3">
+                <div class="text-center">
+                    <div class="text-xs text-gray-400 font-medium uppercase">{{ 'USERS' | translate }}</div>
+                    <div class="text-sm font-bold text-gray-800">{{ admin.totalUsers || 0 }}</div>
+                </div>
+                <div class="text-center border-l border-gray-100">
+                    <div class="text-xs text-gray-400 font-medium uppercase">{{ 'TASKS' | translate }}</div>
+                    <div class="text-sm font-bold text-gray-800">{{ admin.totalTasks || 0 }}</div>
+                </div>
+                <div class="text-center border-l border-gray-100">
+                    <div class="text-xs text-gray-400 font-medium uppercase">{{ 'DATA' | translate }}</div>
+                    <div class="text-sm font-bold text-gray-800">{{ admin.totalDataUsageBytes | fileSize }}</div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-3 pt-1">
+                <button (click)="toggleStatus(admin)"
+                    class="flex-1 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider border transition-colors"
+                    [ngClass]="admin.active ? 'border-red-100 text-red-600 bg-red-50/50' : 'border-green-100 text-green-600 bg-green-50/50'">
+                    {{ (admin.active ? 'BLOCK' : 'UNBLOCK') | translate }}
+                </button>
+                <button (click)="resetPassword(admin)"
+                    class="flex-1 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider border border-blue-100 text-blue-600 bg-blue-50/50 transition-colors">
+                    {{ 'RESET_PWD' | translate }}
+                </button>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="admins.length === 0 && !loading"
+            class="flex flex-col items-center justify-center py-20 text-gray-400">
+            <ion-icon name="people-outline" class="text-5xl mb-2 opacity-30"></ion-icon>
+            <p class="text-sm font-medium">{{ 'NO_ADMINS_FOUND' | translate }}</p>
+        </div>
+
+        <ion-loading [isOpen]="loading" message="Please wait..."></ion-loading>
+    </div>
+
+    <!-- FAB for Adding Admin -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="mb-6 mr-4">
+        <ion-fab-button (click)="openCreateModal()"
+            class="w-14 h-14 shadow-xl shadow-orange-500/30 overflow-hidden rounded-full">
+            <div class="bg-gradient-to-br from-orange-400 to-orange-600 w-full h-full flex items-center justify-center">
+                <ion-icon name="add" class="text-3xl text-white font-bold"></ion-icon>
+            </div>
+        </ion-fab-button>
+    </ion-fab>
+
+    <!-- Create Admin Modal -->
+    <ion-modal [isOpen]="showModal" (didDismiss)="showModal = false" [initialBreakpoint]="0.75"
+        [breakpoints]="[0, 0.75, 1]">
+        <ng-template>
+            <ion-header class="ion-no-border">
+                <ion-toolbar>
+                    <ion-title class="font-bold">{{ 'NEW_ADMIN' | translate }}</ion-title>
+                    <ion-buttons slot="end">
+                        <ion-button (click)="showModal = false" color="medium">{{ 'CLOSE' | translate }}</ion-button>
+                    </ion-buttons>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding">
+                <form [formGroup]="createForm" (ngSubmit)="createAdmin()" class="flex flex-col gap-5 pt-2">
+
+                    <div class="space-y-4">
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-gray-500 uppercase ml-1">{{ 'NAME' | translate
+                                }}</label>
+                            <ion-item lines="none" class="rounded-xl border border-gray-200"
+                                style="--background: #fff;">
+                                <ion-input formControlName="name" placeholder="Full Name" type="text"></ion-input>
+                            </ion-item>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-gray-500 uppercase ml-1">{{ 'EMAIL' | translate
+                                }}</label>
+                            <ion-item lines="none" class="rounded-xl border border-gray-200"
+                                style="--background: #fff;">
+                                <ion-input formControlName="email" placeholder="email@domain.com"
+                                    type="email"></ion-input>
+                            </ion-item>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-gray-500 uppercase ml-1">{{ 'PASSWORD' | translate
+                                }}</label>
+                            <ion-item lines="none" class="rounded-xl border border-gray-200"
+                                style="--background: #fff;">
+                                <ion-input formControlName="password" placeholder="••••••••"
+                                    type="password"></ion-input>
+                            </ion-item>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-gray-500 uppercase ml-1">{{ 'MOBILE' | translate
+                                }}</label>
+                            <ion-item lines="none" class="rounded-xl border border-gray-200"
+                                style="--background: #fff;">
+                                <ion-input formControlName="mobile" placeholder="Mobile Number" type="tel"></ion-input>
+                            </ion-item>
+                        </div>
+                    </div>
+
+                    <ion-button type="submit" [disabled]="createForm.invalid || loading" expand="block" shape="round"
+                        class="mt-4 h-12 font-bold tracking-wide" color="primary">
+                        <span *ngIf="!loading">{{ 'CREATE_ACCOUNT' | translate }}</span>
+                        <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+                    </ion-button>
+                </form>
+            </ion-content>
+        </ng-template>
+    </ion-modal>
+
+</ion-content>

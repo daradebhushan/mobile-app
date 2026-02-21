@@ -1,0 +1,42 @@
+.status-card {
+    &.PENDING { border-left: 5px solid var(--ion-color-warning); }
+    &.ACCEPTED { border-left: 5px solid var(--ion-color-success); }
+    &.REJECTED { border-left: 5px solid var(--ion-color-danger); }
+    &.CONVERTED_TO_TASK { border-left: 5px solid var(--ion-color-primary); }
+}
+
+img {
+    max-height: 300px;
+    width: 100%;
+    object-fit: contain;
+    background-color: #f0f0f0;
+}
+
+// Scrollbar Visibility
+.overflow-x-auto {
+    // Force displaying scrollbars on WebKit (Chrome/Safari/Android WebView)
+    &::-webkit-scrollbar {
+        height: 6px;
+        display: block !important;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.05);
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,0.2);
+        border-radius: 4px;
+        
+        &:hover {
+            background: rgba(0,0,0,0.4);
+        }
+    }
+    
+    // For PC/Standard scrolling
+    // On mobile, touch scrolling works naturally, but the scrollbar might hide.
+    // This customization tries to keep it somewhat visible or at least style it.
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.2) rgba(0,0,0,0.05);
+}

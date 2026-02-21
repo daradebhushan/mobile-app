@@ -1,0 +1,302 @@
+<ion-header class="ion-no-border group">
+    <div class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 px-6 pt-4 pb-6 shadow-sm transition-all duration-300 relative z-20"
+        style="padding-top: calc(1rem + var(--ion-safe-area-top));">
+        <h2 class="text-2xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">{{ 'SETTINGS' |
+            translate }}</h2>
+    </div>
+</ion-header>
+
+<ion-content class="bg-[#F8FAFC] dark:bg-black">
+    <div class="p-4 space-y-6 pb-24">
+
+        <!-- Profile Card -->
+        <div
+            class="bg-white dark:bg-gray-900 p-6 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col items-center text-center relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent pointer-events-none"></div>
+
+            <div class="relative mb-4">
+                <div
+                    class="w-24 h-24 rounded-full bg-orange-100 dark:bg-orange-900/40 flex items-center justify-center text-orange-600 dark:text-orange-400 border-4 border-white dark:border-gray-800 shadow-lg overflow-hidden group-hover:scale-110 transition-transform duration-500">
+                    <img *ngIf="orgLogo" [src]="orgLogo" class="w-full h-full object-cover">
+                    <ion-icon *ngIf="!orgLogo" name="person" class="text-4xl"></ion-icon>
+                </div>
+                <div
+                    class="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-green-500 border-4 border-white dark:border-gray-800 shadow-sm">
+                </div>
+            </div>
+
+            <h3 class="text-xl font-black text-gray-900 dark:text-white mb-1 leading-tight">{{ orgName }}</h3>
+            <p class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">{{ username }} • {{
+                userRole }}</p>
+
+            <button (click)="openEditModal()"
+                class="mt-6 w-full py-3.5 bg-gray-50 dark:bg-gray-800 hover:bg-orange-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all ring-1 ring-gray-100 dark:ring-gray-700 hover:ring-orange-100 shadow-sm active:scale-95">
+                {{ 'EDIT_PROFILE' | translate }}
+            </button>
+        </div>
+
+        <!-- Section: Preferences -->
+        <div class="space-y-3">
+            <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-2">{{ 'GENERAL' | translate }}
+            </h3>
+
+            <div
+                class="bg-white dark:bg-gray-900 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden divide-y divide-gray-50 dark:divide-gray-800">
+
+                <!-- Task Alerts -->
+                <div
+                    class="p-5 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors">
+                    <div class="flex items-center space-x-4">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-orange-500 dark:text-orange-400 shadow-inner">
+                            <ion-icon name="notifications-outline" class="text-xl"></ion-icon>
+                        </div>
+                        <div>
+                            <div class="text-sm font-black text-gray-800 dark:text-gray-100">{{ 'TASK_ALERTS' |
+                                translate }}</div>
+                            <div class="text-[10px] text-gray-400 dark:text-gray-500 font-bold uppercase">Get notified
+                                about new tasks
+                            </div>
+                        </div>
+                    </div>
+                    <ion-toggle color="primary" [(ngModel)]="taskAlerts" (ionChange)="onToggleChange()"
+                        mode="ios"></ion-toggle>
+                </div>
+
+                <!-- Email Notifications -->
+                <div
+                    class="p-5 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors">
+                    <div class="flex items-center space-x-4">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-500 dark:text-blue-400 shadow-inner">
+                            <ion-icon name="mail-outline" class="text-xl"></ion-icon>
+                        </div>
+                        <div>
+                            <div class="text-sm font-black text-gray-800 dark:text-gray-100">{{ 'EMAIL_NOTIFICATIONS' |
+                                translate }}</div>
+                            <div class="text-[10px] text-gray-400 dark:text-gray-500 font-bold uppercase">Receive
+                                updates via email</div>
+                        </div>
+                    </div>
+                    <ion-toggle color="primary" [(ngModel)]="emailNotifications" (ionChange)="onToggleChange()"
+                        mode="ios"></ion-toggle>
+                </div>
+
+                <!-- Biometric Login -->
+                <div *ngIf="isBiometricSupported"
+                    class="p-5 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors">
+                    <div class="flex items-center space-x-4">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-green-50 dark:bg-green-900/20 flex items-center justify-center text-green-500 dark:text-green-400 shadow-inner">
+                            <ion-icon name="finger-print-outline" class="text-xl"></ion-icon>
+                        </div>
+                        <div>
+                            <div class="text-sm font-black text-gray-800 dark:text-gray-100">Biometric Login</div>
+                            <div class="text-[10px] text-gray-400 dark:text-gray-500 font-bold uppercase">Use
+                                Fingerprint / Face ID</div>
+                        </div>
+                    </div>
+                    <ion-toggle color="success" [(ngModel)]="biometricEnabled" (ionChange)="onBiometricToggle()"
+                        mode="ios"></ion-toggle>
+                </div>
+
+                <!-- Language Selector -->
+                <div (click)="toggleLanguage()"
+                    class="p-5 flex items-center justify-between active:bg-orange-50 dark:active:bg-gray-800 transition-colors cursor-pointer group">
+                    <div class="flex items-center space-x-4">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-purple-500 dark:text-purple-400 shadow-inner">
+                            <ion-icon name="language-outline" class="text-xl"></ion-icon>
+                        </div>
+                        <div>
+                            <div class="text-sm font-black text-gray-800 dark:text-gray-100">{{ 'LANGUAGE' | translate
+                                }}</div>
+                            <div class="text-[10px] text-gray-400 dark:text-gray-500 font-bold uppercase">{{ currentLang
+                                === 'EN' ?
+                                'English' : 'मराठी' }}</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span
+                            class="text-[10px] font-black text-orange-600 dark:text-orange-400 uppercase tracking-widest">{{
+                            currentLang
+                            === 'EN' ? 'MR' : 'EN' }}</span>
+                        <ion-icon name="swap-horizontal-outline"
+                            class="text-orange-300 group-hover:rotate-180 transition-transform duration-500"></ion-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Admin -->
+        <div class="space-y-3" *ngIf="isAdmin">
+            <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-2">Administration</h3>
+            <div
+                class="bg-white dark:bg-gray-900 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden divide-y divide-gray-50 dark:divide-gray-800">
+
+                <div [routerLink]="['/tabs/admin/departments']"
+                    class="p-4 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors cursor-pointer">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-500 dark:text-blue-400">
+                            <ion-icon name="business"></ion-icon>
+                        </div>
+                        <span class="text-sm font-bold text-gray-700 dark:text-gray-200">Departments</span>
+                    </div>
+                    <ion-icon name="chevron-forward-outline" class="text-gray-300 dark:text-gray-600"></ion-icon>
+                </div>
+
+                <div [routerLink]="['/tabs/admin/complaint-types']"
+                    class="p-4 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors cursor-pointer">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-red-500 dark:text-red-400">
+                            <ion-icon name="list"></ion-icon>
+                        </div>
+                        <span class="text-sm font-bold text-gray-700 dark:text-gray-200">Complaint Types</span>
+                    </div>
+                    <ion-icon name="chevron-forward-outline" class="text-gray-300 dark:text-gray-600"></ion-icon>
+                </div>
+
+                <div [routerLink]="['/tabs/admin/chatbot']"
+                    class="p-4 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors cursor-pointer">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-green-50 dark:bg-green-900/20 flex items-center justify-center text-green-500 dark:text-green-400">
+                            <ion-icon name="chatbubbles"></ion-icon>
+                        </div>
+                        <span class="text-sm font-bold text-gray-700 dark:text-gray-200">Chatbot Settings</span>
+                    </div>
+                    <ion-icon name="chevron-forward-outline" class="text-gray-300 dark:text-gray-600"></ion-icon>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Legal & Support -->
+        <div class="space-y-3">
+            <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-2">Privacy & Support</h3>
+            <div
+                class="bg-white dark:bg-gray-900 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden divide-y divide-gray-50 dark:divide-gray-800">
+                <div
+                    class="p-4 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors cursor-pointer">
+                    <div class="flex items-center space-x-3">
+                        <ion-icon name="shield-checkmark-outline" class="text-gray-400 dark:text-gray-500"></ion-icon>
+                        <span class="text-sm font-bold text-gray-700 dark:text-gray-200">{{ 'PRIVACY_POLICY' | translate
+                            }}</span>
+                    </div>
+                    <ion-icon name="chevron-forward-outline" class="text-gray-300 dark:text-gray-600"></ion-icon>
+                </div>
+                <!-- ... other legal items ... -->
+                <div
+                    class="p-4 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors cursor-pointer">
+                    <div class="flex items-center space-x-3">
+                        <ion-icon name="document-text-outline" class="text-gray-400 dark:text-gray-500"></ion-icon>
+                        <span class="text-sm font-bold text-gray-700 dark:text-gray-200">{{ 'TERMS_OF_SERVICE' |
+                            translate }}</span>
+                    </div>
+                    <ion-icon name="chevron-forward-outline" class="text-gray-300 dark:text-gray-600"></ion-icon>
+                </div>
+                <div
+                    class="p-4 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors cursor-pointer">
+                    <div class="flex items-center space-x-3">
+                        <ion-icon name="information-circle-outline" class="text-gray-400 dark:text-gray-500"></ion-icon>
+                        <span class="text-sm font-bold text-gray-700 dark:text-gray-200">{{ 'ABOUT_APP' | translate
+                            }}</span>
+                    </div>
+                    <ion-icon name="chevron-forward-outline" class="text-gray-300 dark:text-gray-600"></ion-icon>
+                </div>
+                <div
+                    class="p-4 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors cursor-pointer">
+                    <div class="flex items-center space-x-3">
+                        <ion-icon name="headset-outline" class="text-gray-400 dark:text-gray-500"></ion-icon>
+                        <span class="text-sm font-bold text-gray-700 dark:text-gray-200">{{ 'CONTACT_SUPPORT' |
+                            translate }}</span>
+                    </div>
+                    <ion-icon name="chevron-forward-outline" class="text-gray-300 dark:text-gray-600"></ion-icon>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout -->
+        <button (click)="logout()"
+            class="w-full p-5 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 text-red-600 dark:text-red-400 rounded-[2rem] flex items-center justify-center space-x-3 transition-colors active:scale-95">
+            <ion-icon name="log-out-outline" class="text-xl"></ion-icon>
+            <span class="text-sm font-black uppercase tracking-widest">{{ 'LOGOUT' | translate }}</span>
+        </button>
+
+        <!-- App Branding -->
+        <div class="text-center py-6 opacity-40">
+            <div class="text-[10px] font-black text-gray-900 dark:text-gray-500 uppercase tracking-[0.2em] mb-1">Nagar
+                Parishad</div>
+            <div class="text-[8px] font-bold text-gray-500 dark:text-gray-600 uppercase tracking-widest">{{ 'VERSION' |
+                translate }}</div>
+        </div>
+
+    </div>
+
+    <!-- Edit Profile Bottom Sheet -->
+    <div *ngIf="isEditModalOpen" class="fixed inset-0 z-[100] flex items-end justify-center animate-fade-in"
+        (click)="closeEditModal()">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+
+        <div class="bg-white dark:bg-gray-900 w-full rounded-t-[3rem] p-8 pb-12 shadow-2xl relative z-10 animate-slide-up"
+            (click)="$event.stopPropagation()">
+            <div class="w-12 h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full mx-auto mb-8"></div>
+
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h3 class="text-xl font-black text-gray-900 dark:text-white leading-tight">{{ 'EDIT_PROFILE' |
+                        translate }}</h3>
+                    <p class="text-[10px] text-gray-400 dark:text-gray-500 font-bold uppercase tracking-widest">{{
+                        'SAVE_CHANGES' |
+                        translate }}</p>
+                </div>
+                <button (click)="closeEditModal()"
+                    class="w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-800 text-gray-400 text-xl flex items-center justify-center active:scale-95 transition-transform shadow-inner">
+                    <ion-icon name="close"></ion-icon>
+                </button>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Org Name -->
+                <div>
+                    <label
+                        class="block text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.1em] mb-2 px-1">{{
+                        'NAGAR_PANCHAYAT_NAME' | translate }}</label>
+                    <input type="text" [(ngModel)]="editOrgName"
+                        class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl px-5 py-4 text-sm font-bold text-gray-900 dark:text-white focus:ring-4 focus:ring-orange-500/10 focus:bg-white dark:focus:bg-gray-800 focus:border-orange-500/20 outline-none transition-all shadow-inner">
+                </div>
+
+                <!-- Logo Upload -->
+                <div>
+                    <label
+                        class="block text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.1em] mb-2 px-1">{{
+                        'UPLOAD_LOGO' | translate }}</label>
+                    <div (click)="logoInput.click()"
+                        class="border-2 border-dashed border-gray-100 dark:border-gray-700 rounded-[2rem] p-8 flex flex-col items-center justify-center text-center hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer relative">
+                        <input type="file" #logoInput (change)="onLogoSelected($event)" accept="image/*" class="hidden">
+
+                        <div *ngIf="!editLogoPreview" class="flex flex-col items-center">
+                            <ion-icon name="cloud-upload-outline"
+                                class="text-3xl text-gray-300 dark:text-gray-600 mb-2"></ion-icon>
+                            <span
+                                class="text-[10px] font-black text-orange-600 dark:text-orange-400 uppercase tracking-widest">{{
+                                'CLICK_TO_UPLOAD' | translate }}</span>
+                            <span class="text-[8px] text-gray-400 dark:text-gray-600 mt-1 uppercase font-bold">{{
+                                'PNG_JPG_UP_TO' |
+                                translate }}</span>
+                        </div>
+
+                        <img *ngIf="editLogoPreview" [src]="editLogoPreview"
+                            class="h-24 w-auto object-contain rounded-lg shadow-sm">
+                    </div>
+                </div>
+
+                <button (click)="saveProfile()"
+                    class="w-full py-5 bg-orange-600 text-white rounded-[2rem] font-black text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-orange-500/30 active:scale-95 transition-all mt-4">
+                    {{ 'SAVE_CHANGES' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</ion-content>

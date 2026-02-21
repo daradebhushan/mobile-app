@@ -1,0 +1,167 @@
+
+> mobile@0.0.1 build
+> ng build
+
+node.exe : - 
+Generating browser 
+application bundles 
+(phase: setup)...
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (- Generating    
+ br...hase: setup).    
+..:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+??? Browser 
+application bundle 
+generation complete.
+??? Browser 
+application bundle 
+generation complete.
+[1m[31m
+Error: [96msrc/app/fea
+tures/complaints/compla
+int-detail/complaint-de
+tail.page.html[0m:[93
+m58[0m:[93m43[0m - 
+[91merror[0m[90m 
+TS2367: [0mThis 
+comparison appears to 
+be unintentional 
+because the types 
+'"PENDING" | 
+"ACCEPTED" | 
+"REJECTED" | 
+"CONVERTED_TO_TASK"' 
+and '"RESOLVED"' have 
+no overlap.
+
+[7m58[0m             
+            
+'text-green-500': 
+complaint.status === 
+'RESOLVED',
+[7m  [0m [91m       
+                       
+            ~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~[0
+m
+
+  [96msrc/app/features
+/complaints/complaint-d
+etail/complaint-detail.
+page.ts[0m:[93m19[0m
+:[93m18[0m
+    [7m19[0m     
+templateUrl: './complai
+nt-detail.page.html',
+    [7m  [0m [96m   
+              ~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~[
+0m
+    Error occurs in 
+the template of 
+component 
+ComplaintDetailPage.
+
+
+Error: [96msrc/app/fea
+tures/complaints/compla
+int-detail/complaint-de
+tail.page.html[0m:[93
+m64[0m:[93m76[0m - 
+[91merror[0m[90m 
+TS2367: [0mThis 
+comparison appears to 
+be unintentional 
+because the types 
+'"ACCEPTED" | 
+"REJECTED" | 
+"CONVERTED_TO_TASK"' 
+and '"RESOLVED"' have 
+no overlap.
+
+[7m64[0m             
+            [name]="com
+plaint.status === 
+'PENDING' ? 'time' : 
+(complaint.status === 
+'RESOLVED' ? 
+'checkmark-circle' : 
+'bulb')"
+[7m  [0m [91m       
+                       
+                       
+                      ~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~[0m
+
+  [96msrc/app/features
+/complaints/complaint-d
+etail/complaint-detail.
+page.ts[0m:[93m19[0m
+:[93m18[0m
+    [7m19[0m     
+templateUrl: './complai
+nt-detail.page.html',
+    [7m  [0m [96m   
+              ~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~[
+0m
+    Error occurs in 
+the template of 
+component 
+ComplaintDetailPage.
+
+
+Error: [96msrc/app/fea
+tures/complaints/compla
+int-detail/complaint-de
+tail.page.html[0m:[93
+m256[0m:[93m34[0m - 
+[91merror[0m[90m 
+TS2339: [0mProperty 
+'hasDocuments' does 
+not exist on type 
+'ComplaintDetailPage'.
+
+[7m256[0m            
+         <div 
+*ngIf="!hasDocuments()"
+[7m   [0m [91m      
+                       
+    ~~~~~~~~~~~~[0m
+
+  [96msrc/app/features
+/complaints/complaint-d
+etail/complaint-detail.
+page.ts[0m:[93m19[0m
+:[93m18[0m
+    [7m19[0m     
+templateUrl: './complai
+nt-detail.page.html',
+    [7m  [0m [96m   
+              ~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~[
+0m
+    Error occurs in 
+the template of 
+component 
+ComplaintDetailPage.
+
+
+[39m[22m

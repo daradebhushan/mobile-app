@@ -1,0 +1,65 @@
+<ion-app>
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <!-- Common: Dashboard -->
+        <ion-item routerLink="/tabs/home" routerDirection="root" lines="none" detail="false" (click)="closeMenu()">
+          <ion-icon slot="start" name="grid-outline"></ion-icon>
+          <ion-label>Dashboard</ion-label>
+        </ion-item>
+
+        <!-- Common: Tasks -->
+        <ion-item routerLink="/tabs/tasks" routerDirection="root" lines="none" detail="false" (click)="closeMenu()">
+          <ion-icon slot="start" name="list-outline"></ion-icon>
+          <ion-label>Tasks</ion-label>
+        </ion-item>
+
+        <!-- Common: Complaints -->
+        <ion-item routerLink="/tabs/complaints" routerDirection="root" lines="none" detail="false"
+          (click)="closeMenu()">
+          <ion-icon slot="start" name="alert-circle-outline"></ion-icon>
+          <ion-label>Complaints</ion-label>
+        </ion-item>
+
+        <!-- Admin Only: Staff -->
+        <ion-item *ngIf="isAdmin" routerLink="/tabs/admin/users" routerDirection="root" lines="none" detail="false"
+          (click)="closeMenu()">
+          <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ion-label>Staff</ion-label>
+        </ion-item>
+
+        <!-- Admin Only: Chatbot -->
+        <ion-item *ngIf="isAdmin" routerLink="/tabs/admin/chatbot" routerDirection="root" lines="none" detail="false"
+          (click)="closeMenu()">
+          <ion-icon slot="start" name="chatbubbles-outline"></ion-icon>
+          <ion-label>Chatbot</ion-label>
+        </ion-item>
+
+        <!-- Admin Only: Settings -->
+        <ion-item *ngIf="isAdmin" routerLink="/tabs/admin/settings" routerDirection="root" lines="none" detail="false"
+          (click)="closeMenu()">
+          <ion-icon slot="start" name="settings-outline"></ion-icon>
+          <ion-label>Settings</ion-label>
+        </ion-item>
+
+        <!-- Owner Only: Admins -->
+        <ion-item *ngIf="isOwner" routerLink="/tabs/owner/admins" routerDirection="root" lines="none" detail="false"
+          (click)="closeMenu()">
+          <ion-icon slot="start" name="shield-checkmark-outline"></ion-icon>
+          <ion-label>Admins</ion-label>
+        </ion-item>
+
+        <ion-item button lines="none" detail="false" (click)="logout()">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          <ion-label>Logout</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-app>

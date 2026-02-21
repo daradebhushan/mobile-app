@@ -1,0 +1,512 @@
+﻿--------- beginning of main
+02-21 23:18:03.312 31781 31781 D Capacitor: Starting BridgeActivity
+02-21 23:18:03.326 31781 31781 D Capacitor: Registering plugin instance: CapacitorCookies
+02-21 23:18:03.331 31781 31781 D Capacitor: Registering plugin instance: WebView
+02-21 23:18:03.332 31781 31781 D Capacitor: Registering plugin instance: CapacitorHttp
+02-21 23:18:03.334 31781 31781 D Capacitor: Registering plugin instance: SystemBars
+02-21 23:18:03.336 31781 31781 D Capacitor: Registering plugin instance: FileOpener
+02-21 23:18:03.337 31781 31781 D Capacitor: Registering plugin instance: App
+02-21 23:18:03.339 31781 31781 D Capacitor: Registering plugin instance: Filesystem
+02-21 23:18:03.341 31781 31781 D Capacitor: Registering plugin instance: Haptics
+02-21 23:18:03.343 31781 31781 D Capacitor: Registering plugin instance: Keyboard
+02-21 23:18:03.344 31781 31781 D Capacitor: Registering plugin instance: LocalNotifications
+02-21 23:18:03.347 31781 31781 D Capacitor: Registering plugin instance: Preferences
+02-21 23:18:03.348 31781 31781 D Capacitor: Registering plugin instance: PushNotifications
+02-21 23:18:03.351 31781 31781 D Capacitor: Registering plugin instance: Share
+02-21 23:18:03.353 31781 31781 D Capacitor: Registering plugin instance: StatusBar
+02-21 23:18:03.357 31781 31781 D Capacitor: Registering plugin instance: NativeBiometric
+02-21 23:18:03.369 31781 31781 W Capacitor: Unable to read file at path public/plugins
+02-21 23:18:03.375 31781 31781 D Capacitor: Loading app at https://localhost
+02-21 23:18:03.413 31781 31861 D Capacitor: Handling local request: https://localhost/
+02-21 23:18:03.419 31781 31781 D Capacitor: App started
+02-21 23:18:03.428 31781 31781 D Capacitor: App resumed
+02-21 23:18:03.590 31781 31861 D Capacitor: Handling local request: https://localhost/runtime.01a8dfb583e04f5d.js
+02-21 23:18:03.591 31781 31869 D Capacitor: Handling local request: https://localhost/polyfills.c1d7d33ea838c63e.js
+02-21 23:18:03.592 31781 31872 D Capacitor: Handling local request: https://localhost/main.6fb1bfdf4f1aeecd.js
+02-21 23:18:03.610 31781 31860 D Capacitor: Handling local request: https://localhost/styles.52297ff48cd35c3c.css
+02-21 23:18:03.987 31781 31781 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:18:03.989 31781 31781 V Capacitor: callback: 96527717, pluginId: Preferences, methodName: get, methodData: {"key":"auth_data"}
+02-21 23:18:03.995 31781 31781 I Capacitor/Console: File:  - Line 333 - Msg: {"value":"{\"token\":\"eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJpZCI6Mywic3ViIjoiZGFyYWRlYmh1c2hhbjE1QGdtYWlsLmNvbSIsImlhdCI6MTc3MTY1ODA0MywiZXhwIjoxNzcxNzQ0NDQzfQ.YHTSdIgMDFnurEWFQLHckzex4HVrefGxxovoLoOG9B4\",\"id\":3,\"username\":\"Bhushan Tukaram\",\"email\":\"daradebhushan15@gmail.com\",\"roles\":[\"ADMIN\"],\"departmentId\":null,\"name\":\"Bhushan Tukaram\",\"mobile\":\"07304091845\"}"}
+02-21 23:18:04.006 31781 31861 D Capacitor: Handling local request: https://localhost/common.bea9ded4f2bca4d8.js
+02-21 23:18:04.007 31781 31860 D Capacitor: Handling local request: https://localhost/7720.1377bc4a393bc2c0.js
+02-21 23:18:04.034 31781 31860 D Capacitor: Handling local request: https://localhost/2075.6d48ae0693d66b1f.js
+02-21 23:18:04.034 31781 31861 D Capacitor: Handling local request: https://localhost/3506.0577bd19366e6496.js
+02-21 23:18:04.036 31781 31862 D Capacitor: Handling local request: https://localhost/4591.89c85abd5bb7bb25.js
+02-21 23:18:04.088 31781 31781 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:18:04.088 31781 31781 V Capacitor: callback: 96527718, pluginId: LocalNotifications, methodName: requestPermissions, methodData: {}
+02-21 23:18:04.089 31781 31869 D Capacitor: Handling local request: https://localhost/6270.f29f9adbc2e5a080.js
+02-21 23:18:04.105 31781 31871 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:18:04.106 31781 31871 D Capacitor: Handling local request: https://localhost/svg/grid-outline.svg
+02-21 23:18:04.111 31781 31862 D Capacitor: Handling local request: https://localhost/svg/list-outline.svg
+02-21 23:18:04.112 31781 31862 D Capacitor: Handling local request: https://localhost/svg/alert-circle-outline.svg
+02-21 23:18:04.112 31781 31872 D Capacitor: Handling local request: https://localhost/svg/log-out-outline.svg
+02-21 23:18:04.112 31781 31862 D Capacitor: Handling local request: https://localhost/svg/people-outline.svg
+02-21 23:18:04.113 31781 31872 D Capacitor: Handling local request: https://localhost/svg/chatbubbles-outline.svg
+02-21 23:18:04.113 31781 31862 D Capacitor: Handling local request: https://localhost/svg/settings-outline.svg
+02-21 23:18:04.122 31781 31862 D Capacitor: Handling local request: https://localhost/7240.b6a47df1e8bcf1bf.js
+02-21 23:18:04.127 31781 31862 D Capacitor: Handling local request: https://localhost/964.a954abcfa39f92af.js
+02-21 23:18:04.143 31781 31781 I Capacitor/Console: File:  - Line 333 - Msg: {"display":"granted"}
+02-21 23:18:04.152 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Local notifications permission granted
+02-21 23:18:04.153 31781 31781 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:18:04.159 31781 31781 V Capacitor: callback: 96527719, pluginId: LocalNotifications, methodName: addListener, methodData: {"eventName":"localNotificationActionPerformed"}
+02-21 23:18:04.186 31781 31860 D Capacitor: Handling local request: https://localhost/svg/mail-outline.svg
+02-21 23:18:04.186 31781 31861 D Capacitor: Handling local request: https://localhost/svg/lock-closed-outline.svg
+02-21 23:18:04.187 31781 31862 D Capacitor: Handling local request: https://localhost/svg/eye.svg
+02-21 23:18:04.196 31781 31872 D Capacitor: Handling local request: https://localhost/3774.c6378d2f04b186d8.js
+02-21 23:18:04.196 31781 31869 D Capacitor: Handling local request: https://localhost/5661.f5a70fefba8557a6.js
+02-21 23:18:04.199 31781 31872 D Capacitor: Handling local request: https://localhost/4424.57a212c488d2eeb8.js
+02-21 23:18:04.200 31781 31871 D Capacitor: Handling local request: https://localhost/7573.912ede121b7f1eb8.js
+02-21 23:18:04.201 31781 31871 D Capacitor: Handling local request: https://localhost/5230.65d497bf70fe78b1.js
+02-21 23:18:04.202 31781 31861 D Capacitor: Handling local request: https://localhost/9726.cf5c0ac83b50bc63.js
+02-21 23:18:04.203 31781 31869 D Capacitor: Handling local request: https://localhost/8844.8aba02d0d62434ae.js
+02-21 23:18:04.207 31781 31862 D Capacitor: Handling local request: https://localhost/7693.66cb39b42a7f0a30.js
+02-21 23:18:04.207 31781 31862 D Capacitor: Handling local request: https://localhost/6457.f9e834066f351c28.js
+02-21 23:18:04.208 31781 31862 D Capacitor: Handling local request: https://localhost/7681.3b8cd19ba90667ef.js
+02-21 23:18:04.208 31781 31862 D Capacitor: Handling local request: https://localhost/8685.3524ca71fd982a6f.js
+02-21 23:18:04.209 31781 31862 D Capacitor: Handling local request: https://localhost/4519.2351a075b21390be.js
+02-21 23:18:04.209 31781 31862 D Capacitor: Handling local request: https://localhost/6595.dab486f0476fcb06.js
+02-21 23:18:04.209 31781 31862 D Capacitor: Handling local request: https://localhost/3370.e6aa797ce2d45879.js
+02-21 23:18:04.210 31781 31862 D Capacitor: Handling local request: https://localhost/542.698c41912b1f7942.js
+02-21 23:18:04.210 31781 31862 D Capacitor: Handling local request: https://localhost/919.91f70206f08ab189.js
+02-21 23:18:04.210 31781 31862 D Capacitor: Handling local request: https://localhost/9266.af9e4606d1a73f6c.js
+02-21 23:18:04.214 31781 31862 D Capacitor: Handling local request: https://localhost/2213.313fc3ebc88f66dd.js
+02-21 23:18:04.214 31781 31861 D Capacitor: Handling local request: https://localhost/6068.33a61274d16ce324.js
+02-21 23:18:04.221 31781 31861 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:18:04.240 31781 31781 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:18:04.242 31781 31781 V Capacitor: callback: 96527720, pluginId: Preferences, methodName: get, methodData: {"key":"biometric_enabled"}
+02-21 23:18:04.257 31781 31781 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 23:18:04.258 31781 31781 I Capacitor/Console: File: https://localhost/6270.f29f9adbc2e5a080.js - Line 1 - Msg: LoginPage: User already logged in, redirecting to home
+02-21 23:18:04.259 31781 31861 D Capacitor: Handling local request: https://localhost/2415.c3539c7d34c6a05b.js
+02-21 23:18:04.289 31781 31861 D Capacitor: Handling local request: https://localhost/4406.0e3f7150a975b869.js
+02-21 23:18:04.298 31781 31862 D Capacitor: Handling local request: https://localhost/5197.87bd8b59d6784248.js
+02-21 23:18:04.302 31781 31860 D Capacitor: Handling local request: https://localhost/svg/time-outline.svg
+02-21 23:18:04.304 31781 31860 D Capacitor: Handling local request: https://localhost/svg/sync-outline.svg
+02-21 23:18:04.305 31781 31860 D Capacitor: Handling local request: https://localhost/svg/pause-circle-outline.svg
+02-21 23:18:04.305 31781 31871 D Capacitor: Handling local request: https://localhost/svg/checkmark-done-outline.svg
+02-21 23:18:04.306 31781 31860 D Capacitor: Handling local request: https://localhost/svg/person-outline.svg
+02-21 23:18:04.309 31781 31871 D Capacitor: Handling local request: https://localhost/svg/document-text-outline.svg
+02-21 23:18:04.370 31781 31860 D Capacitor: Handling local request: https://localhost/8805.4cb3897d7c19ee2c.js
+02-21 23:18:04.382 31781 31781 I Capacitor/Console: File: https://localhost/4424.57a212c488d2eeb8.js - Line 1 - Msg: LanguageService init. Available Langs: EN,MR
+02-21 23:18:04.383 31781 31781 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:18:04.397 31781 31781 V Capacitor: callback: 96527721, pluginId: Keyboard, methodName: getResizeMode, methodData: {}
+02-21 23:18:04.397 31781 31891 D Capacitor: Sending plugin error: {"save":false,"callbackId":"96527721","pluginId":"Keyboard","methodName":"getResizeMode","success":false,"error":{"message":"not implemented","code":"UNIMPLEMENTED"}}
+02-21 23:18:04.411 31781 31860 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:18:04.529 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:04.530 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:04.543 31781 31781 E Capacitor/Console: File:  - Line 330 - Msg: [object Object]
+02-21 23:18:04.545 31781 31781 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:18:04.546 31781 31860 D Capacitor: Handling local request: https://localhost/7927.0b4f4beb2bf9d78d.js
+02-21 23:18:04.547 31781 31862 D Capacitor: Handling local request: https://localhost/9364.37609adf3161b37c.js
+02-21 23:18:04.582 31781 31781 V Capacitor: callback: 96527722, pluginId: App, methodName: addListener, methodData: {"eventName":"backButton"}
+02-21 23:18:04.777 31781 31781 I Capacitor/Console: File: https://localhost/common.bea9ded4f2bca4d8.js - Line 1 - Msg: DEBUG: User API Response: [object Object]
+02-21 23:18:16.299 31781 31860 D Capacitor: Handling local request: https://localhost/svg/home-outline.svg
+02-21 23:18:16.299 31781 31861 D Capacitor: Handling local request: https://localhost/svg/search-outline.svg
+02-21 23:18:16.299 31781 31862 D Capacitor: Handling local request: https://localhost/svg/chevron-down-outline.svg
+02-21 23:18:16.300 31781 31869 D Capacitor: Handling local request: https://localhost/4463.12a357c5ef97a555.js
+02-21 23:18:16.300 31781 31872 D Capacitor: Handling local request: https://localhost/svg/add.svg
+02-21 23:18:16.301 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:16.331 31781 31860 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:18:16.364 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:16.364 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:16.364 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:16.364 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:16.364 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:16.365 31781 31861 D Capacitor: Handling local request: https://localhost/svg/clipboard-outline.svg
+02-21 23:18:17.464 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:17.562 31781 31860 D Capacitor: Handling local request: https://localhost/svg/calendar-clear-outline.svg
+02-21 23:18:17.568 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:17.571 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:17.571 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:17.571 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:17.571 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:18.270 31781 31861 D Capacitor: Handling local request: https://localhost/3162.6e2adcbc63622ae5.js
+02-21 23:18:18.272 31781 31871 D Capacitor: Handling local request: https://localhost/svg/create.svg
+02-21 23:18:18.272 31781 31869 D Capacitor: Handling local request: https://localhost/svg/trash.svg
+02-21 23:18:18.274 31781 31861 D Capacitor: Handling local request: https://localhost/svg/attach.svg
+02-21 23:18:18.275 31781 31871 D Capacitor: Handling local request: https://localhost/svg/send.svg
+02-21 23:18:18.276 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:18.298 31781 31860 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:18:18.301 31781 31860 D Capacitor: Handling local request: https://localhost/svg/chevron-back.svg
+02-21 23:18:18.347 31781 31781 I Capacitor/Console: File: https://localhost/7681.3b8cd19ba90667ef.js - Line 1 - Msg: DEBUG: Loaded Task: [object Object]
+02-21 23:18:18.347 31781 31781 I Capacitor/Console: File: https://localhost/7681.3b8cd19ba90667ef.js - Line 1 - Msg: DEBUG: No Related Complaint in task object
+02-21 23:18:18.347 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:18.348 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:18.348 31781 31861 D Capacitor: Handling local request: https://localhost/svg/business.svg
+02-21 23:18:18.349 31781 31871 D Capacitor: Handling local request: https://localhost/svg/location.svg
+02-21 23:18:18.349 31781 31869 D Capacitor: Handling local request: https://localhost/svg/time.svg
+02-21 23:18:18.349 31781 31860 D Capacitor: Handling local request: https://localhost/svg/calendar.svg
+02-21 23:18:18.349 31781 31861 D Capacitor: Handling local request: https://localhost/svg/cloud-upload.svg
+02-21 23:18:18.351 31781 31862 D Capacitor: Handling local request: https://localhost/svg/chatbubbles.svg
+02-21 23:18:18.401 31781 31860 D Capacitor: Handling local request: https://localhost/svg/document-attach.svg
+02-21 23:18:18.411 31781 31860 D Capacitor: Handling local request: https://localhost/svg/document-text.svg
+02-21 23:18:20.154 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:18:20.340 31781 31781 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:18:20.378 31781 31781 V Capacitor: callback: 96527723, pluginId: Filesystem, methodName: writeFile, methodData: {"path":"IMG_20211222_160234.jpg","data":"\/9j\/4AAQSkZJRgABAQEAeAB4AAD\/4QB6RXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAAIrwEBAAQAAAABAAAFlAESAAMAAAABAAEAAAEyAAIAAAAUAAAASodpAAQAAAABAAAAXgAAAAAyMDIxOjEyOjIyIDE2OjAyOjAxAAABkggABAAAAAEAAAAAAAAAAAAA\/+AAEEpGSUYAAQEAAAEAAQAA\/9sAQwACAQECAQECAgICAgICAgMFAwMDAwMGBAQDBQcGBwcHBgcHCAkLCQgICggHBwoNCgoLDAwMDAcJDg8NDA4LDAwM\/9sAQwECAgIDAwMGAwMGDAgHCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwM\/8AAEQgEEwZVAwEiAAIRAQMRAf\/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC\/\/EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29\/j5+v\/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC\/\/EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29\/j5+v\/aAAwDAQACEQMRAD8A+3Gdd2FY89Np6UK37lj\/ABHjH+NQzESD7x5+7zS+cTIvfcf8iuXqehGJKZPlC7u2P\/r1G7sM7fm9Sec1E820febvjPc1FLcqis2Rng8VI+UmE\/LNu+nNLFLld2cleQfQVRecB\/r39Kp3mvpaI2+aNQvdzVGljXFwAY\/m3HNQ3Otw6NG0t1NHaxqMF5SFUc+9eD\/Gf9tTS\/h1I1np9xHfag2NqKpdUPuRXzv4j+OusfETUTdaxeXU7DJWPftROeMDpQWqbZ9g69+0\/wCH9KuDDp8h1JmYqWjJ2A\/U1hah+0vfX28aetvFu6ZGWJ9PSvlm18bO43MW4w3+0PxrXOrvLCC0r8YGC\/ykdelZ7HRToo9v1j9oDXHndptUjtznhIyP5Vyup\/tH69GjeXrk8jAkKqEQhfcnFeWXWvLBCyxuyq3JKJyMds1zGteKvPDMww3VQ43N+lHMz1sHg4zd2epav+1b4sskPk+KLzL4IUMHKjuORWJN+2R43s4SsOvTbi5JLBCDXjmveJCIcPMzKcggDC1zr60dudyx8bsKP60a2PoKWWYe2sT3yP8AbN8fSsq\/8JPc+XgsVjiUH88VG37aXj5Llz\/wll2yjG1WjVsV4RJrgCE+Y3zMFADdBUsNyWUrubcwwR0z+NVqdMcnw19Ynv0X7ZvjmabjXH6\/6xoU549KvaZ+214zcL5usRsVXL7bdPnOe9fO9vehY92d2zABzU9xq3lj5Wk25554NNF\/2JhH9k+m5v20fFCR+c2rpbr0w8S8\/hiptN\/bd8Rsx866hvPMBwVgCjPYk\/0r5ZufEcj2fl7iv9\/aevbvWeuqLaruWTBHOQelMX9h4TpE+tYf25\/E0T7o57Fc\/KURNxAqvq37eXiMXC+S0cfzFXZ4RgfSvlQ+JCc\/OVBGCRxmoZNeJfh9vmHPXqaB\/wBg4T+U+ph\/wUC8TQxKFvLeVcZP7jJzn+VRx\/8ABQPxULxis2m+VvXBmtsH3xXyuNYa2uN275wedx6CnQ668irukLbsn5edtLUP9X8I\/sn2FH\/wUN1RIt0kcMsiqS2Iwq5Hvnoajg\/4KEeIJZlLxaWIVG5kClifYHpXyLNrrMQItyqxG7H8XrSSazsm+VtqldpyNoPpzSB8OYT+U+wLf9v7XpyY\/J0uNQxX99EVGO3TvVjTf28tUtA32z7LM0gyDChCp6CvjqLX3QE+ZJ07E7fz6Uz\/AISppMbpm6kA7z0poz\/1dwnY+14f299R2eYy2EjM2QmTwPWrk3\/BQHUiqqml6bk5\/eO5XIHcCviq215YYVYs2CMMAMD8\/WrreJlbzFTdtyCOd3480Gb4dwttEz7Kh\/b8umh2y2dqwYAhoNz4Pfii3\/4KATQzbP7Lt2XOfmmKnPWvjuHxBuRWVl7\/ACg7cVU1rWd1srsqsjfN06Hpgmncxlw9heh9oH\/gpPbW7T7dHG6OHzDukPzPn7v\/ANesyP8A4KZWizf6VpNvbqpAZopzIWJB\/IV8T3Oo7pGXop52g9Kp3OryZHzYLDaxP8R96on\/AFewx90Rf8FNreVf3el26ROThpLjaF\/\/AF1s6V\/wUT0nVLXH2GPzFIxHG25c+uf8K+ArLVVDb+F3H72M\/nV6x13y2yvzbhgc55qSlw7hmfoF\/wAN26Xb2qrcQ24UnB8ubcF78+9V5P2\/9LlzJDYr8wJ+ecKePavhmHxE1rBuDeWzAE7ODTbnxIbndu+bpgsuTVFf6tYZ9T7qt\/8AgoDpLwoZIpF3Eh8uCV\/Lg1csP25NHuYVkkgjWFlwGkmwcgnt196+CbPX5DHJHv28jKDocVoadr72025WUDIJIXp2FGonwxh+jPvK2\/bd0G5Mn2eHeYcEsX5ZT3ye1I37bejTA5tZ1PKgLJuV\/wAa+IT4i+1S7mYSbV2BmOT+VXYPELJCJB5i9DhW2rx14qdTnlwzSvoz7Rsv2zLFCsjWc0IxkkSgj8as3H7ZujsV8mJ7lt2cFtqj\/gR\/lXxnZ+J2jKso2FsqOOSevNR6l4wmcttb5W2yfMe69eKDCXDkL6M+yn\/bU0OwiWS4EkXmAhAsobcc+gqF\/wBt7Q4f3jW9xJCpGCsi7sn2zXwrrPi66SZTbysjbzzGdoUMOeaz7vxTcO3zP5j7cMw+XkUeo\/8AV2HWR+gFv+3R4cmmDLY6kxcFQoVeT+db2nftg6FdWvmfZ7yMR4Lo2N6enQ96\/POz1e42W7bmP7zeQzcEEYxXaaF4jmsbVdq7QqGPKr0A561NyHw7BP4j7cT9rHQ\/OjZYL0IxIYbfyzzUE37anhVg2BdeYpxhUB57fX618dx+JJLgH5l2swk+9lgOmKy9d1eabEbSybiGiweOKXM7GkeG4P7R9oyftv8AhKG4YS\/bY2hOwo8Y3NkZpX\/bx8GpGW26ky4+fNv0HrmvgnUdXk+1SMk0h8vDYXPBHFUDN5\/+sMkm0lfmYnYTzSUjT\/VeD+0foZa\/tv8AgvUjmG4uh0VXeLjOOK0h+2L4RigCy3U0O\/s6bR9c1+ddlfTRQbY2kVOoUHuO9XrfWbhJSYpXjk+7hD1zVHn5hkKoQ51K6P0KP7X\/AIQWKTbeSSIMYKRk7qjm\/a+8JTXag3ki\/N8ivERzivz7l1WZpvMdvMYr8pc44H0rU0rU72eVN02+PJyoGFOeOveg+WxEeRaH3pb\/ALU2h3EoRvtkaqATI0fy89MY5q6v7Rmi4HlyyTkuA20FSo9efSvjLQb24tgGjuJo3B2ZVzkBegxXQp4gnhZ5TMzSJ1LNt5IoOVSufW0f7SHhcEf6dtmOMIUO4\/Qe1Yesft1\/CjRr6awuvG1hb3tucPbssgkVvTG
+02-21 23:18:20.417 31781 31781 I Capacitor/Console: File:  - Line 333 - Msg: {"uri":"file:///data/user/0/io.ionic.starter/cache/IMG_20211222_160234.jpg"}
+02-21 23:18:20.417 31781 31781 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:18:20.418 31781 31781 V Capacitor: callback: 96527724, pluginId: LocalNotifications, methodName: schedule, methodData: {"notifications":[{"title":"Download Complete","body":"IMG_20211222_160234.jpg has been saved.","id":3380,"extra":{"filePath":"file:\/\/\/data\/user\/0\/io.ionic.starter\/cache\/IMG_20211222_160234.jpg","contentType":"application\/json"}}]}
+02-21 23:18:20.431 31781 31781 I Capacitor/Console: File:  - Line 333 - Msg: {"notifications":[{"id":3380}]}
+02-21 23:18:20.433 31781 31781 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:18:20.433 31781 31781 V Capacitor: callback: 96527725, pluginId: FileOpener, methodName: open, methodData: {"filePath":"file:\/\/\/data\/user\/0\/io.ionic.starter\/cache\/IMG_20211222_160234.jpg","contentType":"application\/json"}
+02-21 23:18:20.451 31781 31781 D Capacitor: App paused
+02-21 23:18:20.456 31781 31781 I Capacitor/Console: File:  - Line 333 - Msg: undefined
+02-21 23:18:20.749 31781 31781 D Capacitor: App resumed
+02-21 23:18:25.594 31781 31781 D Capacitor: App paused
+02-21 23:18:25.601 31781 31781 D Capacitor: App resumed
+02-21 23:18:25.608 31781 31781 I Capacitor/Console: File:  - Line 333 - Msg: {"actionId":"tap","notification":{"title":"Download Complete","body":"IMG_20211222_160234.jpg has been saved.","id":3380,"extra":{"filePath":"file:///data/user/0/io.ionic.starter/cache/IMG_20211222_160234.jpg","contentType":"application/json"}}}
+02-21 23:18:25.608 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Local notification action performed [object Object]
+02-21 23:18:25.608 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Attempting to open file from notification: file:///data/user/0/io.ionic.starter/cache/IMG_20211222_160234.jpg
+02-21 23:18:25.608 31781 31781 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:18:25.609 31781 31781 V Capacitor: callback: 96527726, pluginId: FileOpener, methodName: open, methodData: {"filePath":"file:\/\/\/data\/user\/0\/io.ionic.starter\/cache\/IMG_20211222_160234.jpg","contentType":"application\/json"}
+02-21 23:18:25.629 31781 31781 D Capacitor: App paused
+02-21 23:18:25.640 31781 31781 I Capacitor/Console: File:  - Line 333 - Msg: undefined
+02-21 23:18:25.677 31781 31781 D Capacitor: App resumed
+02-21 23:24:32.658 31781 31781 D Capacitor: App paused
+02-21 23:24:33.682 31781 31781 D Capacitor: App stopped
+02-21 23:24:33.684 31781 31781 D Capacitor: Saving instance state!
+02-21 23:24:33.791 31781 31781 D Capacitor: App restarted
+02-21 23:24:33.792 31781 31781 D Capacitor: App started
+02-21 23:24:33.801 31781 31781 D Capacitor: Unable to find a Capacitor plugin to handle requestCode, trying Cordova plugins 1217510996
+02-21 23:24:33.808 31781 31781 D Capacitor: App resumed
+02-21 23:24:35.397 31781 31781 I Capacitor/Console: File:  - Line 333 - Msg: {"canGoBack":true}
+02-21 23:24:35.406 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:24:35.435 31781 31860 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:24:35.437 31781 31860 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:24:35.691 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:24:35.692 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:24:35.692 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:24:35.692 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:24:35.693 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:24:35.704 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:24:35.704 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:24:35.998 31781 31781 I Capacitor/Console: File: https://localhost/common.bea9ded4f2bca4d8.js - Line 1 - Msg: DEBUG: User API Response: [object Object]
+02-21 23:24:42.105 31781 31860 D Capacitor: Handling local request: https://localhost/svg/person-add.svg
+02-21 23:24:42.107 31781 31861 D Capacitor: Handling local request: https://localhost/svg/filter-outline.svg
+02-21 23:24:42.107 31781 31862 D Capacitor: Handling local request: https://localhost/svg/chevron-down.svg
+02-21 23:24:42.107 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:24:42.111 31781 31860 D Capacitor: Handling local request: https://localhost/svg/people.svg
+02-21 23:24:42.140 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:24:42.140 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:24:42.145 31781 31860 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:24:42.211 31781 31781 I Capacitor/Console: File: https://localhost/common.bea9ded4f2bca4d8.js - Line 1 - Msg: DEBUG: User API Response: [object Object]
+02-21 23:24:42.214 31781 31860 D Capacitor: Handling local request: https://localhost/svg/call.svg
+02-21 23:24:46.372 31781 31860 D Capacitor: Handling local request: https://localhost/svg/checkmark.svg
+02-21 23:24:46.373 31781 31860 D Capacitor: Handling local request: https://localhost/svg/call-outline.svg
+02-21 23:24:46.373 31781 31862 D Capacitor: Handling local request: https://localhost/svg/shield-half-outline.svg
+02-21 23:24:46.373 31781 31860 D Capacitor: Handling local request: https://localhost/svg/briefcase-outline.svg
+02-21 23:24:46.377 31781 31860 D Capacitor: Handling local request: https://localhost/svg/business-outline.svg
+02-21 23:24:46.396 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:24:46.397 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:24:46.397 31781 31781 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:24:46.405 31781 31861 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:24:46.510 31781 31781 I Capacitor/Console: File: https://localhost/6595.dab486f0476fcb06.js - Line 1 - Msg: User loaded: [object Object]
+02-21 23:24:55.035 31781 31781 D Capacitor: App paused
+02-21 23:24:55.088 31781 31781 D Capacitor: App stopped
+02-21 23:24:55.089 31781 31781 D Capacitor: Saving instance state!
+02-21 23:26:34.893 20315 20315 D Capacitor: Starting BridgeActivity
+02-21 23:26:34.953 20315 20315 D Capacitor: Registering plugin instance: CapacitorCookies
+02-21 23:26:34.971 20315 20315 D Capacitor: Registering plugin instance: WebView
+02-21 23:26:34.976 20315 20315 D Capacitor: Registering plugin instance: CapacitorHttp
+02-21 23:26:34.981 20315 20315 D Capacitor: Registering plugin instance: SystemBars
+02-21 23:26:34.990 20315 20315 D Capacitor: Registering plugin instance: FileOpener
+02-21 23:26:34.993 20315 20315 D Capacitor: Registering plugin instance: App
+02-21 23:26:34.998 20315 20315 D Capacitor: Registering plugin instance: Filesystem
+02-21 23:26:35.006 20315 20315 D Capacitor: Registering plugin instance: Haptics
+02-21 23:26:35.013 20315 20315 D Capacitor: Registering plugin instance: Keyboard
+02-21 23:26:35.018 20315 20315 D Capacitor: Registering plugin instance: LocalNotifications
+02-21 23:26:35.029 20315 20315 D Capacitor: Registering plugin instance: Preferences
+02-21 23:26:35.040 20315 20315 D Capacitor: Registering plugin instance: PushNotifications
+02-21 23:26:35.049 20315 20315 D Capacitor: Registering plugin instance: Share
+02-21 23:26:35.056 20315 20315 D Capacitor: Registering plugin instance: StatusBar
+02-21 23:26:35.069 20315 20315 D Capacitor: Registering plugin instance: NativeBiometric
+02-21 23:26:35.119 20315 20315 W Capacitor: Unable to read file at path public/plugins
+02-21 23:26:35.130 20315 20315 D Capacitor: Loading app at https://localhost
+02-21 23:26:35.275 20315 20422 D Capacitor: Handling local request: https://localhost/
+02-21 23:26:35.290 20315 20315 D Capacitor: App started
+02-21 23:26:35.324 20315 20315 D Capacitor: App resumed
+02-21 23:26:35.666 20315 20315 D Capacitor: App paused
+02-21 23:26:35.672 20315 20315 D Capacitor: App stopped
+02-21 23:26:35.673 20315 20315 D Capacitor: Saving instance state!
+02-21 23:26:36.125 20315 20422 D Capacitor: Handling local request: https://localhost/polyfills.c1d7d33ea838c63e.js
+02-21 23:26:36.125 20315 20427 D Capacitor: Handling local request: https://localhost/runtime.0dc8fb0d64755be9.js
+02-21 23:26:36.126 20315 20429 D Capacitor: Handling local request: https://localhost/main.af1028ee7b94ae76.js
+02-21 23:26:36.135 20315 20315 E Capacitor/Console: File: https://localhost/ - Line 1 - Msg: Uncaught TypeError: Cannot read properties of undefined (reading 'triggerEvent')
+02-21 23:26:36.687 20315 20419 D Capacitor: Handling local request: https://localhost/styles.52297ff48cd35c3c.css
+02-21 23:26:37.321 20315 20315 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:26:37.327 20315 20315 V Capacitor: callback: 44280928, pluginId: Preferences, methodName: get, methodData: {"key":"auth_data"}
+02-21 23:26:37.349 20315 20315 I Capacitor/Console: File:  - Line 333 - Msg: {"value":"{\"token\":\"eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJpZCI6Mywic3ViIjoiZGFyYWRlYmh1c2hhbjE1QGdtYWlsLmNvbSIsImlhdCI6MTc3MTY1ODA0MywiZXhwIjoxNzcxNzQ0NDQzfQ.YHTSdIgMDFnurEWFQLHckzex4HVrefGxxovoLoOG9B4\",\"id\":3,\"username\":\"Bhushan Tukaram\",\"email\":\"daradebhushan15@gmail.com\",\"roles\":[\"ADMIN\"],\"departmentId\":null,\"name\":\"Bhushan Tukaram\",\"mobile\":\"07304091845\"}"}
+02-21 23:26:37.388 20315 20422 D Capacitor: Handling local request: https://localhost/common.bea9ded4f2bca4d8.js
+02-21 23:26:37.391 20315 20419 D Capacitor: Handling local request: https://localhost/7720.1377bc4a393bc2c0.js
+02-21 23:26:37.433 20315 20421 D Capacitor: Handling local request: https://localhost/2075.6d48ae0693d66b1f.js
+02-21 23:26:37.526 20315 20315 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:26:37.528 20315 20315 V Capacitor: callback: 44280929, pluginId: LocalNotifications, methodName: requestPermissions, methodData: {}
+02-21 23:26:37.535 20315 20421 D Capacitor: Handling local request: https://localhost/3506.0577bd19366e6496.js
+02-21 23:26:37.539 20315 20315 I Capacitor/Console: File:  - Line 333 - Msg: {"display":"granted"}
+02-21 23:26:37.540 20315 20315 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Local notifications permission granted
+02-21 23:26:37.542 20315 20426 D Capacitor: Handling local request: https://localhost/4591.89c85abd5bb7bb25.js
+02-21 23:26:37.545 20315 20315 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:26:37.546 20315 20421 D Capacitor: Handling local request: https://localhost/6270.f29f9adbc2e5a080.js
+02-21 23:26:37.559 20315 20315 V Capacitor: callback: 44280930, pluginId: LocalNotifications, methodName: addListener, methodData: {"eventName":"localNotificationActionPerformed"}
+02-21 23:26:37.603 20315 20421 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:26:37.603 20315 20426 D Capacitor: Handling local request: https://localhost/7240.b6a47df1e8bcf1bf.js
+02-21 23:26:37.622 20315 20419 D Capacitor: Handling local request: https://localhost/964.a954abcfa39f92af.js
+02-21 23:26:37.649 20315 20426 D Capacitor: Handling local request: https://localhost/svg/grid-outline.svg
+02-21 23:26:37.650 20315 20421 D Capacitor: Handling local request: https://localhost/svg/alert-circle-outline.svg
+02-21 23:26:37.650 20315 20426 D Capacitor: Handling local request: https://localhost/svg/log-out-outline.svg
+02-21 23:26:37.652 20315 20422 D Capacitor: Handling local request: https://localhost/svg/list-outline.svg
+02-21 23:26:37.657 20315 20419 D Capacitor: Handling local request: https://localhost/svg/people-outline.svg
+02-21 23:26:37.660 20315 20426 D Capacitor: Handling local request: https://localhost/svg/settings-outline.svg
+02-21 23:26:37.660 20315 20427 D Capacitor: Handling local request: https://localhost/svg/chatbubbles-outline.svg
+02-21 23:26:37.722 20315 20419 D Capacitor: Handling local request: https://localhost/svg/mail-outline.svg
+02-21 23:26:37.722 20315 20421 D Capacitor: Handling local request: https://localhost/svg/lock-closed-outline.svg
+02-21 23:26:37.728 20315 20421 D Capacitor: Handling local request: https://localhost/svg/eye.svg
+02-21 23:26:37.789 20315 20426 D Capacitor: Handling local request: https://localhost/3774.c6378d2f04b186d8.js
+02-21 23:26:37.791 20315 20426 D Capacitor: Handling local request: https://localhost/5661.f5a70fefba8557a6.js
+02-21 23:26:37.792 20315 20429 D Capacitor: Handling local request: https://localhost/4424.57a212c488d2eeb8.js
+02-21 23:26:37.852 20315 20421 D Capacitor: Handling local request: https://localhost/7573.912ede121b7f1eb8.js
+02-21 23:26:37.860 20315 20422 D Capacitor: Handling local request: https://localhost/9726.cf5c0ac83b50bc63.js
+02-21 23:26:37.868 20315 20421 D Capacitor: Handling local request: https://localhost/8844.8aba02d0d62434ae.js
+02-21 23:26:37.903 20315 20429 D Capacitor: Handling local request: https://localhost/5230.65d497bf70fe78b1.js
+02-21 23:26:37.904 20315 20427 D Capacitor: Handling local request: https://localhost/7693.66cb39b42a7f0a30.js
+02-21 23:26:37.950 20315 20419 D Capacitor: Handling local request: https://localhost/6457.f9e834066f351c28.js
+02-21 23:26:37.952 20315 20421 D Capacitor: Handling local request: https://localhost/7681.d0e9dd0bde0d3c7d.js
+02-21 23:26:37.953 20315 20421 D Capacitor: Handling local request: https://localhost/8685.3524ca71fd982a6f.js
+02-21 23:26:37.990 20315 20427 D Capacitor: Handling local request: https://localhost/4519.2351a075b21390be.js
+02-21 23:26:37.993 20315 20421 D Capacitor: Handling local request: https://localhost/6595.dab486f0476fcb06.js
+02-21 23:26:38.002 20315 20421 D Capacitor: Handling local request: https://localhost/3370.e6aa797ce2d45879.js
+02-21 23:26:38.021 20315 20421 D Capacitor: Handling local request: https://localhost/542.698c41912b1f7942.js
+02-21 23:26:38.030 20315 20419 D Capacitor: Handling local request: https://localhost/919.91f70206f08ab189.js
+02-21 23:26:38.067 20315 20421 D Capacitor: Handling local request: https://localhost/9266.af9e4606d1a73f6c.js
+02-21 23:26:38.068 20315 20421 D Capacitor: Handling local request: https://localhost/2213.313fc3ebc88f66dd.js
+02-21 23:26:38.078 20315 20419 D Capacitor: Handling local request: https://localhost/6068.34bbe977710e982d.js
+02-21 23:26:38.112 20315 20421 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:26:38.197 20315 20421 D Capacitor: Handling local request: https://localhost/7927.0b4f4beb2bf9d78d.js
+02-21 23:26:38.197 20315 20315 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:26:38.199 20315 20315 V Capacitor: callback: 44280931, pluginId: App, methodName: addListener, methodData: {"eventName":"backButton"}
+02-21 23:26:38.200 20315 20422 D Capacitor: Handling local request: https://localhost/9364.37609adf3161b37c.js
+02-21 23:28:03.872 21328 21328 D Capacitor: Starting BridgeActivity
+02-21 23:28:03.886 21328 21328 D Capacitor: Registering plugin instance: CapacitorCookies
+02-21 23:28:03.890 21328 21328 D Capacitor: Registering plugin instance: WebView
+02-21 23:28:03.892 21328 21328 D Capacitor: Registering plugin instance: CapacitorHttp
+02-21 23:28:03.893 21328 21328 D Capacitor: Registering plugin instance: SystemBars
+02-21 23:28:03.895 21328 21328 D Capacitor: Registering plugin instance: FileOpener
+02-21 23:28:03.896 21328 21328 D Capacitor: Registering plugin instance: App
+02-21 23:28:03.897 21328 21328 D Capacitor: Registering plugin instance: Filesystem
+02-21 23:28:03.899 21328 21328 D Capacitor: Registering plugin instance: Haptics
+02-21 23:28:03.905 21328 21328 D Capacitor: Registering plugin instance: Keyboard
+02-21 23:28:03.907 21328 21328 D Capacitor: Registering plugin instance: LocalNotifications
+02-21 23:28:03.910 21328 21328 D Capacitor: Registering plugin instance: Preferences
+02-21 23:28:03.911 21328 21328 D Capacitor: Registering plugin instance: PushNotifications
+02-21 23:28:03.914 21328 21328 D Capacitor: Registering plugin instance: Share
+02-21 23:28:03.919 21328 21328 D Capacitor: Registering plugin instance: StatusBar
+02-21 23:28:03.924 21328 21328 D Capacitor: Registering plugin instance: NativeBiometric
+02-21 23:28:03.937 21328 21328 W Capacitor: Unable to read file at path public/plugins
+02-21 23:28:03.941 21328 21328 D Capacitor: Loading app at https://localhost
+02-21 23:28:03.973 21328 21595 D Capacitor: Handling local request: https://localhost/
+02-21 23:28:03.978 21328 21328 D Capacitor: App started
+02-21 23:28:03.985 21328 21328 D Capacitor: App resumed
+02-21 23:28:04.096 21328 21643 D Capacitor: Handling local request: https://localhost/runtime.0dc8fb0d64755be9.js
+02-21 23:28:04.097 21328 21620 D Capacitor: Handling local request: https://localhost/polyfills.c1d7d33ea838c63e.js
+02-21 23:28:04.098 21328 21594 D Capacitor: Handling local request: https://localhost/main.af1028ee7b94ae76.js
+02-21 23:28:04.117 21328 21595 D Capacitor: Handling local request: https://localhost/styles.52297ff48cd35c3c.css
+02-21 23:28:04.451 21328 21328 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:28:04.453 21328 21328 V Capacitor: callback: 17897737, pluginId: Preferences, methodName: get, methodData: {"key":"auth_data"}
+02-21 23:28:04.467 21328 21328 I Capacitor/Console: File:  - Line 333 - Msg: {"value":"{\"token\":\"eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJpZCI6Mywic3ViIjoiZGFyYWRlYmh1c2hhbjE1QGdtYWlsLmNvbSIsImlhdCI6MTc3MTY1ODA0MywiZXhwIjoxNzcxNzQ0NDQzfQ.YHTSdIgMDFnurEWFQLHckzex4HVrefGxxovoLoOG9B4\",\"id\":3,\"username\":\"Bhushan Tukaram\",\"email\":\"daradebhushan15@gmail.com\",\"roles\":[\"ADMIN\"],\"departmentId\":null,\"name\":\"Bhushan Tukaram\",\"mobile\":\"07304091845\"}"}
+02-21 23:28:04.475 21328 21641 D Capacitor: Handling local request: https://localhost/common.bea9ded4f2bca4d8.js
+02-21 23:28:04.480 21328 21620 D Capacitor: Handling local request: https://localhost/7720.1377bc4a393bc2c0.js
+02-21 23:28:04.492 21328 21643 D Capacitor: Handling local request: https://localhost/2075.6d48ae0693d66b1f.js
+02-21 23:28:04.496 21328 21645 D Capacitor: Handling local request: https://localhost/3506.0577bd19366e6496.js
+02-21 23:28:04.499 21328 21641 D Capacitor: Handling local request: https://localhost/4591.89c85abd5bb7bb25.js
+02-21 23:28:04.520 21328 21620 D Capacitor: Handling local request: https://localhost/6270.f29f9adbc2e5a080.js
+02-21 23:28:04.520 21328 21328 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:28:04.521 21328 21328 V Capacitor: callback: 17897738, pluginId: LocalNotifications, methodName: requestPermissions, methodData: {}
+02-21 23:28:04.523 21328 21641 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:28:04.537 21328 21620 D Capacitor: Handling local request: https://localhost/7240.b6a47df1e8bcf1bf.js
+02-21 23:28:04.540 21328 21620 D Capacitor: Handling local request: https://localhost/svg/grid-outline.svg
+02-21 23:28:04.555 21328 21643 D Capacitor: Handling local request: https://localhost/svg/list-outline.svg
+02-21 23:28:04.555 21328 21641 D Capacitor: Handling local request: https://localhost/svg/log-out-outline.svg
+02-21 23:28:04.556 21328 21643 D Capacitor: Handling local request: https://localhost/svg/people-outline.svg
+02-21 23:28:04.556 21328 21641 D Capacitor: Handling local request: https://localhost/svg/chatbubbles-outline.svg
+02-21 23:28:04.557 21328 21641 D Capacitor: Handling local request: https://localhost/svg/settings-outline.svg
+02-21 23:28:04.557 21328 21641 D Capacitor: Handling local request: https://localhost/964.a954abcfa39f92af.js
+02-21 23:28:04.558 21328 21645 D Capacitor: Handling local request: https://localhost/svg/alert-circle-outline.svg
+02-21 23:28:04.565 21328 21328 I Capacitor/Console: File:  - Line 333 - Msg: {"display":"granted"}
+02-21 23:28:04.565 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Local notifications permission granted
+02-21 23:28:04.565 21328 21328 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:28:04.566 21328 21328 V Capacitor: callback: 17897739, pluginId: LocalNotifications, methodName: addListener, methodData: {"eventName":"localNotificationActionPerformed"}
+02-21 23:28:04.612 21328 21641 D Capacitor: Handling local request: https://localhost/svg/mail-outline.svg
+02-21 23:28:04.612 21328 21594 D Capacitor: Handling local request: https://localhost/svg/lock-closed-outline.svg
+02-21 23:28:04.613 21328 21641 D Capacitor: Handling local request: https://localhost/svg/eye.svg
+02-21 23:28:04.614 21328 21594 D Capacitor: Handling local request: https://localhost/3774.c6378d2f04b186d8.js
+02-21 23:28:04.614 21328 21643 D Capacitor: Handling local request: https://localhost/5661.f5a70fefba8557a6.js
+02-21 23:28:04.615 21328 21620 D Capacitor: Handling local request: https://localhost/8844.8aba02d0d62434ae.js
+02-21 23:28:04.615 21328 21594 D Capacitor: Handling local request: https://localhost/4424.57a212c488d2eeb8.js
+02-21 23:28:04.616 21328 21620 D Capacitor: Handling local request: https://localhost/5230.65d497bf70fe78b1.js
+02-21 23:28:04.616 21328 21643 D Capacitor: Handling local request: https://localhost/7573.912ede121b7f1eb8.js
+02-21 23:28:04.616 21328 21620 D Capacitor: Handling local request: https://localhost/6457.f9e834066f351c28.js
+02-21 23:28:04.616 21328 21643 D Capacitor: Handling local request: https://localhost/7681.d0e9dd0bde0d3c7d.js
+02-21 23:28:04.617 21328 21594 D Capacitor: Handling local request: https://localhost/7693.66cb39b42a7f0a30.js
+02-21 23:28:04.620 21328 21645 D Capacitor: Handling local request: https://localhost/9726.cf5c0ac83b50bc63.js
+02-21 23:28:04.621 21328 21641 D Capacitor: Handling local request: https://localhost/8685.3524ca71fd982a6f.js
+02-21 23:28:04.622 21328 21643 D Capacitor: Handling local request: https://localhost/4519.2351a075b21390be.js
+02-21 23:28:04.625 21328 21620 D Capacitor: Handling local request: https://localhost/6595.dab486f0476fcb06.js
+02-21 23:28:04.626 21328 21645 D Capacitor: Handling local request: https://localhost/3370.e6aa797ce2d45879.js
+02-21 23:28:04.627 21328 21645 D Capacitor: Handling local request: https://localhost/542.698c41912b1f7942.js
+02-21 23:28:04.628 21328 21328 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:28:04.628 21328 21645 D Capacitor: Handling local request: https://localhost/919.91f70206f08ab189.js
+02-21 23:28:04.629 21328 21328 V Capacitor: callback: 17897740, pluginId: Preferences, methodName: get, methodData: {"key":"biometric_enabled"}
+02-21 23:28:04.630 21328 21620 D Capacitor: Handling local request: https://localhost/2213.313fc3ebc88f66dd.js
+02-21 23:28:04.631 21328 21643 D Capacitor: Handling local request: https://localhost/6068.34bbe977710e982d.js
+02-21 23:28:04.631 21328 21641 D Capacitor: Handling local request: https://localhost/9266.af9e4606d1a73f6c.js
+02-21 23:28:04.633 21328 21328 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 23:28:04.634 21328 21328 I Capacitor/Console: File: https://localhost/6270.f29f9adbc2e5a080.js - Line 1 - Msg: LoginPage: User already logged in, redirecting to home
+02-21 23:28:04.634 21328 21645 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:28:04.696 21328 21620 D Capacitor: Handling local request: https://localhost/2415.c3539c7d34c6a05b.js
+02-21 23:28:04.780 21328 21620 D Capacitor: Handling local request: https://localhost/4406.0e3f7150a975b869.js
+02-21 23:28:04.796 21328 21595 D Capacitor: Handling local request: https://localhost/5197.87bd8b59d6784248.js
+02-21 23:28:04.800 21328 21620 D Capacitor: Handling local request: https://localhost/svg/sync-outline.svg
+02-21 23:28:04.800 21328 21641 D Capacitor: Handling local request: https://localhost/svg/time-outline.svg
+02-21 23:28:04.801 21328 21594 D Capacitor: Handling local request: https://localhost/svg/pause-circle-outline.svg
+02-21 23:28:04.803 21328 21595 D Capacitor: Handling local request: https://localhost/svg/checkmark-done-outline.svg
+02-21 23:28:04.804 21328 21595 D Capacitor: Handling local request: https://localhost/svg/document-text-outline.svg
+02-21 23:28:04.805 21328 21620 D Capacitor: Handling local request: https://localhost/svg/person-outline.svg
+02-21 23:28:04.844 21328 21328 I Capacitor/Console: File: https://localhost/4424.57a212c488d2eeb8.js - Line 1 - Msg: LanguageService init. Available Langs: EN,MR
+02-21 23:28:04.856 21328 21328 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:28:04.858 21328 21328 V Capacitor: callback: 17897741, pluginId: Keyboard, methodName: getResizeMode, methodData: {}
+02-21 23:28:04.859 21328 21688 D Capacitor: Sending plugin error: {"save":false,"callbackId":"17897741","pluginId":"Keyboard","methodName":"getResizeMode","success":false,"error":{"message":"not implemented","code":"UNIMPLEMENTED"}}
+02-21 23:28:04.880 21328 21328 E Capacitor/Console: File:  - Line 330 - Msg: [object Object]
+02-21 23:28:04.884 21328 21595 D Capacitor: Handling local request: https://localhost/8805.4cb3897d7c19ee2c.js
+02-21 23:28:04.884 21328 21594 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:28:04.901 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:04.901 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:04.973 21328 21594 D Capacitor: Handling local request: https://localhost/7927.0b4f4beb2bf9d78d.js
+02-21 23:28:04.973 21328 21595 D Capacitor: Handling local request: https://localhost/9364.37609adf3161b37c.js
+02-21 23:28:05.005 21328 21328 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:28:05.010 21328 21328 V Capacitor: callback: 17897742, pluginId: App, methodName: addListener, methodData: {"eventName":"backButton"}
+02-21 23:28:05.154 21328 21328 I Capacitor/Console: File: https://localhost/common.bea9ded4f2bca4d8.js - Line 1 - Msg: DEBUG: User API Response: [object Object]
+02-21 23:28:08.872 21328 21594 D Capacitor: Handling local request: https://localhost/svg/home-outline.svg
+02-21 23:28:08.872 21328 21595 D Capacitor: Handling local request: https://localhost/svg/search-outline.svg
+02-21 23:28:08.872 21328 21620 D Capacitor: Handling local request: https://localhost/svg/chevron-down-outline.svg
+02-21 23:28:08.874 21328 21594 D Capacitor: Handling local request: https://localhost/4463.12a357c5ef97a555.js
+02-21 23:28:08.874 21328 21594 D Capacitor: Handling local request: https://localhost/svg/add.svg
+02-21 23:28:08.877 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:08.903 21328 21594 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:28:08.963 21328 21594 D Capacitor: Handling local request: https://localhost/svg/clipboard-outline.svg
+02-21 23:28:08.966 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:08.966 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:08.966 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:08.966 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:08.966 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:09.738 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:09.807 21328 21594 D Capacitor: Handling local request: https://localhost/svg/calendar-clear-outline.svg
+02-21 23:28:09.810 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:09.811 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:09.811 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:09.812 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:09.812 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:10.503 21328 21595 D Capacitor: Handling local request: https://localhost/3162.6e2adcbc63622ae5.js
+02-21 23:28:10.506 21328 21594 D Capacitor: Handling local request: https://localhost/svg/create.svg
+02-21 23:28:10.506 21328 21620 D Capacitor: Handling local request: https://localhost/svg/trash.svg
+02-21 23:28:10.507 21328 21641 D Capacitor: Handling local request: https://localhost/svg/attach.svg
+02-21 23:28:10.507 21328 21595 D Capacitor: Handling local request: https://localhost/svg/send.svg
+02-21 23:28:10.508 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:10.531 21328 21594 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:28:10.534 21328 21594 D Capacitor: Handling local request: https://localhost/svg/chevron-back.svg
+02-21 23:28:10.575 21328 21328 I Capacitor/Console: File: https://localhost/7681.d0e9dd0bde0d3c7d.js - Line 1 - Msg: DEBUG: Loaded Task: [object Object]
+02-21 23:28:10.575 21328 21328 I Capacitor/Console: File: https://localhost/7681.d0e9dd0bde0d3c7d.js - Line 1 - Msg: DEBUG: No Related Complaint in task object
+02-21 23:28:10.575 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:10.576 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:10.580 21328 21594 D Capacitor: Handling local request: https://localhost/svg/calendar.svg
+02-21 23:28:10.582 21328 21594 D Capacitor: Handling local request: https://localhost/svg/business.svg
+02-21 23:28:10.582 21328 21595 D Capacitor: Handling local request: https://localhost/svg/location.svg
+02-21 23:28:10.583 21328 21595 D Capacitor: Handling local request: https://localhost/svg/time.svg
+02-21 23:28:10.584 21328 21595 D Capacitor: Handling local request: https://localhost/svg/cloud-upload.svg
+02-21 23:28:10.584 21328 21643 D Capacitor: Handling local request: https://localhost/svg/chatbubbles.svg
+02-21 23:28:10.636 21328 21594 D Capacitor: Handling local request: https://localhost/svg/document-text.svg
+02-21 23:28:10.648 21328 21594 D Capacitor: Handling local request: https://localhost/svg/document-attach.svg
+02-21 23:28:13.150 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:28:13.306 21328 21328 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:28:13.346 21328 21328 V Capacitor: callback: 17897743, pluginId: Filesystem, methodName: writeFile, methodData: {"path":"IMG_20211222_160234.jpg","data":"\/9j\/4AAQSkZJRgABAQEAeAB4AAD\/4QB6RXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAAIrwEBAAQAAAABAAAFlAESAAMAAAABAAEAAAEyAAIAAAAUAAAASodpAAQAAAABAAAAXgAAAAAyMDIxOjEyOjIyIDE2OjAyOjAxAAABkggABAAAAAEAAAAAAAAAAAAA\/+AAEEpGSUYAAQEAAAEAAQAA\/9sAQwACAQECAQECAgICAgICAgMFAwMDAwMGBAQDBQcGBwcHBgcHCAkLCQgICggHBwoNCgoLDAwMDAcJDg8NDA4LDAwM\/9sAQwECAgIDAwMGAwMGDAgHCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwM\/8AAEQgEEwZVAwEiAAIRAQMRAf\/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC\/\/EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29\/j5+v\/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC\/\/EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29\/j5+v\/aAAwDAQACEQMRAD8A+3Gdd2FY89Np6UK37lj\/ABHjH+NQzESD7x5+7zS+cTIvfcf8iuXqehGJKZPlC7u2P\/r1G7sM7fm9Sec1E820febvjPc1FLcqis2Rng8VI+UmE\/LNu+nNLFLld2cleQfQVRecB\/r39Kp3mvpaI2+aNQvdzVGljXFwAY\/m3HNQ3Otw6NG0t1NHaxqMF5SFUc+9eD\/Gf9tTS\/h1I1np9xHfag2NqKpdUPuRXzv4j+OusfETUTdaxeXU7DJWPftROeMDpQWqbZ9g69+0\/wCH9KuDDp8h1JmYqWjJ2A\/U1hah+0vfX28aetvFu6ZGWJ9PSvlm18bO43MW4w3+0PxrXOrvLCC0r8YGC\/ykdelZ7HRToo9v1j9oDXHndptUjtznhIyP5Vyup\/tH69GjeXrk8jAkKqEQhfcnFeWXWvLBCyxuyq3JKJyMds1zGteKvPDMww3VQ43N+lHMz1sHg4zd2epav+1b4sskPk+KLzL4IUMHKjuORWJN+2R43s4SsOvTbi5JLBCDXjmveJCIcPMzKcggDC1zr60dudyx8bsKP60a2PoKWWYe2sT3yP8AbN8fSsq\/8JPc+XgsVjiUH88VG37aXj5Llz\/wll2yjG1WjVsV4RJrgCE+Y3zMFADdBUsNyWUrubcwwR0z+NVqdMcnw19Ynv0X7ZvjmabjXH6\/6xoU549KvaZ+214zcL5usRsVXL7bdPnOe9fO9vehY92d2zABzU9xq3lj5Wk25554NNF\/2JhH9k+m5v20fFCR+c2rpbr0w8S8\/hiptN\/bd8Rsx866hvPMBwVgCjPYk\/0r5ZufEcj2fl7iv9\/aevbvWeuqLaruWTBHOQelMX9h4TpE+tYf25\/E0T7o57Fc\/KURNxAqvq37eXiMXC+S0cfzFXZ4RgfSvlQ+JCc\/OVBGCRxmoZNeJfh9vmHPXqaB\/wBg4T+U+ph\/wUC8TQxKFvLeVcZP7jJzn+VRx\/8ABQPxULxis2m+VvXBmtsH3xXyuNYa2uN275wedx6CnQ668irukLbsn5edtLUP9X8I\/sn2FH\/wUN1RIt0kcMsiqS2Iwq5Hvnoajg\/4KEeIJZlLxaWIVG5kClifYHpXyLNrrMQItyqxG7H8XrSSazsm+VtqldpyNoPpzSB8OYT+U+wLf9v7XpyY\/J0uNQxX99EVGO3TvVjTf28tUtA32z7LM0gyDChCp6CvjqLX3QE+ZJ07E7fz6Uz\/AISppMbpm6kA7z0poz\/1dwnY+14f299R2eYy2EjM2QmTwPWrk3\/BQHUiqqml6bk5\/eO5XIHcCviq215YYVYs2CMMAMD8\/WrreJlbzFTdtyCOd3480Gb4dwttEz7Kh\/b8umh2y2dqwYAhoNz4Pfii3\/4KATQzbP7Lt2XOfmmKnPWvjuHxBuRWVl7\/ACg7cVU1rWd1srsqsjfN06Hpgmncxlw9heh9oH\/gpPbW7T7dHG6OHzDukPzPn7v\/ANesyP8A4KZWizf6VpNvbqpAZopzIWJB\/IV8T3Oo7pGXop52g9Kp3OryZHzYLDaxP8R96on\/AFewx90Rf8FNreVf3el26ROThpLjaF\/\/AF1s6V\/wUT0nVLXH2GPzFIxHG25c+uf8K+ArLVVDb+F3H72M\/nV6x13y2yvzbhgc55qSlw7hmfoF\/wAN26Xb2qrcQ24UnB8ubcF78+9V5P2\/9LlzJDYr8wJ+ecKePavhmHxE1rBuDeWzAE7ODTbnxIbndu+bpgsuTVFf6tYZ9T7qt\/8AgoDpLwoZIpF3Eh8uCV\/Lg1csP25NHuYVkkgjWFlwGkmwcgnt196+CbPX5DHJHv28jKDocVoadr72025WUDIJIXp2FGonwxh+jPvK2\/bd0G5Mn2eHeYcEsX5ZT3ye1I37bejTA5tZ1PKgLJuV\/wAa+IT4i+1S7mYSbV2BmOT+VXYPELJCJB5i9DhW2rx14qdTnlwzSvoz7Rsv2zLFCsjWc0IxkkSgj8as3H7ZujsV8mJ7lt2cFtqj\/gR\/lXxnZ+J2jKso2FsqOOSevNR6l4wmcttb5W2yfMe69eKDCXDkL6M+yn\/bU0OwiWS4EkXmAhAsobcc+gqF\/wBt7Q4f3jW9xJCpGCsi7sn2zXwrrPi66SZTbysjbzzGdoUMOeaz7vxTcO3zP5j7cMw+XkUeo\/8AV2HWR+gFv+3R4cmmDLY6kxcFQoVeT+db2nftg6FdWvmfZ7yMR4Lo2N6enQ96\/POz1e42W7bmP7zeQzcEEYxXaaF4jmsbVdq7QqGPKr0A561NyHw7BP4j7cT9rHQ\/OjZYL0IxIYbfyzzUE37anhVg2BdeYpxhUB57fX618dx+JJLgH5l2swk+9lgOmKy9d1eabEbSybiGiweOKXM7GkeG4P7R9oyftv8AhKG4YS\/bY2hOwo8Y3NkZpX\/bx8GpGW26ky4+fNv0HrmvgnUdXk+1SMk0h8vDYXPBHFUDN5\/+sMkm0lfmYnYTzSUjT\/VeD+0foZa\/tv8AgvUjmG4uh0VXeLjOOK0h+2L4RigCy3U0O\/s6bR9c1+ddlfTRQbY2kVOoUHuO9XrfWbhJSYpXjk+7hD1zVHn5hkKoQ51K6P0KP7X\/AIQWKTbeSSIMYKRk7qjm\/a+8JTXag3ki\/N8ivERzivz7l1WZpvMdvMYr8pc44H0rU0rU72eVN02+PJyoGFOeOveg+WxEeRaH3pb\/ALU2h3EoRvtkaqATI0fy89MY5q6v7Rmi4HlyyTkuA20FSo9efSvjLQb24tgGjuJo3B2ZVzkBegxXQp4gnhZ5TMzSJ1LNt5IoOVSufW0f7SHhcEf6dtmOMIUO4\/Qe1Yesft1\/CjRr6awuvG1hb3tucPbssgkVvTG
+02-21 23:28:13.376 21328 21328 I Capacitor/Console: File:  - Line 333 - Msg: {"uri":"file:///data/user/0/io.ionic.starter/cache/IMG_20211222_160234.jpg"}
+02-21 23:28:13.376 21328 21328 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:28:13.377 21328 21328 V Capacitor: callback: 17897744, pluginId: LocalNotifications, methodName: schedule, methodData: {"notifications":[{"title":"Download Complete","body":"IMG_20211222_160234.jpg has been saved.","id":6420,"extra":{"filePath":"file:\/\/\/data\/user\/0\/io.ionic.starter\/cache\/IMG_20211222_160234.jpg","contentType":"application\/json"}}]}
+02-21 23:28:13.388 21328 21328 I Capacitor/Console: File:  - Line 333 - Msg: {"notifications":[{"id":6420}]}
+02-21 23:28:13.392 21328 21328 I Capacitor/Console: File: https://localhost/7681.d0e9dd0bde0d3c7d.js - Line 1 - Msg: Attempting to auto-open file at: file:///data/user/0/io.ionic.starter/cache/IMG_20211222_160234.jpg with type: application/json
+02-21 23:28:13.392 21328 21328 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:28:13.393 21328 21328 V Capacitor: callback: 17897745, pluginId: FileOpener, methodName: open, methodData: {"filePath":"file:\/\/\/data\/user\/0\/io.ionic.starter\/cache\/IMG_20211222_160234.jpg","contentType":"application\/json","openWithDefault":false}
+02-21 23:28:13.412 21328 21328 D Capacitor: App paused
+02-21 23:28:13.417 21328 21328 I Capacitor/Console: File:  - Line 333 - Msg: undefined
+02-21 23:28:13.417 21328 21328 I Capacitor/Console: File: https://localhost/7681.d0e9dd0bde0d3c7d.js - Line 1 - Msg: FileOpener resolved successfully
+02-21 23:28:14.054 21328 21328 D Capacitor: App resumed
+02-21 23:28:16.256 21328 21328 D Capacitor: App paused
+02-21 23:28:16.271 21328 21328 D Capacitor: App resumed
+02-21 23:28:16.272 21328 21328 I Capacitor/Console: File:  - Line 333 - Msg: {"actionId":"tap","notification":{"title":"Download Complete","body":"IMG_20211222_160234.jpg has been saved.","id":6420,"extra":{"filePath":"file:///data/user/0/io.ionic.starter/cache/IMG_20211222_160234.jpg","contentType":"application/json"}}}
+02-21 23:28:16.274 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Local notification action performed [object Object]
+02-21 23:28:16.274 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Attempting to open file from notification: file:///data/user/0/io.ionic.starter/cache/IMG_20211222_160234.jpg
+02-21 23:28:16.275 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Notification opening file: file:///data/user/0/io.ionic.starter/cache/IMG_20211222_160234.jpg type: application/json
+02-21 23:28:16.275 21328 21328 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:28:16.282 21328 21328 V Capacitor: callback: 17897746, pluginId: FileOpener, methodName: open, methodData: {"filePath":"file:\/\/\/data\/user\/0\/io.ionic.starter\/cache\/IMG_20211222_160234.jpg","contentType":"application\/json","openWithDefault":false}
+02-21 23:28:16.294 21328 21328 D Capacitor: App paused
+02-21 23:28:16.319 21328 21328 I Capacitor/Console: File:  - Line 333 - Msg: undefined
+02-21 23:28:16.319 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: FileOpener resolved successfully from notification
+02-21 23:28:16.389 21328 21328 D Capacitor: App resumed
+02-21 23:31:32.318 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:31:32.575 21328 21328 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:31:32.602 21328 21328 V Capacitor: callback: 17897747, pluginId: Filesystem, methodName: writeFile, methodData: {"path":"IMG_20211222_160234.jpg","data":"\/9j\/4AAQSkZJRgABAQEAeAB4AAD\/4QB6RXhpZgAATU0AKgAAAAgABQEAAAQAAAABAAAIrwEBAAQAAAABAAAFlAESAAMAAAABAAEAAAEyAAIAAAAUAAAASodpAAQAAAABAAAAXgAAAAAyMDIxOjEyOjIyIDE2OjAyOjAxAAABkggABAAAAAEAAAAAAAAAAAAA\/+AAEEpGSUYAAQEAAAEAAQAA\/9sAQwACAQECAQECAgICAgICAgMFAwMDAwMGBAQDBQcGBwcHBgcHCAkLCQgICggHBwoNCgoLDAwMDAcJDg8NDA4LDAwM\/9sAQwECAgIDAwMGAwMGDAgHCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwM\/8AAEQgEEwZVAwEiAAIRAQMRAf\/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC\/\/EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29\/j5+v\/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC\/\/EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29\/j5+v\/aAAwDAQACEQMRAD8A+3Gdd2FY89Np6UK37lj\/ABHjH+NQzESD7x5+7zS+cTIvfcf8iuXqehGJKZPlC7u2P\/r1G7sM7fm9Sec1E820febvjPc1FLcqis2Rng8VI+UmE\/LNu+nNLFLld2cleQfQVRecB\/r39Kp3mvpaI2+aNQvdzVGljXFwAY\/m3HNQ3Otw6NG0t1NHaxqMF5SFUc+9eD\/Gf9tTS\/h1I1np9xHfag2NqKpdUPuRXzv4j+OusfETUTdaxeXU7DJWPftROeMDpQWqbZ9g69+0\/wCH9KuDDp8h1JmYqWjJ2A\/U1hah+0vfX28aetvFu6ZGWJ9PSvlm18bO43MW4w3+0PxrXOrvLCC0r8YGC\/ykdelZ7HRToo9v1j9oDXHndptUjtznhIyP5Vyup\/tH69GjeXrk8jAkKqEQhfcnFeWXWvLBCyxuyq3JKJyMds1zGteKvPDMww3VQ43N+lHMz1sHg4zd2epav+1b4sskPk+KLzL4IUMHKjuORWJN+2R43s4SsOvTbi5JLBCDXjmveJCIcPMzKcggDC1zr60dudyx8bsKP60a2PoKWWYe2sT3yP8AbN8fSsq\/8JPc+XgsVjiUH88VG37aXj5Llz\/wll2yjG1WjVsV4RJrgCE+Y3zMFADdBUsNyWUrubcwwR0z+NVqdMcnw19Ynv0X7ZvjmabjXH6\/6xoU549KvaZ+214zcL5usRsVXL7bdPnOe9fO9vehY92d2zABzU9xq3lj5Wk25554NNF\/2JhH9k+m5v20fFCR+c2rpbr0w8S8\/hiptN\/bd8Rsx866hvPMBwVgCjPYk\/0r5ZufEcj2fl7iv9\/aevbvWeuqLaruWTBHOQelMX9h4TpE+tYf25\/E0T7o57Fc\/KURNxAqvq37eXiMXC+S0cfzFXZ4RgfSvlQ+JCc\/OVBGCRxmoZNeJfh9vmHPXqaB\/wBg4T+U+ph\/wUC8TQxKFvLeVcZP7jJzn+VRx\/8ABQPxULxis2m+VvXBmtsH3xXyuNYa2uN275wedx6CnQ668irukLbsn5edtLUP9X8I\/sn2FH\/wUN1RIt0kcMsiqS2Iwq5Hvnoajg\/4KEeIJZlLxaWIVG5kClifYHpXyLNrrMQItyqxG7H8XrSSazsm+VtqldpyNoPpzSB8OYT+U+wLf9v7XpyY\/J0uNQxX99EVGO3TvVjTf28tUtA32z7LM0gyDChCp6CvjqLX3QE+ZJ07E7fz6Uz\/AISppMbpm6kA7z0poz\/1dwnY+14f299R2eYy2EjM2QmTwPWrk3\/BQHUiqqml6bk5\/eO5XIHcCviq215YYVYs2CMMAMD8\/WrreJlbzFTdtyCOd3480Gb4dwttEz7Kh\/b8umh2y2dqwYAhoNz4Pfii3\/4KATQzbP7Lt2XOfmmKnPWvjuHxBuRWVl7\/ACg7cVU1rWd1srsqsjfN06Hpgmncxlw9heh9oH\/gpPbW7T7dHG6OHzDukPzPn7v\/ANesyP8A4KZWizf6VpNvbqpAZopzIWJB\/IV8T3Oo7pGXop52g9Kp3OryZHzYLDaxP8R96on\/AFewx90Rf8FNreVf3el26ROThpLjaF\/\/AF1s6V\/wUT0nVLXH2GPzFIxHG25c+uf8K+ArLVVDb+F3H72M\/nV6x13y2yvzbhgc55qSlw7hmfoF\/wAN26Xb2qrcQ24UnB8ubcF78+9V5P2\/9LlzJDYr8wJ+ecKePavhmHxE1rBuDeWzAE7ODTbnxIbndu+bpgsuTVFf6tYZ9T7qt\/8AgoDpLwoZIpF3Eh8uCV\/Lg1csP25NHuYVkkgjWFlwGkmwcgnt196+CbPX5DHJHv28jKDocVoadr72025WUDIJIXp2FGonwxh+jPvK2\/bd0G5Mn2eHeYcEsX5ZT3ye1I37bejTA5tZ1PKgLJuV\/wAa+IT4i+1S7mYSbV2BmOT+VXYPELJCJB5i9DhW2rx14qdTnlwzSvoz7Rsv2zLFCsjWc0IxkkSgj8as3H7ZujsV8mJ7lt2cFtqj\/gR\/lXxnZ+J2jKso2FsqOOSevNR6l4wmcttb5W2yfMe69eKDCXDkL6M+yn\/bU0OwiWS4EkXmAhAsobcc+gqF\/wBt7Q4f3jW9xJCpGCsi7sn2zXwrrPi66SZTbysjbzzGdoUMOeaz7vxTcO3zP5j7cMw+XkUeo\/8AV2HWR+gFv+3R4cmmDLY6kxcFQoVeT+db2nftg6FdWvmfZ7yMR4Lo2N6enQ96\/POz1e42W7bmP7zeQzcEEYxXaaF4jmsbVdq7QqGPKr0A561NyHw7BP4j7cT9rHQ\/OjZYL0IxIYbfyzzUE37anhVg2BdeYpxhUB57fX618dx+JJLgH5l2swk+9lgOmKy9d1eabEbSybiGiweOKXM7GkeG4P7R9oyftv8AhKG4YS\/bY2hOwo8Y3NkZpX\/bx8GpGW26ky4+fNv0HrmvgnUdXk+1SMk0h8vDYXPBHFUDN5\/+sMkm0lfmYnYTzSUjT\/VeD+0foZa\/tv8AgvUjmG4uh0VXeLjOOK0h+2L4RigCy3U0O\/s6bR9c1+ddlfTRQbY2kVOoUHuO9XrfWbhJSYpXjk+7hD1zVHn5hkKoQ51K6P0KP7X\/AIQWKTbeSSIMYKRk7qjm\/a+8JTXag3ki\/N8ivERzivz7l1WZpvMdvMYr8pc44H0rU0rU72eVN02+PJyoGFOeOveg+WxEeRaH3pb\/ALU2h3EoRvtkaqATI0fy89MY5q6v7Rmi4HlyyTkuA20FSo9efSvjLQb24tgGjuJo3B2ZVzkBegxXQp4gnhZ5TMzSJ1LNt5IoOVSufW0f7SHhcEf6dtmOMIUO4\/Qe1Yesft1\/CjRr6awuvG1hb3tucPbssgkVvTG
+02-21 23:31:32.614 21328 21328 I Capacitor/Console: File:  - Line 333 - Msg: {"uri":"file:///data/user/0/io.ionic.starter/cache/IMG_20211222_160234.jpg"}
+02-21 23:31:32.614 21328 21328 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:31:32.615 21328 21328 V Capacitor: callback: 17897748, pluginId: LocalNotifications, methodName: schedule, methodData: {"notifications":[{"title":"Download Complete","body":"IMG_20211222_160234.jpg has been saved.","id":8959,"extra":{"filePath":"file:\/\/\/data\/user\/0\/io.ionic.starter\/cache\/IMG_20211222_160234.jpg","contentType":"application\/json"}}]}
+02-21 23:31:32.622 21328 21328 I Capacitor/Console: File:  - Line 333 - Msg: {"notifications":[{"id":8959}]}
+02-21 23:31:32.625 21328 21328 I Capacitor/Console: File: https://localhost/7681.d0e9dd0bde0d3c7d.js - Line 1 - Msg: Attempting to auto-open file at: file:///data/user/0/io.ionic.starter/cache/IMG_20211222_160234.jpg with type: application/json
+02-21 23:31:32.625 21328 21328 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:31:32.625 21328 21328 V Capacitor: callback: 17897749, pluginId: FileOpener, methodName: open, methodData: {"filePath":"file:\/\/\/data\/user\/0\/io.ionic.starter\/cache\/IMG_20211222_160234.jpg","contentType":"application\/json","openWithDefault":false}
+02-21 23:31:32.637 21328 21328 D Capacitor: App paused
+02-21 23:31:32.648 21328 21328 I Capacitor/Console: File:  - Line 333 - Msg: undefined
+02-21 23:31:32.648 21328 21328 I Capacitor/Console: File: https://localhost/7681.d0e9dd0bde0d3c7d.js - Line 1 - Msg: FileOpener resolved successfully
+02-21 23:31:32.753 21328 21328 D Capacitor: App resumed
+02-21 23:31:35.252 21328 21328 D Capacitor: App paused
+02-21 23:31:35.258 21328 21328 D Capacitor: App resumed
+02-21 23:31:35.262 21328 21328 I Capacitor/Console: File:  - Line 333 - Msg: {"actionId":"tap","notification":{"title":"Download Complete","body":"IMG_20211222_160234.jpg has been saved.","id":8959,"extra":{"filePath":"file:///data/user/0/io.ionic.starter/cache/IMG_20211222_160234.jpg","contentType":"application/json"}}}
+02-21 23:31:35.262 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Local notification action performed [object Object]
+02-21 23:31:35.264 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Attempting to open file from notification: file:///data/user/0/io.ionic.starter/cache/IMG_20211222_160234.jpg
+02-21 23:31:35.264 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Notification opening file: file:///data/user/0/io.ionic.starter/cache/IMG_20211222_160234.jpg type: application/json
+02-21 23:31:35.264 21328 21328 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:31:35.270 21328 21328 V Capacitor: callback: 17897750, pluginId: FileOpener, methodName: open, methodData: {"filePath":"file:\/\/\/data\/user\/0\/io.ionic.starter\/cache\/IMG_20211222_160234.jpg","contentType":"application\/json","openWithDefault":false}
+02-21 23:31:35.289 21328 21328 D Capacitor: App paused
+02-21 23:31:35.295 21328 21328 I Capacitor/Console: File:  - Line 333 - Msg: undefined
+02-21 23:31:35.295 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: FileOpener resolved successfully from notification
+02-21 23:31:35.387 21328 21328 D Capacitor: App resumed
+02-21 23:31:37.784 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:31:37.813 21328 21594 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:31:37.869 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:31:37.869 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:31:37.869 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:31:37.869 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:31:37.869 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:32:00.039 21328 21594 D Capacitor: Handling local request: https://localhost/svg/checkmark.svg
+02-21 23:32:00.040 21328 21594 D Capacitor: Handling local request: https://localhost/svg/chevron-down.svg
+02-21 23:32:00.041 21328 21641 D Capacitor: Handling local request: https://localhost/svg/people.svg
+02-21 23:32:00.042 21328 21641 D Capacitor: Handling local request: https://localhost/svg/person.svg
+02-21 23:32:00.042 21328 21643 D Capacitor: Handling local request: https://localhost/944.64f1b427b3d94efc.js
+02-21 23:32:00.042 21328 21641 D Capacitor: Handling local request: https://localhost/7428.0b42a74e62571184.js
+02-21 23:32:00.045 21328 21595 D Capacitor: Handling local request: https://localhost/441.b11f188dc74a20b8.js
+02-21 23:32:00.047 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:32:00.047 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:32:00.048 21328 21594 D Capacitor: Handling local request: https://localhost/2885.3402a2aa7dcefa0e.js
+02-21 23:32:00.072 21328 21594 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:32:00.131 21328 21620 D Capacitor: Handling local request: https://localhost/6840.d8076c01e66f0d8a.js
+02-21 23:32:00.131 21328 21641 D Capacitor: Handling local request: https://localhost/1459.6bccf7fd6a30b6c4.js
+02-21 23:32:00.132 21328 21620 D Capacitor: Handling local request: https://localhost/9013.5023d36a5d26c2e1.js
+02-21 23:32:00.177 21328 21328 I Capacitor/Console: File: https://localhost/common.bea9ded4f2bca4d8.js - Line 1 - Msg: DEBUG: User API Response: [object Object]
+02-21 23:32:01.173 21328 21328 I Capacitor/Console: File:  - Line 333 - Msg: {"canGoBack":true}
+02-21 23:32:01.181 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:32:01.189 21328 21594 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:32:01.199 21328 21594 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:32:01.256 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:32:01.257 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:32:01.257 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:32:01.257 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:32:01.258 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:32:01.430 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:32:01.430 21328 21328 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Mobile Interceptor: Attaching token
+02-21 23:32:01.469 21328 21328 I Capacitor/Console: File: https://localhost/common.bea9ded4f2bca4d8.js - Line 1 - Msg: DEBUG: User API Response: [object Object]

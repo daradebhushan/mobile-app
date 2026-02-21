@@ -1,0 +1,200 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+@import "@ionic/angular/css/palettes/dark.class.css";
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --ion-font-family: 'Outfit', sans-serif !important;
+}
+
+body {
+    font-family: 'Outfit', sans-serif !important;
+    background-color: var(--ion-background-color);
+}
+
+/* Glassmorphism Utilities */
+.glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+
+    /* Dark Mode Override */
+    .dark & {
+        background: rgba(30, 30, 30, 0.85);
+        /* Darker background for .dark class */
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #f7f7f7;
+    }
+
+    /* Keep generic media query as fallback if .dark class missing but system is dark */
+    @media (prefers-color-scheme: dark) {
+        body:not(.light) & {
+            background: rgba(30, 30, 30, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #f7f7f7;
+        }
+    }
+}
+
+/* Ensure Ionic components respect Tailwind background classes in Dark Mode */
+.dark ion-content.bg-black {
+    --background: #000000;
+}
+
+.dark ion-content.bg-gray-900 {
+    --background: #111827;
+}
+
+/* Premium Design Tokens */
+:root {
+    --border-radius-xl: 16px;
+    --border-radius-lg: 12px;
+    --box-shadow-premium: 0 4px 20px rgba(0, 0, 0, 0.05);
+    --box-shadow-premium-hover: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.modern-shadow {
+    box-shadow: var(--box-shadow-premium) !important;
+}
+
+.dark .modern-shadow {
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4) !important;
+}
+
+.rounded-xl-important {
+    border-radius: var(--border-radius-lg) !important;
+}
+
+.rounded-2xl-important {
+    border-radius: var(--border-radius-xl) !important;
+}
+
+/* Enhancing Ionic Components */
+ion-card {
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--box-shadow-premium);
+    overflow: hidden;
+}
+
+ion-item {
+    --border-radius: var(--border-radius-lg);
+}
+
+/* Gradient Button specific to Brand */
+.btn-brand-gradient {
+    background: linear-gradient(135deg, #FF9933 0%, #EA580C 100%);
+    box-shadow: 0 4px 15px rgba(234, 88, 12, 0.3);
+    --background: linear-gradient(135deg, #FF9933 0%, #EA580C 100%);
+    --box-shadow: 0 4px 15px rgba(234, 88, 12, 0.3);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.text-default {
+    @apply text-gray-900 dark:text-gray-100;
+}
+
+.bg-default {
+    @apply bg-white dark:bg-black;
+}
+
+.bg-surface {
+    @apply bg-gray-50 dark:bg-gray-900;
+}
+
+/* Text Utilities */
+.text-saffron-600 {
+    color: #d97706;
+}
+
+.bg-saffron-50 {
+    background-color: #fff7ed;
+}
+
+.border-saffron-100 {
+    border-color: #ffedd5;
+}
+
+.bg-cream-50 {
+    background-color: #FEFDF5;
+}
+
+/* Custom Badge */
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.4s ease-out forwards;
+    opacity: 0;
+    /* Starte hidden */
+}
+
+/* Stagger delays for up to 20 items */
+@for $i from 1 through 20 {
+    .stagger-item:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.05}s;
+    }
+}

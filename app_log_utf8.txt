@@ -1,0 +1,79 @@
+﻿--------- beginning of main
+02-21 11:57:48.882 14324 14324 I VRI[MainActivity]@e428ba: handleAppVisibility mAppVisible = false visible = true
+02-21 11:57:48.894 14324 14324 I VRI[MainActivity]@e428ba: stopped(false) old = true
+02-21 11:57:48.894 14324 14324 D VRI[MainActivity]@e428ba: WindowStopped on io.ionic.starter/io.ionic.starter.MainActivity set to false
+02-21 11:57:48.895 14324 14324 D Capacitor: App restarted
+02-21 11:57:48.897 14324 14324 D Capacitor: App started
+02-21 11:57:48.899 14324 14324 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+02-21 11:57:48.899 14324 14324 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+02-21 11:57:48.909 14324 14324 D Capacitor/LN: LocalNotification received: null
+02-21 11:57:48.909 14324 14324 D Capacitor/LN: Activity started without notification attached
+02-21 11:57:48.916 14324 14324 D Capacitor/AppPlugin: Firing change: true
+02-21 11:57:48.916 14324 14324 V Capacitor/AppPlugin: Notifying listeners for event appStateChange
+02-21 11:57:48.916 14324 14324 D Capacitor/AppPlugin: No listeners found for event appStateChange
+02-21 11:57:48.916 14324 14324 V Capacitor/AppPlugin: Notifying listeners for event resume
+02-21 11:57:48.916 14324 14324 D Capacitor/AppPlugin: No listeners found for event resume
+02-21 11:57:48.919 14324 14324 V Capacitor/NativeBiometric: Notifying listeners for event biometryChange
+02-21 11:57:48.920 14324 14324 D Capacitor/NativeBiometric: No listeners found for event biometryChange
+02-21 11:57:48.920 14324 14324 D Capacitor: App resumed
+02-21 11:57:48.972 14324 14324 W libc    : Access denied finding property "vendor.display.enable_optimal_refresh_rate"
+02-21 11:57:48.972 14324 14324 I BufferQueueProducer: [](id:37f400000001,api:0,p:-979879072,c:14324) setDequeueTimeout:2077252342
+02-21 11:57:48.972 14324 14324 I BLASTBufferQueue_Java: new BLASTBufferQueue, mName= VRI[MainActivity]@e428ba mNativeObject= 0xb400007322c17000 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3585 android.view.ViewRootImpl.relayoutWindow:11685 android.view.ViewRootImpl.performTraversals:4804 android.view.ViewRootImpl.doTraversal:3924 android.view.ViewRootImpl$TraversalRunnable.run:12903 android.view.Choreographer$CallbackRecord.run:1901 android.view.Choreographer$CallbackRecord.run:1910 android.view.Choreographer.doCallbacks:1367 android.view.Choreographer.doFrame:1292 android.view.Choreographer$FrameDisplayEventReceiver.run:1870 
+02-21 11:57:48.973 14324 14324 I BLASTBufferQueue_Java: update, w= 1080 h= 2316 mName = VRI[MainActivity]@e428ba mNativeObject= 0xb400007322c17000 sc.mNativeObject= 0xb40000701936e680 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3590 android.view.ViewRootImpl.relayoutWindow:11685 android.view.ViewRootImpl.performTraversals:4804 android.view.ViewRootImpl.doTraversal:3924 android.view.ViewRootImpl$TraversalRunnable.run:12903 android.view.Choreographer$CallbackRecord.run:1901 
+02-21 11:57:48.973 14324 14324 W libc    : Access denied finding property "vendor.display.enable_optimal_refresh_rate"
+02-21 11:57:48.973 14324 14324 I VRI[MainActivity]@e428ba: Relayout returned: old=(0,0,1080,2316) new=(0,0,1080,2316) relayoutAsync=false req=(1080,2316)0 dur=4 res=0x3 s={true 0xb4000070193bba00} ch=true seqId=0
+02-21 11:57:48.974 14324 14324 D VRI[MainActivity]@e428ba: mThreadedRenderer.initialize() mSurface={isValid=true 0xb4000070193bba00} hwInitialized=true
+02-21 11:57:48.974 14324 14324 D VRI[MainActivity]@e428ba: reportNextDraw android.view.ViewRootImpl.performTraversals:5443 android.view.ViewRootImpl.doTraversal:3924 android.view.ViewRootImpl$TraversalRunnable.run:12903 android.view.Choreographer$CallbackRecord.run:1901 android.view.Choreographer$CallbackRecord.run:1910 
+02-21 11:57:48.974 14324 14324 D VRI[MainActivity]@e428ba: Setup new sync=wmsSync-VRI[MainActivity]@e428ba#2
+02-21 11:57:48.974 14324 14324 I VRI[MainActivity]@e428ba: Creating new active sync group VRI[MainActivity]@e428ba#3
+02-21 11:57:48.974 14324 14324 D VRI[MainActivity]@e428ba: Start draw after previous draw not visible
+02-21 11:57:48.974 14324 14324 D VRI[MainActivity]@e428ba: registerCallbacksForSync syncBuffer=false
+02-21 11:57:48.975 14324 14324 I View    : setRequestedFrameRate frameRate=-4.0, this=com.getcapacitor.CapacitorWebView{1d34927 VFEDHVC.. .F...... 0,0-1080,2316 #7f0901ff app:id/webview aid=1073741824}, caller=android.view.ViewGroup.setRequestedFrameRate:9952 WV.rf.o:1 WV.rg.h:118 WV.rg.onDraw:7 com.android.webview.chromium.WebViewChromium.onDraw:19 
+02-21 11:57:48.978 14324 14428 D VRI[MainActivity]@e428ba: Received frameDrawingCallback syncResult=0 frameNum=1.
+02-21 11:57:48.978 14324 14428 I VRI[MainActivity]@e428ba: mWNT: t=0xb40000731b76c700 mBlastBufferQueue=0xb400007322c17000 fn= 1 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$12.onFrameDraw:15441 android.view.ThreadedRenderer$1.onFrameDraw:718 <bottom of call stack> 
+02-21 11:57:48.978 14324 14428 I VRI[MainActivity]@e428ba: Setting up sync and frameCommitCallback
+02-21 11:57:48.990 14324 14361 I BLASTBufferQueue: [VRI[MainActivity]@e428ba#1](f:0,a:0,s:0) onFrameAvailable the first frame is available
+02-21 11:57:48.991 14324 14361 I SurfaceComposerClient: apply transaction with the first frame. layerId: 118130, bufferData(ID: 61521111547909, frameNumber: 1)
+02-21 11:57:48.991 14324 14361 I VRI[MainActivity]@e428ba: Received frameCommittedCallback lastAttemptedDrawFrameNum=1 didProduceBuffer=true
+02-21 11:57:48.991 14324 14324 D VRI[MainActivity]@e428ba: reportDrawFinished seqId=0
+02-21 11:57:48.998 14324 14324 I VRI[MainActivity]@e428ba: onDisplayChanged oldDisplayState=2 newDisplayState=2
+02-21 11:57:48.999 14324 14324 I VRI[MainActivity]@e428ba: onDisplayChanged oldDisplayState=2 newDisplayState=2
+02-21 11:57:48.999 14324 14324 I VRI[MainActivity]@e428ba: onDisplayChanged oldDisplayState=2 newDisplayState=2
+02-21 11:57:48.999 14324 14324 I VRI[MainActivity]@e428ba: onDisplayChanged oldDisplayState=2 newDisplayState=2
+02-21 11:57:48.999 14324 14324 I VRI[MainActivity]@e428ba: onDisplayChanged oldDisplayState=2 newDisplayState=2
+02-21 11:57:49.000 14324 14324 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=statusBars, host=io.ionic.starter/io.ionic.starter.MainActivity
+02-21 11:57:49.001 14324 14324 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=navigationBars, host=io.ionic.starter/io.ionic.starter.MainActivity
+02-21 11:57:49.003 14324 14324 I View    : setRequestedFrameRate frameRate=-4.0, this=com.getcapacitor.CapacitorWebView{1d34927 VFEDHVC.. .F...... 0,0-1080,2316 #7f0901ff app:id/webview aid=1073741824}, caller=android.view.ViewGroup.setRequestedFrameRate:9952 WV.rf.o:1 WV.rg.h:118 WV.rg.onDraw:7 com.android.webview.chromium.WebViewChromium.onDraw:19 
+02-21 11:57:49.012 14324 14324 I View    : setRequestedFrameRate frameRate=-4.0, this=com.getcapacitor.CapacitorWebView{1d34927 VFEDHVC.. .F...... 0,0-1080,2316 #7f0901ff app:id/webview aid=1073741824}, caller=android.view.ViewGroup.setRequestedFrameRate:9952 WV.rf.o:1 WV.rg.h:118 WV.rg.onDraw:7 com.android.webview.chromium.WebViewChromium.onDraw:19 
+02-21 11:57:49.014 14324 14324 D VRI[MainActivity]@e428ba: mThreadedRenderer.initializeIfNeeded()#2 mSurface={isValid=true 0xb4000070193bba00}
+02-21 11:57:49.015 14324 14324 D InputMethodManagerUtils: startInputInner - Id : 0
+02-21 11:57:49.015 14324 14324 I InputMethodManager: startInputInner - IInputMethodManagerGlobalInvoker.startInputOrWindowGainedFocus
+02-21 11:57:49.016 14324 14324 I InputMethodManager: handleMessage: setImeVisibility visible=false
+02-21 11:57:49.016 14324 14324 D InsetsController: hide(ime(), fromIme=false)
+02-21 11:57:49.016 14324 14324 I ImeTracker: io.ionic.starter:adb895a4: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+02-21 11:57:49.021 14324 14439 D InputTransport: Input channel constructed: 'ClientS', fd=229
+02-21 11:58:07.512 14324 14324 I VRI[MainActivity]@e428ba: ViewPostIme pointer 0
+02-21 11:58:07.513 14324 14324 I VRI[MainActivity]@e428ba: call setFrameRateCategory for touch hint category=high hint, reason=touch, vri=VRI[MainActivity]@e428ba
+02-21 11:58:07.716 14324 14324 I ImeFocusController: onPreWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+02-21 11:58:07.716 14324 14324 I ImeFocusController: onPostWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+02-21 11:58:08.357 14324 14324 V Capacitor/AppPlugin: Notifying listeners for event pause
+02-21 11:58:08.357 14324 14324 D Capacitor/AppPlugin: No listeners found for event pause
+02-21 11:58:08.357 14324 14324 D Capacitor: App paused
+02-21 11:58:08.483 14324 14324 I VRI[MainActivity]@e428ba: handleAppVisibility mAppVisible = true visible = false
+02-21 11:58:08.483 14324 14324 D VRI[MainActivity]@e428ba: visibilityChanged oldVisibility=true newVisibility=false
+02-21 11:58:08.571 14324 14361 D HWUI    : CacheManager::trimMemory(20)
+02-21 11:58:08.609 14324 14324 I VRI[MainActivity]@e428ba: Relayout returned: old=(0,0,1080,2316) new=(0,0,1080,2316) relayoutAsync=false req=(1080,2316)8 dur=32 res=0x2 s={false 0x0} ch=true seqId=0
+02-21 11:58:08.610 14324 14324 D VRI[MainActivity]@e428ba: Not drawing due to not visible. Reason=!mAppVisible && !mForceDecorViewVisibility
+02-21 11:58:08.613 14324 14324 I VRI[MainActivity]@e428ba: stopped(true) old = false
+02-21 11:58:08.613 14324 14324 D VRI[MainActivity]@e428ba: WindowStopped on io.ionic.starter/io.ionic.starter.MainActivity set to true
+02-21 11:58:08.616 14324 14361 D HWUI    : CacheManager::trimMemory(20)
+02-21 11:58:08.616 14324 14361 D HWUI    : CacheManager::trimMemory(20)
+02-21 11:58:08.617 14324 14324 D Capacitor/AppPlugin: Firing change: false
+02-21 11:58:08.618 14324 14324 V Capacitor/AppPlugin: Notifying listeners for event appStateChange
+02-21 11:58:08.618 14324 14324 D Capacitor/AppPlugin: No listeners found for event appStateChange
+02-21 11:58:08.618 14324 14324 D Capacitor: App stopped
+02-21 11:58:08.619 14324 14324 D Capacitor: Saving instance state!
+02-21 11:58:08.621 14324 14324 D InputTransport: Input channel destroyed: 'ClientS', fd=229
+02-21 11:58:08.626 14324 14324 I VRI[MainActivity]@e428ba: Relayout returned: old=(0,0,1080,2316) new=(0,0,1080,2316) relayoutAsync=false req=(1080,2316)8 dur=5 res=0x2 s={false 0x0} ch=false seqId=0
+02-21 11:58:08.636 14324 14324 D BBA2    : setIsFg isFg = false; delayValue 3999ms
+02-21 11:58:10.797 14324 14361 D HWUI    : CacheManager::trimMemory(40)

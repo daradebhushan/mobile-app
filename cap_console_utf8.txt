@@ -1,0 +1,56 @@
+﻿--------- beginning of main
+02-21 21:36:52.384 23229 23229 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 21:36:52.435 23229 23229 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 21:36:52.574 23229 23229 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 21:36:52.698 23229 23229 I Capacitor/Console: File:  - Line 333 - Msg: {"display":"granted"}
+02-21 21:36:52.705 23229 23229 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Local notifications permission granted
+02-21 21:36:52.706 23229 23229 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 21:36:52.955 23229 23229 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 21:36:53.009 23229 23229 I Capacitor/Console: File:  - Line 333 - Msg: {"biometryType":3,"deviceIsSecure":false,"strongBiometryIsAvailable":false,"errorCode":3,"isAvailable":false,"authenticationStrength":0}
+02-21 21:36:53.012 23229 23229 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 21:36:53.043 23229 23229 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 21:36:53.457 23229 23229 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:45:02.537 24829 24829 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:45:02.673 24829 24829 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 22:45:03.116 24829 24829 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:45:03.355 24829 24829 I Capacitor/Console: File:  - Line 333 - Msg: {"display":"granted"}
+02-21 22:45:03.355 24829 24829 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Local notifications permission granted
+02-21 22:45:03.357 24829 24829 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:45:03.595 24829 24829 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:45:04.178 24829 24829 I Capacitor/Console: File:  - Line 333 - Msg: {"biometryType":3,"deviceIsSecure":false,"strongBiometryIsAvailable":false,"errorCode":3,"isAvailable":false,"authenticationStrength":0}
+02-21 22:45:04.181 24829 24829 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:45:04.218 24829 24829 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 22:45:04.365 24829 24829 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:48:49.849 25105 25105 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:48:50.041 25105 25105 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 22:48:50.255 25105 25105 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:48:50.361 25105 25105 I Capacitor/Console: File:  - Line 333 - Msg: {"display":"granted"}
+02-21 22:48:50.366 25105 25105 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Local notifications permission granted
+02-21 22:48:50.367 25105 25105 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:48:50.574 25105 25105 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:48:50.678 25105 25105 I Capacitor/Console: File:  - Line 333 - Msg: {"biometryType":3,"deviceIsSecure":false,"strongBiometryIsAvailable":false,"errorCode":3,"isAvailable":false,"authenticationStrength":0}
+02-21 22:48:50.679 25105 25105 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:48:51.742 25105 25105 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 22:48:51.915 25105 25105 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:49:41.905 25309 25309 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:49:41.995 25309 25309 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 22:49:42.481 25309 25309 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:49:42.898 25309 25309 I Capacitor/Console: File:  - Line 333 - Msg: {"display":"granted"}
+02-21 22:49:42.925 25309 25309 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Local notifications permission granted
+02-21 22:49:42.928 25309 25309 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:49:43.223 25309 25309 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:49:43.330 25309 25309 I Capacitor/Console: File:  - Line 333 - Msg: {"biometryType":3,"deviceIsSecure":false,"strongBiometryIsAvailable":false,"errorCode":3,"isAvailable":false,"authenticationStrength":0}
+02-21 22:49:43.332 25309 25309 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:49:43.420 25309 25309 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 22:49:44.315 25309 25309 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:16:05.455 26041 26041 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:16:05.534 26041 26041 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 23:16:05.693 26041 26041 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:16:05.800 26041 26041 I Capacitor/Console: File:  - Line 333 - Msg: {"display":"granted"}
+02-21 23:16:05.808 26041 26041 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Local notifications permission granted
+02-21 23:16:05.811 26041 26041 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:16:06.046 26041 26041 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:16:06.707 26041 26041 I Capacitor/Console: File:  - Line 333 - Msg: {"biometryType":3,"deviceIsSecure":false,"strongBiometryIsAvailable":false,"errorCode":3,"isAvailable":false,"authenticationStrength":0}
+02-21 23:16:06.708 26041 26041 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:16:06.782 26041 26041 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 23:16:06.783 26041 26041 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]

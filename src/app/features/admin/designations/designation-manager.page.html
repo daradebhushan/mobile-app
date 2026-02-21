@@ -1,0 +1,86 @@
+<ion-header class="ion-no-border group">
+    <div class="bg-white/90 dark:bg-black/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 px-6 pt-4 pb-6 shadow-sm transition-all duration-300 relative z-20"
+        style="padding-top: calc(1rem + var(--ion-safe-area-top));">
+        <div class="flex items-center space-x-4">
+            <ion-back-button defaultHref="/tabs/admin/users" class="text-gray-400" text=""></ion-back-button>
+            <div>
+                <h2 class="text-2xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">{{
+                    'DESIGNATION' | translate
+                    }}</h2>
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{{ designations.length }} {{
+                    'TOTAL' | translate }}</p>
+            </div>
+        </div>
+    </div>
+</ion-header>
+
+<ion-content class="bg-[#F8FAFC] dark:bg-black">
+    <div class="p-6 space-y-8 pb-24">
+
+        <!-- Add New Designation Section -->
+        <div class="space-y-4">
+            <h3 class="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em] px-2 flex items-center">
+                <ion-icon name="add-circle-outline" class="mr-2 text-purple-500 text-lg"></ion-icon>
+                {{ 'ADD_NEW_DESIGNATION' | translate }}
+            </h3>
+
+            <div
+                class="bg-white dark:bg-gray-900 p-6 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent pointer-events-none">
+                </div>
+
+                <div class="space-y-4 relative z-10">
+                    <input type="text" [(ngModel)]="newDesignationName" [placeholder]="'e.g. Senior Clerk'"
+                        class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl px-5 py-4 text-sm font-bold text-gray-900 dark:text-white focus:ring-4 focus:ring-purple-500/10 focus:bg-white dark:focus:bg-gray-900 focus:border-purple-500/20 outline-none transition-all shadow-inner">
+
+                    <button (click)="addDesignation()"
+                        class="w-full py-4 bg-purple-600 text-white rounded-[2rem] font-black text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-purple-500/30 active:scale-95 transition-all">
+                        {{ 'ADD' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- List Section -->
+        <div class="space-y-4">
+            <h3 class="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em] px-2 flex items-center">
+                <ion-icon name="list-outline" class="mr-2 text-purple-500 text-lg"></ion-icon>
+                {{ 'TASK_LIST' | translate }}
+            </h3>
+
+            <!-- Loading Signal -->
+            <div *ngIf="loading" class="flex justify-center py-10">
+                <ion-spinner name="crescent" color="purple"></ion-spinner>
+            </div>
+
+            <!-- Empty State -->
+            <div *ngIf="!loading && designations.length === 0"
+                class="bg-white dark:bg-gray-900 rounded-[2.5rem] p-12 shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col items-center justify-center text-center opacity-40">
+                <ion-icon name="file-tray-outline" class="text-5xl text-gray-300 mb-2"></ion-icon>
+                <p class="text-xs font-bold uppercase tracking-widest">{{ 'NO_DESIGNATIONS_FOUND' | translate }}</p>
+            </div>
+
+            <!-- Designation Items -->
+            <div class="space-y-3">
+                <div *ngFor="let desig of designations"
+                    class="bg-white dark:bg-gray-900 p-5 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-800 flex items-center justify-between active:bg-purple-50 dark:active:bg-gray-800 transition-all group animate-fade-in">
+
+                    <div class="flex items-center space-x-4">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center text-purple-500 shadow-inner group-active:scale-95 transition-transform">
+                            <ion-icon name="ribbon-outline" class="text-xl"></ion-icon>
+                        </div>
+                        <span class="text-sm font-black text-gray-800 dark:text-gray-200 tracking-tight">{{ desig.name
+                            }}</span>
+                    </div>
+
+                    <button (click)="deleteDesignation(desig.id)"
+                        class="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-red-500 dark:text-red-400 active:scale-90 transition-transform shadow-sm">
+                        <ion-icon name="trash-outline" class="text-lg"></ion-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ion-content>

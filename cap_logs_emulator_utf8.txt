@@ -1,0 +1,480 @@
+﻿--------- beginning of main
+02-21 21:36:49.766 23229 23229 D Capacitor: Starting BridgeActivity
+02-21 21:36:49.873 23229 23229 D Capacitor: Registering plugin instance: CapacitorCookies
+02-21 21:36:49.881 23229 23229 D Capacitor: Registering plugin instance: WebView
+02-21 21:36:49.883 23229 23229 D Capacitor: Registering plugin instance: CapacitorHttp
+02-21 21:36:49.886 23229 23229 D Capacitor: Registering plugin instance: SystemBars
+02-21 21:36:49.894 23229 23229 D Capacitor: Registering plugin instance: FileOpener
+02-21 21:36:49.898 23229 23229 D Capacitor: Registering plugin instance: App
+02-21 21:36:49.903 23229 23229 D Capacitor: Registering plugin instance: Filesystem
+02-21 21:36:49.909 23229 23229 D Capacitor: Registering plugin instance: Haptics
+02-21 21:36:49.913 23229 23229 D Capacitor: Registering plugin instance: Keyboard
+02-21 21:36:49.919 23229 23229 D Capacitor: Registering plugin instance: LocalNotifications
+02-21 21:36:49.931 23229 23229 D Capacitor: Registering plugin instance: Preferences
+02-21 21:36:49.935 23229 23229 D Capacitor: Registering plugin instance: PushNotifications
+02-21 21:36:49.949 23229 23229 D Capacitor: Registering plugin instance: Share
+02-21 21:36:49.954 23229 23229 D Capacitor: Registering plugin instance: StatusBar
+02-21 21:36:49.983 23229 23229 D Capacitor: Registering plugin instance: NativeBiometric
+02-21 21:36:50.027 23229 23229 W Capacitor: Unable to read file at path public/plugins
+02-21 21:36:50.042 23229 23229 D Capacitor: Loading app at https://localhost
+02-21 21:36:50.133 23229 23317 D Capacitor: Handling local request: https://localhost/
+02-21 21:36:50.210 23229 23229 D Capacitor: App started
+02-21 21:36:50.258 23229 23229 D Capacitor: App resumed
+02-21 21:36:50.991 23229 23318 D Capacitor: Handling local request: https://localhost/runtime.850ef6658655309c.js
+02-21 21:36:51.051 23229 23330 D Capacitor: Handling local request: https://localhost/polyfills.c1d7d33ea838c63e.js
+02-21 21:36:51.088 23229 23334 D Capacitor: Handling local request: https://localhost/main.6fb1bfdf4f1aeecd.js
+02-21 21:36:51.548 23229 23317 D Capacitor: Handling local request: https://localhost/styles.52297ff48cd35c3c.css
+02-21 21:36:52.384 23229 23229 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 21:36:52.424 23229 23229 V Capacitor: callback: 27893490, pluginId: Preferences, methodName: get, methodData: {"key":"auth_data"}
+02-21 21:36:52.430 23229 23317 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 21:36:52.435 23229 23229 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 21:36:52.471 23229 23318 D Capacitor: Handling local request: https://localhost/common.bea9ded4f2bca4d8.js
+02-21 21:36:52.482 23229 23318 D Capacitor: Handling local request: https://localhost/7720.1377bc4a393bc2c0.js
+02-21 21:36:52.509 23229 23317 D Capacitor: Handling local request: https://localhost/2075.6d48ae0693d66b1f.js
+02-21 21:36:52.519 23229 23330 D Capacitor: Handling local request: https://localhost/3506.0577bd19366e6496.js
+02-21 21:36:52.521 23229 23320 D Capacitor: Handling local request: https://localhost/4591.89c85abd5bb7bb25.js
+02-21 21:36:52.571 23229 23317 D Capacitor: Handling local request: https://localhost/6270.f29f9adbc2e5a080.js
+02-21 21:36:52.574 23229 23229 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 21:36:52.575 23229 23229 V Capacitor: callback: 27893491, pluginId: LocalNotifications, methodName: requestPermissions, methodData: {}
+02-21 21:36:52.624 23229 23318 D Capacitor: Handling local request: https://localhost/7240.b6a47df1e8bcf1bf.js
+02-21 21:36:52.657 23229 23318 D Capacitor: Handling local request: https://localhost/964.a954abcfa39f92af.js
+02-21 21:36:52.682 23229 23317 D Capacitor: Handling local request: https://localhost/svg/grid-outline.svg
+02-21 21:36:52.687 23229 23317 D Capacitor: Handling local request: https://localhost/svg/list-outline.svg
+02-21 21:36:52.691 23229 23317 D Capacitor: Handling local request: https://localhost/svg/alert-circle-outline.svg
+02-21 21:36:52.694 23229 23318 D Capacitor: Handling local request: https://localhost/svg/log-out-outline.svg
+02-21 21:36:52.698 23229 23229 I Capacitor/Console: File:  - Line 333 - Msg: {"display":"granted"}
+02-21 21:36:52.705 23229 23229 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Local notifications permission granted
+02-21 21:36:52.706 23229 23229 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 21:36:52.710 23229 23229 V Capacitor: callback: 27893492, pluginId: LocalNotifications, methodName: addListener, methodData: {"eventName":"localNotificationActionPerformed"}
+02-21 21:36:52.775 23229 23317 D Capacitor: Handling local request: https://localhost/svg/mail-outline.svg
+02-21 21:36:52.780 23229 23318 D Capacitor: Handling local request: https://localhost/svg/lock-closed-outline.svg
+02-21 21:36:52.790 23229 23318 D Capacitor: Handling local request: https://localhost/svg/eye.svg
+02-21 21:36:52.803 23229 23317 D Capacitor: Handling local request: https://localhost/3774.c6378d2f04b186d8.js
+02-21 21:36:52.806 23229 23317 D Capacitor: Handling local request: https://localhost/5661.f5a70fefba8557a6.js
+02-21 21:36:52.814 23229 23317 D Capacitor: Handling local request: https://localhost/4424.57a212c488d2eeb8.js
+02-21 21:36:52.814 23229 23330 D Capacitor: Handling local request: https://localhost/7573.912ede121b7f1eb8.js
+02-21 21:36:52.815 23229 23320 D Capacitor: Handling local request: https://localhost/9726.cf5c0ac83b50bc63.js
+02-21 21:36:52.836 23229 23320 D Capacitor: Handling local request: https://localhost/8844.8aba02d0d62434ae.js
+02-21 21:36:52.838 23229 23333 D Capacitor: Handling local request: https://localhost/5230.65d497bf70fe78b1.js
+02-21 21:36:52.838 23229 23330 D Capacitor: Handling local request: https://localhost/7693.66cb39b42a7f0a30.js
+02-21 21:36:52.840 23229 23333 D Capacitor: Handling local request: https://localhost/6457.f9e834066f351c28.js
+02-21 21:36:52.859 23229 23320 D Capacitor: Handling local request: https://localhost/7681.8289d49dbdc247d9.js
+02-21 21:36:52.881 23229 23317 D Capacitor: Handling local request: https://localhost/8685.3524ca71fd982a6f.js
+02-21 21:36:52.881 23229 23333 D Capacitor: Handling local request: https://localhost/4519.2351a075b21390be.js
+02-21 21:36:52.882 23229 23320 D Capacitor: Handling local request: https://localhost/6595.dab486f0476fcb06.js
+02-21 21:36:52.884 23229 23320 D Capacitor: Handling local request: https://localhost/3370.e6aa797ce2d45879.js
+02-21 21:36:52.889 23229 23320 D Capacitor: Handling local request: https://localhost/542.698c41912b1f7942.js
+02-21 21:36:52.895 23229 23320 D Capacitor: Handling local request: https://localhost/919.91f70206f08ab189.js
+02-21 21:36:52.896 23229 23330 D Capacitor: Handling local request: https://localhost/9266.af9e4606d1a73f6c.js
+02-21 21:36:52.899 23229 23318 D Capacitor: Handling local request: https://localhost/2213.313fc3ebc88f66dd.js
+02-21 21:36:52.899 23229 23320 D Capacitor: Handling local request: https://localhost/6068.b77916d4c51525d2.js
+02-21 21:36:52.955 23229 23229 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 21:36:52.957 23229 23229 V Capacitor: callback: 27893493, pluginId: NativeBiometric, methodName: isAvailable, methodData: {}
+02-21 21:36:52.984 23229 23318 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 21:36:53.009 23229 23229 I Capacitor/Console: File:  - Line 333 - Msg: {"biometryType":3,"deviceIsSecure":false,"strongBiometryIsAvailable":false,"errorCode":3,"isAvailable":false,"authenticationStrength":0}
+02-21 21:36:53.012 23229 23229 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 21:36:53.018 23229 23229 V Capacitor: callback: 27893494, pluginId: Preferences, methodName: get, methodData: {"key":"biometric_enabled"}
+02-21 21:36:53.043 23229 23229 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 21:36:53.441 23229 23318 D Capacitor: Handling local request: https://localhost/7927.0b4f4beb2bf9d78d.js
+02-21 21:36:53.457 23229 23229 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 21:36:53.461 23229 23317 D Capacitor: Handling local request: https://localhost/9364.37609adf3161b37c.js
+02-21 21:36:53.500 23229 23229 V Capacitor: callback: 27893495, pluginId: App, methodName: addListener, methodData: {"eventName":"backButton"}
+02-21 22:44:58.407 24829 24829 D Capacitor: Starting BridgeActivity
+02-21 22:44:58.675 24829 24829 D Capacitor: Registering plugin instance: CapacitorCookies
+02-21 22:44:58.698 24829 24829 D Capacitor: Registering plugin instance: WebView
+02-21 22:44:58.705 24829 24829 D Capacitor: Registering plugin instance: CapacitorHttp
+02-21 22:44:58.714 24829 24829 D Capacitor: Registering plugin instance: SystemBars
+02-21 22:44:58.760 24829 24829 D Capacitor: Registering plugin instance: FileOpener
+02-21 22:44:58.763 24829 24829 D Capacitor: Registering plugin instance: App
+02-21 22:44:58.774 24829 24829 D Capacitor: Registering plugin instance: Filesystem
+02-21 22:44:58.791 24829 24829 D Capacitor: Registering plugin instance: Haptics
+02-21 22:44:58.801 24829 24829 D Capacitor: Registering plugin instance: Keyboard
+02-21 22:44:58.809 24829 24829 D Capacitor: Registering plugin instance: LocalNotifications
+02-21 22:44:58.853 24829 24829 D Capacitor: Registering plugin instance: Preferences
+02-21 22:44:58.863 24829 24829 D Capacitor: Registering plugin instance: PushNotifications
+02-21 22:44:58.888 24829 24829 D Capacitor: Registering plugin instance: Share
+02-21 22:44:58.899 24829 24829 D Capacitor: Registering plugin instance: StatusBar
+02-21 22:44:58.941 24829 24829 D Capacitor: Registering plugin instance: NativeBiometric
+02-21 22:44:59.086 24829 24829 W Capacitor: Unable to read file at path public/plugins
+02-21 22:44:59.161 24829 24829 D Capacitor: Loading app at https://localhost
+02-21 22:44:59.550 24829 24908 D Capacitor: Handling local request: https://localhost/
+02-21 22:44:59.733 24829 24829 D Capacitor: App started
+02-21 22:44:59.822 24829 24829 D Capacitor: App resumed
+02-21 22:45:00.460 24829 24911 D Capacitor: Handling local request: https://localhost/runtime.01a8dfb583e04f5d.js
+02-21 22:45:00.630 24829 24914 D Capacitor: Handling local request: https://localhost/polyfills.c1d7d33ea838c63e.js
+02-21 22:45:00.634 24829 24917 D Capacitor: Handling local request: https://localhost/main.6fb1bfdf4f1aeecd.js
+02-21 22:45:00.727 24829 24918 D Capacitor: Handling local request: https://localhost/styles.52297ff48cd35c3c.css
+02-21 22:45:02.537 24829 24829 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:45:02.559 24829 24829 V Capacitor: callback: 59802842, pluginId: Preferences, methodName: get, methodData: {"key":"auth_data"}
+02-21 22:45:02.673 24829 24829 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 22:45:02.774 24829 24908 D Capacitor: Handling local request: https://localhost/common.bea9ded4f2bca4d8.js
+02-21 22:45:02.775 24829 24909 D Capacitor: Handling local request: https://localhost/7720.1377bc4a393bc2c0.js
+02-21 22:45:02.916 24829 24909 D Capacitor: Handling local request: https://localhost/2075.6d48ae0693d66b1f.js
+02-21 22:45:02.938 24829 24909 D Capacitor: Handling local request: https://localhost/3506.0577bd19366e6496.js
+02-21 22:45:02.955 24829 24908 D Capacitor: Handling local request: https://localhost/4591.89c85abd5bb7bb25.js
+02-21 22:45:03.116 24829 24829 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:45:03.123 24829 24829 V Capacitor: callback: 59802843, pluginId: LocalNotifications, methodName: requestPermissions, methodData: {}
+02-21 22:45:03.123 24829 24908 D Capacitor: Handling local request: https://localhost/6270.f29f9adbc2e5a080.js
+02-21 22:45:03.135 24829 24909 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 22:45:03.192 24829 24909 D Capacitor: Handling local request: https://localhost/7240.b6a47df1e8bcf1bf.js
+02-21 22:45:03.282 24829 24908 D Capacitor: Handling local request: https://localhost/964.a954abcfa39f92af.js
+02-21 22:45:03.323 24829 24908 D Capacitor: Handling local request: https://localhost/svg/grid-outline.svg
+02-21 22:45:03.325 24829 24909 D Capacitor: Handling local request: https://localhost/svg/list-outline.svg
+02-21 22:45:03.329 24829 24908 D Capacitor: Handling local request: https://localhost/svg/alert-circle-outline.svg
+02-21 22:45:03.342 24829 24908 D Capacitor: Handling local request: https://localhost/svg/log-out-outline.svg
+02-21 22:45:03.355 24829 24829 I Capacitor/Console: File:  - Line 333 - Msg: {"display":"granted"}
+02-21 22:45:03.355 24829 24829 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Local notifications permission granted
+02-21 22:45:03.357 24829 24829 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:45:03.360 24829 24829 V Capacitor: callback: 59802844, pluginId: LocalNotifications, methodName: addListener, methodData: {"eventName":"localNotificationActionPerformed"}
+02-21 22:45:03.418 24829 24909 D Capacitor: Handling local request: https://localhost/svg/lock-closed-outline.svg
+02-21 22:45:03.419 24829 24908 D Capacitor: Handling local request: https://localhost/svg/mail-outline.svg
+02-21 22:45:03.431 24829 24908 D Capacitor: Handling local request: https://localhost/svg/eye.svg
+02-21 22:45:03.457 24829 24908 D Capacitor: Handling local request: https://localhost/3774.c6378d2f04b186d8.js
+02-21 22:45:03.462 24829 24909 D Capacitor: Handling local request: https://localhost/5661.f5a70fefba8557a6.js
+02-21 22:45:03.465 24829 24908 D Capacitor: Handling local request: https://localhost/4424.57a212c488d2eeb8.js
+02-21 22:45:03.466 24829 24911 D Capacitor: Handling local request: https://localhost/7573.912ede121b7f1eb8.js
+02-21 22:45:03.470 24829 24909 D Capacitor: Handling local request: https://localhost/9726.cf5c0ac83b50bc63.js
+02-21 22:45:03.497 24829 24909 D Capacitor: Handling local request: https://localhost/8844.8aba02d0d62434ae.js
+02-21 22:45:03.501 24829 24911 D Capacitor: Handling local request: https://localhost/5230.65d497bf70fe78b1.js
+02-21 22:45:03.502 24829 24909 D Capacitor: Handling local request: https://localhost/7693.66cb39b42a7f0a30.js
+02-21 22:45:03.507 24829 24914 D Capacitor: Handling local request: https://localhost/6457.f9e834066f351c28.js
+02-21 22:45:03.509 24829 24908 D Capacitor: Handling local request: https://localhost/7681.3b8cd19ba90667ef.js
+02-21 22:45:03.522 24829 24908 D Capacitor: Handling local request: https://localhost/8685.3524ca71fd982a6f.js
+02-21 22:45:03.531 24829 24908 D Capacitor: Handling local request: https://localhost/4519.2351a075b21390be.js
+02-21 22:45:03.554 24829 24909 D Capacitor: Handling local request: https://localhost/6595.dab486f0476fcb06.js
+02-21 22:45:03.557 24829 24908 D Capacitor: Handling local request: https://localhost/3370.e6aa797ce2d45879.js
+02-21 22:45:03.561 24829 24908 D Capacitor: Handling local request: https://localhost/542.698c41912b1f7942.js
+02-21 22:45:03.562 24829 24908 D Capacitor: Handling local request: https://localhost/919.91f70206f08ab189.js
+02-21 22:45:03.563 24829 24911 D Capacitor: Handling local request: https://localhost/9266.af9e4606d1a73f6c.js
+02-21 22:45:03.564 24829 24909 D Capacitor: Handling local request: https://localhost/2213.313fc3ebc88f66dd.js
+02-21 22:45:03.580 24829 24908 D Capacitor: Handling local request: https://localhost/6068.33a61274d16ce324.js
+02-21 22:45:03.595 24829 24829 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:45:03.598 24829 24829 V Capacitor: callback: 59802845, pluginId: NativeBiometric, methodName: isAvailable, methodData: {}
+02-21 22:45:03.623 24829 24908 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 22:45:04.178 24829 24829 I Capacitor/Console: File:  - Line 333 - Msg: {"biometryType":3,"deviceIsSecure":false,"strongBiometryIsAvailable":false,"errorCode":3,"isAvailable":false,"authenticationStrength":0}
+02-21 22:45:04.181 24829 24829 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:45:04.198 24829 24829 V Capacitor: callback: 59802846, pluginId: Preferences, methodName: get, methodData: {"key":"biometric_enabled"}
+02-21 22:45:04.218 24829 24829 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 22:45:04.230 24829 24909 D Capacitor: Handling local request: https://localhost/7927.0b4f4beb2bf9d78d.js
+02-21 22:45:04.231 24829 24911 D Capacitor: Handling local request: https://localhost/9364.37609adf3161b37c.js
+02-21 22:45:04.365 24829 24829 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:45:04.375 24829 24829 V Capacitor: callback: 59802847, pluginId: App, methodName: addListener, methodData: {"eventName":"backButton"}
+02-21 22:48:47.059 25105 25105 D Capacitor: Starting BridgeActivity
+02-21 22:48:47.258 25105 25105 D Capacitor: Registering plugin instance: CapacitorCookies
+02-21 22:48:47.275 25105 25105 D Capacitor: Registering plugin instance: WebView
+02-21 22:48:47.281 25105 25105 D Capacitor: Registering plugin instance: CapacitorHttp
+02-21 22:48:47.287 25105 25105 D Capacitor: Registering plugin instance: SystemBars
+02-21 22:48:47.305 25105 25105 D Capacitor: Registering plugin instance: FileOpener
+02-21 22:48:47.307 25105 25105 D Capacitor: Registering plugin instance: App
+02-21 22:48:47.312 25105 25105 D Capacitor: Registering plugin instance: Filesystem
+02-21 22:48:47.321 25105 25105 D Capacitor: Registering plugin instance: Haptics
+02-21 22:48:47.326 25105 25105 D Capacitor: Registering plugin instance: Keyboard
+02-21 22:48:47.332 25105 25105 D Capacitor: Registering plugin instance: LocalNotifications
+02-21 22:48:47.352 25105 25105 D Capacitor: Registering plugin instance: Preferences
+02-21 22:48:47.362 25105 25105 D Capacitor: Registering plugin instance: PushNotifications
+02-21 22:48:47.378 25105 25105 D Capacitor: Registering plugin instance: Share
+02-21 22:48:47.383 25105 25105 D Capacitor: Registering plugin instance: StatusBar
+02-21 22:48:47.410 25105 25105 D Capacitor: Registering plugin instance: NativeBiometric
+02-21 22:48:47.465 25105 25105 W Capacitor: Unable to read file at path public/plugins
+02-21 22:48:47.486 25105 25105 D Capacitor: Loading app at https://localhost
+02-21 22:48:47.767 25105 25180 D Capacitor: Handling local request: https://localhost/
+02-21 22:48:47.779 25105 25105 D Capacitor: App started
+02-21 22:48:47.842 25105 25105 D Capacitor: App resumed
+02-21 22:48:48.174 25105 25178 D Capacitor: Handling local request: https://localhost/runtime.01a8dfb583e04f5d.js
+02-21 22:48:48.181 25105 25186 D Capacitor: Handling local request: https://localhost/polyfills.c1d7d33ea838c63e.js
+02-21 22:48:48.183 25105 25188 D Capacitor: Handling local request: https://localhost/main.6fb1bfdf4f1aeecd.js
+02-21 22:48:48.429 25105 25184 D Capacitor: Handling local request: https://localhost/styles.52297ff48cd35c3c.css
+02-21 22:48:49.849 25105 25105 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:48:49.920 25105 25178 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 22:48:49.982 25105 25105 V Capacitor: callback: 2105164, pluginId: Preferences, methodName: get, methodData: {"key":"auth_data"}
+02-21 22:48:50.041 25105 25105 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 22:48:50.112 25105 25181 D Capacitor: Handling local request: https://localhost/common.bea9ded4f2bca4d8.js
+02-21 22:48:50.112 25105 25184 D Capacitor: Handling local request: https://localhost/7720.1377bc4a393bc2c0.js
+02-21 22:48:50.166 25105 25178 D Capacitor: Handling local request: https://localhost/3506.0577bd19366e6496.js
+02-21 22:48:50.170 25105 25180 D Capacitor: Handling local request: https://localhost/2075.6d48ae0693d66b1f.js
+02-21 22:48:50.173 25105 25181 D Capacitor: Handling local request: https://localhost/4591.89c85abd5bb7bb25.js
+02-21 22:48:50.251 25105 25178 D Capacitor: Handling local request: https://localhost/6270.f29f9adbc2e5a080.js
+02-21 22:48:50.255 25105 25105 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:48:50.258 25105 25105 V Capacitor: callback: 2105165, pluginId: LocalNotifications, methodName: requestPermissions, methodData: {}
+02-21 22:48:50.316 25105 25178 D Capacitor: Handling local request: https://localhost/7240.b6a47df1e8bcf1bf.js
+02-21 22:48:50.330 25105 25178 D Capacitor: Handling local request: https://localhost/964.a954abcfa39f92af.js
+02-21 22:48:50.356 25105 25178 D Capacitor: Handling local request: https://localhost/svg/grid-outline.svg
+02-21 22:48:50.359 25105 25178 D Capacitor: Handling local request: https://localhost/svg/list-outline.svg
+02-21 22:48:50.360 25105 25180 D Capacitor: Handling local request: https://localhost/svg/alert-circle-outline.svg
+02-21 22:48:50.360 25105 25178 D Capacitor: Handling local request: https://localhost/svg/log-out-outline.svg
+02-21 22:48:50.361 25105 25105 I Capacitor/Console: File:  - Line 333 - Msg: {"display":"granted"}
+02-21 22:48:50.366 25105 25105 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Local notifications permission granted
+02-21 22:48:50.367 25105 25105 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:48:50.370 25105 25105 V Capacitor: callback: 2105166, pluginId: LocalNotifications, methodName: addListener, methodData: {"eventName":"localNotificationActionPerformed"}
+02-21 22:48:50.444 25105 25178 D Capacitor: Handling local request: https://localhost/svg/mail-outline.svg
+02-21 22:48:50.448 25105 25178 D Capacitor: Handling local request: https://localhost/svg/lock-closed-outline.svg
+02-21 22:48:50.465 25105 25178 D Capacitor: Handling local request: https://localhost/svg/eye.svg
+02-21 22:48:50.475 25105 25178 D Capacitor: Handling local request: https://localhost/3774.c6378d2f04b186d8.js
+02-21 22:48:50.488 25105 25180 D Capacitor: Handling local request: https://localhost/5661.f5a70fefba8557a6.js
+02-21 22:48:50.491 25105 25188 D Capacitor: Handling local request: https://localhost/9726.cf5c0ac83b50bc63.js
+02-21 22:48:50.491 25105 25181 D Capacitor: Handling local request: https://localhost/4424.57a212c488d2eeb8.js
+02-21 22:48:50.492 25105 25181 D Capacitor: Handling local request: https://localhost/8844.8aba02d0d62434ae.js
+02-21 22:48:50.494 25105 25180 D Capacitor: Handling local request: https://localhost/7693.66cb39b42a7f0a30.js
+02-21 22:48:50.495 25105 25188 D Capacitor: Handling local request: https://localhost/5230.65d497bf70fe78b1.js
+02-21 22:48:50.499 25105 25188 D Capacitor: Handling local request: https://localhost/7681.3b8cd19ba90667ef.js
+02-21 22:48:50.499 25105 25178 D Capacitor: Handling local request: https://localhost/6457.f9e834066f351c28.js
+02-21 22:48:50.502 25105 25186 D Capacitor: Handling local request: https://localhost/7573.912ede121b7f1eb8.js
+02-21 22:48:50.503 25105 25186 D Capacitor: Handling local request: https://localhost/8685.3524ca71fd982a6f.js
+02-21 22:48:50.505 25105 25186 D Capacitor: Handling local request: https://localhost/4519.2351a075b21390be.js
+02-21 22:48:50.545 25105 25178 D Capacitor: Handling local request: https://localhost/6595.dab486f0476fcb06.js
+02-21 22:48:50.553 25105 25178 D Capacitor: Handling local request: https://localhost/3370.e6aa797ce2d45879.js
+02-21 22:48:50.558 25105 25180 D Capacitor: Handling local request: https://localhost/542.698c41912b1f7942.js
+02-21 22:48:50.562 25105 25178 D Capacitor: Handling local request: https://localhost/919.91f70206f08ab189.js
+02-21 22:48:50.564 25105 25178 D Capacitor: Handling local request: https://localhost/9266.af9e4606d1a73f6c.js
+02-21 22:48:50.567 25105 25180 D Capacitor: Handling local request: https://localhost/2213.313fc3ebc88f66dd.js
+02-21 22:48:50.569 25105 25188 D Capacitor: Handling local request: https://localhost/6068.33a61274d16ce324.js
+02-21 22:48:50.574 25105 25105 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:48:50.577 25105 25105 V Capacitor: callback: 2105167, pluginId: NativeBiometric, methodName: isAvailable, methodData: {}
+02-21 22:48:50.608 25105 25178 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 22:48:50.678 25105 25105 I Capacitor/Console: File:  - Line 333 - Msg: {"biometryType":3,"deviceIsSecure":false,"strongBiometryIsAvailable":false,"errorCode":3,"isAvailable":false,"authenticationStrength":0}
+02-21 22:48:50.679 25105 25105 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:48:50.698 25105 25105 V Capacitor: callback: 2105168, pluginId: Preferences, methodName: get, methodData: {"key":"biometric_enabled"}
+02-21 22:48:51.742 25105 25105 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 22:48:51.900 25105 25178 D Capacitor: Handling local request: https://localhost/7927.0b4f4beb2bf9d78d.js
+02-21 22:48:51.915 25105 25105 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:48:51.925 25105 25180 D Capacitor: Handling local request: https://localhost/9364.37609adf3161b37c.js
+02-21 22:48:51.926 25105 25105 V Capacitor: callback: 2105169, pluginId: App, methodName: addListener, methodData: {"eventName":"backButton"}
+02-21 22:49:39.681 25309 25309 D Capacitor: Starting BridgeActivity
+02-21 22:49:39.804 25309 25309 D Capacitor: Registering plugin instance: CapacitorCookies
+02-21 22:49:39.828 25309 25309 D Capacitor: Registering plugin instance: WebView
+02-21 22:49:39.831 25309 25309 D Capacitor: Registering plugin instance: CapacitorHttp
+02-21 22:49:39.839 25309 25309 D Capacitor: Registering plugin instance: SystemBars
+02-21 22:49:39.850 25309 25309 D Capacitor: Registering plugin instance: FileOpener
+02-21 22:49:39.852 25309 25309 D Capacitor: Registering plugin instance: App
+02-21 22:49:39.858 25309 25309 D Capacitor: Registering plugin instance: Filesystem
+02-21 22:49:39.867 25309 25309 D Capacitor: Registering plugin instance: Haptics
+02-21 22:49:39.873 25309 25309 D Capacitor: Registering plugin instance: Keyboard
+02-21 22:49:39.877 25309 25309 D Capacitor: Registering plugin instance: LocalNotifications
+02-21 22:49:39.892 25309 25309 D Capacitor: Registering plugin instance: Preferences
+02-21 22:49:39.899 25309 25309 D Capacitor: Registering plugin instance: PushNotifications
+02-21 22:49:39.920 25309 25309 D Capacitor: Registering plugin instance: Share
+02-21 22:49:39.925 25309 25309 D Capacitor: Registering plugin instance: StatusBar
+02-21 22:49:39.956 25309 25309 D Capacitor: Registering plugin instance: NativeBiometric
+02-21 22:49:40.011 25309 25309 W Capacitor: Unable to read file at path public/plugins
+02-21 22:49:40.027 25309 25309 D Capacitor: Loading app at https://localhost
+02-21 22:49:40.118 25309 25376 D Capacitor: Handling local request: https://localhost/
+02-21 22:49:40.239 25309 25309 D Capacitor: App started
+02-21 22:49:40.278 25309 25309 D Capacitor: App resumed
+02-21 22:49:40.551 25309 25392 D Capacitor: Handling local request: https://localhost/runtime.01a8dfb583e04f5d.js
+02-21 22:49:40.561 25309 25387 D Capacitor: Handling local request: https://localhost/polyfills.c1d7d33ea838c63e.js
+02-21 22:49:40.609 25309 25377 D Capacitor: Handling local request: https://localhost/main.6fb1bfdf4f1aeecd.js
+02-21 22:49:40.711 25309 25376 D Capacitor: Handling local request: https://localhost/styles.52297ff48cd35c3c.css
+02-21 22:49:41.905 25309 25309 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:49:41.931 25309 25309 V Capacitor: callback: 89809757, pluginId: Preferences, methodName: get, methodData: {"key":"auth_data"}
+02-21 22:49:41.995 25309 25309 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 22:49:42.068 25309 25377 D Capacitor: Handling local request: https://localhost/7720.1377bc4a393bc2c0.js
+02-21 22:49:42.073 25309 25376 D Capacitor: Handling local request: https://localhost/common.bea9ded4f2bca4d8.js
+02-21 22:49:42.224 25309 25377 D Capacitor: Handling local request: https://localhost/2075.6d48ae0693d66b1f.js
+02-21 22:49:42.256 25309 25376 D Capacitor: Handling local request: https://localhost/3506.0577bd19366e6496.js
+02-21 22:49:42.296 25309 25376 D Capacitor: Handling local request: https://localhost/4591.89c85abd5bb7bb25.js
+02-21 22:49:42.469 25309 25376 D Capacitor: Handling local request: https://localhost/6270.f29f9adbc2e5a080.js
+02-21 22:49:42.481 25309 25309 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:49:42.486 25309 25309 V Capacitor: callback: 89809758, pluginId: LocalNotifications, methodName: requestPermissions, methodData: {}
+02-21 22:49:42.507 25309 25376 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 22:49:42.664 25309 25377 D Capacitor: Handling local request: https://localhost/7240.b6a47df1e8bcf1bf.js
+02-21 22:49:42.809 25309 25377 D Capacitor: Handling local request: https://localhost/964.a954abcfa39f92af.js
+02-21 22:49:42.864 25309 25376 D Capacitor: Handling local request: https://localhost/svg/grid-outline.svg
+02-21 22:49:42.877 25309 25379 D Capacitor: Handling local request: https://localhost/svg/list-outline.svg
+02-21 22:49:42.884 25309 25377 D Capacitor: Handling local request: https://localhost/svg/alert-circle-outline.svg
+02-21 22:49:42.892 25309 25379 D Capacitor: Handling local request: https://localhost/svg/log-out-outline.svg
+02-21 22:49:42.898 25309 25309 I Capacitor/Console: File:  - Line 333 - Msg: {"display":"granted"}
+02-21 22:49:42.925 25309 25309 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Local notifications permission granted
+02-21 22:49:42.928 25309 25309 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:49:42.940 25309 25309 V Capacitor: callback: 89809759, pluginId: LocalNotifications, methodName: addListener, methodData: {"eventName":"localNotificationActionPerformed"}
+02-21 22:49:43.002 25309 25377 D Capacitor: Handling local request: https://localhost/svg/lock-closed-outline.svg
+02-21 22:49:43.005 25309 25376 D Capacitor: Handling local request: https://localhost/svg/mail-outline.svg
+02-21 22:49:43.009 25309 25376 D Capacitor: Handling local request: https://localhost/svg/eye.svg
+02-21 22:49:43.038 25309 25376 D Capacitor: Handling local request: https://localhost/3774.c6378d2f04b186d8.js
+02-21 22:49:43.038 25309 25379 D Capacitor: Handling local request: https://localhost/5661.f5a70fefba8557a6.js
+02-21 22:49:43.052 25309 25387 D Capacitor: Handling local request: https://localhost/4424.57a212c488d2eeb8.js
+02-21 22:49:43.054 25309 25379 D Capacitor: Handling local request: https://localhost/7573.912ede121b7f1eb8.js
+02-21 22:49:43.058 25309 25379 D Capacitor: Handling local request: https://localhost/9726.cf5c0ac83b50bc63.js
+02-21 22:49:43.060 25309 25392 D Capacitor: Handling local request: https://localhost/8844.8aba02d0d62434ae.js
+02-21 22:49:43.078 25309 25379 D Capacitor: Handling local request: https://localhost/5230.65d497bf70fe78b1.js
+02-21 22:49:43.086 25309 25377 D Capacitor: Handling local request: https://localhost/7693.66cb39b42a7f0a30.js
+02-21 22:49:43.087 25309 25377 D Capacitor: Handling local request: https://localhost/6457.f9e834066f351c28.js
+02-21 22:49:43.088 25309 25379 D Capacitor: Handling local request: https://localhost/7681.3b8cd19ba90667ef.js
+02-21 22:49:43.094 25309 25392 D Capacitor: Handling local request: https://localhost/8685.3524ca71fd982a6f.js
+02-21 22:49:43.094 25309 25377 D Capacitor: Handling local request: https://localhost/4519.2351a075b21390be.js
+02-21 22:49:43.108 25309 25377 D Capacitor: Handling local request: https://localhost/6595.dab486f0476fcb06.js
+02-21 22:49:43.130 25309 25379 D Capacitor: Handling local request: https://localhost/3370.e6aa797ce2d45879.js
+02-21 22:49:43.132 25309 25389 D Capacitor: Handling local request: https://localhost/542.698c41912b1f7942.js
+02-21 22:49:43.134 25309 25379 D Capacitor: Handling local request: https://localhost/919.91f70206f08ab189.js
+02-21 22:49:43.136 25309 25377 D Capacitor: Handling local request: https://localhost/9266.af9e4606d1a73f6c.js
+02-21 22:49:43.143 25309 25379 D Capacitor: Handling local request: https://localhost/2213.313fc3ebc88f66dd.js
+02-21 22:49:43.143 25309 25387 D Capacitor: Handling local request: https://localhost/6068.33a61274d16ce324.js
+02-21 22:49:43.223 25309 25309 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:49:43.226 25309 25309 V Capacitor: callback: 89809760, pluginId: NativeBiometric, methodName: isAvailable, methodData: {}
+02-21 22:49:43.263 25309 25376 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 22:49:43.330 25309 25309 I Capacitor/Console: File:  - Line 333 - Msg: {"biometryType":3,"deviceIsSecure":false,"strongBiometryIsAvailable":false,"errorCode":3,"isAvailable":false,"authenticationStrength":0}
+02-21 22:49:43.332 25309 25309 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:49:43.337 25309 25309 V Capacitor: callback: 89809761, pluginId: Preferences, methodName: get, methodData: {"key":"biometric_enabled"}
+02-21 22:49:43.420 25309 25309 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 22:49:43.624 25309 25379 D Capacitor: Handling local request: https://localhost/7927.0b4f4beb2bf9d78d.js
+02-21 22:49:43.624 25309 25376 D Capacitor: Handling local request: https://localhost/9364.37609adf3161b37c.js
+02-21 22:49:44.315 25309 25309 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 22:49:44.345 25309 25309 V Capacitor: callback: 89809762, pluginId: App, methodName: addListener, methodData: {"eventName":"backButton"}
+02-21 23:16:03.783 26041 26041 D Capacitor: Starting BridgeActivity
+02-21 23:16:03.878 26041 26041 D Capacitor: Registering plugin instance: CapacitorCookies
+02-21 23:16:03.887 26041 26041 D Capacitor: Registering plugin instance: WebView
+02-21 23:16:03.890 26041 26041 D Capacitor: Registering plugin instance: CapacitorHttp
+02-21 23:16:03.894 26041 26041 D Capacitor: Registering plugin instance: SystemBars
+02-21 23:16:03.902 26041 26041 D Capacitor: Registering plugin instance: FileOpener
+02-21 23:16:03.903 26041 26041 D Capacitor: Registering plugin instance: App
+02-21 23:16:03.908 26041 26041 D Capacitor: Registering plugin instance: Filesystem
+02-21 23:16:03.914 26041 26041 D Capacitor: Registering plugin instance: Haptics
+02-21 23:16:03.919 26041 26041 D Capacitor: Registering plugin instance: Keyboard
+02-21 23:16:03.923 26041 26041 D Capacitor: Registering plugin instance: LocalNotifications
+02-21 23:16:03.939 26041 26041 D Capacitor: Registering plugin instance: Preferences
+02-21 23:16:03.945 26041 26041 D Capacitor: Registering plugin instance: PushNotifications
+02-21 23:16:03.956 26041 26041 D Capacitor: Registering plugin instance: Share
+02-21 23:16:03.959 26041 26041 D Capacitor: Registering plugin instance: StatusBar
+02-21 23:16:03.981 26041 26041 D Capacitor: Registering plugin instance: NativeBiometric
+02-21 23:16:04.024 26041 26041 W Capacitor: Unable to read file at path public/plugins
+02-21 23:16:04.038 26041 26041 D Capacitor: Loading app at https://localhost
+02-21 23:16:04.092 26041 26117 D Capacitor: Handling local request: https://localhost/
+02-21 23:16:04.188 26041 26041 D Capacitor: App started
+02-21 23:16:04.227 26041 26041 D Capacitor: App resumed
+02-21 23:16:04.445 26041 26124 D Capacitor: Handling local request: https://localhost/runtime.01a8dfb583e04f5d.js
+02-21 23:16:04.447 26041 26119 D Capacitor: Handling local request: https://localhost/polyfills.c1d7d33ea838c63e.js
+02-21 23:16:04.451 26041 26125 D Capacitor: Handling local request: https://localhost/main.6fb1bfdf4f1aeecd.js
+02-21 23:16:04.546 26041 26128 D Capacitor: Handling local request: https://localhost/styles.52297ff48cd35c3c.css
+02-21 23:16:05.455 26041 26041 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:16:05.475 26041 26041 V Capacitor: callback: 47291172, pluginId: Preferences, methodName: get, methodData: {"key":"auth_data"}
+02-21 23:16:05.521 26041 26119 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:16:05.534 26041 26041 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 23:16:05.570 26041 26119 D Capacitor: Handling local request: https://localhost/common.bea9ded4f2bca4d8.js
+02-21 23:16:05.574 26041 26117 D Capacitor: Handling local request: https://localhost/7720.1377bc4a393bc2c0.js
+02-21 23:16:05.621 26041 26117 D Capacitor: Handling local request: https://localhost/2075.6d48ae0693d66b1f.js
+02-21 23:16:05.626 26041 26117 D Capacitor: Handling local request: https://localhost/3506.0577bd19366e6496.js
+02-21 23:16:05.636 26041 26119 D Capacitor: Handling local request: https://localhost/4591.89c85abd5bb7bb25.js
+02-21 23:16:05.689 26041 26117 D Capacitor: Handling local request: https://localhost/6270.f29f9adbc2e5a080.js
+02-21 23:16:05.693 26041 26041 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:16:05.695 26041 26041 V Capacitor: callback: 47291173, pluginId: LocalNotifications, methodName: requestPermissions, methodData: {}
+02-21 23:16:05.759 26041 26117 D Capacitor: Handling local request: https://localhost/7240.b6a47df1e8bcf1bf.js
+02-21 23:16:05.782 26041 26117 D Capacitor: Handling local request: https://localhost/964.a954abcfa39f92af.js
+02-21 23:16:05.793 26041 26117 D Capacitor: Handling local request: https://localhost/svg/grid-outline.svg
+02-21 23:16:05.799 26041 26117 D Capacitor: Handling local request: https://localhost/svg/list-outline.svg
+02-21 23:16:05.800 26041 26120 D Capacitor: Handling local request: https://localhost/svg/alert-circle-outline.svg
+02-21 23:16:05.800 26041 26041 I Capacitor/Console: File:  - Line 333 - Msg: {"display":"granted"}
+02-21 23:16:05.808 26041 26041 I Capacitor/Console: File: https://localhost/main.6fb1bfdf4f1aeecd.js - Line 1 - Msg: Local notifications permission granted
+02-21 23:16:05.808 26041 26119 D Capacitor: Handling local request: https://localhost/svg/log-out-outline.svg
+02-21 23:16:05.811 26041 26041 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:16:05.814 26041 26041 V Capacitor: callback: 47291174, pluginId: LocalNotifications, methodName: addListener, methodData: {"eventName":"localNotificationActionPerformed"}
+02-21 23:16:05.878 26041 26117 D Capacitor: Handling local request: https://localhost/svg/mail-outline.svg
+02-21 23:16:05.888 26041 26117 D Capacitor: Handling local request: https://localhost/svg/lock-closed-outline.svg
+02-21 23:16:05.896 26041 26119 D Capacitor: Handling local request: https://localhost/svg/eye.svg
+02-21 23:16:05.911 26041 26117 D Capacitor: Handling local request: https://localhost/3774.c6378d2f04b186d8.js
+02-21 23:16:05.911 26041 26119 D Capacitor: Handling local request: https://localhost/5661.f5a70fefba8557a6.js
+02-21 23:16:05.921 26041 26117 D Capacitor: Handling local request: https://localhost/4424.57a212c488d2eeb8.js
+02-21 23:16:05.923 26041 26117 D Capacitor: Handling local request: https://localhost/7573.912ede121b7f1eb8.js
+02-21 23:16:05.931 26041 26119 D Capacitor: Handling local request: https://localhost/9726.cf5c0ac83b50bc63.js
+02-21 23:16:05.933 26041 26119 D Capacitor: Handling local request: https://localhost/8844.8aba02d0d62434ae.js
+02-21 23:16:05.947 26041 26120 D Capacitor: Handling local request: https://localhost/5230.65d497bf70fe78b1.js
+02-21 23:16:05.955 26041 26125 D Capacitor: Handling local request: https://localhost/7693.66cb39b42a7f0a30.js
+02-21 23:16:05.961 26041 26119 D Capacitor: Handling local request: https://localhost/6457.f9e834066f351c28.js
+02-21 23:16:05.962 26041 26128 D Capacitor: Handling local request: https://localhost/7681.3b8cd19ba90667ef.js
+02-21 23:16:05.972 26041 26119 D Capacitor: Handling local request: https://localhost/8685.3524ca71fd982a6f.js
+02-21 23:16:05.980 26041 26120 D Capacitor: Handling local request: https://localhost/542.698c41912b1f7942.js
+02-21 23:16:05.980 26041 26117 D Capacitor: Handling local request: https://localhost/6595.dab486f0476fcb06.js
+02-21 23:16:05.982 26041 26120 D Capacitor: Handling local request: https://localhost/9266.af9e4606d1a73f6c.js
+02-21 23:16:05.983 26041 26124 D Capacitor: Handling local request: https://localhost/4519.2351a075b21390be.js
+02-21 23:16:05.984 26041 26125 D Capacitor: Handling local request: https://localhost/3370.e6aa797ce2d45879.js
+02-21 23:16:05.989 26041 26119 D Capacitor: Handling local request: https://localhost/2213.313fc3ebc88f66dd.js
+02-21 23:16:05.990 26041 26128 D Capacitor: Handling local request: https://localhost/919.91f70206f08ab189.js
+02-21 23:16:05.998 26041 26117 D Capacitor: Handling local request: https://localhost/6068.33a61274d16ce324.js
+02-21 23:16:06.046 26041 26041 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:16:06.064 26041 26041 V Capacitor: callback: 47291175, pluginId: NativeBiometric, methodName: isAvailable, methodData: {}
+02-21 23:16:06.087 26041 26119 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:16:06.707 26041 26041 I Capacitor/Console: File:  - Line 333 - Msg: {"biometryType":3,"deviceIsSecure":false,"strongBiometryIsAvailable":false,"errorCode":3,"isAvailable":false,"authenticationStrength":0}
+02-21 23:16:06.708 26041 26041 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:16:06.727 26041 26041 V Capacitor: callback: 47291176, pluginId: Preferences, methodName: get, methodData: {"key":"biometric_enabled"}
+02-21 23:16:06.749 26041 26117 D Capacitor: Handling local request: https://localhost/7927.0b4f4beb2bf9d78d.js
+02-21 23:16:06.753 26041 26119 D Capacitor: Handling local request: https://localhost/9364.37609adf3161b37c.js
+02-21 23:16:06.782 26041 26041 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 23:16:06.783 26041 26041 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:16:06.795 26041 26041 V Capacitor: callback: 47291177, pluginId: App, methodName: addListener, methodData: {"eventName":"backButton"}
+02-21 23:24:22.652 26380 26380 D Capacitor: Starting BridgeActivity
+02-21 23:24:22.764 26380 26380 D Capacitor: Registering plugin instance: CapacitorCookies
+02-21 23:24:22.786 26380 26380 D Capacitor: Registering plugin instance: WebView
+02-21 23:24:22.790 26380 26380 D Capacitor: Registering plugin instance: CapacitorHttp
+02-21 23:24:22.795 26380 26380 D Capacitor: Registering plugin instance: SystemBars
+02-21 23:24:22.813 26380 26380 D Capacitor: Registering plugin instance: FileOpener
+02-21 23:24:22.818 26380 26380 D Capacitor: Registering plugin instance: App
+02-21 23:24:22.822 26380 26380 D Capacitor: Registering plugin instance: Filesystem
+02-21 23:24:22.830 26380 26380 D Capacitor: Registering plugin instance: Haptics
+02-21 23:24:22.841 26380 26380 D Capacitor: Registering plugin instance: Keyboard
+02-21 23:24:22.845 26380 26380 D Capacitor: Registering plugin instance: LocalNotifications
+02-21 23:24:22.861 26380 26380 D Capacitor: Registering plugin instance: Preferences
+02-21 23:24:22.867 26380 26380 D Capacitor: Registering plugin instance: PushNotifications
+02-21 23:24:22.885 26380 26380 D Capacitor: Registering plugin instance: Share
+02-21 23:24:22.890 26380 26380 D Capacitor: Registering plugin instance: StatusBar
+02-21 23:24:22.912 26380 26380 D Capacitor: Registering plugin instance: NativeBiometric
+02-21 23:24:22.964 26380 26380 W Capacitor: Unable to read file at path public/plugins
+02-21 23:24:22.978 26380 26380 D Capacitor: Loading app at https://localhost
+02-21 23:24:23.082 26380 26468 D Capacitor: Handling local request: https://localhost/
+02-21 23:24:23.158 26380 26380 D Capacitor: App started
+02-21 23:24:23.195 26380 26380 D Capacitor: App resumed
+02-21 23:24:23.480 26380 26475 D Capacitor: Handling local request: https://localhost/runtime.0dc8fb0d64755be9.js
+02-21 23:24:23.489 26380 26478 D Capacitor: Handling local request: https://localhost/polyfills.c1d7d33ea838c63e.js
+02-21 23:24:23.509 26380 26469 D Capacitor: Handling local request: https://localhost/main.af1028ee7b94ae76.js
+02-21 23:24:23.528 26380 26468 D Capacitor: Handling local request: https://localhost/styles.52297ff48cd35c3c.css
+02-21 23:24:24.755 26380 26380 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:24:24.769 26380 26380 V Capacitor: callback: 130878454, pluginId: Preferences, methodName: get, methodData: {"key":"auth_data"}
+02-21 23:24:24.793 26380 26380 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 23:24:24.838 26380 26468 D Capacitor: Handling local request: https://localhost/common.bea9ded4f2bca4d8.js
+02-21 23:24:24.847 26380 26469 D Capacitor: Handling local request: https://localhost/7720.1377bc4a393bc2c0.js
+02-21 23:24:24.924 26380 26468 D Capacitor: Handling local request: https://localhost/2075.6d48ae0693d66b1f.js
+02-21 23:24:24.935 26380 26468 D Capacitor: Handling local request: https://localhost/3506.0577bd19366e6496.js
+02-21 23:24:24.940 26380 26473 D Capacitor: Handling local request: https://localhost/4591.89c85abd5bb7bb25.js
+02-21 23:24:25.033 26380 26380 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:24:25.038 26380 26380 V Capacitor: callback: 130878455, pluginId: LocalNotifications, methodName: requestPermissions, methodData: {}
+02-21 23:24:25.047 26380 26468 D Capacitor: Handling local request: https://localhost/6270.f29f9adbc2e5a080.js
+02-21 23:24:25.217 26380 26468 D Capacitor: Handling local request: https://localhost/7240.b6a47df1e8bcf1bf.js
+02-21 23:24:25.260 26380 26468 D Capacitor: Handling local request: https://localhost/svg/grid-outline.svg
+02-21 23:24:25.265 26380 26469 D Capacitor: Handling local request: https://localhost/svg/alert-circle-outline.svg
+02-21 23:24:25.268 26380 26468 D Capacitor: Handling local request: https://localhost/svg/list-outline.svg
+02-21 23:24:25.328 26380 26468 D Capacitor: Handling local request: https://localhost/svg/log-out-outline.svg
+02-21 23:24:25.362 26380 26469 D Capacitor: Handling local request: https://localhost/964.a954abcfa39f92af.js
+02-21 23:24:25.400 26380 26380 I Capacitor/Console: File:  - Line 333 - Msg: {"display":"granted"}
+02-21 23:24:25.404 26380 26380 I Capacitor/Console: File: https://localhost/main.af1028ee7b94ae76.js - Line 1 - Msg: Local notifications permission granted
+02-21 23:24:25.408 26380 26380 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:24:25.411 26380 26380 V Capacitor: callback: 130878456, pluginId: LocalNotifications, methodName: addListener, methodData: {"eventName":"localNotificationActionPerformed"}
+02-21 23:24:25.523 26380 26469 D Capacitor: Handling local request: https://localhost/svg/lock-closed-outline.svg
+02-21 23:24:25.525 26380 26468 D Capacitor: Handling local request: https://localhost/svg/mail-outline.svg
+02-21 23:24:25.531 26380 26468 D Capacitor: Handling local request: https://localhost/svg/eye.svg
+02-21 23:24:25.551 26380 26468 D Capacitor: Handling local request: https://localhost/3774.c6378d2f04b186d8.js
+02-21 23:24:25.555 26380 26470 D Capacitor: Handling local request: https://localhost/4424.57a212c488d2eeb8.js
+02-21 23:24:25.556 26380 26469 D Capacitor: Handling local request: https://localhost/5661.f5a70fefba8557a6.js
+02-21 23:24:25.558 26380 26469 D Capacitor: Handling local request: https://localhost/7573.912ede121b7f1eb8.js
+02-21 23:24:25.561 26380 26478 D Capacitor: Handling local request: https://localhost/9726.cf5c0ac83b50bc63.js
+02-21 23:24:25.567 26380 26470 D Capacitor: Handling local request: https://localhost/8844.8aba02d0d62434ae.js
+02-21 23:24:25.569 26380 26468 D Capacitor: Handling local request: https://localhost/5230.65d497bf70fe78b1.js
+02-21 23:24:25.575 26380 26470 D Capacitor: Handling local request: https://localhost/7693.66cb39b42a7f0a30.js
+02-21 23:24:25.581 26380 26468 D Capacitor: Handling local request: https://localhost/6457.f9e834066f351c28.js
+02-21 23:24:25.590 26380 26470 D Capacitor: Handling local request: https://localhost/7681.d0e9dd0bde0d3c7d.js
+02-21 23:24:25.591 26380 26473 D Capacitor: Handling local request: https://localhost/8685.3524ca71fd982a6f.js
+02-21 23:24:25.599 26380 26470 D Capacitor: Handling local request: https://localhost/4519.2351a075b21390be.js
+02-21 23:24:25.609 26380 26468 D Capacitor: Handling local request: https://localhost/6595.dab486f0476fcb06.js
+02-21 23:24:25.638 26380 26468 D Capacitor: Handling local request: https://localhost/3370.e6aa797ce2d45879.js
+02-21 23:24:25.643 26380 26469 D Capacitor: Handling local request: https://localhost/919.91f70206f08ab189.js
+02-21 23:24:25.643 26380 26478 D Capacitor: Handling local request: https://localhost/6068.34bbe977710e982d.js
+02-21 23:24:25.643 26380 26470 D Capacitor: Handling local request: https://localhost/9266.af9e4606d1a73f6c.js
+02-21 23:24:25.643 26380 26473 D Capacitor: Handling local request: https://localhost/2213.313fc3ebc88f66dd.js
+02-21 23:24:25.647 26380 26468 D Capacitor: Handling local request: https://localhost/542.698c41912b1f7942.js
+02-21 23:24:25.678 26380 26380 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:24:25.682 26380 26380 V Capacitor: callback: 130878457, pluginId: NativeBiometric, methodName: isAvailable, methodData: {}
+02-21 23:24:25.799 26380 26380 I Capacitor/Console: File:  - Line 333 - Msg: {"biometryType":3,"deviceIsSecure":false,"strongBiometryIsAvailable":false,"errorCode":3,"isAvailable":false,"authenticationStrength":0}
+02-21 23:24:25.799 26380 26380 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:24:25.818 26380 26380 V Capacitor: callback: 130878458, pluginId: Preferences, methodName: get, methodData: {"key":"biometric_enabled"}
+02-21 23:24:26.504 26380 26380 I Capacitor/Console: File:  - Line 333 - Msg: {"value":null}
+02-21 23:24:26.536 26380 26468 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+02-21 23:24:26.626 26380 26468 D Capacitor: Handling local request: https://localhost/7927.0b4f4beb2bf9d78d.js
+02-21 23:24:26.628 26380 26469 D Capacitor: Handling local request: https://localhost/9364.37609adf3161b37c.js
+02-21 23:24:26.632 26380 26380 I Capacitor/Console: File:  - Line 349 - Msg: [object Object]
+02-21 23:24:26.635 26380 26380 V Capacitor: callback: 130878459, pluginId: App, methodName: addListener, methodData: {"eventName":"backButton"}

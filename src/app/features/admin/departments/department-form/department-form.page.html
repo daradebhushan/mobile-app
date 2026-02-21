@@ -1,0 +1,121 @@
+<ion-header class="ion-no-border group relative z-50">
+    <div class="bg-white/80 dark:bg-[#0B0F19]/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 px-4 pt-4 pb-3 shadow-sm transition-all duration-300 relative"
+        style="padding-top: calc(1rem + var(--ion-safe-area-top));">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <ion-buttons slot="start">
+                    <ion-back-button defaultHref="/tabs/admin/departments" class="text-gray-800 dark:text-white"
+                        icon="chevron-back" text=""></ion-back-button>
+                </ion-buttons>
+                <div>
+                    <h1 class="text-xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
+                        {{ (isEditMode ? 'EDIT_DEPARTMENT' : 'CREATE_DEPARTMENT') | translate }}
+                    </h1>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-0.5">
+                        {{ isEditMode ? ('DEPARTMENT_DETAILS' | translate) : ('NEW_DEPARTMENT_ENTRY' | translate) }}
+                    </p>
+                </div>
+            </div>
+
+            <button (click)="saveDepartment()" [disabled]="!name || loading"
+                class="w-11 h-11 rounded-full bg-gradient-to-br from-saffron-500 to-orange-600 text-white flex items-center justify-center shadow-lg shadow-orange-500/30 active:scale-90 transition-all disabled:opacity-50 disabled:from-gray-300 disabled:to-gray-400 disabled:shadow-none">
+                <ion-icon name="checkmark" class="text-xl"></ion-icon>
+            </button>
+        </div>
+    </div>
+</ion-header>
+
+<ion-content class="bg-[#F8FAFC] dark:bg-[#0B0F19]">
+    <div class="p-5 space-y-5 pb-32">
+        <div *ngIf="error"
+            class="bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 p-4 rounded-[1.25rem] text-[13px] font-bold border border-red-100 dark:border-red-800 shadow-sm animate-fade-in flex items-start">
+            <ion-icon name="alert-circle" class="text-lg mr-2 shrink-0 mt-0.5"></ion-icon>
+            <span>{{ error }}</span>
+        </div>
+
+        <div
+            class="bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800/50 p-6 rounded-[1.5rem] border border-gray-100 dark:border-gray-800 relative overflow-hidden shadow-sm space-y-5">
+            <div class="absolute top-0 left-0 bottom-0 w-1.5 bg-gradient-to-b from-saffron-400 to-orange-600"></div>
+
+            <!-- Name Input -->
+            <div class="space-y-2 relative z-10">
+                <label
+                    class="block text-[11px] font-black text-gray-900 dark:text-white uppercase tracking-widest px-1">{{
+                    'DEPARTMENT_NAME' | translate }} <span class="text-red-500">*</span></label>
+                <div
+                    class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-[1.25rem] border border-gray-200 dark:border-gray-700 focus-within:ring-2 focus-within:ring-saffron-500/20 focus-within:border-saffron-500 focus-within:bg-white dark:focus-within:bg-gray-800 transition-all">
+                    <input type="text" [(ngModel)]="name" [placeholder]="'DEPARTMENT_NAME_PLACEHOLDER' | translate"
+                        class="w-full text-[15px] font-bold text-gray-900 dark:text-white border-none p-0 focus:ring-0 placeholder-gray-400 bg-transparent">
+                </div>
+            </div>
+
+            <!-- Chatbot Label Input -->
+            <div class="space-y-2 relative z-10">
+                <label
+                    class="block text-[11px] font-black text-gray-900 dark:text-white uppercase tracking-widest px-1">Chatbot
+                    Label (Marathi)</label>
+                <div
+                    class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-[1.25rem] border border-gray-200 dark:border-gray-700 focus-within:ring-2 focus-within:ring-saffron-500/20 focus-within:border-saffron-500 focus-within:bg-white dark:focus-within:bg-gray-800 transition-all">
+                    <input type="text" [(ngModel)]="nameMr" placeholder="e.g. पाणी पुरवठा"
+                        class="w-full text-[15px] font-bold text-gray-900 dark:text-white border-none p-0 focus:ring-0 placeholder-gray-400 bg-transparent">
+                </div>
+            </div>
+        </div>
+
+        <!-- Sub Issues Section -->
+        <div
+            class="bg-white dark:bg-gray-900 p-6 rounded-[1.5rem] shadow-sm border border-gray-100 dark:border-gray-800">
+            <label
+                class="block text-[11px] font-black text-gray-900 dark:text-white uppercase tracking-widest mb-4 flex items-center">
+                <ion-icon name="list" class="mr-2 text-saffron-500 text-lg"></ion-icon>
+                Sub Issues (Checklist)
+            </label>
+
+            <!-- List of Existing Sub Issues -->
+            <div *ngIf="subQuestions.length > 0" class="space-y-2.5 mb-5">
+                <div *ngFor="let q of subQuestions; let i = index"
+                    class="flex items-center justify-between bg-gray-50 dark:bg-gray-800/80 p-3.5 rounded-[1.25rem] border border-gray-100 dark:border-gray-700 active:scale-[0.98] transition-all group">
+                    <span class="text-[13px] font-bold text-gray-800 dark:text-gray-200">{{ q }}</span>
+                    <button
+                        class="w-8 h-8 rounded-full flex items-center justify-center text-red-500 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 transition-colors"
+                        (click)="removeSubQuestion(i)">
+                        <ion-icon name="trash" class="text-sm"></ion-icon>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Add New Sub Issue -->
+            <div class="flex items-center gap-3">
+                <div
+                    class="flex-1 bg-gray-50 dark:bg-gray-800/50 p-3.5 rounded-[1.25rem] border border-gray-200 dark:border-gray-700 focus-within:ring-2 focus-within:ring-blue-500/20 focus-within:border-blue-500 focus-within:bg-white dark:focus-within:bg-gray-800 transition-all">
+                    <input type="text" [(ngModel)]="newSubQuestion" placeholder="Add new issue..."
+                        class="w-full text-[14px] font-bold text-gray-900 dark:text-white bg-transparent border-none p-0 focus:ring-0 placeholder-gray-400"
+                        (keyup.enter)="addSubQuestion()">
+                </div>
+                <button (click)="addSubQuestion()" [disabled]="!newSubQuestion.trim()"
+                    class="w-12 h-12 rounded-[1.25rem] bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 flex items-center justify-center disabled:opacity-50 active:scale-95 transition-all">
+                    <ion-icon name="add" class="text-2xl"></ion-icon>
+                </button>
+            </div>
+        </div>
+
+        <div
+            class="bg-white dark:bg-gray-900 p-5 rounded-[1.5rem] shadow-sm border border-gray-100 dark:border-gray-800 flex items-center justify-between">
+            <div class="flex items-center">
+                <div
+                    class="w-10 h-10 rounded-full bg-green-50 dark:bg-green-900/20 flex items-center justify-center text-green-500 mr-3">
+                    <ion-icon name="power" class="text-xl"></ion-icon>
+                </div>
+                <div>
+                    <label class="block text-[13px] font-black text-gray-900 dark:text-white">Active Status</label>
+                    <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">Enable or disable</p>
+                </div>
+            </div>
+            <ion-toggle [(ngModel)]="active" color="success" mode="ios" class="scale-90"></ion-toggle>
+        </div>
+
+        <div class="text-[11px] font-bold text-gray-400 px-4 text-center tracking-wide uppercase mt-4">
+            {{ (isEditMode ? 'UPDATE_DEPARTMENT_DESC' : 'CREATE_DEPARTMENT_DESC') | translate }}
+        </div>
+    </div>
+</ion-content>

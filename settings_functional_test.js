@@ -15,6 +15,11 @@ const { chromium } = require('playwright');
 
     console.log('--- STARTING FUNCTIONAL SETTINGS TEST ---');
 
+    // Debug Requests
+    page.on('request', req => console.log('REQ >> ' + req.method() + ' ' + req.url()));
+    page.on('response', res => console.log('RES << ' + res.status() + ' ' + res.url()));
+    page.on('requestfailed', req => console.log('FAIL !! ' + (req.failure() ? req.failure().errorText : 'No error text') + ' ' + req.url()));
+
     try {
         // --- 1. LOGIN ---
         console.log('[1/4] Login');
@@ -33,14 +38,16 @@ const { chromium } = require('playwright');
         console.log('[3/4] Verify Email Toggle Sync');
 
         // Debug Requests
-        page.on('request', req => console.log('>> ' + req.method() + ' ' + req.url()));
+        page.on('request', req => console.log('REQ >> ' + req.method() + ' ' + req.url()));
+        page.on('response', res => console.log('RES << ' + res.status() + ' ' + res.url()));
+        page.on('requestfailed', req => console.log('FAIL !! ' + req.failure().errorText + ' ' + req.url()));
 
         const updateRequestPromise = page.waitForRequest(request =>
             request.url().includes('api/user/profile') && request.method() === 'PUT'
         );
 
-        // Click Email Toggle
-        const emailToggle = page.locator('div:has(div:has-text("EMAIL_NOTIFICATIONS")) ion-toggle');
+        // Click Email Toggle (Using the exact DOM structure for Email)
+        const emailToggle = page.locator('div:has-text("Email Notifications")').locator('ion-toggle').first();
 
         await emailToggle.waitFor({ state: 'visible' });
         // Use evaluate click if standard click failing on shadow dom
@@ -76,7 +83,7 @@ const { chromium } = require('playwright');
         // 4b. Verify Service logic via console if triggered
         // Since we cannot trigger internal service methods easily, we verify that the Toggle click UPDATES localStorage
 
-        const alertToggle = page.locator('div:has(div:has-text("TASK_ALERTS")) ion-toggle');
+        const alertToggle = page.locator('div:has-text("Task Alerts")').locator('ion-toggle').first();
         await alertToggle.click(); // Toggle to FALSE
         await page.waitForTimeout(1000);
 

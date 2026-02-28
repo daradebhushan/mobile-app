@@ -4,7 +4,7 @@ import { TaskService } from '../../../services/task.service';
 import { UserService } from '../../../services/user.service';
 import { DashboardService } from '../../../services/dashboard.service';
 import { AuthService } from '../../../services/auth/auth.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,14 +35,22 @@ export class DashboardPage implements OnInit {
   constructor(
     private router: Router,
     private taskService: TaskService,
-    private userService: UserService, // Need to inject UserService
+    private userService: UserService,
     private dashboardService: DashboardService,
     private authService: AuthService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private loadingController: LoadingController
   ) { }
 
   ngOnInit() {
     this.currentUser = this.authService.currentUserValue;
+  }
+
+  get greetingKey(): string {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'GREETING_MORNING';
+    if (hour < 17) return 'GREETING_AFTERNOON';
+    return 'GREETING_EVENING';
   }
 
   handleRefresh(event: any) {
@@ -54,7 +62,6 @@ export class DashboardPage implements OnInit {
       this.loadOwnerStats();
     }
 
-    // Safety timeout to ensure refresher closes
     setTimeout(() => {
       event.target.complete();
     }, 1500);
@@ -170,8 +177,17 @@ export class DashboardPage implements OnInit {
     });
   }
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/role-selection']);
+  async logout() {
+    const loading = await this.loadingController.create({
+      message: 'Signing out securely...',
+      spinner: 'crescent',
+      duration: 1500,
+      cssClass: 'premium-logout-spinner',
+      showBackdrop: true
+    });
+    await loading.present();
+
+    await this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

@@ -1,0 +1,46 @@
+--- STARTING EXHAUSTIVE CRUD API TEST ---
+
+1. Authenticating as CO/Admin...
+node : Error: Login 
+failed: {"success":true
+,"message":"Login Succe
+ssful","data":{"token":
+"eyJhbGciOiJIUzI1NiJ9.e
+yJyb2xlIjoiQURNSU4iLCJp
+ZCI6Niwic3ViIjoiZGFyYWR
+lYmh1c2hhbjE1K2FkbWluQG
+dtYWlsLmNvbSIsImlhdCI6M
+Tc3MjE2ODUwOSwiZXhwIjox
+NzcyMjU0OTA5fQ.hswM0TwV
+NUCqU0XTL3-CGJbypWrcZvI
+-KBObUlIlb5w","id":6,"u
+sername":"Bhushan Admin
+","email":"daradebhusha
+n15+admin@gmail.com","r
+oles":["ADMIN"],"depart
+mentId":null}}
+At line:1 char:1
++ node 
+api_crud_test.js 2>&1 
+| Out-File -Encoding 
+ASCII crud_out.txt
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (Error: Login    
+ fa...tmentId":null    
+}}:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+    at testCRUD 
+(D:\anti gravity\mobile
+\api_crud_test.js:14:33
+)
+    at process.processT
+icksAndRejections (node
+:internal/process/task_
+queues:103:5)

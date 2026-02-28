@@ -18,7 +18,6 @@ export class UserFormPageComponent implements OnInit {
     isEditMode = false;
     userId: number | null = null;
     departments: any[] = [];
-    designations: any[] = [];
 
     // Form Model
     userForm: any = {
@@ -26,7 +25,7 @@ export class UserFormPageComponent implements OnInit {
         email: '',
         role: 'STAFF',
         departmentId: null,
-        designationId: null,
+        designation: '',
         password: '',
         mobile: '' // Optional
     };
@@ -51,7 +50,6 @@ export class UserFormPageComponent implements OnInit {
     ionViewWillEnter() {
         this.resetForm();
         this.loadDepartments();
-        this.loadDesignations();
 
         const paramId = this.route.snapshot.paramMap.get('userId');
         if (paramId) {
@@ -69,7 +67,7 @@ export class UserFormPageComponent implements OnInit {
             email: '',
             role: 'STAFF',
             departmentId: null,
-            designationId: null,
+            designation: '',
             password: '',
             mobile: ''
         };
@@ -85,16 +83,6 @@ export class UserFormPageComponent implements OnInit {
             next: (res: any) => {
                 if (res.success) {
                     this.departments = res.data.content || res.data || [];
-                }
-            }
-        });
-    }
-
-    loadDesignations() {
-        this.designationService.getAllDesignations().subscribe({
-            next: (res: any) => {
-                if (res.success) {
-                    this.designations = res.data || [];
                 }
             }
         });
@@ -134,7 +122,7 @@ export class UserFormPageComponent implements OnInit {
                         email: u.email,
                         role: u.role,
                         departmentId: u.department?.id || null,
-                        designationId: u.designation?.id || null,
+                        designation: u.designation || '',
                         mobile: u.mobile || '',
                         password: '' // Don't show password
                     };
@@ -166,6 +154,16 @@ export class UserFormPageComponent implements OnInit {
             const payload = { ...this.userForm };
             if (!payload.password) delete payload.password;
 
+            // Strictly parse IDs to numbers or null to avoid Jackson TypeMismatchException 400 Bad Request
+            const deptId = payload.departmentId && payload.departmentId !== 'null' ? parseInt(payload.departmentId, 10) : null;
+
+            payload.departmentId = deptId;
+
+            // Add clear flags for backend explicit nullification
+            payload.clearDepartment = deptId === null;
+            payload.clearDesignation = !payload.designation || payload.designation.trim() === '';
+
+            console.error('PAYLOAD BEING SENT TO BACKEND:', JSON.stringify(payload));
             this.userService.updateUser(this.userId, payload).subscribe({
                 next: (res: any) => {
                     if (res.success) {
@@ -174,15 +172,19 @@ export class UserFormPageComponent implements OnInit {
                         this.error = res.message;
                     }
                     this.loading = false;
+                    this.cdr.detectChanges(); // Force UI update
                 },
                 error: (err) => {
-                    this.error = 'Update failed.';
+                    this.error = 'Update failed: ' + (err.error?.message || err.message);
                     this.loading = false;
+                    this.cdr.detectChanges(); // Force UI update to exit 'Saving...' state
                 }
             });
         } else {
-            // Create
-            this.userService.createUser(this.userForm).subscribe({
+            const payload = { ...this.userForm };
+            payload.departmentId = payload.departmentId && payload.departmentId !== 'null' ? parseInt(payload.departmentId, 10) : null;
+
+            this.userService.createUser(payload).subscribe({
                 next: (res: any) => {
                     if (res.success) {
                         this.navCtrl.navigateBack('/tabs/admin/users');
@@ -190,10 +192,12 @@ export class UserFormPageComponent implements OnInit {
                         this.error = res.message;
                     }
                     this.loading = false;
+                    this.cdr.detectChanges();
                 },
                 error: (err) => {
-                    this.error = 'Creation failed. Email might be taken.';
+                    this.error = err.error?.message || 'Creation failed: Email might be taken.';
                     this.loading = false;
+                    this.cdr.detectChanges();
                 }
             });
         }

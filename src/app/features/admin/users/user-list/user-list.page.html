@@ -31,6 +31,23 @@
             </button>
         </div>
 
+        <!-- Filter by Dept -->
+        <div
+            class="relative bg-white dark:bg-gray-900 rounded-[1.5rem] shadow-sm border border-gray-100 dark:border-gray-800 focus-within:ring-2 focus-within:ring-indigo-500/20 focus-within:border-indigo-500 transition-all mt-4 mb-2">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400">
+                <ion-icon name="filter-outline" class="text-lg"></ion-icon>
+            </div>
+            <select [(ngModel)]="selectedDepartmentId" (change)="onFilterChange()"
+                class="w-full bg-transparent border-none text-gray-700 dark:text-gray-200 text-[12px] font-bold uppercase tracking-widest pl-11 pr-10 py-4 focus:ring-0 appearance-none outline-none">
+                <option [ngValue]="null">{{ 'ALL_DEPARTMENTS' | translate }}</option>
+                <option [ngValue]="-1">No Department / General</option>
+                <option *ngFor="let dept of departments" [ngValue]="dept.id">{{ dept.name }}</option>
+            </select>
+            <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
+                <ion-icon name="chevron-down" class="text-gray-400 text-sm"></ion-icon>
+            </div>
+        </div>
+
     </div>
 </ion-header>
 
@@ -40,22 +57,6 @@
     </ion-refresher>
 
     <div class="p-4 pt-6 space-y-4 pb-24">
-
-        <!-- Filter by Dept -->
-        <div
-            class="relative bg-white dark:bg-gray-900 rounded-[1.5rem] shadow-sm border border-gray-100 dark:border-gray-800 focus-within:ring-2 focus-within:ring-indigo-500/20 focus-within:border-indigo-500 transition-all mb-4">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400">
-                <ion-icon name="filter-outline" class="text-lg"></ion-icon>
-            </div>
-            <select [(ngModel)]="selectedDepartmentId" (change)="onFilterChange()"
-                class="w-full bg-transparent border-none text-gray-700 dark:text-gray-200 text-[12px] font-bold uppercase tracking-widest pl-11 pr-10 py-4 focus:ring-0 appearance-none outline-none">
-                <option [ngValue]="null">{{ 'ALL_DEPARTMENTS' | translate }}</option>
-                <option *ngFor="let dept of departments" [value]="dept.id">{{ dept.name }}</option>
-            </select>
-            <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
-                <ion-icon name="chevron-down" class="text-gray-400 text-sm"></ion-icon>
-            </div>
-        </div>
 
         <!-- User List -->
         <div class="space-y-4">

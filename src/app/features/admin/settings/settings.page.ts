@@ -51,11 +51,19 @@ export class SettingsPageComponent implements OnInit {
         this.currentLang = this.languageService.currentLang();
 
         // Load saved settings
-        const savedName = localStorage.getItem('orgName');
-        if (savedName) this.orgName = savedName;
+        if (user && user.organizationName) {
+            this.orgName = user.organizationName;
+        } else {
+            const savedName = localStorage.getItem('orgName');
+            if (savedName) this.orgName = savedName;
+        }
 
-        const savedLogo = localStorage.getItem('orgLogo');
-        if (savedLogo) this.orgLogo = savedLogo;
+        if (user && user.organizationLogo) {
+            this.orgLogo = user.organizationLogo;
+        } else {
+            const savedLogo = localStorage.getItem('orgLogo');
+            if (savedLogo) this.orgLogo = savedLogo;
+        }
 
         // Load Toggles
         const savedAlerts = localStorage.getItem('taskAlerts');
@@ -116,20 +124,23 @@ export class SettingsPageComponent implements OnInit {
                         handler: async (data) => {
                             if (!data.password) return;
 
-                            // Verify password by trying to login (or just trust it? Better to verify)
-                            // For simplicity, we assume if they can login, it's valid.
-                            // But here we just assume the user knows their password. 
-                            // Ideally we should call an API to verify, but let's go with flow.
-
                             const user = this.authService.currentUserValue;
                             if (user && user.email) {
-                                const success = await this.authService.enableBiometricLogin(user.email, data.password);
-                                if (success) {
-                                    this.showToast('Biometric login enabled', 'success');
-                                } else {
-                                    this.biometricEnabled = false;
-                                    this.showToast('Failed to enable biometric', 'danger');
-                                }
+                                this.authService.login({ email: user.email, password: data.password }).subscribe({
+                                    next: async (res) => {
+                                        const success = await this.authService.enableBiometricLogin(user.email, data.password);
+                                        if (success) {
+                                            this.showToast('Biometric login enabled successfully', 'success');
+                                        } else {
+                                            this.biometricEnabled = false;
+                                            this.showToast('Failed to save biometric credentials', 'danger');
+                                        }
+                                    },
+                                    error: async (err) => {
+                                        this.biometricEnabled = false;
+                                        this.showToast('Incorrect password. Biometric not enabled.', 'danger');
+                                    }
+                                });
                             }
                         }
                     }
@@ -190,6 +201,11 @@ export class SettingsPageComponent implements OnInit {
             this.orgLogo = this.editLogoPreview;
         }
 
+        // Prepare update data
+        const updateData: any = {
+            organizationName: this.orgName
+        };
+
         if (this.editLogoFile) {
             // Upload Photo
             this.authService.uploadProfilePhoto(this.editLogoFile).subscribe({
@@ -198,27 +214,37 @@ export class SettingsPageComponent implements OnInit {
                         const newLogoUrl = `${environment.apiUrl}/uploads/${res.data}`;
                         this.orgLogo = newLogoUrl;
                         this.editLogoPreview = newLogoUrl;
-                        localStorage.setItem('orgLogo', newLogoUrl);
+                        updateData.organizationLogo = newLogoUrl;
+                        this.sendProfileUpdate(updateData);
                     }
                 },
-                error: (err) => console.error('Photo upload failed', err)
+                error: (err) => {
+                    console.error('Photo upload failed', err);
+                    this.sendProfileUpdate(updateData); // Still save name if photo fails
+                }
             });
+        } else {
+            if (this.orgLogo) updateData.organizationLogo = this.orgLogo;
+            this.sendProfileUpdate(updateData);
         }
+    }
 
-        this.authService.updateProfile({ name: this.editOrgName }).subscribe();
+    private sendProfileUpdate(updateData: any) {
+        this.authService.updateProfile(updateData).subscribe({
+            next: async (res) => {
+                if (res.success && res.data && res.data.user) {
+                    await this.authService.updateUserSubject(res.data.user);
+                }
+            }
+        });
 
-        // Local Persist
+        // Local Persist as fallback/cache
         localStorage.setItem('orgName', this.orgName);
         if (this.orgLogo) localStorage.setItem('orgLogo', this.orgLogo);
 
         this.closeEditModal();
 
-        const toast = await this.alertController.create({
-            header: 'Success',
-            message: 'Profile settings updated successfully.',
-            buttons: ['OK']
-        });
-        await toast.present();
+        this.showToast('Profile settings updated successfully.', 'success');
     }
 
     async logout() {
@@ -230,6 +256,14 @@ export class SettingsPageComponent implements OnInit {
                 {
                     text: this.languageService.translate('LOGOUT'),
                     handler: async () => {
+                        const loading = await this.toastController.create({
+                            message: 'Logging out...',
+                            duration: 1500,
+                            position: 'middle',
+                            color: 'dark'
+                        });
+                        await loading.present();
+
                         await this.authService.logout();
                         this.navCtrl.navigateRoot('/login');
                     }

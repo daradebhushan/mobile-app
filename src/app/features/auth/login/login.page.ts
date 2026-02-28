@@ -121,10 +121,11 @@ export class LoginPage {
         error: async (err) => {
           await loading.dismiss();
           console.error('Login error full object:', err);
+
           if (err.status === 0) {
             this.errorMessage = 'Connection failed. Check network or server status.';
           } else if (err.status === 401) {
-            this.errorMessage = 'Invalid email or password.';
+            this.errorMessage = err.error?.message || 'Wrong credentials.';
           } else {
             this.errorMessage = err.error?.message || `Server Error (${err.status})`;
           }

@@ -41,9 +41,23 @@ export class UserListComponent implements OnInit {
         this.loadDepartments();
     }
 
+    private autoRefreshInterval: any;
+
     ionViewWillEnter() {
-        this.loadUsers();
+        this.loadUsers(null, true);
         this.loadDepartments();
+    }
+
+    ionViewDidEnter() {
+        this.autoRefreshInterval = setInterval(() => {
+            this.loadUsers(null, true);
+        }, 10000);
+    }
+
+    ionViewWillLeave() {
+        if (this.autoRefreshInterval) {
+            clearInterval(this.autoRefreshInterval);
+        }
     }
 
     handleRefresh(event: any) {
@@ -60,15 +74,38 @@ export class UserListComponent implements OnInit {
         });
     }
 
-    loadUsers(event: any = null) {
+    // Smart merge to prevent UI blinking
+    mergeData(newData: any[]) {
+        if (!this.users || this.users.length === 0) {
+            this.users = newData;
+            return;
+        }
+
+        // Remove items no longer in new data
+        this.users = this.users.filter(u => newData.find(n => n.id === u.id));
+
+        // Update existing or push new
+        newData.forEach(newItem => {
+            const existingIndex = this.users.findIndex(u => u.id === newItem.id);
+            if (existingIndex > -1) {
+                // Update in place without losing reference
+                Object.assign(this.users[existingIndex], newItem);
+            } else {
+                this.users.push(newItem);
+            }
+        });
+    }
+
+    loadUsers(event: any = null, silent: boolean = false) {
         const params: any = {};
-        if (this.selectedDepartmentId) {
+        if (this.selectedDepartmentId !== null) {
             params.departmentId = this.selectedDepartmentId;
         }
         this.userService.getAllUsers(params).subscribe({
             next: (res: any) => {
                 if (res.success) {
-                    this.users = res.data.content || res.data || [];
+                    const newData = res.data.content || res.data || [];
+                    this.mergeData(newData);
                 } else {
                     this.users = [];
                 }
@@ -83,6 +120,7 @@ export class UserListComponent implements OnInit {
     }
 
     onFilterChange() {
+        this.users = []; // explicit clear when changing filter
         this.loadUsers();
     }
 
@@ -103,6 +141,14 @@ export class UserListComponent implements OnInit {
                         this.userService.deleteUser(id).subscribe({
                             next: () => {
                                 this.loadUsers();
+                            },
+                            error: async (err) => {
+                                const errorAlert = await this.alertController.create({
+                                    header: 'Error',
+                                    message: err.error?.message || 'Failed to delete user.',
+                                    buttons: ['OK']
+                                });
+                                await errorAlert.present();
                             }
                         });
                     }

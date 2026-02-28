@@ -52,9 +52,27 @@ export class ComplaintListComponent implements OnInit, OnDestroy {
         });
     }
 
+    private autoRefreshInterval: any;
+
     ngOnDestroy() {
         if (this.fetchSubscription) {
             this.fetchSubscription.unsubscribe();
+        }
+    }
+
+    ionViewWillEnter() {
+        this.fetchComplaints(null, true);
+    }
+
+    ionViewDidEnter() {
+        this.autoRefreshInterval = setInterval(() => {
+            this.fetchComplaints(null, true);
+        }, 10000);
+    }
+
+    ionViewWillLeave() {
+        if (this.autoRefreshInterval) {
+            clearInterval(this.autoRefreshInterval);
         }
     }
 
@@ -71,18 +89,36 @@ export class ComplaintListComponent implements OnInit, OnDestroy {
         this.applyFilters();
     }
 
-    fetchComplaints(event: any = null) {
+    mergeData(newData: Complaint[]) {
+        if (!this.complaints || this.complaints.length === 0) {
+            this.complaints = newData;
+            return;
+        }
+
+        this.complaints = this.complaints.filter(c => newData.find(n => n.id === c.id));
+
+        newData.forEach(newItem => {
+            const existingIndex = this.complaints.findIndex(c => c.id === newItem.id);
+            if (existingIndex > -1) {
+                Object.assign(this.complaints[existingIndex], newItem);
+            } else {
+                this.complaints.push(newItem);
+            }
+        });
+    }
+
+    fetchComplaints(event: any = null, silent: boolean = false) {
         if (this.fetchSubscription) {
             this.fetchSubscription.unsubscribe();
         }
 
-        if (!event) this.loading = true;
+        if (!event && !silent) this.loading = true;
 
         // Fetch ALL and filter client-side for now, as backend filter wasn't implemented robustly yet
         this.fetchSubscription = this.complaintService.getComplaints()
             .subscribe({
                 next: (data: Complaint[]) => {
-                    this.complaints = data || [];
+                    this.mergeData(data || []);
                     this.applyFilters();
                     this.loading = false;
                     this.cdr.detectChanges();

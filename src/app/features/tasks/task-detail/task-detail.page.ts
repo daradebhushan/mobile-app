@@ -428,7 +428,15 @@ export class TaskDetailComponent implements OnInit {
                             next: () => {
                                 this.router.navigate(['/tabs/tasks'], { replaceUrl: true });
                             },
-                            error: (err) => console.error('Delete failed', err)
+                            error: async (err) => {
+                                console.error('Delete failed', err);
+                                const errorAlert = await this.alertController.create({
+                                    header: 'Error',
+                                    message: err.error?.message || 'Failed to delete task',
+                                    buttons: ['OK']
+                                });
+                                await errorAlert.present();
+                            }
                         });
                     }
                 }

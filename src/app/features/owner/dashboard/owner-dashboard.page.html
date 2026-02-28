@@ -3,7 +3,11 @@
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/tabs/home"></ion-back-button>
         </ion-buttons>
-        <ion-title class="font-black">{{ 'OWNER_DASHBOARD' | translate }}</ion-title>
+        <ion-title class="font-black">
+            <span class="block text-[10px] text-gray-500 font-bold uppercase tracking-widest leading-none">{{
+                greetingKey | translate }}</span>
+            <span class="block text-lg mt-0.5">{{ 'OWNER_DASHBOARD' | translate }}</span>
+        </ion-title>
         <ion-buttons slot="end">
             <ion-button (click)="fetchStats()">
                 <ion-icon name="refresh-outline" slot="icon-only"></ion-icon>

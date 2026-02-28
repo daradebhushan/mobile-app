@@ -68,14 +68,21 @@ export class TaskListComponent implements OnInit, OnDestroy {
                 else if (this.statusFilter === 'ON_HOLD') this.activeTab = 'FILTER_ON_HOLD';
                 else if (this.statusFilter === 'COMPLETED') this.activeTab = 'FILTER_COMPLETED';
                 else this.activeTab = 'FILTER_ALL';
+            } else {
+                this.statusFilter = '';
+                this.activeTab = 'FILTER_ALL';
             }
 
             if (params['priority']) {
                 this.priorityFilter = params['priority'];
+            } else {
+                this.priorityFilter = '';
             }
 
             if (params['type']) {
                 this.taskType = params['type'];
+            } else {
+                this.taskType = '';
             }
 
             if (params['assignedToMe']) {
@@ -100,9 +107,27 @@ export class TaskListComponent implements OnInit, OnDestroy {
         });
     }
 
+    private autoRefreshInterval: any;
+
     ngOnDestroy(): void {
         this.destroy$.next();
         this.destroy$.complete();
+    }
+
+    ionViewWillEnter() {
+        this.loadTasks(null, true);
+    }
+
+    ionViewDidEnter() {
+        this.autoRefreshInterval = setInterval(() => {
+            this.loadTasks(null, true);
+        }, 10000);
+    }
+
+    ionViewWillLeave() {
+        if (this.autoRefreshInterval) {
+            clearInterval(this.autoRefreshInterval);
+        }
     }
 
     handleRefresh(event: any) {
@@ -143,8 +168,37 @@ export class TaskListComponent implements OnInit, OnDestroy {
         this.loadTasks();
     }
 
-    loadTasks(event: any = null) {
-        if (!event) this.isLoading = true;
+    onStatusFilterChange() {
+        switch (this.statusFilter) {
+            case 'TO_DO': this.activeTab = 'FILTER_PENDING'; break;
+            case 'IN_PROGRESS': this.activeTab = 'FILTER_IN_PROGRESS'; break;
+            case 'ON_HOLD': this.activeTab = 'FILTER_ON_HOLD'; break;
+            case 'COMPLETED': this.activeTab = 'FILTER_COMPLETED'; break;
+            default: this.activeTab = 'FILTER_ALL'; break;
+        }
+        this.loadTasks();
+    }
+
+    mergeData(newData: Task[]) {
+        if (!this.tasks || this.tasks.length === 0) {
+            this.tasks = newData;
+            return;
+        }
+
+        this.tasks = this.tasks.filter(t => newData.find(n => n.id === t.id));
+
+        newData.forEach(newItem => {
+            const existingIndex = this.tasks.findIndex(t => t.id === newItem.id);
+            if (existingIndex > -1) {
+                Object.assign(this.tasks[existingIndex], newItem);
+            } else {
+                this.tasks.push(newItem);
+            }
+        });
+    }
+
+    loadTasks(event: any = null, silent: boolean = false) {
+        if (!event && !silent) this.isLoading = true;
         const filters: any = {
             page: this.currentPage,
             size: this.pageSize
@@ -161,7 +215,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
             next: (res: any) => {
                 this.isLoading = false;
                 if (res.success) {
-                    this.tasks = res.data.content || [];
+                    const newData = res.data.content || [];
+                    this.mergeData(newData);
                     this.totalPages = res.data.totalPages;
                     this.totalElements = res.data.totalElements;
                     this.cdr.detectChanges();

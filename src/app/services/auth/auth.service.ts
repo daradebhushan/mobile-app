@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, from, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, from, map, tap, switchMap, timeout } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Preferences } from '@capacitor/preferences';
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
@@ -15,6 +15,8 @@ export interface User {
     departmentId?: number;
     name?: string;
     mobile?: string;
+    organizationName?: string;
+    organizationLogo?: string;
 }
 
 export interface AuthResponse {
@@ -27,6 +29,8 @@ export interface AuthResponse {
     departmentId?: number;
     name?: string;
     mobile?: string;
+    organizationName?: string;
+    organizationLogo?: string;
 }
 
 import { Router } from '@angular/router';
@@ -65,12 +69,14 @@ export class AuthService {
         console.log('Attempting Login to:', `${this.apiUrl}/login`);
 
         return this.http.post<any>(`${this.apiUrl}/login`, credentials, { headers }).pipe(
-            tap(async response => {
+            timeout(15000),
+            switchMap(async (response: any) => {
                 console.log('Login Response:', response);
                 const authData = response.data || response;
                 if (authData.token) {
                     await this.saveToken(authData);
                 }
+                return response;
             }),
             // Catch error to log it visibly
             tap({
@@ -129,7 +135,9 @@ export class AuthService {
             roles: data.roles,
             departmentId: data.departmentId,
             name: data.name,
-            mobile: data.mobile
+            mobile: data.mobile,
+            organizationName: data.organizationName,
+            organizationLogo: data.organizationLogo
         });
     }
 
@@ -146,7 +154,9 @@ export class AuthService {
                     roles: parsed.roles,
                     departmentId: parsed.departmentId,
                     name: parsed.name,
-                    mobile: parsed.mobile
+                    mobile: parsed.mobile,
+                    organizationName: parsed.organizationName,
+                    organizationLogo: parsed.organizationLogo
                 });
             } catch (e) {
                 console.error('Failed to parse auth data', e);
@@ -241,6 +251,33 @@ export class AuthService {
         } catch (e) {
             console.error('Biometric verification failed:', e);
             return false;
+        }
+    }
+
+    async updateUserSubject(user: any) {
+        if (!user) return;
+        const { value } = await Preferences.get({ key: AUTH_DATA });
+        if (value) {
+            const parsed = JSON.parse(value);
+            parsed.name = user.name || parsed.name;
+            parsed.username = user.name || parsed.username;
+            parsed.email = user.email || parsed.email;
+            if (user.role) parsed.roles = [user.role];
+            if (user.organizationName) parsed.organizationName = user.organizationName;
+            if (user.organizationLogo !== undefined) parsed.organizationLogo = user.organizationLogo;
+
+            await Preferences.set({ key: AUTH_DATA, value: JSON.stringify(parsed) });
+            this.userSubject.next({
+                id: parsed.id,
+                username: parsed.username,
+                email: parsed.email,
+                roles: parsed.roles,
+                departmentId: parsed.departmentId,
+                name: parsed.name,
+                mobile: parsed.mobile,
+                organizationName: parsed.organizationName,
+                organizationLogo: parsed.organizationLogo
+            });
         }
     }
 }

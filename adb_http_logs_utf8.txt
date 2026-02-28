@@ -1,0 +1,102 @@
+﻿
+02-22 19:35:04.969 23999 
+24037 D Capacitor: 
+Handling local request: htt
+ps://localhost/svg/eye.svg
+02-22 19:35:05.043 23999 
+24039 D Capacitor: 
+Handling local request: htt
+ps://localhost/3774.c6378d2
+f04b186d8.js
+02-22 19:35:05.062 23999 
+24046 D Capacitor: 
+Handling local request: htt
+ps://localhost/5661.f5a70fe
+fba8557a6.js
+02-22 19:35:05.063 23999 
+24046 D Capacitor: 
+Handling local request: htt
+ps://localhost/4424.57a212c
+488d2eeb8.js
+02-22 19:35:05.087 23999 
+24044 D Capacitor: 
+Handling local request: htt
+ps://localhost/7573.912ede1
+21b7f1eb8.js
+02-22 19:35:05.088 23999 
+24037 D Capacitor: 
+Handling local request: htt
+ps://localhost/9726.cf5c0ac
+83b50bc63.js
+02-22 19:35:05.089 23999 
+24044 D Capacitor: 
+Handling local request: htt
+ps://localhost/8844.8aba02d
+0d62434ae.js
+02-22 19:35:05.107 23999 
+24037 D Capacitor: 
+Handling local request: htt
+ps://localhost/5230.65d497b
+f70fe78b1.js
+02-22 19:35:05.138 23999 
+24037 D Capacitor: 
+Handling local request: htt
+ps://localhost/7693.00447fd
+350acc503.js
+02-22 19:35:05.141 23999 
+24039 D Capacitor: 
+Handling local request: htt
+ps://localhost/6457.f9e8340
+66f351c28.js
+02-22 19:35:05.143 23999 
+24044 D Capacitor: 
+Handling local request: htt
+ps://localhost/7681.b73a819
+a8996788f.js
+02-22 19:35:05.148 23999 
+24038 D Capacitor: 
+Handling local request: htt
+ps://localhost/8685.3524ca7
+1fd982a6f.js
+02-22 19:35:05.153 23999 
+24039 D Capacitor: 
+Handling local request: htt
+ps://localhost/4519.2351a07
+5b21390be.js
+02-22 19:35:05.162 23999 
+24046 D Capacitor: 
+Handling local request: htt
+ps://localhost/6595.dab486f
+0476fcb06.js
+02-22 19:35:05.183 23999 
+24037 D Capacitor: 
+Handling local request: htt
+ps://localhost/3370.e6aa797
+ce2d45879.js
+02-22 19:35:05.445 23999 
+24046 D Capacitor: 
+Handling local request: htt
+ps://localhost/542.698c4191
+2b1f7942.js
+02-22 19:35:05.483 23999 
+24037 D Capacitor: 
+Handling local request: htt
+ps://localhost/919.91f70206
+f08ab189.js
+02-22 19:35:05.507 23999 
+24037 D Capacitor: 
+Handling local request: htt
+ps://localhost/9266.af9e460
+6d1a73f6c.js
+02-22 19:35:05.509 23999 
+24045 D Capacitor: 
+Handling local request: htt
+ps://localhost/2213.313fc3e
+bc88f66dd.js
+02-22 19:35:05.510 23999 
+24038 D Capacitor: 
+Handling local request: htt
+ps://localhost/6068.0a9e970
+25519f512.js
+
+

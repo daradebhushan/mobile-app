@@ -59,23 +59,55 @@ export class ComplaintTypeListComponent implements OnInit {
         this.loadTypes();
     }
 
+    private autoRefreshInterval: any;
+
     ionViewWillEnter() {
-        this.loadTypes();
+        this.loadTypes(null, true);
+    }
+
+    ionViewDidEnter() {
+        this.autoRefreshInterval = setInterval(() => {
+            this.loadTypes(null, true);
+        }, 10000);
+    }
+
+    ionViewWillLeave() {
+        if (this.autoRefreshInterval) {
+            clearInterval(this.autoRefreshInterval);
+        }
     }
 
     handleRefresh(event: any) {
         this.loadTypes(event);
     }
 
-    loadTypes(event: any = null) {
-        if (!event) this.loading = true;
+    mergeData(newData: ComplaintType[]) {
+        if (!this.types || this.types.length === 0) {
+            this.types = newData;
+            return;
+        }
+
+        this.types = this.types.filter(t => newData.find(n => n.id === t.id));
+
+        newData.forEach(newItem => {
+            const existingIndex = this.types.findIndex(t => t.id === newItem.id);
+            if (existingIndex > -1) {
+                Object.assign(this.types[existingIndex], newItem);
+            } else {
+                this.types.push(newItem);
+            }
+        });
+    }
+
+    loadTypes(event: any = null, silent: boolean = false) {
+        if (!event && !silent) this.loading = true;
         this.complaintTypeService.getAllComplaintTypes().subscribe({
             next: (res: any) => {
                 // Backend might return ApiResponse wrapper or List directly
                 if (res.success && res.data) {
-                    this.types = res.data;
+                    this.mergeData(res.data);
                 } else if (Array.isArray(res)) {
-                    this.types = res; // Fallback
+                    this.mergeData(res); // Fallback
                 } else {
                     this.types = [];
                 }

@@ -3,7 +3,7 @@
     class="bg-white/90 dark:bg-black/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 px-6 pt-4 pb-6 shadow-sm">
     <div class="flex justify-between items-center">
       <div>
-        <div class="text-[10px] font-bold text-orange-600 uppercase tracking-widest mb-1">{{ 'GREETING_AFTERNOON' |
+        <div class="text-[10px] font-bold text-orange-600 uppercase tracking-widest mb-1">{{ greetingKey |
           translate }}</div>
         <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-tight">{{
           'DEPARTMENT_DASHBOARD' |
@@ -64,12 +64,7 @@
         </div>
       </div>
 
-      <!-- Employees (Dept Head only sees their staff in tasks usually, but here linking to create task or something else?) -->
-      <!-- Frontend links to /dept-head/staff. Does mobile have this? 
-           If not, we link to Tasks or leave blank. Let's assume there isn't a dedicated Staff Management for Dept Head in Mobile yet.
-           Frontend "Employees" card: totalUsers.
-           Let's link to Home for now or just display.
-      -->
+      <!-- Employees -->
       <div
         class="bg-gradient-to-br from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 p-5 rounded-3xl shadow-sm border border-blue-100 dark:border-gray-800 active:scale-95 transition-all relative overflow-hidden group">
         <div class="absolute right-0 top-0 w-16 h-16 bg-blue-500/10 rounded-full blur-xl -mr-6 -mt-6"></div>

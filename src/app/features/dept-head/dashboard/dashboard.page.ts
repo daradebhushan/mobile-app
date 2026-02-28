@@ -25,6 +25,13 @@ export class DashboardPage implements OnInit {
     this.loadStats();
   }
 
+  get greetingKey(): string {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'GREETING_MORNING';
+    if (hour < 17) return 'GREETING_AFTERNOON';
+    return 'GREETING_EVENING';
+  }
+
   handleRefresh(event: any) {
     this.loadStats();
     setTimeout(() => {

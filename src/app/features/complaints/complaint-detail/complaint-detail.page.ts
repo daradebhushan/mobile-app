@@ -11,6 +11,7 @@ import { Filesystem, Directory } from '@capacitor/filesystem';
 import { FileOpener } from '@capacitor-community/file-opener';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { ImageModalComponent } from './image-modal.component';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
     selector: 'app-complaint-detail',
@@ -35,8 +36,14 @@ export class ComplaintDetailPage implements OnInit {
         private modalController: ModalController,
         private platform: Platform,
         private loadingController: LoadingController,
-        private sanitizer: DomSanitizer
+        private sanitizer: DomSanitizer,
+        private authService: AuthService
     ) { }
+
+    get isAdmin(): boolean {
+        const user = this.authService.currentUserValue;
+        return user?.roles?.includes('ROLE_OWNER') || user?.roles?.includes('ROLE_ADMIN') || user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN') || false;
+    }
 
     ngOnInit() {
         const idParam = this.route.snapshot.paramMap.get('id');

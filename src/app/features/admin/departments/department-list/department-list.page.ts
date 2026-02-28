@@ -28,15 +28,48 @@ export class DepartmentListComponent implements OnInit {
         this.loadDepartments(event);
     }
 
+    private autoRefreshInterval: any;
+
     ionViewWillEnter() {
-        this.loadDepartments();
+        this.loadDepartments(null, true);
     }
 
-    loadDepartments(event: any = null) {
+    ionViewDidEnter() {
+        this.autoRefreshInterval = setInterval(() => {
+            this.loadDepartments(null, true);
+        }, 10000);
+    }
+
+    ionViewWillLeave() {
+        if (this.autoRefreshInterval) {
+            clearInterval(this.autoRefreshInterval);
+        }
+    }
+
+    mergeData(newData: any[]) {
+        if (!this.departments || this.departments.length === 0) {
+            this.departments = newData;
+            return;
+        }
+
+        this.departments = this.departments.filter(d => newData.find(n => n.id === d.id));
+
+        newData.forEach(newItem => {
+            const existingIndex = this.departments.findIndex(d => d.id === newItem.id);
+            if (existingIndex > -1) {
+                Object.assign(this.departments[existingIndex], newItem);
+            } else {
+                this.departments.push(newItem);
+            }
+        });
+    }
+
+    loadDepartments(event: any = null, silent: boolean = false) {
         this.departmentService.getAllDepartments().subscribe({
             next: (res: any) => {
                 if (res.success) {
-                    this.departments = res.data.content || res.data || [];
+                    const newData = res.data.content || res.data || [];
+                    this.mergeData(newData);
                 } else {
                     this.departments = [];
                 }

@@ -1,0 +1,40 @@
+{
+  "success": true,
+  "message": "User fetched successfully",
+  "data": {
+    "id": 132,
+    "name": "Role Test User",
+    "mobile": "5555555555",
+    "email": "roletest_1772169086134@test.com",
+    "resetPasswordToken": null,
+    "resetPasswordTokenExpiry": null,
+    "role": "STAFF",
+    "organizationName": "Maharashtra Nagar Panchayat",
+    "organizationLogo": null,
+    "department": {
+      "id": 111,
+      "name": "Role Test Dept",
+      "nameMr": "रोल टेस्ट",
+      "nameHi": null,
+      "chatbotEnabled": false,
+      "subQuestions": null,
+      "active": true,
+      "createdAt": "2026-02-27T10:41:26.129433"
+    },
+    "designation": "Staff",
+    "active": true,
+    "emailNotifications": true,
+    "profilePhoto": null,
+    "createdAt": "2026-02-27T10:41:26.219304",
+    "enabled": true,
+    "username": "roletest_1772169086134@test.com",
+    "accountNonLocked": true,
+    "authorities": [
+      {
+        "authority": "ROLE_STAFF"
+      }
+    ],
+    "accountNonExpired": true,
+    "credentialsNonExpired": true
+  }
+}

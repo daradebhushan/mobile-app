@@ -148,26 +148,26 @@ export class TaskFormComponent implements OnInit {
                         priority: task.priority,
                         status: task.status,
                         type: task.type || 'Internal',
-                        departmentId: task.department?.id || null,
-                        assignedStaffId: task.assignedStaff?.id || null,
+                        departmentId: task.departmentId || task.department?.id || null,
+                        assignedStaffId: task.assignedStaffId || task.assignedStaff?.id || null,
                         dueDate: task.dueDate
                     };
 
                     // Robustness: Handle missing Department in list
-                    if (task.department && this.taskForm.departmentId) {
+                    if ((task.department || task.departmentId) && this.taskForm.departmentId) {
                         const exists = this.departments.find(d => d.id === this.taskForm.departmentId);
                         if (!exists) {
                             console.warn(`Department ${this.taskForm.departmentId} not in list. Appending.`);
-                            this.departments.push(task.department);
+                            this.departments.push(task.department || { id: task.departmentId, name: task.departmentName || 'Department' });
                         }
                     }
 
                     // Robustness: Handle missing Staff in list
-                    if (task.assignedStaff && this.taskForm.assignedStaffId) {
+                    if ((task.assignedStaff || task.assignedStaffId) && this.taskForm.assignedStaffId) {
                         const exists = this.staffList.find(u => u.id === this.taskForm.assignedStaffId);
                         if (!exists) {
                             console.warn(`Staff ${this.taskForm.assignedStaffId} not in list. Appending.`);
-                            this.staffList.push(task.assignedStaff);
+                            this.staffList.push(task.assignedStaff || { id: task.assignedStaffId, name: task.assignedStaffName || 'Staff', role: 'STAFF' });
                         }
                     }
 

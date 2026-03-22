@@ -14,9 +14,11 @@ import { IonicModule, AlertController } from '@ionic/angular';
     templateUrl: './user-list.page.html',
 })
 export class UserListComponent implements OnInit {
-    users: any[] = [];
     departments: any[] = [];
     selectedDepartmentId: number | null = null;
+    allUsers: any[] = [];
+    private autoRefreshInterval: any;
+    isLoading: boolean = false;
 
     constructor(
         private userService: UserService,
@@ -30,28 +32,23 @@ export class UserListComponent implements OnInit {
     ngOnInit(): void {
         this.route.queryParams.subscribe(params => {
             if (params['departmentId']) {
-                this.selectedDepartmentId = +params['departmentId'];
+                this.selectedDepartmentId = parseInt(params['departmentId'], 10);
             } else {
                 this.selectedDepartmentId = null;
             }
-            if (this.users.length > 0) {
-                this.loadUsers();
-            }
         });
-        this.loadDepartments();
     }
 
-    private autoRefreshInterval: any;
-
     ionViewWillEnter() {
-        this.loadUsers(null, true);
-        this.loadDepartments();
+        this.loadData();
     }
 
     ionViewDidEnter() {
         this.autoRefreshInterval = setInterval(() => {
-            this.loadUsers(null, true);
-        }, 10000);
+            if (!this.isLoading) {
+                this.loadData(null, true);
+            }
+        }, 15000);
     }
 
     ionViewWillLeave() {
@@ -61,67 +58,73 @@ export class UserListComponent implements OnInit {
     }
 
     handleRefresh(event: any) {
-        this.loadUsers(event);
+        this.loadData(event, false);
     }
 
-    loadDepartments() {
-        this.departmentService.getAllDepartments().subscribe({
-            next: (res: any) => {
-                if (res.success) {
-                    this.departments = res.data.content || res.data || [];
+    async loadData(event: any = null, silent: boolean = false) {
+        if (!silent) this.isLoading = true;
+        try {
+            // 1. Fetch departments
+            const deptsRes: any = await import('rxjs').then(m => m.firstValueFrom(this.departmentService.getAllDepartments()));
+            if (deptsRes.success) {
+                this.departments = deptsRes.data.content || deptsRes.data || [];
+            }
+
+            // 2. Fetch users for each department + general users in parallel
+            const fetchPromises: Promise<any[]>[] = [];
+
+            // Fetch users with no department
+            fetchPromises.push(
+                import('rxjs').then(m => m.firstValueFrom(this.userService.getAllUsers({ departmentId: -1 }))).then(
+                    (res: any) => res.success ? (res.data.content || res.data || []) : []
+                ).catch(() => [])
+            );
+
+            // Fetch users for each actual department
+            for (const dept of this.departments) {
+                fetchPromises.push(
+                    import('rxjs').then(m => m.firstValueFrom(this.userService.getAllUsers({ departmentId: dept.id }))).then(
+                        (res: any) => res.success ? (res.data.content || res.data || []) : []
+                    ).catch(() => [])
+                );
+            }
+
+            const results = await Promise.all(fetchPromises);
+
+            let combinedUsers: any[] = [];
+            for (const userArray of results) {
+                if (Array.isArray(userArray)) {
+                    combinedUsers = combinedUsers.concat(userArray);
                 }
             }
-        });
+
+            // Deduplicate across results (just in case)
+            const uniqueUsersMap = new Map();
+            combinedUsers.forEach(u => uniqueUsersMap.set(u.id, u));
+            this.allUsers = Array.from(uniqueUsersMap.values());
+
+        } catch (error) {
+            console.error('Error loading data:', error);
+        } finally {
+            this.isLoading = false;
+            this.cdr.detectChanges();
+            if (event) event.target.complete();
+        }
     }
 
-    // Smart merge to prevent UI blinking
-    mergeData(newData: any[]) {
-        if (!this.users || this.users.length === 0) {
-            this.users = newData;
-            return;
+    get currentUsers() {
+        if (this.selectedDepartmentId == null || this.selectedDepartmentId === 'null' as any || (this.selectedDepartmentId as any) === 'ALL') {
+            return this.allUsers;
+        } else if (this.selectedDepartmentId == -1) {
+            return this.allUsers.filter(u => !u.department);
+        } else {
+            const numId = Number(this.selectedDepartmentId);
+            return this.allUsers.filter(u => u.department?.id === numId);
         }
-
-        // Remove items no longer in new data
-        this.users = this.users.filter(u => newData.find(n => n.id === u.id));
-
-        // Update existing or push new
-        newData.forEach(newItem => {
-            const existingIndex = this.users.findIndex(u => u.id === newItem.id);
-            if (existingIndex > -1) {
-                // Update in place without losing reference
-                Object.assign(this.users[existingIndex], newItem);
-            } else {
-                this.users.push(newItem);
-            }
-        });
-    }
-
-    loadUsers(event: any = null, silent: boolean = false) {
-        const params: any = {};
-        if (this.selectedDepartmentId !== null) {
-            params.departmentId = this.selectedDepartmentId;
-        }
-        this.userService.getAllUsers(params).subscribe({
-            next: (res: any) => {
-                if (res.success) {
-                    const newData = res.data.content || res.data || [];
-                    this.mergeData(newData);
-                } else {
-                    this.users = [];
-                }
-                this.cdr.detectChanges();
-                if (event) event.target.complete();
-            },
-            error: (err) => {
-                console.error('Failed to load users', err);
-                if (event) event.target.complete();
-            }
-        });
     }
 
     onFilterChange() {
-        this.users = []; // explicit clear when changing filter
-        this.loadUsers();
+        this.cdr.detectChanges();
     }
 
     editUser(user: any) {
@@ -140,7 +143,7 @@ export class UserListComponent implements OnInit {
                     handler: () => {
                         this.userService.deleteUser(id).subscribe({
                             next: () => {
-                                this.loadUsers();
+                                this.loadData();
                             },
                             error: async (err) => {
                                 const errorAlert = await this.alertController.create({

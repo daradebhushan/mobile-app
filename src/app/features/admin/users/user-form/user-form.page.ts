@@ -35,9 +35,7 @@ export class UserFormPageComponent implements OnInit {
 
     showAddDept = false;
     newDeptName = '';
-
-    roles = ['DEPARTMENT_HEAD', 'STAFF', 'ADMIN'];
-
+    roles = ['DEPARTMENT_HEAD', 'STAFF'];
     constructor(
         private userService: UserService,
         private departmentService: DepartmentService,

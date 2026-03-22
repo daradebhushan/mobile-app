@@ -146,6 +146,8 @@ export const TRANSLATIONS = {
         // Users
         'USER_MANAGEMENT': 'User Management',
         'ADD_USER': 'Add User',
+        'CREATE_USER': 'Create User',
+        'EDIT_USER': 'Edit User',
         'NAME': 'Name',
         'ROLE': 'Role',
         'DESIGNATION': 'Designation',
@@ -470,6 +472,8 @@ export const TRANSLATIONS = {
         // Users
         'USER_MANAGEMENT': 'वापरकर्ता व्यवस्थापन',
         'ADD_USER': 'वापरकर्ता जोडा',
+        'CREATE_USER': 'वापरकर्ता तयार करा',
+        'EDIT_USER': 'वापरकर्ता संपादित करा',
         'NAME': 'नाव',
         'ROLE': 'भूमिका',
         'DESIGNATION': 'पद',

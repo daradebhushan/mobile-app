@@ -55,14 +55,19 @@ export class ComplaintDetailPage implements OnInit {
 
     safePhotoUrl: SafeUrl | undefined;
     mainPhotoBlobUrl: SafeUrl | undefined;
+    mainPhotoError: boolean = false;
 
     loadComplaint() {
         if (!this.complaintId) return;
         this.loading = true;
+        this.mainPhotoError = false;
         this.complaintService.getComplaintById(this.complaintId).subscribe({
             next: (res) => {
                 this.complaint = res; // Backend returns DTO directly
                 if (this.complaint) {
+                    if (this.complaint.photoUrl === 'null') {
+                        this.complaint.photoUrl = undefined;
+                    }
                     this.safePhotoUrl = this.getSafeUrl(this.complaint.photoUrl);
                     console.log('Original Photo URL:', this.complaint.photoUrl);
                     console.log('Safe Photo URL:', this.safePhotoUrl);
@@ -106,8 +111,11 @@ export class ComplaintDetailPage implements OnInit {
     }
 
     onImageError(event: any) {
-        console.error('Image failed to load:', event);
-        this.showToast('Failed to load image', 'warning');
+        console.error('Main image failed to load:', event);
+        this.mainPhotoError = true;
+        // Commenting out the toast to prevent annoying the user if the image is just a broken fallback
+        // this.showToast('Failed to load image', 'warning');
+        this.cdr.detectChanges();
     }
 
     selectedCommentFile: File | null = null;
@@ -434,13 +442,20 @@ export class ComplaintDetailPage implements OnInit {
 
         this.complaintService.getImage(fetchUrl).subscribe({
             next: (blob) => {
-                const objectURL = URL.createObjectURL(blob);
-                this.mainPhotoBlobUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-                console.log('Main Photo Blob Loaded');
+                if (blob && blob.size > 0) {
+                    const objectURL = URL.createObjectURL(blob);
+                    this.mainPhotoBlobUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+                    console.log('Main Photo Blob Loaded');
+                } else {
+                    console.warn('Main photo fetch returned 0 bytes');
+                    this.mainPhotoError = true;
+                }
                 this.cdr.detectChanges();
             },
             error: (err) => {
-                console.error('Failed to load main photo blob', err);
+                console.error('Failed to load main photo blob HTTP', err);
+                this.mainPhotoError = true;
+                this.cdr.detectChanges();
             }
         });
     }
@@ -531,13 +546,12 @@ export class ComplaintDetailPage implements OnInit {
 
     isPhotoInAttachments(photoUrl: string): boolean {
         if (!this.complaint || !this.complaint.attachments) return false;
-        // Logic: Check if any attachment filename or path matches the photoUrl
-        // photoUrl might be "/uploads/WA_123.jpg"
-        // attributes might need adjustment based on how we store 'url' in attachment entity or just filename
-        // Actually, attachment entity has 'filePath' in backend but frontend DTO has 'fileName'?
-        // Let's assume filename match is good enough proxy if photoUrl ends with it.
-        const photoName = photoUrl.split('/').pop();
-        return this.complaint.attachments.some(att => att.fileName === photoName);
+
+        // If the complaint has ANY attachments, we can safely hide the main fallback photo.
+        // Reason: Our backend copies `photoUrl` into a new `ComplaintAttachment` entity with a newly generated name (whatsapp_media_123.jpg)
+        // This causes filename mismatch, and since EVERY photo is copied to attachments, 
+        // the main photo block is almost always a duplicate. Hiding it if there are attachments prevents the double/empty image bug.
+        return this.complaint.attachments.some(att => this.isImage(att));
     }
 
     hasDocuments(): boolean {

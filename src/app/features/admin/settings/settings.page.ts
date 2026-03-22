@@ -7,6 +7,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { LanguageService } from '../../../services/language.service';
 import { RouterModule } from '@angular/router';
 import { environment } from '../../../../environments/environment';
+import { Browser } from '@capacitor/browser';
 
 @Component({
     selector: 'app-settings-page',
@@ -21,6 +22,8 @@ export class SettingsPageComponent implements OnInit {
     userRole: string = 'Nagar Panchayat';
     currentLang: string = 'EN';
     isEditModalOpen = false;
+    isPrivacyModalOpen = false;
+    isTermsModalOpen = false;
 
     // Toggle States
     taskAlerts: boolean = true;
@@ -271,6 +274,36 @@ export class SettingsPageComponent implements OnInit {
             ]
         });
         await alert.present();
+    }
+
+    openPrivacyPolicy() {
+        this.isPrivacyModalOpen = true;
+    }
+
+    closePrivacyModal() {
+        this.isPrivacyModalOpen = false;
+    }
+
+    openTermsOfService() {
+        this.isTermsModalOpen = true;
+    }
+
+    closeTermsModal() {
+        this.isTermsModalOpen = false;
+    }
+
+    async openAboutApp() {
+        const alert = await this.alertController.create({
+            header: 'About Loknagar',
+            subHeader: 'by TownSeva',
+            message: 'Version: 1.0.0\n\nLoknagar is a SaaS (Software as a Service) platform provided by TownSeva. It is NOT an official government or municipal application.\n\n© 2026 TownSeva. All rights reserved.',
+            buttons: ['OK']
+        });
+        await alert.present();
+    }
+
+    contactSupport() {
+        window.open('mailto:support@townseva.in?subject=TownSeva Support Request', '_system');
     }
 
     get isAdmin(): boolean {

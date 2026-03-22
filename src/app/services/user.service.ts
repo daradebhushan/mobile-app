@@ -25,16 +25,19 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     getAllUsers(params?: any): Observable<any> {
-        let queryString = '';
+        let queryParams = new URLSearchParams();
         if (params) {
-            const queryParams = new URLSearchParams();
             for (const key in params) {
-                if (params[key] !== null && params[key] !== undefined) {
-                    queryParams.append(key, params[key]);
+                if (params.hasOwnProperty(key)) {
+                    const value = params[key];
+                    if (value !== null && value !== undefined && value !== '') {
+                        queryParams.append(key, value);
+                    }
                 }
             }
-            queryString = `?${queryParams.toString()}`;
         }
+        const queryString = queryParams.toString() ? `?${queryParams.toString()}` : '';
+
         return this.http.get<any>(`${this.apiUrl}${queryString}`).pipe(
             tap(res => console.log('DEBUG: User API Response:', res))
         );

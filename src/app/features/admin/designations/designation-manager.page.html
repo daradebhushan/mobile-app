@@ -17,29 +17,6 @@
 <ion-content class="bg-[#F8FAFC] dark:bg-black">
     <div class="p-6 space-y-8 pb-24">
 
-        <!-- Add New Designation Section -->
-        <div class="space-y-4">
-            <h3 class="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em] px-2 flex items-center">
-                <ion-icon name="add-circle-outline" class="mr-2 text-purple-500 text-lg"></ion-icon>
-                {{ 'ADD_NEW_DESIGNATION' | translate }}
-            </h3>
-
-            <div
-                class="bg-white dark:bg-gray-900 p-6 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800 relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent pointer-events-none">
-                </div>
-
-                <div class="space-y-4 relative z-10">
-                    <input type="text" [(ngModel)]="newDesignationName" [placeholder]="'e.g. Senior Clerk'"
-                        class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl px-5 py-4 text-sm font-bold text-gray-900 dark:text-white focus:ring-4 focus:ring-purple-500/10 focus:bg-white dark:focus:bg-gray-900 focus:border-purple-500/20 outline-none transition-all shadow-inner">
-
-                    <button (click)="addDesignation()"
-                        class="w-full py-4 bg-purple-600 text-white rounded-[2rem] font-black text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-purple-500/30 active:scale-95 transition-all">
-                        {{ 'ADD' | translate }}
-                    </button>
-                </div>
-            </div>
-        </div>
 
         <!-- List Section -->
         <div class="space-y-4">
@@ -83,4 +60,14 @@
         </div>
 
     </div>
+
+    <!-- Floating Add Button -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="mb-6 mr-4">
+        <ion-fab-button (click)="openAddAlert()"
+            class="w-14 h-14 shadow-xl shadow-orange-500/30 overflow-hidden rounded-full">
+            <div class="bg-gradient-to-br from-orange-400 to-orange-600 w-full h-full flex items-center justify-center">
+                <ion-icon name="add" class="text-3xl text-white font-bold"></ion-icon>
+            </div>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>

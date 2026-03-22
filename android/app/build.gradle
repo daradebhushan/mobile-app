@@ -4,7 +4,7 @@ android {
     namespace = "io.ionic.starter"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "io.ionic.starter"
+        applicationId "com.nagar.parishad.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -18,10 +18,10 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file("release.keystore")
-            storePassword "password123"
-            keyAlias "loknagar"
-            keyPassword "password123"
+            storeFile file("C:/Users/darad/OneDrive/Desktop/Play Store Deployment/townseva-release-key.jks")
+            storePassword "TownSeva@123"
+            keyAlias "townseva-key"
+            keyPassword "TownSeva@123"
         }
     }
     buildTypes {

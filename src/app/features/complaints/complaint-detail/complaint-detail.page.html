@@ -34,51 +34,81 @@
     <div class="pb-32" *ngIf="!loading && complaint">
 
         <!-- Top Status Hero Section -->
-        <div
-            class="bg-white dark:bg-gray-900 px-6 pt-6 pb-8 rounded-b-[2.5rem] shadow-sm border-b border-gray-100 dark:border-gray-800 mb-6 relative overflow-hidden">
+        <div class="relative px-6 pt-10 pb-10 mx-4 mt-2 rounded-[2.5rem] shadow-xl shadow-gray-200/50 dark:shadow-black/50 overflow-hidden mb-8 border border-white/50 dark:border-gray-800/50 backdrop-blur-3xl"
+            [ngClass]="{
+                'bg-gradient-to-br from-orange-50 via-orange-100/50 to-orange-50 dark:from-orange-950/40 dark:via-orange-900/20 dark:to-orange-950/40': complaint.status === 'PENDING',
+                'bg-gradient-to-br from-emerald-50 via-emerald-100/50 to-emerald-50 dark:from-emerald-950/40 dark:via-emerald-900/20 dark:to-emerald-950/40': complaint.status === 'ACCEPTED',
+                'bg-gradient-to-br from-red-50 via-red-100/50 to-red-50 dark:from-red-950/40 dark:via-red-900/20 dark:to-red-950/40': complaint.status === 'REJECTED',
+                'bg-gradient-to-br from-indigo-50 via-indigo-100/50 to-indigo-50 dark:from-indigo-950/40 dark:via-indigo-900/20 dark:to-indigo-950/40': complaint.status === 'CONVERTED_TO_TASK'
+            }">
 
-            <!-- Subtle background pattern/gradient -->
-            <div
-                class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-gradient-to-bl from-saffron-500/10 to-transparent rounded-full blur-3xl pointer-events-none">
+            <!-- Decorative blobs -->
+            <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse"
+                [ngClass]="{'bg-orange-300 dark:bg-orange-900': complaint.status === 'PENDING', 'bg-emerald-300 dark:bg-emerald-900': complaint.status === 'ACCEPTED', 'bg-red-300 dark:bg-red-900': complaint.status === 'REJECTED', 'bg-indigo-300 dark:bg-indigo-900': complaint.status === 'CONVERTED_TO_TASK'}">
             </div>
 
-            <div class="relative z-10 flex flex-col items-center text-center">
+            <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse"
+                style="animation-delay: 2s;"
+                [ngClass]="{'bg-yellow-300 dark:bg-yellow-900/50': complaint.status === 'PENDING', 'bg-teal-300 dark:bg-teal-900/50': complaint.status === 'ACCEPTED', 'bg-rose-300 dark:bg-rose-900/50': complaint.status === 'REJECTED', 'bg-purple-300 dark:bg-purple-900/50': complaint.status === 'CONVERTED_TO_TASK'}">
+            </div>
+
+            <div class="relative z-10 flex flex-col items-center justify-center text-center">
                 <div
-                    class="inline-flex items-center space-x-2 px-4 py-1.5 bg-gray-50 dark:bg-gray-800 rounded-full border border-gray-100 dark:border-gray-700 mb-4">
-                    <ion-icon name="document-text" class="text-gray-400 text-sm"></ion-icon>
-                    <span class="text-[11px] font-black uppercase tracking-[0.15em] text-gray-500 dark:text-gray-400">
+                    class="inline-flex items-center space-x-2 px-5 py-2 bg-white/60 dark:bg-black/40 backdrop-blur-md rounded-full shadow-sm border border-white/50 dark:border-white/10 mb-6">
+                    <ion-icon name="ticket" class="text-gray-500 dark:text-gray-400"></ion-icon>
+                    <span class="text-[11px] font-black uppercase tracking-[0.2em] text-gray-700 dark:text-gray-300">
                         {{ complaint.complaintNo }}
                     </span>
                 </div>
 
-                <!-- Large Dynamic Status Typography -->
-                <h2 class="text-4xl font-black tracking-tight mb-2 flex items-center justify-center space-x-3"
-                    [ngClass]="{
-                        'text-orange-500': complaint.status === 'PENDING',
-                        'text-blue-500': complaint.status === 'ACCEPTED',
-                        'text-red-500': complaint.status === 'REJECTED',
-                        'text-indigo-500': complaint.status === 'CONVERTED_TO_TASK'
-                    }">
-                    <ion-icon
-                        [name]="complaint.status === 'PENDING' ? 'time' : (complaint.status === 'ACCEPTED' ? 'checkmark-circle' : 'bulb')"
-                        class="text-3xl drop-shadow-sm"></ion-icon>
-                    <span>{{ complaint.status }}</span>
+                <!-- Status Icon Container rings -->
+                <div class="relative w-24 h-24 mb-6 flex items-center justify-center group cursor-default">
+                    <div class="absolute inset-0 rounded-full animate-ping opacity-20" [ngClass]="{
+                            'bg-orange-500': complaint.status === 'PENDING',
+                            'bg-emerald-500': complaint.status === 'ACCEPTED',
+                            'bg-red-500': complaint.status === 'REJECTED',
+                            'bg-indigo-500': complaint.status === 'CONVERTED_TO_TASK'
+                        }"></div>
+                    <div class="relative w-20 h-20 rounded-full bg-white dark:bg-gray-900 shadow-2xl flex items-center justify-center border-4 transform transition-transform group-hover:scale-110"
+                        [ngClass]="{
+                            'border-orange-500 text-orange-500': complaint.status === 'PENDING',
+                            'border-emerald-500 text-emerald-500': complaint.status === 'ACCEPTED',
+                            'border-red-500 text-red-500': complaint.status === 'REJECTED',
+                            'border-indigo-500 text-indigo-500': complaint.status === 'CONVERTED_TO_TASK'
+                        }">
+                        <ion-icon
+                            [name]="complaint.status === 'PENDING' ? 'time' : (complaint.status === 'ACCEPTED' ? 'checkmark-done' : (complaint.status === 'REJECTED' ? 'close' : 'construct'))"
+                            class="text-4xl drop-shadow-md"></ion-icon>
+                    </div>
+                </div>
+
+                <h2 class="text-3xl font-black tracking-tight text-gray-900 dark:text-white mb-2 drop-shadow-sm">
+                    {{ complaint.status === 'CONVERTED_TO_TASK' ? 'Converted To Task' : (complaint.status | titlecase)
+                    }}
                 </h2>
 
-                <p class="text-sm font-semibold text-gray-500 dark:text-gray-400">
-                    Filed on {{ complaint.createdAt | date:'longDate' }}
+                <p
+                    class="text-[13px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider bg-white/50 dark:bg-black/20 px-5 py-2 rounded-full mt-2 backdrop-blur-sm border border-white/40 dark:border-white/5 shadow-sm">
+                    Filed {{ complaint.createdAt | date:'mediumDate' }}
                 </p>
 
                 <!-- Rejection Banner -->
                 <div *ngIf="complaint.rejectionReason"
-                    class="mt-6 w-full text-left bg-gradient-to-br from-red-50 to-white dark:from-red-950/30 dark:to-gray-900 border border-red-100 dark:border-red-900/50 p-5 rounded-3xl shadow-sm">
-                    <div class="flex items-center space-x-2 mb-2">
-                        <ion-icon name="warning" class="text-red-500 text-lg"></ion-icon>
-                        <p class="text-xs text-red-600 dark:text-red-400 font-bold uppercase tracking-widest">Rejection
-                            Reason</p>
+                    class="mt-8 w-full text-left bg-red-50/90 dark:bg-red-950/50 backdrop-blur-xl border border-red-200/50 dark:border-red-900/50 p-6 rounded-[2rem] shadow-inner relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-2xl -mr-16 -mt-16 pointer-events-none">
                     </div>
-                    <p class="text-sm text-gray-800 dark:text-gray-200 leading-relaxed font-medium pl-1">{{
-                        complaint.rejectionReason }}</p>
+                    <div class="flex items-center space-x-3 mb-3 relative z-10">
+                        <div
+                            class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/50 flex items-center justify-center shadow-sm">
+                            <ion-icon name="warning" class="text-red-600 dark:text-red-400 text-lg"></ion-icon>
+                        </div>
+                        <p class="text-xs text-red-700 dark:text-red-400 font-black uppercase tracking-[0.15em]">
+                            Rejection Reason</p>
+                    </div>
+                    <p class="text-[15px] text-red-950 dark:text-red-200 leading-relaxed font-bold px-1 relative z-10">
+                        {{ complaint.rejectionReason }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -89,116 +119,170 @@
             <div class="grid grid-cols-2 gap-4">
                 <!-- Department Card -->
                 <div
-                    class="bg-white dark:bg-gray-900 p-5 rounded-[2rem] border border-gray-100/80 dark:border-gray-800/80 shadow-sm flex flex-col justify-center items-start relative overflow-hidden group">
+                    class="bg-white/70 dark:bg-gray-900/70 p-5 rounded-[2rem] border border-white/60 dark:border-gray-800/60 shadow-lg shadow-gray-200/20 dark:shadow-black/20 backdrop-blur-xl relative overflow-hidden group hover:-translate-y-1 transition-all duration-300">
                     <div
-                        class="w-10 h-10 rounded-2xl bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center mb-3">
-                        <ion-icon name="business" class="text-indigo-500 text-lg"></ion-icon>
+                        class="absolute -right-4 -top-4 w-24 h-24 bg-indigo-500/5 rounded-full blur-2xl group-hover:bg-indigo-500/10 transition-colors pointer-events-none">
                     </div>
-                    <p class="text-[10px] uppercase tracking-widest text-gray-400 dark:text-gray-500 font-bold mb-1">
-                        Department</p>
-                    <p class="text-sm font-black text-gray-900 dark:text-white leading-tight">{{
-                        complaint.departmentName || 'General' }}</p>
+                    <div
+                        class="w-12 h-12 rounded-[1.25rem] bg-gradient-to-br from-indigo-50 to-indigo-100/50 dark:from-indigo-500/20 dark:to-indigo-500/5 flex items-center justify-center mb-4 border border-indigo-100/50 dark:border-indigo-500/20 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                        <ion-icon name="business" class="text-indigo-600 dark:text-indigo-400 text-xl"></ion-icon>
+                    </div>
+                    <p
+                        class="text-[9px] uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 font-extrabold mb-1.5 opacity-80">
+                        {{ 'DEPARTMENT' | translate }}</p>
+                    <p
+                        class="text-[14px] font-black text-gray-900 dark:text-white leading-tight line-clamp-2 relative z-10">
+                        {{ complaint.departmentName || 'General' }}</p>
                 </div>
 
                 <!-- Type Card -->
                 <div
-                    class="bg-white dark:bg-gray-900 p-5 rounded-[2rem] border border-gray-100/80 dark:border-gray-800/80 shadow-sm flex flex-col justify-center items-start relative overflow-hidden group">
+                    class="bg-white/70 dark:bg-gray-900/70 p-5 rounded-[2rem] border border-white/60 dark:border-gray-800/60 shadow-lg shadow-gray-200/20 dark:shadow-black/20 backdrop-blur-xl relative overflow-hidden group hover:-translate-y-1 transition-all duration-300">
                     <div
-                        class="w-10 h-10 rounded-2xl bg-orange-50 dark:bg-orange-500/10 flex items-center justify-center mb-3">
-                        <ion-icon name="layers" class="text-orange-500 text-lg"></ion-icon>
+                        class="absolute -right-4 -top-4 w-24 h-24 bg-orange-500/5 rounded-full blur-2xl group-hover:bg-orange-500/10 transition-colors pointer-events-none">
                     </div>
-                    <p class="text-[10px] uppercase tracking-widest text-gray-400 dark:text-gray-500 font-bold mb-1">
-                        Category</p>
-                    <p class="text-sm font-black text-gray-900 dark:text-white leading-tight">{{
-                        complaint.complaintTypeName || 'General' }}</p>
+                    <div
+                        class="w-12 h-12 rounded-[1.25rem] bg-gradient-to-br from-orange-50 to-orange-100/50 dark:from-orange-500/20 dark:to-orange-500/5 flex items-center justify-center mb-4 border border-orange-100/50 dark:border-orange-500/20 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                        <ion-icon name="layers" class="text-orange-600 dark:text-orange-400 text-xl"></ion-icon>
+                    </div>
+                    <p
+                        class="text-[9px] uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 font-extrabold mb-1.5 opacity-80">
+                        {{ 'COMPLAINT_TYPE' | translate }}</p>
+                    <p
+                        class="text-[14px] font-black text-gray-900 dark:text-white leading-tight line-clamp-2 relative z-10">
+                        {{ complaint.complaintTypeName || 'General' }}</p>
+                </div>
+
+                <!-- Citizen Card (If Available) -->
+                <div
+                    class="col-span-2 bg-white/70 dark:bg-gray-900/70 p-5 rounded-[2rem] border border-white/60 dark:border-gray-800/60 shadow-lg shadow-gray-200/20 dark:shadow-black/20 backdrop-blur-xl flex items-center justify-between group overflow-hidden relative">
+                    <div
+                        class="absolute -bottom-4 -right-4 w-32 h-32 bg-blue-500/5 rounded-full blur-2xl group-hover:bg-blue-500/10 transition-colors pointer-events-none">
+                    </div>
+                    <div class="flex items-center space-x-4 relative z-10 w-full">
+                        <div
+                            class="w-14 h-14 rounded-[1.25rem] bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-500/20 dark:to-blue-500/5 flex items-center justify-center border border-blue-100/50 dark:border-blue-500/20 shadow-sm shrink-0 group-hover:rotate-3 transition-transform">
+                            <ion-icon name="person" class="text-blue-600 dark:text-blue-400 text-2xl"></ion-icon>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p
+                                class="text-[9px] uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 font-extrabold mb-1 w-full truncate">
+                                {{ 'CITIZEN' | translate }} Details</p>
+                            <p class="text-sm font-black text-gray-900 dark:text-white leading-tight w-full truncate">{{
+                                complaint.citizenName || 'Guest User' }}</p>
+                            <p
+                                class="text-xs font-bold text-gray-500 dark:text-gray-400 mt-1 flex items-center space-x-1">
+                                <ion-icon name="call" class="text-[10px]"></ion-icon>
+                                <span>{{ complaint.citizenMobile || 'N/A' }}</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Description Card (Full Width) -->
                 <div
-                    class="col-span-2 bg-white dark:bg-gray-900 p-6 rounded-[2rem] border border-gray-100/80 dark:border-gray-800/80 shadow-sm relative">
-                    <div class="absolute top-6 right-6 text-gray-100 dark:text-gray-800 pointer-events-none">
-                        <ion-icon name="chatbox" class="text-4xl"></ion-icon>
+                    class="col-span-2 bg-gradient-to-br from-white to-gray-50/50 dark:from-gray-900 dark:to-gray-900/50 p-7 rounded-[2rem] border border-white/80 dark:border-gray-800/80 shadow-xl shadow-gray-200/30 dark:shadow-black/30 backdrop-blur-xl relative mt-2 group">
+                    <div
+                        class="absolute top-5 right-5 w-12 h-12 bg-gray-50 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-700 group-hover:scale-110 group-hover:text-blue-500 group-hover:bg-blue-50 dark:group-hover:bg-blue-500/10 transition-all duration-300 shadow-sm border border-gray-100 dark:border-gray-700">
+                        <ion-icon name="document-text" class="text-xl"></ion-icon>
                     </div>
-                    <p class="text-[10px] uppercase tracking-widest text-gray-400 dark:text-gray-500 font-bold mb-3">
-                        Description</p>
-                    <p class="text-[15px] text-gray-800 dark:text-gray-200 leading-relaxed font-medium relative z-10">
-                        {{ complaint.description }}
+                    <p
+                        class="text-[10px] uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 font-extrabold mb-5 flex items-center space-x-2">
+                        <ion-icon name="list"></ion-icon><span>{{ 'DESCRIPTION' | translate }}</span>
+                    </p>
+                    <p
+                        class="text-[15px] text-gray-800 dark:text-gray-200 leading-relaxed font-semibold relative z-10 pr-12">
+                        {{ complaint.description || 'No description provided.' }}
                     </p>
                 </div>
 
                 <!-- Location Button -->
-                <div class="col-span-2" *ngIf="complaint.location">
+                <div class="col-span-2 mt-2" *ngIf="complaint.location">
                     <button (click)="openLocation()"
-                        class="w-full bg-blue-50 dark:bg-blue-500/10 hover:bg-blue-100 dark:hover:bg-blue-500/20 active:bg-blue-200 dark:active:bg-blue-500/30 transition-colors p-4 rounded-2xl flex items-center justify-between group">
-                        <div class="flex items-center space-x-3">
+                        class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:scale-[0.98] transition-all p-5 rounded-[2rem] flex items-center justify-between group shadow-lg shadow-blue-500/25 border border-blue-400/50 overflow-hidden relative">
+                        <!-- Shimmer effect -->
+                        <div
+                            class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite]">
+                        </div>
+
+                        <div class="flex items-center space-x-4 relative z-10">
                             <div
-                                class="w-10 h-10 rounded-full bg-white dark:bg-gray-900 shadow-sm flex items-center justify-center text-blue-500">
-                                <ion-icon name="location" class="text-xl"></ion-icon>
+                                class="w-12 h-12 rounded-[1.25rem] bg-white/20 backdrop-blur-md shadow-inner flex items-center justify-center text-white group-hover:scale-110 transition-transform border border-white/20">
+                                <ion-icon name="location" class="text-2xl drop-shadow-sm"></ion-icon>
                             </div>
-                            <div class="text-left">
-                                <p class="text-[10px] font-bold uppercase tracking-widest text-blue-400/80 mb-0.5">
-                                    Location</p>
-                                <p class="text-sm font-bold text-blue-700 dark:text-blue-300 truncate max-w-[200px]">{{
-                                    complaint.location }}</p>
+                            <div class="text-left flex-1 min-w-0 pr-4">
+                                <p
+                                    class="text-[9px] font-extrabold uppercase tracking-[0.2em] text-blue-100 mb-1 drop-shadow-sm w-full truncate">
+                                    {{ 'LOCATION' | translate }} Information</p>
+                                <p
+                                    class="text-[15px] font-black text-white w-full leading-tight drop-shadow-sm line-clamp-2">
+                                    {{ complaint.location }}
+                                </p>
                             </div>
                         </div>
-                        <ion-icon name="map" class="text-blue-300 dark:text-blue-700 text-xl"></ion-icon>
+                        <div
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10 shrink-0 relative z-10">
+                            <ion-icon name="map" class="text-white text-xl"></ion-icon>
+                        </div>
                     </button>
                 </div>
             </div>
 
             <!-- Media Section -->
-            <div *ngIf="(complaint.attachments && complaint.attachments.length > 0) || complaint.photoUrl" class="mt-8">
-                <div class="flex items-center space-x-2 mb-4 pl-2">
-                    <ion-icon name="images" class="text-gray-400 dark:text-gray-500"></ion-icon>
-                    <h3 class="text-sm font-black text-gray-900 dark:text-white uppercase tracking-widest">Media Gallery
-                    </h3>
+            <div *ngIf="(complaint.attachments && complaint.attachments.length > 0) || complaint.photoUrl"
+                class="mt-10">
+                <div class="flex items-center space-x-3 mb-6 pl-2">
+                    <div
+                        class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-600 flex items-center justify-center shadow-lg shadow-purple-500/30">
+                        <ion-icon name="images" class="text-white text-sm"></ion-icon>
+                    </div>
+                    <h3 class="text-[13px] font-black text-gray-900 dark:text-white uppercase tracking-[0.15em]">Media
+                        Gallery</h3>
                 </div>
 
                 <!-- Horizontal Scroll Container -->
-                <div class="flex overflow-x-auto space-x-4 pb-4 snap-x snap-mandatory scrollbar-hide -mx-5 px-5">
+                <div class="flex overflow-x-auto space-x-5 pb-6 snap-x snap-mandatory scrollbar-hide -mx-6 px-6">
 
                     <!-- Loop attachments -->
                     <ng-container *ngFor="let file of complaint.attachments">
-                        <div *ngIf="isImage(file)" class="shrink-0 snap-center relative group w-64">
-                            <div class="aspect-[4/3] rounded-[2rem] overflow-hidden shadow-lg border border-white/20 dark:border-white/5 bg-gray-100 dark:bg-gray-800 relative cursor-pointer"
+                        <div *ngIf="isImage(file) && !attachmentLoadErrors[file.id]"
+                            class="shrink-0 snap-center relative group w-64 lg:w-72">
+                            <div class="aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-xl shadow-gray-200/40 dark:shadow-black/40 border border-white/40 dark:border-gray-700/50 bg-gray-50 dark:bg-gray-800 relative cursor-pointer group-hover:-translate-y-2 transition-transform duration-500"
                                 (click)="viewImage(file.id)">
 
-                                <img *ngIf="attachmentImages[file.id] && !attachmentLoadErrors[file.id]"
-                                    [src]="attachmentImages[file.id]" (error)="onAttachmentImageError(file.id)"
-                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                <img *ngIf="attachmentImages[file.id]" [src]="attachmentImages[file.id]"
+                                    (error)="onAttachmentImageError(file.id)"
+                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
 
-                                <div *ngIf="!attachmentImages[file.id] || attachmentLoadErrors[file.id]"
+                                <div *ngIf="!attachmentImages[file.id]"
                                     class="w-full h-full flex items-center justify-center flex-col text-gray-400">
-                                    <ion-spinner name="crescent"
-                                        *ngIf="!attachmentImages[file.id] && !attachmentLoadErrors[file.id]"></ion-spinner>
-                                    <div *ngIf="attachmentLoadErrors[file.id]" class="flex flex-col items-center">
-                                        <ion-icon name="image-outline" class="text-3xl mb-2 opacity-50"></ion-icon>
-                                        <span class="text-[10px] uppercase font-bold tracking-widest">Load Failed</span>
-                                    </div>
+                                    <ion-spinner name="crescent"></ion-spinner>
                                 </div>
 
                                 <div
-                                    class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 </div>
                                 <div
-                                    class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
-                                    <ion-icon name="expand-outline" class="text-xl"></ion-icon>
+                                    class="absolute bottom-5 right-5 w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 border border-white/30 shadow-lg">
+                                    <ion-icon name="expand" class="text-xl"></ion-icon>
                                 </div>
                             </div>
                         </div>
                     </ng-container>
 
                     <!-- Main photo fallback -->
-                    <div *ngIf="complaint.photoUrl && !isPhotoInAttachments(complaint.photoUrl)"
-                        class="shrink-0 snap-center relative group w-64">
-                        <div class="aspect-[4/3] rounded-[2rem] overflow-hidden shadow-lg border border-white/20 dark:border-white/5 bg-gray-100 dark:bg-gray-800 relative cursor-pointer"
+                    <div *ngIf="complaint.photoUrl && !isPhotoInAttachments(complaint.photoUrl) && !mainPhotoError"
+                        class="shrink-0 snap-center relative group w-64 lg:w-72">
+                        <div class="aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-xl shadow-gray-200/40 dark:shadow-black/40 border border-white/40 dark:border-gray-700/50 bg-gray-50 dark:bg-gray-800 relative cursor-pointer group-hover:-translate-y-2 transition-transform duration-500"
                             (click)="openOriginalMedia()">
                             <img [src]="mainPhotoBlobUrl || safePhotoUrl" (error)="onImageError($event)"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                             <div
-                                class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
-                                <ion-icon name="expand-outline" class="text-xl"></ion-icon>
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            </div>
+                            <div
+                                class="absolute bottom-5 right-5 w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 border border-white/30 shadow-lg">
+                                <ion-icon name="expand" class="text-xl"></ion-icon>
                             </div>
                         </div>
                     </div>
@@ -208,73 +292,88 @@
 
             <!-- Documents Section -->
             <div class="mt-8">
-                <div class="flex items-center justify-between mb-4 pl-2 pr-1">
-                    <div class="flex items-center space-x-2">
-                        <ion-icon name="document-text" class="text-gray-400 dark:text-gray-500"></ion-icon>
-                        <h3 class="text-sm font-black text-gray-900 dark:text-white uppercase tracking-widest">Documents
+                <div class="flex items-center justify-between mb-6 pl-2 pr-1">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-emerald-500 flex items-center justify-center shadow-lg shadow-teal-500/30">
+                            <ion-icon name="document-text" class="text-white text-sm"></ion-icon>
+                        </div>
+                        <h3 class="text-[13px] font-black text-gray-900 dark:text-white uppercase tracking-[0.15em]">
+                            Documents
                         </h3>
                     </div>
                     <!-- Upload Trigger -->
                     <button *ngIf="complaint.status !== 'REJECTED'"
                         onclick="document.getElementById('fileInput').click()"
-                        class="text-saffron-600 dark:text-saffron-500 text-[10px] font-black uppercase tracking-widest bg-saffron-50 dark:bg-saffron-500/10 px-3 py-1.5 rounded-full hover:bg-saffron-100 transition-colors">
-                        + Add
+                        class="group relative overflow-hidden bg-gradient-to-r from-saffron-500 to-orange-600 text-white font-black uppercase tracking-widest text-[10px] px-4 py-2 rounded-full shadow-md shadow-orange-500/20 active:scale-95 transition-all">
+                        <div
+                            class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform">
+                        </div>
+                        <span class="relative z-10 flex items-center"><ion-icon name="add"
+                                class="mr-1 text-sm"></ion-icon> Add</span>
                     </button>
                     <input type="file" (change)="uploadAttachment($event)" id="fileInput" class="hidden">
                 </div>
 
-                <div class="space-y-3">
+                <div class="space-y-4">
                     <!-- Document Rows -->
                     <ng-container *ngFor="let file of complaint.attachments">
                         <div *ngIf="!isImage(file)"
-                            class="group bg-white dark:bg-gray-900 p-4 rounded-[1.5rem] border border-gray-100 dark:border-gray-800 flex items-center justify-between shadow-sm hover:border-gray-300 dark:hover:border-gray-600 transition-colors cursor-pointer"
+                            class="group bg-white/80 dark:bg-gray-900/80 backdrop-blur-md p-4 rounded-[1.5rem] border border-white/50 dark:border-gray-800/50 flex items-center justify-between shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
                             (click)="downloadFile(file)">
 
-                            <div class="flex items-center overflow-hidden w-full">
+                            <div class="flex items-center overflow-hidden w-full space-x-4">
                                 <div
-                                    class="w-12 h-12 rounded-[1rem] bg-gray-50 dark:bg-gray-800 mr-4 flex items-center justify-center shrink-0 text-gray-400 group-hover:text-saffron-500 transition-colors">
-                                    <ion-icon name="document" class="text-2xl"></ion-icon>
+                                    class="w-14 h-14 rounded-[1.2rem] bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-800/50 flex items-center justify-center shrink-0 text-gray-400 group-hover:text-emerald-500 transition-colors shadow-inner border border-white/50 dark:border-gray-700/50">
+                                    <ion-icon name="document" class="text-2xl drop-shadow-sm"></ion-icon>
                                 </div>
                                 <div class="flex flex-col truncate pr-4">
-                                    <div class="text-sm font-black text-gray-800 dark:text-gray-200 truncate mb-0.5">{{
+                                    <div class="text-[14px] font-black text-gray-800 dark:text-gray-200 truncate mb-1">
+                                        {{
                                         file.fileName }}</div>
                                     <div
-                                        class="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest flex items-center">
-                                        {{ file.uploadedBy }} <span class="mx-1">•</span> DOC
+                                        class="text-[10px] font-extrabold text-gray-400 dark:text-gray-500 uppercase tracking-widest flex items-center">
+                                        {{ file.uploadedBy }} <span class="mx-2 opacity-50">•</span> DOC
                                     </div>
                                 </div>
                             </div>
 
                             <button
-                                class="w-10 h-10 shrink-0 rounded-full bg-gray-50 dark:bg-gray-800 flex items-center justify-center text-gray-500 group-hover:bg-saffron-500 group-hover:text-white transition-all shadow-sm">
-                                <ion-icon name="download-outline" class="text-lg"></ion-icon>
+                                class="w-12 h-12 shrink-0 rounded-full bg-gray-50 dark:bg-gray-800 flex items-center justify-center text-gray-500 group-hover:bg-emerald-500 group-hover:text-white transition-all shadow-sm border border-gray-100 dark:border-gray-700 group-hover:border-emerald-400">
+                                <ion-icon name="download" class="text-xl"></ion-icon>
                             </button>
                         </div>
                     </ng-container>
 
                     <!-- Empty State for Docs -->
                     <div *ngIf="!hasDocuments()"
-                        class="border-2 border-dashed border-gray-200 dark:border-gray-800 rounded-[2rem] p-6 text-center">
-                        <ion-icon name="cloud-upload-outline"
-                            class="text-3xl text-gray-300 dark:text-gray-600 mb-2"></ion-icon>
-                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">No Documents Attached
-                        </p>
+                        class="bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm border-2 border-dashed border-gray-200 dark:border-gray-800/80 rounded-[2rem] p-8 text-center flex flex-col items-center">
+                        <div
+                            class="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800/80 flex items-center justify-center mb-4">
+                            <ion-icon name="cloud-upload-outline"
+                                class="text-2xl text-gray-400 dark:text-gray-500"></ion-icon>
+                        </div>
+                        <p class="text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]">No
+                            Documents Attached</p>
                     </div>
                 </div>
             </div>
 
             <!-- Comments Thread -->
-            <div class="mt-10">
-                <div class="flex items-center space-x-2 mb-6 pl-2">
-                    <ion-icon name="chatbubbles" class="text-gray-400 dark:text-gray-500"></ion-icon>
-                    <h3 class="text-sm font-black text-gray-900 dark:text-white uppercase tracking-widest">Activity &
-                        Comments</h3>
+            <div class="mt-12">
+                <div class="flex items-center space-x-3 mb-8 pl-2">
+                    <div
+                        class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/30">
+                        <ion-icon name="chatbubbles" class="text-white text-sm"></ion-icon>
+                    </div>
+                    <h3 class="text-[13px] font-black text-gray-900 dark:text-white uppercase tracking-[0.15em]">
+                        Activity & Comments</h3>
                 </div>
 
-                <div class="relative pl-6 space-y-6">
+                <div class="relative pl-7 space-y-8">
                     <!-- Timeline vertical line -->
                     <div
-                        class="absolute left-0 top-2 bottom-0 w-[2px] bg-gradient-to-b from-gray-200 via-gray-100 to-transparent dark:from-gray-800 dark:via-gray-800/50">
+                        class="absolute left-2.5 top-4 bottom-0 w-[3px] bg-gradient-to-b from-blue-500/50 via-gray-200 to-transparent dark:from-blue-500/50 dark:via-gray-800/80 rounded-full">
                     </div>
 
                     <!-- Comment Bubbles -->
@@ -282,19 +381,28 @@
 
                         <!-- Timeline Dot -->
                         <div
-                            class="absolute -left-[29px] top-4 w-4 h-4 rounded-full bg-white dark:bg-gray-950 border-[3px] border-saffron-500 shadow-sm z-10 transition-transform group-hover:scale-125">
+                            class="absolute -left-[27px] top-3 w-5 h-5 rounded-full bg-white dark:bg-gray-900 border-[4px] border-blue-500 shadow-sm z-10 transition-transform group-hover:scale-125 duration-300">
                         </div>
 
                         <div
-                            class="bg-white dark:bg-gray-900 p-5 rounded-2xl rounded-tl-sm shadow-sm border border-gray-100 dark:border-gray-800 relative hover:shadow-md transition-shadow">
-                            <div class="flex justify-between items-baseline mb-2">
-                                <span class="text-[13px] font-black text-gray-900 dark:text-white">{{ comment.userName
-                                    }}</span>
-                                <span
-                                    class="text-[10px] font-bold tracking-wider text-gray-400 dark:text-gray-500 uppercase">{{
-                                    comment.timestamp | date:'short' }}</span>
+                            class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md p-6 rounded-[2rem] rounded-tl-sm shadow-sm hover:shadow-lg border border-white/60 dark:border-gray-800/60 relative transition-all duration-300 group-hover:-translate-y-1">
+
+                            <!-- Little speech bubble triangle -->
+                            <div
+                                class="absolute -left-3 top-3 w-4 h-4 bg-white/80 dark:bg-gray-900/80 border-l border-b border-white/60 dark:border-gray-800/60 rotate-45 transform origin-bottom-right rounded-sm">
                             </div>
-                            <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed font-medium">{{
+
+                            <div class="flex justify-between items-baseline mb-3">
+                                <span class="text-[14px] font-black text-gray-900 dark:text-white flex items-center">
+                                    <ion-icon name="person-circle" class="mr-2 text-xl text-blue-500"></ion-icon>
+                                    {{ comment.userName }}
+                                </span>
+                                <span
+                                    class="text-[10px] font-extrabold tracking-widest text-gray-400 dark:text-gray-500 uppercase bg-gray-50 dark:bg-gray-800/50 px-2.5 py-1 rounded-full border border-gray-100 dark:border-gray-700/50">
+                                    {{ comment.timestamp | date:'shortTime' }}
+                                </span>
+                            </div>
+                            <p class="text-[15px] text-gray-700 dark:text-gray-300 leading-relaxed font-medium pl-1">{{
                                 comment.text }}</p>
                         </div>
                     </div>
@@ -303,11 +411,11 @@
                 <!-- Chat Input Area -->
                 <div class="mt-8 flex gap-3 relative" *ngIf="complaint.status !== 'REJECTED'">
                     <input type="text" [(ngModel)]="newComment" placeholder="Add an update or comment..."
-                        class="flex-1 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-800 rounded-[1.5rem] pl-5 pr-16 py-4 shadow-sm text-sm font-medium focus:ring-2 focus:ring-saffron-500/30 focus:border-saffron-500 transition-all placeholder-gray-400">
+                        class="flex-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl text-gray-900 dark:text-white border border-white/60 dark:border-gray-800/60 rounded-[2rem] pl-6 pr-16 py-5 shadow-lg shadow-gray-200/20 dark:shadow-black/20 text-[14px] font-bold focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder-gray-400 w-full outline-none">
 
                     <button (click)="addComment()" [disabled]="!newComment.trim()"
-                        class="absolute right-2 top-2 bottom-2 aspect-square rounded-[1.2rem] bg-saffron-500 text-white flex items-center justify-center shadow-md disabled:bg-gray-200 dark:disabled:bg-gray-800 disabled:text-gray-400 transition-all active:scale-90">
-                        <ion-icon name="send" class="text-lg"></ion-icon>
+                        class="absolute right-2 top-2 bottom-2 aspect-square rounded-[1.6rem] bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center shadow-xl shadow-blue-500/30 disabled:from-gray-200 disabled:to-gray-300 dark:disabled:from-gray-800 dark:disabled:to-gray-900 disabled:text-gray-400 transition-all active:scale-90 hover:scale-105 disabled:hover:scale-100 disabled:shadow-none pointer-events-auto z-10">
+                        <ion-icon name="send" class="text-xl ml-1"></ion-icon>
                     </button>
                 </div>
             </div>

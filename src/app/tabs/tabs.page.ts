@@ -22,12 +22,15 @@ export class TabsPage {
 
     constructor(private authService: AuthService, private platform: Platform) {
         this.isOwner$ = this.authService.user$.pipe(
-            map(user => !!user && (
-                user.roles.includes('ROLE_OWNER') ||
-                user.roles.includes('OWNER') ||
-                user.roles.includes('SYSTEM_OWNER') ||
-                user.roles.includes('ROLE_SYSTEM_OWNER')
-            ))
+            map(user => {
+                if (!user) return false;
+                const roles = user.roles || [];
+                const role = (user as any).role;
+                return roles.includes('ROLE_OWNER') || roles.includes('OWNER') ||
+                    roles.includes('SYSTEM_OWNER') || roles.includes('ROLE_SYSTEM_OWNER') ||
+                    role === 'OWNER' || role === 'ROLE_OWNER' ||
+                    role === 'SYSTEM_OWNER' || role === 'ROLE_SYSTEM_OWNER';
+            })
         );
         this.isAdmin$ = this.authService.user$.pipe(
             map(user => {

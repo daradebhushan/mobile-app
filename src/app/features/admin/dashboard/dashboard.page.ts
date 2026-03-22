@@ -93,8 +93,10 @@ export class DashboardPage implements OnInit {
       next: (res: any) => {
         if (res && res.data) {
           this.stats = res.data;
+          this.complaintTasks = res.data.complaintTasks || 0;
         } else if (res) {
           this.stats = res;
+          this.complaintTasks = res.complaintTasks || 0;
         }
 
         if (this.stats && this.stats.departmentStats) {

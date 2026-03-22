@@ -43,6 +43,34 @@ export class DesignationManagerComponent implements OnInit {
         });
     }
 
+    async openAddAlert() {
+        const alert = await this.alertController.create({
+            header: this.languageService.translate('ADD_NEW_DESIGNATION') || 'Add New Designation',
+            inputs: [
+                {
+                    name: 'name',
+                    type: 'text',
+                    placeholder: 'e.g. Senior Clerk',
+                    value: this.newDesignationName
+                }
+            ],
+            buttons: [
+                {
+                    text: this.languageService.translate('CANCEL') || 'Cancel',
+                    role: 'cancel'
+                },
+                {
+                    text: this.languageService.translate('ADD') || 'Add',
+                    handler: (data) => {
+                        this.newDesignationName = data.name;
+                        this.addDesignation();
+                    }
+                }
+            ]
+        });
+        await alert.present();
+    }
+
     async addDesignation() {
         if (!this.newDesignationName.trim()) return;
 

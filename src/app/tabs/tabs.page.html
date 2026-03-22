@@ -14,6 +14,11 @@
                 <ion-icon name="people-circle-outline"></ion-icon>
                 <ion-label>Admins</ion-label>
             </ion-tab-button>
+
+            <ion-tab-button tab="settings">
+                <ion-icon name="settings-outline"></ion-icon>
+                <ion-label>{{ 'NAV_SETTINGS' | translate }}</ion-label>
+            </ion-tab-button>
         </ng-container>
 
         <!-- ADMIN / STAFF TABS -->
@@ -33,15 +38,17 @@
                 <ion-label>{{ 'NAV_COMPLAINTS' | translate }}</ion-label>
             </ion-tab-button>
 
-            <ion-tab-button tab="admin/users" *ngIf="isAdmin$ | async">
-                <ion-icon name="people-outline"></ion-icon>
-                <ion-label>{{ 'NAV_STAFF' | translate }}</ion-label>
-            </ion-tab-button>
+            <ng-container *ngIf="isAdmin$ | async">
+                <ion-tab-button tab="admin/users">
+                    <ion-icon name="people-outline"></ion-icon>
+                    <ion-label>{{ 'NAV_STAFF' | translate }}</ion-label>
+                </ion-tab-button>
 
-            <ion-tab-button tab="admin/settings" *ngIf="isAdmin$ | async">
-                <ion-icon name="settings-outline"></ion-icon>
-                <ion-label>{{ 'NAV_SETTINGS' | translate }}</ion-label>
-            </ion-tab-button>
+                <ion-tab-button tab="settings">
+                    <ion-icon name="settings-outline"></ion-icon>
+                    <ion-label>{{ 'NAV_SETTINGS' | translate }}</ion-label>
+                </ion-tab-button>
+            </ng-container>
         </ng-container>
     </ion-tab-bar>
 

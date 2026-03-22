@@ -97,6 +97,10 @@ const routes: Routes = [
         loadComponent: () => import('./features/admin/settings/settings.page').then(m => m.SettingsPageComponent)
       },
       {
+        path: 'settings',
+        loadComponent: () => import('./features/admin/settings/settings.page').then(m => m.SettingsPageComponent)
+      },
+      {
         path: 'admin/chatbot',
         loadChildren: () => import('./features/admin/chatbot/chatbot-settings.module').then(m => m.ChatbotSettingsPageModule),
         data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER'] }

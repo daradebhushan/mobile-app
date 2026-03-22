@@ -177,7 +177,7 @@
             <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-2">Privacy & Support</h3>
             <div
                 class="bg-white dark:bg-gray-900 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden divide-y divide-gray-50 dark:divide-gray-800">
-                <div
+                <div (click)="openPrivacyPolicy()"
                     class="p-4 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors cursor-pointer">
                     <div class="flex items-center space-x-3">
                         <ion-icon name="shield-checkmark-outline" class="text-gray-400 dark:text-gray-500"></ion-icon>
@@ -186,8 +186,7 @@
                     </div>
                     <ion-icon name="chevron-forward-outline" class="text-gray-300 dark:text-gray-600"></ion-icon>
                 </div>
-                <!-- ... other legal items ... -->
-                <div
+                <div (click)="openTermsOfService()"
                     class="p-4 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors cursor-pointer">
                     <div class="flex items-center space-x-3">
                         <ion-icon name="document-text-outline" class="text-gray-400 dark:text-gray-500"></ion-icon>
@@ -196,7 +195,7 @@
                     </div>
                     <ion-icon name="chevron-forward-outline" class="text-gray-300 dark:text-gray-600"></ion-icon>
                 </div>
-                <div
+                <div (click)="openAboutApp()"
                     class="p-4 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors cursor-pointer">
                     <div class="flex items-center space-x-3">
                         <ion-icon name="information-circle-outline" class="text-gray-400 dark:text-gray-500"></ion-icon>
@@ -205,7 +204,7 @@
                     </div>
                     <ion-icon name="chevron-forward-outline" class="text-gray-300 dark:text-gray-600"></ion-icon>
                 </div>
-                <div
+                <div (click)="contactSupport()"
                     class="p-4 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors cursor-pointer">
                     <div class="flex items-center space-x-3">
                         <ion-icon name="headset-outline" class="text-gray-400 dark:text-gray-500"></ion-icon>
@@ -299,4 +298,120 @@
             </div>
         </div>
     </div>
+
+    <!-- Privacy Policy Modal -->
+    <ion-modal [isOpen]="isPrivacyModalOpen" (didDismiss)="closePrivacyModal()">
+        <ng-template>
+            <ion-header class="ion-no-border">
+                <ion-toolbar class="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+                    <ion-title class="text-lg font-black text-gray-900 dark:text-white">Privacy Policy</ion-title>
+                    <ion-buttons slot="end">
+                        <ion-button (click)="closePrivacyModal()" class="text-gray-500">
+                            <ion-icon name="close"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding bg-gray-50 dark:bg-black text-gray-800 dark:text-gray-200"
+                style="--padding-top: 20px; --padding-bottom: 40px; --padding-start: 20px; --padding-end: 20px;">
+                <div class="prose dark:prose-invert max-w-none space-y-4">
+                    <p class="font-bold">Last Updated: March 2026</p>
+                    <h2 class="text-xl font-black mt-6 mb-2 text-gray-900 dark:text-white">1. Introduction</h2>
+                    <p>Welcome to Loknagar by TownSeva. We provide white-label administrative and grievance redressal
+                        software for municipal corporations, local governing bodies, and civic entities. We are
+                        committed to protecting your personal information and your right to privacy.</p>
+
+                    <h2 class="text-xl font-black mt-6 mb-2 text-gray-900 dark:text-white">2. Information We Collect
+                    </h2>
+                    <p>We collect information you provide to us when you register, including your name, email address,
+                        phone number, and departmental role. When reporting complaints or completing tasks, you may
+                        provide additional information, such as geographical location and photographic evidence.</p>
+
+                    <h2 class="text-xl font-black mt-6 mb-2 text-gray-900 dark:text-white">3. Device Permissions</h2>
+                    <p>To provide core functionalities, the App may request access to:</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>Camera & Photo Library:</strong> Used exclusively to capture/upload images for
+                            complaint verification and task documentation.</li>
+                        <li><strong>Location Services:</strong> Used to tag geographical coordinates of civic issues.
+                        </li>
+                    </ul>
+                    <p>We do not access or use these permissions for any purpose other than facilitating your
+                        interactions within the App.</p>
+
+                    <h2 class="text-xl font-black mt-6 mb-2 text-gray-900 dark:text-white">4. How We Use Your
+                        Information</h2>
+                    <p>We use the information we collect to facilitate account creation, manage and prioritize civic
+                        complaints, communicate updates, and ensure security operations.</p>
+
+                    <h2 class="text-xl font-black mt-6 mb-2 text-gray-900 dark:text-white">5. Sharing Your Information
+                    </h2>
+                    <p>We act as a data processor. Your data is strictly used for internal civic administration and
+                        grievance routing. We <strong>do not</strong> share, sell, rent, or trade any personal
+                        information with third-party advertisers.</p>
+
+                    <h2 class="text-xl font-black mt-6 mb-2 text-gray-900 dark:text-white">6. Security</h2>
+                    <p>We have implemented appropriate secure cloud infrastructure to protect your personal information.
+                    </p>
+
+                    <h2 class="text-xl font-black mt-6 mb-2 text-gray-900 dark:text-white">7. Contact Us</h2>
+                    <p>If you have questions, please contact the system administrator, your municipal department head,
+                        or our support team directly at <strong>support@townseva.in</strong>.</p>
+                </div>
+            </ion-content>
+        </ng-template>
+    </ion-modal>
+
+    <!-- Terms of Service Modal -->
+    <ion-modal [isOpen]="isTermsModalOpen" (didDismiss)="closeTermsModal()">
+        <ng-template>
+            <ion-header class="ion-no-border">
+                <ion-toolbar class="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+                    <ion-title class="text-lg font-black text-gray-900 dark:text-white">Terms of Service</ion-title>
+                    <ion-buttons slot="end">
+                        <ion-button (click)="closeTermsModal()" class="text-gray-500">
+                            <ion-icon name="close"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding bg-gray-50 dark:bg-black text-gray-800 dark:text-gray-200"
+                style="--padding-top: 20px; --padding-bottom: 40px; --padding-start: 20px; --padding-end: 20px;">
+                <div class="prose dark:prose-invert max-w-none space-y-4">
+                    <p class="font-bold">Last Updated: March 2026</p>
+                    <h2 class="text-xl font-black mt-6 mb-2 text-gray-900 dark:text-white">1. Introduction</h2>
+                    <p>Welcome to Loknagar by TownSeva (the "App"). We provide white-label administrative software for
+                        civic entities. These Terms of Service govern your use of our mobile application. By accessing
+                        or using the App, you agree to be bound by these terms.</p>
+
+                    <h2 class="text-xl font-black mt-6 mb-2 text-gray-900 dark:text-white">2. Acceptable Use</h2>
+                    <p>You agree to use the App only for its intended administrative purposes. When reporting complaints
+                        or completing tasks, all provided geographical and photographic evidence must be factual and
+                        unaltered.</p>
+
+                    <h2 class="text-xl font-black mt-6 mb-2 text-gray-900 dark:text-white">3. Local Device Access</h2>
+                    <p>You agree to grant necessary permissions (Camera, Location) solely to facilitate your
+                        interactions within the App and route verifiable data to the appropriate department.</p>
+
+                    <h2 class="text-xl font-black mt-6 mb-2 text-gray-900 dark:text-white">4. Our Responsibilities</h2>
+                    <p>TownSeva acts as a SaaS provider. We facilitate the routing of civic complaints. We do not
+                        guarantee the physical resolution of reported issues, which remains the sole responsibility of
+                        the acting municipal entity.</p>
+
+                    <h2 class="text-xl font-black mt-6 mb-2 text-gray-900 dark:text-white">5. Limitation of Liability
+                    </h2>
+                    <p>TownSeva and our licensors will not be liable for any indirect, incidental, or consequential
+                        damages arising from the use or inability to use the App, or any actions taken by the local
+                        municipal body.</p>
+
+                    <h2 class="text-xl font-black mt-6 mb-2 text-gray-900 dark:text-white">6. Contact Us</h2>
+                    <p>If you have questions about these terms, contact your municipal department head or our support
+                        team at <strong>support@townseva.in</strong>.</p>
+
+                    <h2 class="text-xl font-black mt-6 mb-2 text-red-600 dark:text-red-400">Important Disclaimer</h2>
+                    <p class="font-bold">Loknagar is a SaaS platform provided by TownSeva. It is NOT an official
+                        government or municipal application.</p>
+                </div>
+            </ion-content>
+        </ng-template>
+    </ion-modal>
 </ion-content>

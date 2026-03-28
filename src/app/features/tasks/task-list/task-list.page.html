@@ -124,7 +124,7 @@
         </div>
 
         <!-- Task Items -->
-        <div *ngFor="let task of tasks; let i = index"
+        <div *ngFor="let task of tasks; let i = index; trackBy: trackByTaskId"
             class="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-transparent modern-shadow active:scale-[0.99] transition-all duration-300 group relative overflow-hidden animate-fade-in-up stagger-item"
             [style.animation-delay]="i * 0.05 + 's'" (click)="openTask(task)">
 
@@ -168,10 +168,10 @@
                     <div class="flex items-center space-x-2">
                         <div
                             class="w-6 h-6 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-[9px] font-black text-gray-600 dark:text-gray-300 ring-2 ring-white dark:ring-gray-800">
-                            {{ (task.assignedStaff?.name | slice:0:1) || '?' }}
+                            {{ ((task.assignedStaff?.name || task.assignedStaffName) | slice:0:1) || '?' }}
                         </div>
                         <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400 truncate max-w-[100px]">
-                            {{ task.assignedStaff?.name || ('UNASSIGNED' | translate) }}
+                            {{ task.assignedStaff?.name || task.assignedStaffName || ('UNASSIGNED' | translate) }}
                         </span>
                     </div>
 

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { PushNotifications, Token, ActionPerformed, PushNotificationSchema } from '@capacitor/push-notifications';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { FileOpener } from '@capacitor-community/file-opener';
 import { Capacitor } from '@capacitor/core';
+import { App, URLOpenListenerEvent } from '@capacitor/app';
 
 import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -22,13 +23,40 @@ export class AppComponent implements OnInit {
     private menu: MenuController,
     private router: Router,
     private authService: AuthService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private zone: NgZone
   ) { }
 
   ngOnInit() {
     this.platform.ready().then(() => {
       this.initPushNotifications();
       this.themeService.initTheme();
+      this.initDeepLinking();
+    });
+  }
+
+  initDeepLinking() {
+    App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
+      this.zone.run(() => {
+        // Example URL: https://townseva.in/magic-login?token=xyz123&target=/tasks/456
+        const url = new URL(event.url);
+        
+        if (url.pathname === '/magic-login') {
+          const token = url.searchParams.get('token');
+          const target = url.searchParams.get('target');
+          
+          if (token) {
+            // Ideally, pass this token to authService to set session
+            console.log('Intercepted Magic Login Token!', token);
+            // Example: this.authService.loginWithToken(token).subscribe(...)
+            
+            // Navigate to target route
+            if (target) {
+              this.router.navigateByUrl(target);
+            }
+          }
+        }
+      });
     });
   }
 

@@ -8,7 +8,8 @@ import { ComplaintService } from '../../../services/complaint.service';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule, LoadingController, ToastController } from '@ionic/angular';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
     selector: 'app-task-form',
@@ -50,13 +51,28 @@ export class TaskFormComponent implements OnInit {
         private cdr: ChangeDetectorRef
     ) { }
 
-    ngOnInit() {
+    ngOnInit() {}
+
+    ionViewWillEnter() {
         this.loading = true;
 
-        // Load Departments and Users in Parallel (Parity with Web App)
+        // Load Departments, Users, and Tasks in Parallel with graceful fallback
         forkJoin({
-            depts: this.departmentService.getAllDepartments(),
-            users: this.userService.getAllUsers()
+            depts: this.departmentService.getAllDepartments().pipe(
+                catchError((err: any) => {
+                    console.error('Failed loading departments', err);
+                    return of({ success: false, data: [] });
+                })
+            ),
+            users: this.userService.getAllUsers().pipe(
+                catchError((err: any) => {
+                    console.error('Failed loading users', err);
+                    return of({ success: false, data: [] });
+                })
+            ),
+            fallbackTasks: this.taskService.getTasks().pipe(
+                catchError(() => of({ success: false, data: [] }))
+            )
         }).subscribe({
             next: (results: any) => {
                 // Process Departments
@@ -64,9 +80,26 @@ export class TaskFormComponent implements OnInit {
                     this.departments = results.depts.data.content || results.depts.data || [];
                 }
 
-                // Process Users
-                if (results.users.success) {
+                // Process Users (Primary)
+                if (results.users.success && results.users.data && results.users.data.length > 0) {
                     this.staffList = results.users.data.content || results.users.data || [];
+                } else if (results.fallbackTasks.success) {
+                    // EMERGENCY FALLBACK: Extract unique staff from existing tasks
+                    // since the backend /api/admin/users is crashing
+                    console.warn('Backend users API failed. Extracting staff dynamically from existing tasks...');
+                    const allTasks = results.fallbackTasks.data.content || results.fallbackTasks.data || [];
+                    const extractedStaffMap = new Map();
+                    allTasks.forEach((t: any) => {
+                        if (t.assignedStaff && t.assignedStaff.id) {
+                            extractedStaffMap.set(t.assignedStaff.id, {
+                                id: t.assignedStaff.id,
+                                name: t.assignedStaff.name,
+                                role: 'STAFF', // Assume STAFF for fallback purposes
+                                department: t.department
+                            });
+                        }
+                    });
+                    this.staffList = Array.from(extractedStaffMap.values());
                 }
 
                 this.loading = false;
@@ -78,29 +111,28 @@ export class TaskFormComponent implements OnInit {
                     this.loadTask(this.taskId);
                 } else {
                     // Check for Query Params (e.g. from Complaint)
-                    this.route.queryParams.subscribe(params => {
-                        if (params['description']) {
-                            this.taskForm.description = params['description'];
-                        }
-                        if (params['departmentId']) {
-                            this.taskForm.departmentId = Number(params['departmentId']);
-                            // Trigger logic to filter staff
-                            this.onDepartmentChange();
-                        }
-                        if (params['title']) { // Optional support
-                            this.taskForm.title = params['title'];
-                        }
-                        if (params['fromComplaintId']) {
-                            this.taskForm.complaintId = Number(params['fromComplaintId']);
-                            this.taskForm.type = 'Complaint'; // Auto-set Type
+                    const params = this.route.snapshot.queryParams;
+                    if (params['description']) {
+                        this.taskForm.description = params['description'];
+                    }
+                    if (params['departmentId']) {
+                        this.taskForm.departmentId = Number(params['departmentId']);
+                        // Trigger logic to filter staff
+                        this.onDepartmentChange();
+                    }
+                    if (params['title']) { // Optional support
+                        this.taskForm.title = params['title'];
+                    }
+                    if (params['fromComplaintId']) {
+                        this.taskForm.complaintId = Number(params['fromComplaintId']);
+                        this.taskForm.type = 'Complaint'; // Auto-set Type
 
-                            // Fetch full complaint for reference display
-                            this.complaintService.getComplaintById(this.taskForm.complaintId).subscribe({
-                                next: (c) => this.complaint = c,
-                                error: (e) => console.error('Failed to load complaint ref', e)
-                            });
-                        }
-                    });
+                        // Fetch full complaint for reference display
+                        this.complaintService.getComplaintById(this.taskForm.complaintId).subscribe({
+                            next: (c) => this.complaint = c,
+                            error: (e) => console.error('Failed to load complaint ref', e)
+                        });
+                    }
                 }
             },
             error: (err) => {

@@ -47,6 +47,11 @@ export class TaskDetailComponent implements OnInit {
         const taskIdParam = this.route.snapshot.paramMap.get('taskId');
         if (taskIdParam) {
             this.taskId = +taskIdParam;
+        }
+    }
+
+    ionViewWillEnter() {
+        if (this.taskId) {
             this.loadTask(this.taskId);
         }
     }

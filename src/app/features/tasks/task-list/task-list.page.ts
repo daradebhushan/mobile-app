@@ -115,6 +115,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
     }
 
     ionViewWillEnter() {
+        this.currentPage = 0;
         this.loadTasks(null, true);
     }
 
@@ -131,6 +132,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
     }
 
     handleRefresh(event: any) {
+        this.currentPage = 0;
         this.loadTasks(event);
     }
 
@@ -180,17 +182,16 @@ export class TaskListComponent implements OnInit, OnDestroy {
     }
 
     mergeData(newData: Task[]) {
-        if (!this.tasks || this.tasks.length === 0) {
+        if (this.currentPage === 0) {
             this.tasks = newData;
             return;
         }
 
-        this.tasks = this.tasks.filter(t => newData.find(n => n.id === t.id));
-
         newData.forEach(newItem => {
             const existingIndex = this.tasks.findIndex(t => t.id === newItem.id);
             if (existingIndex > -1) {
-                Object.assign(this.tasks[existingIndex], newItem);
+                // Ensure Angular detects the reassignment properly
+                this.tasks[existingIndex] = { ...this.tasks[existingIndex], ...newItem };
             } else {
                 this.tasks.push(newItem);
             }
@@ -298,5 +299,9 @@ export class TaskListComponent implements OnInit, OnDestroy {
             case 'ON_HOLD': return 'bg-yellow-50 text-yellow-600 border-yellow-100';
             default: return 'bg-gray-100 text-gray-600 border-gray-200';
         }
+    }
+
+    trackByTaskId(index: number, task: Task): number {
+        return task.id;
     }
 }

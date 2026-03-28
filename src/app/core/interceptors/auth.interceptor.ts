@@ -3,9 +3,11 @@ import {
     HttpRequest,
     HttpHandler,
     HttpEvent,
-    HttpInterceptor
+    HttpInterceptor,
+    HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Injectable()
@@ -33,6 +35,14 @@ export class AuthInterceptor implements HttpInterceptor {
             });
         }
 
-        return next.handle(request);
+        return next.handle(request).pipe(
+            catchError((error: HttpErrorResponse) => {
+                if (error.status === 401 || error.status === 403) {
+                    console.error('Mobile Interceptor: 401/403 Unauthorized detected. Logging out.');
+                    this.authService.logout();
+                }
+                return throwError(() => error);
+            })
+        );
     }
 }

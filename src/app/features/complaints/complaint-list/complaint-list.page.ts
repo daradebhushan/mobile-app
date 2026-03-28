@@ -173,4 +173,8 @@ export class ComplaintListComponent implements OnInit, OnDestroy {
             default: return 'bg-gray-50 text-gray-600';
         }
     }
+
+    trackById(index: number, item: any): number {
+        return item.id;
+    }
 }

@@ -47,8 +47,9 @@ export const TRANSLATIONS = {
         'EMPLOYEE': 'Employee',
         'FIELD_WORKER': 'Field Workers / Staff Members',
         'ADMIN': 'Admin',
-        'OWNER': 'Owner',
         'STAFF': 'Staff',
+        'DEPARTMENT_HEAD': 'Department Head',
+        'OWNER': 'Owner',
 
         // Login
         'SIGN_IN_TITLE': 'Sign in to your account',
@@ -384,8 +385,9 @@ export const TRANSLATIONS = {
         'EMPLOYEE': 'कर्मचारी',
         'FIELD_WORKER': 'क्षेत्रीय कामगार / कर्मचारी',
         'ADMIN': 'प्रशासक',
-        'OWNER': 'मालक',
         'STAFF': 'कर्मचारी',
+        'DEPARTMENT_HEAD': 'विभाग प्रमुख',
+        'OWNER': 'मालक',
 
         // Login
         'SIGN_IN_TITLE': 'आपल्या खात्यात साइन इन करा',

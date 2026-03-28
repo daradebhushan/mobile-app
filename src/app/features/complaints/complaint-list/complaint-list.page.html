@@ -66,7 +66,7 @@
 
         <!-- Dynamic Complaint Cards -->
         <div class="space-y-5">
-            <div *ngFor="let complaint of filteredComplaints" (click)="openComplaint(complaint)"
+            <div *ngFor="let complaint of filteredComplaints; trackBy: trackById" (click)="openComplaint(complaint)"
                 class="group bg-white dark:bg-gray-900 rounded-[24px] p-5 relative overflow-hidden active:scale-[0.98] transition-all duration-300 border border-gray-100/80 dark:border-gray-800/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)]">
 
                 <!-- Card Glow Effect (Dark Mode) -->

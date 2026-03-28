@@ -46,7 +46,7 @@
     <div class="p-4 pt-6 space-y-4 pb-24">
 
         <!-- Dept List -->
-        <div *ngFor="let dept of departments"
+        <div *ngFor="let dept of departments; trackBy: trackById"
             class="group bg-white dark:bg-gray-900 rounded-[1.5rem] p-5 shadow-sm border border-gray-100 dark:border-gray-800 relative overflow-hidden active:scale-[0.98] transition-all">
 
             <!-- Accent Bar -->

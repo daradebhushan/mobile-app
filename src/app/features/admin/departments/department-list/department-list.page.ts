@@ -165,4 +165,8 @@ export class DepartmentListComponent implements OnInit {
         });
         await alert.present();
     }
+
+    trackById(index: number, item: any): number {
+        return item.id;
+    }
 }

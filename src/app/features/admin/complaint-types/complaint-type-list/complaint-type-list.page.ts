@@ -26,7 +26,7 @@ import { ComplaintTypeService, ComplaintType } from '../../../../services/compla
             <ion-refresher-content></ion-refresher-content>
         </ion-refresher>
         <ion-list *ngIf="types.length > 0">
-            <ion-item *ngFor="let type of types" [routerLink]="['/tabs/admin/complaint-types/edit', type.id]" button detail>
+            <ion-item *ngFor="let type of types; trackBy: trackById" [routerLink]="['/tabs/admin/complaint-types/edit', type.id]" button detail>
                 <ion-label>
                     <h2>{{ type.name }}</h2>
                     <p>{{ type.departmentName || 'No Department' }}</p>
@@ -120,5 +120,9 @@ export class ComplaintTypeListComponent implements OnInit {
                 if (event) event.target.complete();
             }
         });
+    }
+
+    trackById(index: number, item: any): number {
+        return item.id;
     }
 }

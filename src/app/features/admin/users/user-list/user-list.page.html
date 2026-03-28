@@ -55,7 +55,7 @@
 
         <!-- User List -->
         <div class="space-y-4">
-            <div *ngFor="let user of currentUsers; let i = index"
+            <div *ngFor="let user of currentUsers; let i = index; trackBy: trackById"
                 class="group bg-white dark:bg-gray-900 rounded-[1.5rem] p-5 shadow-sm border border-gray-100 dark:border-gray-800 relative overflow-hidden active:scale-[0.98] transition-all animate-fade-in-up stagger-item"
                 [style.animation-delay]="i * 0.05 + 's'">
 
@@ -75,7 +75,7 @@
                                 </h3>
                                 <span
                                     class="bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400 text-[9px] uppercase font-black tracking-widest px-2 py-0.5 rounded-lg border border-indigo-100 dark:border-indigo-800/50">
-                                    {{ user.role }}
+                                    {{ user.role | translate }}
                                 </span>
                             </div>
                             <div class="space-y-1.5">

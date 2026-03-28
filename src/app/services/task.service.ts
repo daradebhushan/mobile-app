@@ -12,6 +12,7 @@ export interface Task {
     dueDate?: string;
     department?: { id: number; name: string };
     assignedStaff?: { id: number; name: string };
+    assignedStaffName?: string;
     createdDate: string;
     type?: string;
 }

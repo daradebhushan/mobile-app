@@ -1,0 +1,20 @@
+﻿System.Management.Automation.RemoteException
+FAILURE: Build failed with an exception.
+System.Management.Automation.RemoteException
+* Where:
+Build file 'D:\anti gravity\mobile\android\app\build.gradle' line: 1
+System.Management.Automation.RemoteException
+* What went wrong:
+A problem occurred evaluating project ':app'.
+> Failed to apply plugin 'com.android.internal.version-check'.
+   > Minimum supported Gradle version is 8.13. Current version is 7.3.1.
+     Try updating the 'distributionUrl' property in D:\anti gravity\mobile\android\gradle\wrapper\gradle-wrapper.properties to 'gradle-8.13-bin.zip'.
+System.Management.Automation.RemoteException
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+System.Management.Automation.RemoteException
+* Get more help at https://help.gradle.org
+System.Management.Automation.RemoteException
+BUILD FAILED in 955ms

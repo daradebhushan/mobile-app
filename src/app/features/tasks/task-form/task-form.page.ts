@@ -64,7 +64,7 @@ export class TaskFormComponent implements OnInit {
                     return of({ success: false, data: [] });
                 })
             ),
-            users: this.userService.getAllUsers().pipe(
+            users: this.userService.getAllUsers({ size: 1000 }).pipe(
                 catchError((err: any) => {
                     console.error('Failed loading users', err);
                     return of({ success: false, data: [] });
@@ -81,7 +81,7 @@ export class TaskFormComponent implements OnInit {
                 }
 
                 // Process Users (Primary)
-                if (results.users.success && results.users.data && results.users.data.length > 0) {
+                if (results.users.success && results.users.data) {
                     this.staffList = results.users.data.content || results.users.data || [];
                 } else if (results.fallbackTasks.success) {
                     // EMERGENCY FALLBACK: Extract unique staff from existing tasks

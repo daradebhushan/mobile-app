@@ -37,7 +37,10 @@ export class TabsPage {
                 if (!user) return false;
                 const roles = user.roles || [];
                 const role = (user as any).role;
-                return roles.includes('ROLE_ADMIN') || roles.includes('ADMIN') || role === 'ADMIN' || role === 'ROLE_ADMIN';
+                return roles.includes('ROLE_ADMIN') || roles.includes('ADMIN') || 
+                       roles.includes('CHIEF_OFFICER') || roles.includes('ROLE_CHIEF_OFFICER') ||
+                       role === 'ADMIN' || role === 'ROLE_ADMIN' ||
+                       role === 'CHIEF_OFFICER' || role === 'ROLE_CHIEF_OFFICER';
             })
         );
         // Default others to view standard tabs for now

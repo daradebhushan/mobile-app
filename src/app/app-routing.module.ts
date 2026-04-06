@@ -29,7 +29,7 @@ const routes: Routes = [
       {
         path: 'home',
         loadChildren: () => import('./features/admin/dashboard/dashboard.module').then(m => m.DashboardPageModule),
-        data: { roles: ['ROLE_ADMIN', 'ROLE_DEPARTMENT_HEAD', 'ROLE_STAFF', 'ADMIN', 'DEPARTMENT_HEAD', 'STAFF'] }
+        data: { roles: ['ROLE_ADMIN', 'ROLE_DEPARTMENT_HEAD', 'ROLE_STAFF', 'ADMIN', 'DEPARTMENT_HEAD', 'STAFF', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
       },
       {
         path: 'owner/dashboard',
@@ -65,7 +65,7 @@ const routes: Routes = [
       {
         path: 'admin/users',
         loadComponent: () => import('./features/admin/users/user-list/user-list.page').then(m => m.UserListComponent),
-        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ROLE_DEPARTMENT_HEAD', 'ADMIN', 'OWNER', 'DEPARTMENT_HEAD'] }
+        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ROLE_DEPARTMENT_HEAD', 'ADMIN', 'OWNER', 'DEPARTMENT_HEAD', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
       },
       {
         path: 'admin/users/create',
@@ -78,7 +78,7 @@ const routes: Routes = [
       {
         path: 'admin/departments',
         loadComponent: () => import('./features/admin/departments/department-list/department-list.page').then(m => m.DepartmentListComponent),
-        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'ROLE_DEPARTMENT_HEAD', 'DEPARTMENT_HEAD'] }
+        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'ROLE_DEPARTMENT_HEAD', 'DEPARTMENT_HEAD', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
       },
       {
         path: 'admin/departments/create',
@@ -101,11 +101,6 @@ const routes: Routes = [
         loadComponent: () => import('./features/admin/settings/settings.page').then(m => m.SettingsPageComponent)
       },
       {
-        path: 'admin/chatbot',
-        loadChildren: () => import('./features/admin/chatbot/chatbot-settings.module').then(m => m.ChatbotSettingsPageModule),
-        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER'] }
-      },
-      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
@@ -115,6 +110,12 @@ const routes: Routes = [
   {
     path: 'complaint-detail/:id',
     loadComponent: () => import('./features/complaints/complaint-detail/complaint-detail.page').then(m => m.ComplaintDetailPage)
+  },
+  {
+    path: 'admin/chatbot',
+    loadComponent: () => import('./features/admin/chatbot/chatbot-settings.page').then(m => m.ChatbotSettingsPage),
+    canActivate: [authGuard],
+    data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'ROLE_SYSTEM_OWNER', 'SYSTEM_OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
   }
 ];
 

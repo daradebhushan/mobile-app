@@ -1,12 +1,16 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { ChatbotService, ChatbotSettings } from '../../../services/chatbot.service';
-import { IonContent } from '@ionic/angular';
+import { IonicModule, IonContent } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 
 @Component({
     selector: 'app-chatbot-settings',
     templateUrl: './chatbot-settings.page.html',
     styleUrls: ['./chatbot-settings.page.scss'],
-    standalone: false
+    standalone: true,
+    imports: [IonicModule, CommonModule, FormsModule, TranslatePipe]
 })
 export class ChatbotSettingsPage implements OnInit {
     @ViewChild(IonContent) content!: IonContent;
@@ -33,7 +37,7 @@ export class ChatbotSettingsPage implements OnInit {
     }
 
     loadSettings() {
-        // this.isLoading = true; 
+        this.isLoading = true;
         this.chatbotService.getSettings().subscribe({
             next: (data) => {
                 this.settings = data;
@@ -42,6 +46,7 @@ export class ChatbotSettingsPage implements OnInit {
             error: (err) => {
                 console.error('Failed to load settings', err);
                 this.isLoading = false;
+                alert('Failed to load chatbot settings. Please check your internet connection or administrative permissions.');
             }
         });
     }

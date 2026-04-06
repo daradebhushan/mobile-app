@@ -133,7 +133,10 @@ export class DashboardPage implements OnInit {
   }
 
   get isAdmin(): boolean {
-    return this.currentUser?.role === 'ADMIN' || this.currentUser?.roles?.includes('ROLE_ADMIN') || this.currentUser?.roles?.includes('ADMIN');
+    const roles = this.currentUser?.roles || [];
+    const role = this.currentUser?.role;
+    return role === 'ADMIN' || roles.includes('ROLE_ADMIN') || roles.includes('ADMIN') ||
+           role === 'CHIEF_OFFICER' || roles.includes('ROLE_CHIEF_OFFICER') || roles.includes('CHIEF_OFFICER');
   }
 
   get isOwner(): boolean {

@@ -144,8 +144,9 @@ export class LoginPage {
     if (roles.includes('ROLE_OWNER') || roles.includes('OWNER')) {
       this.showToast('Welcome, System Owner!', 'success');
       this.navCtrl.navigateRoot(['/tabs/owner/dashboard']);
-    } else if (roles.includes('ROLE_ADMIN') || roles.includes('ADMIN')) {
-      this.showToast('Welcome, Admin!', 'success');
+    } else if (roles.includes('ROLE_ADMIN') || roles.includes('ADMIN') || 
+               roles.includes('CHIEF_OFFICER') || roles.includes('ROLE_CHIEF_OFFICER')) {
+      this.showToast('Welcome, Chief!', 'success');
       this.navCtrl.navigateRoot(['/tabs/home']);
     } else if (roles.includes('ROLE_DEPARTMENT_HEAD') || roles.includes('DEPARTMENT_HEAD')) {
       this.showToast('Welcome Dept Head!', 'success');

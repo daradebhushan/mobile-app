@@ -11,17 +11,15 @@ export const authGuard: CanActivateFn = (route, state) => {
         const requiredRoles = route.data['roles'] as Array<string>;
 
         if (requiredRoles && user) {
-            // Backend returns roles like "ROLE_ADMIN".
-            // We should check if user has any of the required roles.
-            // Also handling simple role names if stripped.
-            const hasRole = user.roles.some(role =>
-                requiredRoles.includes(role) || requiredRoles.includes(role.replace('ROLE_', ''))
-            );
+            const userRoles = user.roles.map(r => r.toUpperCase().replace('ROLE_', ''));
+            const normalizedRequired = requiredRoles.map(r => r.toUpperCase().replace('ROLE_', ''));
+
+            const hasRole = userRoles.some(role => normalizedRequired.includes(role));
 
             if (!hasRole) {
-                console.warn('AuthGuard: Role mismatch. Required:', requiredRoles, 'User roles:', user.roles);
-                // Role mismatch - maybe redirect to a generic unauthorized page or home
-                // For now, return false
+                const msg = `Access Denied: You do not have the required role to access this page. Required: [${normalizedRequired}], You have: [${userRoles}]`;
+                console.warn(`AuthGuard: ${msg}`);
+                alert(msg);
                 return false;
             }
         }

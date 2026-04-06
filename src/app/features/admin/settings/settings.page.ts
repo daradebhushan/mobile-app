@@ -276,20 +276,12 @@ export class SettingsPageComponent implements OnInit {
         await alert.present();
     }
 
-    openPrivacyPolicy() {
-        this.isPrivacyModalOpen = true;
+    async openPrivacyPolicy() {
+        await Browser.open({ url: 'https://townseva.in/privacy' });
     }
 
-    closePrivacyModal() {
-        this.isPrivacyModalOpen = false;
-    }
-
-    openTermsOfService() {
-        this.isTermsModalOpen = true;
-    }
-
-    closeTermsModal() {
-        this.isTermsModalOpen = false;
+    async openTermsOfService() {
+        await Browser.open({ url: 'https://townseva.in/terms' });
     }
 
     async openAboutApp() {
@@ -302,11 +294,19 @@ export class SettingsPageComponent implements OnInit {
         await alert.present();
     }
 
-    contactSupport() {
-        window.open('mailto:support@townseva.in?subject=TownSeva Support Request', '_system');
+    async contactSupport() {
+        await Browser.open({ url: 'https://townseva.in/support' });
     }
 
     get isAdmin(): boolean {
-        return ['ADMIN', 'OWNER', 'SYSTEM_OWNER', 'ROLE_ADMIN', 'ROLE_OWNER'].includes(this.userRole) || this.userRole.includes('ADMIN');
+        const user = this.authService.currentUserValue;
+        if (!user || !user.roles) return false;
+        
+        // Search all roles for administrative keywords
+        const adminRoles = ['ADMIN', 'OWNER', 'SYSTEM_OWNER', 'CHIEF_OFFICER'];
+        return user.roles.some(role => {
+            const r = role.toUpperCase().replace('ROLE_', '');
+            return adminRoles.includes(r) || r.includes('ADMIN') || r.includes('OWNER');
+        });
     }
 }

@@ -43,18 +43,7 @@
 
 
 
-        <ion-card>
-            <ion-card-header>
-                <ion-card-title>Chatbot Flow Configuration (JSON)</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-                <ion-item>
-                    <ion-label position="stacked">Flow JSON</ion-label>
-                    <ion-textarea [(ngModel)]="settings.chatbotFlow" rows="10" placeholder='{"questions": [...]}'
-                        class="font-mono text-xs"></ion-textarea>
-                </ion-item>
-            </ion-card-content>
-        </ion-card>
+
 
         <div class="ion-padding">
             <ion-button expand="block" (click)="save()" [disabled]="isLoading">

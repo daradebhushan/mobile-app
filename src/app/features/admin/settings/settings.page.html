@@ -43,44 +43,7 @@
             <div
                 class="bg-white dark:bg-gray-900 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden divide-y divide-gray-50 dark:divide-gray-800">
 
-                <!-- Task Alerts -->
-                <div
-                    class="p-5 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors">
-                    <div class="flex items-center space-x-4">
-                        <div
-                            class="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-orange-500 dark:text-orange-400 shadow-inner">
-                            <ion-icon name="notifications-outline" class="text-xl"></ion-icon>
-                        </div>
-                        <div>
-                            <div class="text-sm font-black text-gray-800 dark:text-gray-100">{{ 'TASK_ALERTS' |
-                                translate }}</div>
-                            <div class="text-[10px] text-gray-400 dark:text-gray-500 font-bold uppercase">Get notified
-                                about new tasks
-                            </div>
-                        </div>
-                    </div>
-                    <ion-toggle color="primary" [(ngModel)]="taskAlerts" (ionChange)="onToggleChange()"
-                        mode="ios"></ion-toggle>
-                </div>
 
-                <!-- Email Notifications -->
-                <div
-                    class="p-5 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800 transition-colors">
-                    <div class="flex items-center space-x-4">
-                        <div
-                            class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-500 dark:text-blue-400 shadow-inner">
-                            <ion-icon name="mail-outline" class="text-xl"></ion-icon>
-                        </div>
-                        <div>
-                            <div class="text-sm font-black text-gray-800 dark:text-gray-100">{{ 'EMAIL_NOTIFICATIONS' |
-                                translate }}</div>
-                            <div class="text-[10px] text-gray-400 dark:text-gray-500 font-bold uppercase">Receive
-                                updates via email</div>
-                        </div>
-                    </div>
-                    <ion-toggle color="primary" [(ngModel)]="emailNotifications" (ionChange)="onToggleChange()"
-                        mode="ios"></ion-toggle>
-                </div>
 
                 <!-- Biometric Login -->
                 <div *ngIf="isBiometricSupported"

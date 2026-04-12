@@ -293,10 +293,10 @@ export class TaskFormComponent implements OnInit {
                 this.taskService.notifyTaskCreated(taskId).subscribe({
                     next: () => console.log('Notification triggered'),
                     error: (e) => console.error('Notification failed', e),
-                    complete: () => this.router.navigate(['/tabs/tasks', taskId])
+                    complete: () => this.router.navigate(['/tabs/tasks', taskId], { replaceUrl: true })
                 });
             } else {
-                this.router.navigate(['/tabs/tasks', taskId]);
+                this.router.navigate(['/tabs/tasks', taskId], { replaceUrl: true });
             }
         };
 

@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.nagar.parishad.app',
-  appName: 'Loknagar',
+  appName: 'Loknagar By Townseva',
   webDir: 'www',
   server: {
     cleartext: true

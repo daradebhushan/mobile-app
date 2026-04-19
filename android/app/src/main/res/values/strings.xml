@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Loknagar</string>
-    <string name="title_activity_main">Loknagar</string>
+    <string name="app_name">Loknagar By Townseva</string>
+    <string name="title_activity_main">Loknagar By Townseva</string>
     <string name="package_name">com.nagar.parishad.app</string>
     <string name="custom_url_scheme">com.nagar.parishad.app</string>
 </resources>

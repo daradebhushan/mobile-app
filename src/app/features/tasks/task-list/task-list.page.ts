@@ -202,7 +202,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
         if (!event && !silent) this.isLoading = true;
         const filters: any = {
             page: this.currentPage,
-            size: this.pageSize
+            size: this.pageSize,
+            sort: 'id,desc'
         };
         if (this.taskType && this.taskType !== '') filters.type = this.taskType;
         if (this.priorityFilter && this.priorityFilter !== '') filters.priority = this.priorityFilter;
@@ -244,7 +245,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
         const fetchCount = (status: string, tabLabel: string) => {
             const filters: any = {
                 page: 0,
-                size: 1
+                size: 1,
+                sort: 'id,desc'
             };
             if (this.taskType && this.taskType !== '') filters.type = this.taskType;
             if (this.priorityFilter) filters.priority = this.priorityFilter;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, NavController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -24,7 +24,8 @@ export class ResetPasswordPage implements OnInit {
     private router: Router,
     private http: HttpClient,
     private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private navCtrl: NavController
   ) { }
 
   ngOnInit() {
@@ -78,7 +79,7 @@ export class ResetPasswordPage implements OnInit {
           toast.present();
 
           setTimeout(() => {
-            this.router.navigate(['/login']);
+            this.navCtrl.navigateRoot('/login');
           }, 1000);
         },
         error: async (err) => {

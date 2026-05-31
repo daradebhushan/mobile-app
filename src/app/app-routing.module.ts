@@ -25,20 +25,24 @@ const routes: Routes = [
     path: 'tabs',
     loadComponent: () => import('./tabs/tabs.page').then(m => m.TabsPage),
     canActivate: [authGuard],
+    canActivateChild: [authGuard],
     children: [
       {
         path: 'home',
         loadChildren: () => import('./features/admin/dashboard/dashboard.module').then(m => m.DashboardPageModule),
+        canActivate: [authGuard],
         data: { roles: ['ROLE_ADMIN', 'ROLE_DEPARTMENT_HEAD', 'ROLE_STAFF', 'ADMIN', 'DEPARTMENT_HEAD', 'STAFF', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
       },
       {
         path: 'owner/dashboard',
         loadComponent: () => import('./features/owner/dashboard/owner-dashboard.page').then(m => m.OwnerDashboardPageComponent),
+        canActivate: [authGuard],
         data: { roles: ['ROLE_OWNER', 'OWNER'] }
       },
       {
         path: 'owner/admin-management',
         loadComponent: () => import('./features/owner/admin-management/admin-management.page').then(m => m.AdminManagementPageComponent),
+        canActivate: [authGuard],
         data: { roles: ['ROLE_OWNER', 'OWNER'] }
       },
       {
@@ -47,11 +51,15 @@ const routes: Routes = [
       },
       {
         path: 'tasks/create',
-        loadComponent: () => import('./features/tasks/task-form/task-form.page').then(m => m.TaskFormComponent)
+        loadComponent: () => import('./features/tasks/task-form/task-form.page').then(m => m.TaskFormComponent),
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
       },
       {
         path: 'tasks/edit/:taskId',
-        loadComponent: () => import('./features/tasks/task-form/task-form.page').then(m => m.TaskFormComponent)
+        loadComponent: () => import('./features/tasks/task-form/task-form.page').then(m => m.TaskFormComponent),
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
       },
       {
         path: 'tasks/:taskId',
@@ -65,32 +73,62 @@ const routes: Routes = [
       {
         path: 'admin/users',
         loadComponent: () => import('./features/admin/users/user-list/user-list.page').then(m => m.UserListComponent),
-        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ROLE_DEPARTMENT_HEAD', 'ADMIN', 'OWNER', 'DEPARTMENT_HEAD', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
       },
       {
         path: 'admin/users/create',
-        loadComponent: () => import('./features/admin/users/user-form/user-form.page').then(m => m.UserFormPageComponent)
+        loadComponent: () => import('./features/admin/users/user-form/user-form.page').then(m => m.UserFormPageComponent),
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
       },
       {
         path: 'admin/users/edit/:userId',
-        loadComponent: () => import('./features/admin/users/user-form/user-form.page').then(m => m.UserFormPageComponent)
+        loadComponent: () => import('./features/admin/users/user-form/user-form.page').then(m => m.UserFormPageComponent),
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
       },
       {
         path: 'admin/departments',
         loadComponent: () => import('./features/admin/departments/department-list/department-list.page').then(m => m.DepartmentListComponent),
-        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'ROLE_DEPARTMENT_HEAD', 'DEPARTMENT_HEAD', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
       },
       {
         path: 'admin/departments/create',
-        loadComponent: () => import('./features/admin/departments/department-form/department-form.page').then(m => m.DepartmentFormPageComponent)
+        loadComponent: () => import('./features/admin/departments/department-form/department-form.page').then(m => m.DepartmentFormPageComponent),
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
       },
       {
         path: 'admin/departments/edit/:deptId',
-        loadComponent: () => import('./features/admin/departments/department-form/department-form.page').then(m => m.DepartmentFormPageComponent)
+        loadComponent: () => import('./features/admin/departments/department-form/department-form.page').then(m => m.DepartmentFormPageComponent),
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
       },
       {
         path: 'admin/designations',
-        loadComponent: () => import('./features/admin/designations/designation-manager.page').then(m => m.DesignationManagerComponent)
+        loadComponent: () => import('./features/admin/designations/designation-manager.page').then(m => m.DesignationManagerComponent),
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
+      },
+      {
+        path: 'admin/complaint-types',
+        loadComponent: () => import('./features/admin/complaint-types/complaint-type-list/complaint-type-list.page').then(m => m.ComplaintTypeListComponent),
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
+      },
+      {
+        path: 'admin/complaint-types/create',
+        loadComponent: () => import('./features/admin/complaint-types/complaint-type-form/complaint-type-form.page').then(m => m.ComplaintTypeFormComponent),
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
+      },
+      {
+        path: 'admin/complaint-types/edit/:id',
+        loadComponent: () => import('./features/admin/complaint-types/complaint-type-form/complaint-type-form.page').then(m => m.ComplaintTypeFormComponent),
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
       },
       {
         path: 'admin/settings',
@@ -109,7 +147,8 @@ const routes: Routes = [
   },
   {
     path: 'complaint-detail/:id',
-    loadComponent: () => import('./features/complaints/complaint-detail/complaint-detail.page').then(m => m.ComplaintDetailPage)
+    loadComponent: () => import('./features/complaints/complaint-detail/complaint-detail.page').then(m => m.ComplaintDetailPage),
+    canActivate: [authGuard]
   },
   {
     path: 'admin/chatbot',

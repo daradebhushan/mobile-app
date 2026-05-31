@@ -32,6 +32,31 @@ export class AppComponent implements OnInit {
       this.initPushNotifications();
       this.themeService.initTheme();
       this.initDeepLinking();
+      this.initFallbackBackButton();
+    });
+  }
+
+  initFallbackBackButton() {
+    this.platform.backButton.subscribeWithPriority(-10, () => {
+      console.log('App fallback backbutton handler fired. Current URL:', this.router.url);
+      const currentUrl = this.router.url;
+      if (currentUrl === '/login' || currentUrl === '/tabs/home' || currentUrl === '/tabs/owner/dashboard' || currentUrl === '/') {
+        console.log('At root page, exiting app.');
+        App.exitApp();
+      } else {
+        console.log('Not at root page, redirecting to dashboard...');
+        const user = this.authService.currentUserValue;
+        if (user) {
+          const roles = user.roles || [];
+          if (roles.includes('ROLE_OWNER') || roles.includes('OWNER')) {
+            this.router.navigate(['/tabs/owner/dashboard']);
+          } else {
+            this.router.navigate(['/tabs/home']);
+          }
+        } else {
+          this.router.navigate(['/login']);
+        }
+      }
     });
   }
 

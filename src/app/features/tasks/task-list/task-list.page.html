@@ -199,7 +199,7 @@
     </div>
 
     <!-- Floating Add Button -->
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="mb-6 mr-4">
+    <ion-fab *ngIf="canCreateTask" vertical="bottom" horizontal="end" slot="fixed" class="mb-6 mr-4">
         <ion-fab-button routerLink="/tabs/tasks/create"
             class="w-14 h-14 shadow-xl shadow-orange-500/30 overflow-hidden rounded-full">
             <div class="bg-gradient-to-br from-orange-400 to-orange-600 w-full h-full flex items-center justify-center">

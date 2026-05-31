@@ -28,11 +28,12 @@ import { ComplaintTypeService, ComplaintType } from '../../../../services/compla
         <ion-list *ngIf="types.length > 0">
             <ion-item *ngFor="let type of types; trackBy: trackById" [routerLink]="['/tabs/admin/complaint-types/edit', type.id]" button detail>
                 <ion-label>
-                    <h2>{{ type.name }}</h2>
+                    <h2>{{ type.nameEn || type.nameMr || 'Unnamed Complaint Type' }}</h2>
+                    <p *ngIf="type.nameMr && type.nameEn && type.nameMr !== type.nameEn">{{ type.nameMr }}</p>
                     <p>{{ type.departmentName || 'No Department' }}</p>
                 </ion-label>
-                <ion-badge slot="end" [color]="type.isActive ? 'success' : 'medium'">
-                    {{ type.isActive ? 'Active' : 'Inactive' }}
+                <ion-badge slot="end" [color]="type.active ? 'success' : 'medium'">
+                    {{ type.active ? 'Active' : 'Inactive' }}
                 </ion-badge>
             </ion-item>
         </ion-list>

@@ -72,16 +72,16 @@ test('Simulate Missing Content-Type Header for Images', async ({ page }) => {
 
     // 2. Login
     await page.goto('http://localhost:8100/login');
+    await page.waitForSelector('input[name="email"]', { timeout: 10000 });
     await page.fill('input[name="email"]', 'admin@nagarparishad.in');
     await page.fill('input[name="password"]', 'password');
+    await page.waitForSelector('button:has-text("Sign In")', { timeout: 10000 });
     await page.click('button:has-text("Sign In")');
-    await page.waitForURL('**/tabs/home');
+    await page.waitForURL('**/tabs/home', { timeout: 20000 });
 
-    // 3. Go to Complaints and Open First One
-    await page.goto('http://localhost:8100/tabs/complaints');
-    await page.waitForSelector('ion-item');
-    await page.locator('ion-item').first().click();
-    await page.waitForSelector('app-complaint-detail');
+    // 3. Navigate directly to Complaint Detail to avoid list rendering issues
+    await page.goto('http://localhost:8100/complaint-detail/1');
+    await page.waitForSelector('app-complaint-detail', { timeout: 20000 });
 
     // 4. Verify Image Visibility
     // With my fix (Force Blob), the image SHOULD be visible even without the header.

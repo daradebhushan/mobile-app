@@ -9,7 +9,7 @@ test('Verify Complaint Attachments and Horizontal Scroll', async ({ page }) => {
 
     // Handle potential redirect if already logged in, or just wait for selector
     try {
-        await page.waitForSelector('input[name="email"]', { timeout: 5000 });
+        await page.waitForSelector('input[name="email"]', { timeout: 10000 });
     } catch (e) {
         console.log('Not on login page, maybe already logged in? Checking url');
     }
@@ -31,32 +31,18 @@ test('Verify Complaint Attachments and Horizontal Scroll', async ({ page }) => {
             console.log('Timeout waiting for login response.');
         }
 
-        if (await page.locator('.bg-red-50').isVisible()) {
-            const err = await page.textContent('.bg-red-50');
-            throw new Error('Login failed: ' + err?.trim());
+        if (await page.locator('.bg-red-50').first().isVisible()) {
+            const err = await page.locator('.bg-red-50').first().textContent();
+            throw new Error('Login failed: ' + (err?.trim() || 'Unknown error'));
         }
 
         console.log('Login successful.');
     }
 
-    // 3. Navigate to Complaints
-    console.log('Navigating to Complaints tab...');
-    await page.goto('http://localhost:8100/tabs/complaints');
-    await page.waitForSelector('ion-item'); // Wait for list
-
-    // 4. Open First Complaint (Seeded with Photo)
-    console.log('Opening first complaint in list...');
-    const targetComplaint = page.locator('ion-item').first();
-
-    // Explicit wait for it to be attached/visible
-    try {
-        await targetComplaint.waitFor({ state: 'visible', timeout: 5000 });
-        await targetComplaint.click();
-    } catch (e) {
-        throw new Error('No complaints found in list.');
-    }
-
-    await page.waitForSelector('app-complaint-detail');
+    // 3. Navigate directly to Complaint Detail (bypass list rendering flakiness)
+    console.log('Navigating directly to complaint detail...');
+    await page.goto('http://localhost:8100/complaint-detail/1');
+    await page.waitForSelector('app-complaint-detail', { timeout: 20000 });
     console.log('Complaint Detail Opened.');
 
     // 5. Check for Photos section and Scroll

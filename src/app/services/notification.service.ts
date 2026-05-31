@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, interval, lastValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, interval, lastValueFrom, EMPTY } from 'rxjs';
 import { switchMap, tap, take } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { Capacitor } from '@capacitor/core';
+import { AuthService } from './auth/auth.service';
 
 export interface Notification {
     id: number;
@@ -24,10 +25,10 @@ export class NotificationService {
     private unreadCountSubject = new BehaviorSubject<number>(0);
     public unreadCount$ = this.unreadCountSubject.asObservable();
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private authService: AuthService) {
         // Start polling every 30 seconds
         interval(30000).pipe(
-            switchMap(() => this.getUnreadCount())
+            switchMap(() => this.authService.getToken() ? this.getUnreadCount() : EMPTY)
         ).subscribe();
     }
 

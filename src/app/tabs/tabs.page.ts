@@ -1,11 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { IonTabs } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { IonicModule, Platform } from '@ionic/angular';
 import { App } from '@capacitor/app';
 import { TranslatePipe } from '../core/pipes/translate.pipe';
 import { AuthService } from '../services/auth/auth.service';
-import { map, Observable } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-tabs',
@@ -13,10 +13,11 @@ import { map, Observable } from 'rxjs';
     standalone: true,
     imports: [IonicModule, CommonModule, TranslatePipe]
 })
-export class TabsPage {
+export class TabsPage implements OnDestroy {
     isOwner$: Observable<boolean>;
     isAdmin$: Observable<boolean>;
     isStaff$: Observable<boolean>;
+    private backButtonSub?: Subscription;
 
     @ViewChild('tabs', { static: false }) tabs!: IonTabs;
 
@@ -50,7 +51,12 @@ export class TabsPage {
     }
 
     ionViewDidEnter() {
-        this.platform.backButton.subscribeWithPriority(-1, async () => {
+        // Clean up any existing subscription to prevent duplicates
+        if (this.backButtonSub) {
+            this.backButtonSub.unsubscribe();
+        }
+
+        this.backButtonSub = this.platform.backButton.subscribeWithPriority(-1, async () => {
             const selectedTab = this.tabs.getSelected();
 
             // If we are NOT on home/dashboard tab (and at root of that tab), go to home.
@@ -80,6 +86,19 @@ export class TabsPage {
                 App.exitApp();
             }
         });
+    }
+
+    ionViewWillLeave() {
+        if (this.backButtonSub) {
+            this.backButtonSub.unsubscribe();
+            this.backButtonSub = undefined;
+        }
+    }
+
+    ngOnDestroy() {
+        if (this.backButtonSub) {
+            this.backButtonSub.unsubscribe();
+        }
     }
 
     // Helper to get owner status as promise

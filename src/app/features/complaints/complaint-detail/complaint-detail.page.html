@@ -303,7 +303,7 @@
                         </h3>
                     </div>
                     <!-- Upload Trigger -->
-                    <button *ngIf="complaint.status !== 'REJECTED'"
+                    <button *ngIf="canManageComplaintActions && complaint.status !== 'REJECTED'"
                         onclick="document.getElementById('fileInput').click()"
                         class="group relative overflow-hidden bg-gradient-to-r from-saffron-500 to-orange-600 text-white font-black uppercase tracking-widest text-[10px] px-4 py-2 rounded-full shadow-md shadow-orange-500/20 active:scale-95 transition-all">
                         <div
@@ -409,7 +409,7 @@
                 </div>
 
                 <!-- Chat Input Area -->
-                <div class="mt-8 flex gap-3 relative" *ngIf="complaint.status !== 'REJECTED'">
+                <div class="mt-8 flex gap-3 relative" *ngIf="canManageComplaintActions && complaint.status !== 'REJECTED'">
                     <input type="text" [(ngModel)]="newComment" placeholder="Add an update or comment..."
                         class="flex-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl text-gray-900 dark:text-white border border-white/60 dark:border-gray-800/60 rounded-[2rem] pl-6 pr-16 py-5 shadow-lg shadow-gray-200/20 dark:shadow-black/20 text-[14px] font-bold focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder-gray-400 w-full outline-none">
 
@@ -425,10 +425,10 @@
     </div>
 
     <!-- Sticky Bottom Action Bar -->
-    <div *ngIf="complaint && (complaint.status === 'PENDING' || complaint.status === 'ACCEPTED' || complaint.status === 'CONVERTED_TO_TASK')"
+    <div *ngIf="complaint && (canManageComplaintActions || (complaint.status === 'CONVERTED_TO_TASK' && complaint.relatedTaskId))"
         class="fixed bottom-0 left-0 right-0 p-4 pb-8 bg-white/90 dark:bg-gray-950/90 backdrop-blur-xl border-t border-gray-100 dark:border-gray-800 z-50">
 
-        <div class="flex gap-3 max-w-md mx-auto" *ngIf="isAdmin && complaint.status === 'PENDING'">
+        <div class="flex gap-3 max-w-md mx-auto" *ngIf="canManageComplaintActions && complaint.status === 'PENDING'">
             <button (click)="acceptComplaint()"
                 class="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-black uppercase tracking-widest text-[11px] py-4 px-2 rounded-[1.5rem] shadow-lg shadow-green-500/20 active:scale-95 transition-all flex items-center justify-center">
                 <ion-icon name="checkmark-circle" class="mr-2 text-xl"></ion-icon>
@@ -441,7 +441,7 @@
             </button>
         </div>
 
-        <div *ngIf="isAdmin && complaint.status === 'ACCEPTED'" class="w-full max-w-md mx-auto">
+        <div *ngIf="canManageComplaintActions && complaint.status === 'ACCEPTED'" class="w-full max-w-md mx-auto">
             <button (click)="convertToTask()"
                 class="w-full bg-gradient-to-r from-indigo-500 to-blue-600 text-white font-black uppercase tracking-widest text-[11px] py-4 px-4 rounded-[1.5rem] shadow-lg shadow-indigo-500/20 active:scale-95 transition-all flex items-center justify-center">
                 <ion-icon name="construct" class="mr-2 text-xl"></ion-icon>

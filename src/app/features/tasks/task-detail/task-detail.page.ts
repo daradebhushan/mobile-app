@@ -385,16 +385,42 @@ export class TaskDetailComponent implements OnInit {
     }
 
     canEdit(comment: any): boolean {
-        if (this.isAdmin) return true;
+        if (this.canManageTask) return true;
         return this.currentUser && comment.user && (this.currentUser.id === comment.user.id || this.currentUser.username === comment.user.username);
     }
 
     get isAdmin(): boolean {
         const user = this.authService.currentUserValue;
-        return user?.roles?.includes('ROLE_OWNER') || user?.roles?.includes('ROLE_ADMIN') || user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN') || false;
+        const role = (user as any)?.role;
+        return user?.roles?.includes('ROLE_OWNER') || user?.roles?.includes('ROLE_ADMIN') ||
+            user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN') ||
+            user?.roles?.includes('ROLE_CHIEF_OFFICER') || user?.roles?.includes('CHIEF_OFFICER') ||
+            role === 'OWNER' || role === 'ADMIN' || role === 'CHIEF_OFFICER' || false;
+    }
+
+    get isStaff(): boolean {
+        const user = this.currentUser;
+        return user?.role === 'STAFF' || user?.roles?.includes('ROLE_STAFF') || user?.roles?.includes('STAFF');
+    }
+
+    get isAssignedStaff(): boolean {
+        return !!this.task?.assignedStaff?.id && !!this.currentUser && this.task.assignedStaff.id === this.currentUser.id;
+    }
+
+    get canManageTask(): boolean {
+        return this.isAdmin;
+    }
+
+    get canUpdateTaskStatus(): boolean {
+        return this.canManageTask || (this.isStaff && this.isAssignedStaff);
+    }
+
+    get canCommentOnTask(): boolean {
+        return this.canManageTask || (this.isStaff && this.isAssignedStaff);
     }
 
     updateStatus(newStatus: string) {
+        if (!this.canUpdateTaskStatus) return;
         if (!this.task || this.task.status === newStatus) return;
         this.updatingStatus = true;
         this.taskService.updateTaskStatus(this.task.id, newStatus).subscribe({
@@ -413,11 +439,13 @@ export class TaskDetailComponent implements OnInit {
     }
 
     onEdit() {
+        if (!this.canManageTask) return;
         if (!this.task) return;
         this.router.navigate(['/tabs/tasks/edit', this.task.id]);
     }
 
     async onDelete() {
+        if (!this.canManageTask) return;
         if (!this.task) return;
 
         const alert = await this.alertController.create({

@@ -27,6 +27,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
     searchText: string = '';
     private searchSubject = new Subject<string>();
     private destroy$ = new Subject<void>();
+    currentUser: any = null;
 
     currentPage: number = 0;
     pageSize: number = 10;
@@ -58,6 +59,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
+        this.currentUser = this.authService.currentUserValue;
         this.setupSearchSubscription();
 
         this.route.queryParams.subscribe(params => {
@@ -105,6 +107,15 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
             this.loadTasks();
         });
+    }
+
+    get canCreateTask(): boolean {
+        const roles = this.currentUser?.roles || [];
+        const role = this.currentUser?.role;
+        return role === 'OWNER' || role === 'ADMIN' || role === 'CHIEF_OFFICER' ||
+            roles.includes('ROLE_OWNER') || roles.includes('OWNER') ||
+            roles.includes('ROLE_ADMIN') || roles.includes('ADMIN') ||
+            roles.includes('ROLE_CHIEF_OFFICER') || roles.includes('CHIEF_OFFICER');
     }
 
     private autoRefreshInterval: any;

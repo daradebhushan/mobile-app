@@ -10,7 +10,13 @@ export const authGuard: CanActivateFn = (route, state) => {
         const user = authService.currentUserValue;
         const requiredRoles = route.data['roles'] as Array<string>;
 
-        if (requiredRoles && user) {
+        if (requiredRoles) {
+            if (!user || !user.roles) {
+                console.warn('AuthGuard: Required roles specified but user details are not loaded. Redirecting to login.');
+                router.navigate(['/login']);
+                return false;
+            }
+
             const userRoles = user.roles.map(r => r.toUpperCase().replace('ROLE_', ''));
             const normalizedRequired = requiredRoles.map(r => r.toUpperCase().replace('ROLE_', ''));
 

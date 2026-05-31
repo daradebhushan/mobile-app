@@ -27,7 +27,7 @@ export class LoginPage {
     private http: HttpClient,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    privateRounter: Router,
+    private router: Router,
     private authService: AuthService,
     private platform: Platform,
     private navCtrl: NavController,

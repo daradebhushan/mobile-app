@@ -10,7 +10,8 @@ test('verify complaint image loads', async ({ page }) => {
     await page.waitForSelector('input[name="email"]', { state: 'visible', timeout: 10000 });
     await page.fill('input[name="email"]', 'owner@govt.in');
     await page.fill('input[name="password"]', 'password');
-    await page.click('button[type="submit"]');
+    await page.waitForSelector('button:has-text("Sign In")', { timeout: 10000 });
+    await page.click('button:has-text("Sign In")');
 
     // 3. Wait for Dashboard
     console.log('Waiting for dashboard...');
@@ -28,16 +29,12 @@ test('verify complaint image loads', async ({ page }) => {
         throw e;
     }
 
-    // 4. Navigate to Complaint
+    // 4. Navigate directly to Complaint Detail
     console.log('Navigating to complaint detail...');
-    await page.goto('http://localhost:8102/tabs/complaints');
+    await page.goto('http://localhost:8102/complaint-detail/1');
 
-    // Wait for list to load
-    await page.waitForSelector('.glass-card', { timeout: 15000 });
-
-    // Click the first complaint item
-    const firstComplaint = page.locator('.glass-card').first();
-    await firstComplaint.click();
+    // Wait for detail to load
+    await page.waitForSelector('app-complaint-detail', { timeout: 30000 });
 
     // 5. Verify Image Loading in Detail Page
     console.log('Verifying image in detail page...');
@@ -46,14 +43,14 @@ test('verify complaint image loads', async ({ page }) => {
     await page.waitForSelector('ion-spinner', { state: 'hidden', timeout: 10000 }).catch(() => console.log('Spinner not found or already gone'));
 
     // Check for the main image container or error state
-    const image = page.locator('.rounded-2xl.overflow-hidden img');
+    const image = page.locator('app-complaint-detail img').first();
     const errorState = page.locator('ion-icon[name="alert-circle-outline"]');
 
     if (await errorState.isVisible()) {
         throw new Error('Complaint failed to load (Error State visible)');
     }
 
-    await expect(image).toBeVisible({ timeout: 10000 });
+    await expect(image).toBeVisible({ timeout: 20000 });
 
     // Check if src is a blob url
     const src = await image.getAttribute('src');

@@ -21,17 +21,17 @@ import { DepartmentService } from '../../../../services/department.service';
     <ion-content class="ion-padding">
         <form (ngSubmit)="save()">
             <ion-item>
-                <ion-label position="stacked">Name <span class="text-red-500">*</span></ion-label>
-                <ion-input [(ngModel)]="type.name" name="name" required></ion-input>
+                <ion-label position="stacked">English Name <span class="text-red-500">*</span></ion-label>
+                <ion-input [(ngModel)]="type.nameEn" name="nameEn" required></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label position="stacked">Description</ion-label>
-                <ion-textarea [(ngModel)]="type.description" name="description"></ion-textarea>
+                <ion-label position="stacked">Marathi Name <span class="text-red-500">*</span></ion-label>
+                <ion-textarea [(ngModel)]="type.nameMr" name="nameMr" required></ion-textarea>
             </ion-item>
 
             <ion-item>
-                <ion-label position="stacked">Department</ion-label>
+                <ion-label position="stacked">Department <span class="text-red-500">*</span></ion-label>
                 <ion-select [(ngModel)]="type.departmentId" name="departmentId">
                     <ion-select-option *ngFor="let d of departments" [value]="d.id">{{ d.name }}</ion-select-option>
                 </ion-select>
@@ -39,11 +39,11 @@ import { DepartmentService } from '../../../../services/department.service';
 
             <ion-item>
                 <ion-label>Active</ion-label>
-                <ion-toggle [(ngModel)]="type.isActive" name="isActive"></ion-toggle>
+                <ion-toggle [(ngModel)]="type.active" name="active"></ion-toggle>
             </ion-item>
             
             <div class="mt-6 flex flex-col gap-3">
-                <ion-button expand="block" type="submit" [disabled]="!type.name || loading">
+                <ion-button expand="block" type="submit" [disabled]="!canSave() || loading">
                     {{ loading ? 'Saving...' : 'Save' }}
                 </ion-button>
                 
@@ -60,7 +60,7 @@ import { DepartmentService } from '../../../../services/department.service';
 export class ComplaintTypeFormComponent implements OnInit {
     isEdit = false;
     typeId: number | null = null;
-    type: any = { name: '', description: '', departmentId: null, isActive: true };
+    type: any = { nameMr: '', nameEn: '', departmentId: null, active: true };
     departments: any[] = [];
     loading = false;
 
@@ -99,15 +99,20 @@ export class ComplaintTypeFormComponent implements OnInit {
             next: (res: any) => {
                 this.loading = false;
                 if (res.success) {
-                    this.type = res.data;
-                    // Ensure departmentId is set correctly if returned as object
-                    if (this.type.department && this.type.department.id) {
-                        this.type.departmentId = this.type.department.id;
-                    }
+                    this.type = {
+                        nameMr: res.data.nameMr || '',
+                        nameEn: res.data.nameEn || '',
+                        departmentId: res.data.departmentId ?? res.data.department?.id ?? null,
+                        active: res.data.active !== false
+                    };
                 }
             },
             error: () => this.loading = false
         });
+    }
+
+    canSave(): boolean {
+        return !!this.type.nameEn?.trim() && !!this.type.nameMr?.trim() && !!this.type.departmentId;
     }
 
     save() {

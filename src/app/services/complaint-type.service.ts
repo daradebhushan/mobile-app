@@ -5,11 +5,11 @@ import { environment } from '../../environments/environment';
 
 export interface ComplaintType {
     id: number;
-    name: string;
-    description?: string;
     departmentId?: number;
     departmentName?: string;
-    isActive: boolean;
+    nameMr?: string;
+    nameEn?: string;
+    active: boolean;
 }
 
 @Injectable({

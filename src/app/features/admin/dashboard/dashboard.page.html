@@ -265,8 +265,8 @@
     </div>
 
     <!-- Bottom Summary Row -->
-    <div class="grid grid-cols-2 gap-4 pb-8">
-      <div (click)="navigateTo('/tabs/admin/departments')"
+    <div class="grid gap-4 pb-8" [ngClass]="(isAdmin || isOwner) ? 'grid-cols-2' : 'grid-cols-1'">
+      <div *ngIf="isAdmin || isOwner" (click)="navigateTo('/tabs/admin/departments')"
         class="bg-gradient-to-br from-indigo-500 to-blue-600 p-6 rounded-3xl text-white shadow-lg shadow-blue-500/30 flex flex-col items-center justify-center text-center relative overflow-hidden active:scale-95 transition-transform">
         <div class="text-3xl font-black mb-1 relative z-10">{{ stats.totalDepartments || 0 }}</div>
         <div class="text-[10px] font-bold uppercase tracking-widest text-blue-100 relative z-10">{{

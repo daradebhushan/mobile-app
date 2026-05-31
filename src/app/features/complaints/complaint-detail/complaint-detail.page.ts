@@ -42,7 +42,15 @@ export class ComplaintDetailPage implements OnInit {
 
     get isAdmin(): boolean {
         const user = this.authService.currentUserValue;
-        return user?.roles?.includes('ROLE_OWNER') || user?.roles?.includes('ROLE_ADMIN') || user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN') || false;
+        const role = (user as any)?.role;
+        return user?.roles?.includes('ROLE_OWNER') || user?.roles?.includes('ROLE_ADMIN') ||
+            user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN') ||
+            user?.roles?.includes('ROLE_CHIEF_OFFICER') || user?.roles?.includes('CHIEF_OFFICER') ||
+            role === 'OWNER' || role === 'ADMIN' || role === 'CHIEF_OFFICER' || false;
+    }
+
+    get canManageComplaintActions(): boolean {
+        return this.isAdmin;
     }
 
     ngOnInit() {
@@ -132,6 +140,7 @@ export class ComplaintDetailPage implements OnInit {
     }
 
     async addComment() {
+        if (!this.canManageComplaintActions) return;
         if ((!this.newComment.trim() && !this.selectedCommentFile) || !this.complaintId) return;
 
         const loading = await this.loadingController.create({
@@ -183,6 +192,7 @@ export class ComplaintDetailPage implements OnInit {
     }
 
     async uploadAttachment(event: any) {
+        if (!this.canManageComplaintActions) return;
         const file = event.target.files[0];
         if (!file || !this.complaintId) return;
 
@@ -201,6 +211,7 @@ export class ComplaintDetailPage implements OnInit {
 
 
     async acceptComplaint() {
+        if (!this.canManageComplaintActions) return;
         if (!this.complaintId) return;
 
         const loading = await this.loadingController.create({ message: 'Accepting...' });
@@ -227,6 +238,7 @@ export class ComplaintDetailPage implements OnInit {
     }
 
     async rejectComplaint() {
+        if (!this.canManageComplaintActions) return;
         const alert = await this.alertController.create({
             header: 'Reject Complaint',
             inputs: [
@@ -281,6 +293,7 @@ export class ComplaintDetailPage implements OnInit {
     }
 
     async convertToTask() {
+        if (!this.canManageComplaintActions) return;
         if (!this.complaint) return;
 
         // Use router to navigate to task create form, passing complaint data via state or query params

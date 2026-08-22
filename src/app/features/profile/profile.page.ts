@@ -1,11 +1,12 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UserService } from '../../../services/user.service';
-import { AuthService } from '../../../services/auth/auth.service';
-import { TranslatePipe } from '../../../core/pipes/translate.pipe';
+import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { TranslatePipe } from '../../core/pipes/translate.pipe';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-profile',
@@ -32,8 +33,18 @@ export class ProfilePageComponent implements OnInit {
         private userService: UserService,
         private authService: AuthService,
         private cdr: ChangeDetectorRef,
-        private toastController: ToastController
+        private toastController: ToastController,
+        private location: Location,
+        private router: Router
     ) { }
+
+    goBack() {
+        if (window.history.length > 1) {
+            this.location.back();
+        } else {
+            this.router.navigate(['/tabs/settings']);
+        }
+    }
 
     ngOnInit() {
         this.fetchProfile();
@@ -47,7 +58,7 @@ export class ProfilePageComponent implements OnInit {
                 this.cdr.detectChanges();
             }))
             .subscribe({
-                next: (res) => {
+                next: (res: any) => {
                     if (res.success) {
                         this.user = res.data;
                         this.formData = {
@@ -61,7 +72,7 @@ export class ProfilePageComponent implements OnInit {
                         };
                     }
                 },
-                error: (err) => {
+                error: (err: any) => {
                     this.errorMessage = 'Failed to load profile.';
                 }
             });
@@ -102,7 +113,7 @@ export class ProfilePageComponent implements OnInit {
                         this.errorMessage = res.message;
                     }
                 },
-                error: async (err) => {
+                error: async (err: any) => {
                     this.errorMessage = 'Update failed.';
                     const toast = await this.toastController.create({
                         message: 'Failed to update profile.',

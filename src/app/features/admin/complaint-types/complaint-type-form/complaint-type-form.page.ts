@@ -6,13 +6,17 @@ import { ActivatedRoute } from '@angular/router';
 import { ComplaintTypeService } from '../../../../services/complaint-type.service';
 import { DepartmentService } from '../../../../services/department.service';
 
+import { Location } from '@angular/common';
+
 @Component({
     selector: 'app-complaint-type-form',
     template: `
     <ion-header>
         <ion-toolbar color="primary">
             <ion-buttons slot="start">
-                <ion-back-button defaultHref="/tabs/admin/complaint-types"></ion-back-button>
+                <ion-button (click)="goBack()">
+                    <ion-icon name="chevron-back" slot="icon-only"></ion-icon>
+                </ion-button>
             </ion-buttons>
             <ion-title>{{ isEdit ? 'Edit' : 'Create' }} Complaint Type</ion-title>
         </ion-toolbar>
@@ -69,8 +73,17 @@ export class ComplaintTypeFormComponent implements OnInit {
         private complaintTypeService: ComplaintTypeService,
         private departmentService: DepartmentService,
         private toastController: ToastController,
-        private navCtrl: NavController
+        private navCtrl: NavController,
+        private location: Location
     ) { }
+
+    goBack() {
+        if (window.history.length > 1) {
+            this.location.back();
+        } else {
+            this.navCtrl.navigateBack('/tabs/admin/complaint-types');
+        }
+    }
 
     ngOnInit() {
         this.loadDepartments();

@@ -49,6 +49,7 @@ const routes: Routes = [
         path: 'tasks',
         loadComponent: () => import('./features/tasks/task-list/task-list.page').then(m => m.TaskListComponent)
       },
+      // IMPORTANT: literal sub-paths MUST come before :taskId wildcard
       {
         path: 'tasks/create',
         loadComponent: () => import('./features/tasks/task-form/task-form.page').then(m => m.TaskFormComponent),
@@ -60,6 +61,10 @@ const routes: Routes = [
         loadComponent: () => import('./features/tasks/task-form/task-form.page').then(m => m.TaskFormComponent),
         canActivate: [authGuard],
         data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
+      },
+      {
+        path: 'tasks/board',
+        loadComponent: () => import('./features/tasks/task-board/task-board.page').then(m => m.TaskBoardPageComponent)
       },
       {
         path: 'tasks/:taskId',
@@ -131,6 +136,11 @@ const routes: Routes = [
         data: { roles: ['ROLE_ADMIN', 'ROLE_OWNER', 'ADMIN', 'OWNER', 'CHIEF_OFFICER', 'ROLE_CHIEF_OFFICER'] }
       },
       {
+        path: 'profile',
+        loadComponent: () => import('./features/profile/profile.page').then(m => m.ProfilePageComponent),
+        canActivate: [authGuard]
+      },
+      {
         path: 'admin/settings',
         loadComponent: () => import('./features/admin/settings/settings.page').then(m => m.SettingsPageComponent)
       },
@@ -144,6 +154,11 @@ const routes: Routes = [
         pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./features/profile/profile.page').then(m => m.ProfilePageComponent),
+    canActivate: [authGuard]
   },
   {
     path: 'complaint-detail/:id',

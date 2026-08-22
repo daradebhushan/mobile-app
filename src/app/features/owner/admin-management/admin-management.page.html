@@ -1,7 +1,9 @@
 <ion-header class="ion-no-border">
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="/tabs/owner/dashboard"></ion-back-button>
+            <ion-button (click)="goBack()">
+                <ion-icon name="chevron-back" slot="icon-only"></ion-icon>
+            </ion-button>
         </ion-buttons>
         <ion-title class="font-bold text-lg">{{ 'ADMIN_MANAGEMENT' | translate }}</ion-title>
     </ion-toolbar>
@@ -9,6 +11,27 @@
 
 <ion-content class="bg-gray-50">
     <div class="px-4 pb-20 pt-4 space-y-4">
+
+        <!-- WhatsApp Gateway & QR Setup Banner for Owner -->
+        <div class="bg-gradient-to-r from-emerald-600 to-teal-700 p-4 rounded-2xl text-white shadow-md flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-xl">
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                </div>
+                <div>
+                    <div class="text-xs uppercase tracking-wider text-emerald-100 font-bold">WhatsApp Bot Gateway</div>
+                    <div class="text-sm font-bold flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full" [ngClass]="gatewayStatus?.status === 'CONNECTED' ? 'bg-green-300 animate-pulse' : 'bg-amber-300'"></span>
+                        {{ gatewayStatus?.status === 'CONNECTED' ? '+' + gatewayStatus?.user : 'Awaiting QR Scan' }}
+                    </div>
+                </div>
+            </div>
+            <button (click)="openWhatsappModal()"
+                class="px-3.5 py-2 bg-white text-emerald-800 font-bold text-xs rounded-xl shadow hover:bg-emerald-50 transition-all flex items-center gap-1.5">
+                <ion-icon name="qr-code-outline"></ion-icon>
+                <span>Pair / Setup</span>
+            </button>
+        </div>
 
         <!-- Admin List -->
         <div *ngFor="let admin of admins"
@@ -48,7 +71,12 @@
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex gap-3 pt-1">
+            <div class="flex gap-2 pt-1">
+                <button (click)="openWhatsappModal(admin)"
+                    class="flex-1 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider border border-emerald-200 text-emerald-700 bg-emerald-50/50 flex items-center justify-center gap-1">
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                    <span>WhatsApp</span>
+                </button>
                 <button (click)="toggleStatus(admin)"
                     class="flex-1 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider border transition-colors"
                     [ngClass]="admin.active ? 'border-red-100 text-red-600 bg-red-50/50' : 'border-green-100 text-green-600 bg-green-50/50'">
@@ -142,6 +170,96 @@
                         <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
                     </ion-button>
                 </form>
+            </ion-content>
+        </ng-template>
+    </ion-modal>
+
+    <!-- WhatsApp Gateway & QR Pairing Modal for Owner -->
+    <ion-modal [isOpen]="showWhatsappModal" (didDismiss)="showWhatsappModal = false" [initialBreakpoint]="0.9"
+        [breakpoints]="[0, 0.9, 1]">
+        <ng-template>
+            <ion-header class="ion-no-border">
+                <ion-toolbar>
+                    <ion-title class="font-bold text-base">WhatsApp Gateway & QR Setup</ion-title>
+                    <ion-buttons slot="end">
+                        <ion-button (click)="showWhatsappModal = false" color="medium">{{ 'CLOSE' | translate }}</ion-button>
+                    </ion-buttons>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding bg-slate-900 text-white">
+                <div class="space-y-5 pb-6">
+
+                    <!-- Gateway Status Header -->
+                    <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs uppercase tracking-wider text-slate-400 font-bold">Gateway Engine (Baileys)</span>
+                            <span [ngClass]="gatewayStatus?.status === 'CONNECTED' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border-amber-500/30'"
+                                class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border">
+                                {{ gatewayStatus?.status || 'CHECKING...' }}
+                            </span>
+                        </div>
+                        <div *ngIf="gatewayStatus?.status === 'CONNECTED'" class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl">
+                                <ion-icon name="checkmark-circle"></ion-icon>
+                            </div>
+                            <div>
+                                <div class="text-base font-bold text-emerald-400">+{{ gatewayStatus?.user }}</div>
+                                <div class="text-xs text-slate-400">Live 24/7 Multi-Device Session Active</div>
+                            </div>
+                        </div>
+                        <div *ngIf="gatewayStatus?.status !== 'CONNECTED'" class="text-xs text-slate-300">
+                            Scan the QR code below using WhatsApp on your device (Linked Devices ➔ Link a Device).
+                        </div>
+                    </div>
+
+                    <!-- Live QR Code Viewer with Zoom and Fit -->
+                    <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 text-center space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs uppercase tracking-wider text-slate-400 font-bold">Live Pairing QR Scanner</span>
+                            <a [href]="qrUrl" target="_blank"
+                                class="text-[11px] font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1">
+                                <ion-icon name="open-outline"></ion-icon>
+                                <span>Open Full Window</span>
+                            </a>
+                        </div>
+                        <div class="w-full bg-slate-950 rounded-xl p-1 flex flex-col items-center justify-center border border-slate-800 overflow-hidden">
+                            <iframe [src]="qrUrl | safeUrl" class="w-full h-[440px] rounded-lg border-0" title="WhatsApp QR"></iframe>
+                        </div>
+                        <div class="flex gap-2">
+                            <button (click)="fetchGatewayStatus()"
+                                class="flex-1 py-2.5 rounded-xl text-xs font-bold bg-slate-700 hover:bg-slate-600 text-white transition-all flex items-center justify-center gap-1.5">
+                                <ion-icon name="refresh-outline"></ion-icon>
+                                <span>Refresh Status</span>
+                            </button>
+                            <button (click)="unlinkAndPairNewQR()"
+                                class="flex-1 py-2.5 rounded-xl text-xs font-bold bg-rose-600/20 border border-rose-500/30 text-rose-400 hover:bg-rose-600/30 transition-all flex items-center justify-center gap-1.5">
+                                <ion-icon name="trash-outline"></ion-icon>
+                                <span>Unlink / New QR</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Nagar Parishad Specific WhatsApp Number Assignment -->
+                    <div *ngIf="selectedAdmin" class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-3">
+                        <div class="text-xs uppercase tracking-wider text-slate-400 font-bold">
+                            Assign WhatsApp Number: <span class="text-amber-400">{{ selectedAdmin.name }}</span>
+                        </div>
+                        <form [formGroup]="whatsappForm" (ngSubmit)="saveWhatsappConfig()" class="space-y-3">
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-bold text-slate-400 uppercase">Bot Mobile / WhatsApp Number</label>
+                                <ion-item lines="none" class="rounded-xl border border-slate-600" style="--background: #0f172a; --color: #fff;">
+                                    <ion-input formControlName="phoneNumber" placeholder="+917440179974 or 7440179974" type="tel"></ion-input>
+                                </ion-item>
+                            </div>
+                            <button type="submit" [disabled]="whatsappForm.invalid || loading"
+                                class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 font-bold text-xs uppercase tracking-wider text-white transition-all shadow-lg shadow-emerald-900/40 flex items-center justify-center gap-1.5">
+                                <ion-icon name="save-outline"></ion-icon>
+                                <span>Save WhatsApp Assignment</span>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
             </ion-content>
         </ng-template>
     </ion-modal>

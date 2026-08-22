@@ -6,6 +6,8 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
+import { Location } from '@angular/common';
+
 @Component({
     selector: 'app-task-board',
     standalone: true,
@@ -70,14 +72,28 @@ export class TaskBoardPageComponent implements OnInit {
 
     constructor(
         private taskService: TaskService,
-        private router: Router
+        private router: Router,
+        private location: Location
     ) { }
+
+    goBack() {
+        if (window.history.length > 1) {
+            this.location.back();
+        } else {
+            this.router.navigate(['/tabs/tasks']);
+        }
+    }
 
     ngOnInit() {
         this.loadTasks();
     }
 
     ionViewWillEnter() {
+        // Clear stale data so skeleton shows immediately
+        this.todoTasks = [];
+        this.inProgressTasks = [];
+        this.onHoldTasks = [];
+        this.completedTasks = [];
         this.loadTasks();
     }
 

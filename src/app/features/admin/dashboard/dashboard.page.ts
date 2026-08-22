@@ -31,6 +31,7 @@ export class DashboardPage implements OnInit {
   allUsers: any[] = [];
   currentUser: any = null;
   ownerStats: any = null;
+  isLoading: boolean = false;
 
   constructor(
     private router: Router,
@@ -89,8 +90,10 @@ export class DashboardPage implements OnInit {
   }
 
   loadStats() {
+    this.isLoading = true;
     this.dashboardService.getAdminStats().subscribe({
       next: (res: any) => {
+        this.isLoading = false;
         if (res && res.data) {
           this.stats = res.data;
           this.complaintTasks = res.data.complaintTasks || 0;
@@ -107,7 +110,10 @@ export class DashboardPage implements OnInit {
           }));
         }
       },
-      error: (err) => console.error('Failed to load dashboard stats', err)
+      error: (err) => {
+        this.isLoading = false;
+        console.error('Failed to load dashboard stats', err);
+      }
     });
   }
 

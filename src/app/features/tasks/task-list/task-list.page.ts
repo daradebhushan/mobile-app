@@ -2,8 +2,8 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, takeUntil, switchMap } from 'rxjs/operators';
 import { TaskService, Task } from '../../../services/task.service';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { IonicModule, ToastController } from '@ionic/angular';
@@ -27,6 +27,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
     searchText: string = '';
     private searchSubject = new Subject<string>();
     private destroy$ = new Subject<void>();
+    private queryParamSub?: Subscription;
+    private loadTasksSub?: Subscription;
     currentUser: any = null;
 
     currentPage: number = 0;
@@ -35,7 +37,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
     totalElements: number = 0;
 
     activeTab: string = 'FILTER_ALL';
-    taskType: string = ''; // Default to All
+    taskType: string = '';
     isLoading: boolean = false;
     assignedToMe: boolean = false;
     fromCo: boolean = false;
@@ -49,6 +51,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
         { label: 'FILTER_COMPLETED', count: 0 }
     ];
 
+    private autoRefreshInterval: any;
+
     constructor(
         private taskService: TaskService,
         private cdr: ChangeDetectorRef,
@@ -61,52 +65,39 @@ export class TaskListComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.currentUser = this.authService.currentUserValue;
         this.setupSearchSubscription();
+        this.subscribeToQueryParams();
+    }
 
-        this.route.queryParams.subscribe(params => {
-            if (params['status']) {
-                this.statusFilter = params['status'];
-                if (this.statusFilter === 'TO_DO') this.activeTab = 'FILTER_PENDING';
-                else if (this.statusFilter === 'IN_PROGRESS') this.activeTab = 'FILTER_IN_PROGRESS';
-                else if (this.statusFilter === 'ON_HOLD') this.activeTab = 'FILTER_ON_HOLD';
-                else if (this.statusFilter === 'COMPLETED') this.activeTab = 'FILTER_COMPLETED';
-                else this.activeTab = 'FILTER_ALL';
-            } else {
-                this.statusFilter = '';
-                this.activeTab = 'FILTER_ALL';
-            }
+    private subscribeToQueryParams(): void {
+        // Unsubscribe from any previous subscription first
+        if (this.queryParamSub) {
+            this.queryParamSub.unsubscribe();
+        }
+        this.queryParamSub = this.route.queryParams
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(params => {
+                // Read all filter params
+                if (params['status']) {
+                    this.statusFilter = params['status'];
+                    if (this.statusFilter === 'TO_DO') this.activeTab = 'FILTER_PENDING';
+                    else if (this.statusFilter === 'IN_PROGRESS') this.activeTab = 'FILTER_IN_PROGRESS';
+                    else if (this.statusFilter === 'ON_HOLD') this.activeTab = 'FILTER_ON_HOLD';
+                    else if (this.statusFilter === 'COMPLETED') this.activeTab = 'FILTER_COMPLETED';
+                    else this.activeTab = 'FILTER_ALL';
+                } else {
+                    this.statusFilter = '';
+                    this.activeTab = 'FILTER_ALL';
+                }
+                this.priorityFilter = params['priority'] || '';
+                this.taskType = params['type'] || '';
+                this.assignedToMe = params['assignedToMe'] === 'true';
+                this.fromCo = params['fromCo'] === 'true';
+                this.departmentId = params['departmentId'] ? +params['departmentId'] : null;
 
-            if (params['priority']) {
-                this.priorityFilter = params['priority'];
-            } else {
-                this.priorityFilter = '';
-            }
-
-            if (params['type']) {
-                this.taskType = params['type'];
-            } else {
-                this.taskType = '';
-            }
-
-            if (params['assignedToMe']) {
-                this.assignedToMe = params['assignedToMe'] === 'true' || params['assignedToMe'] === true;
-            } else {
-                this.assignedToMe = false;
-            }
-
-            if (params['fromCo']) {
-                this.fromCo = params['fromCo'] === 'true' || params['fromCo'] === true;
-            } else {
-                this.fromCo = false;
-            }
-
-            if (params['departmentId']) {
-                this.departmentId = +params['departmentId'];
-            } else {
-                this.departmentId = null;
-            }
-
-            this.loadTasks();
-        });
+                // Reset to page 0 on any param change
+                this.currentPage = 0;
+                this.loadTasks();
+            });
     }
 
     get canCreateTask(): boolean {
@@ -118,19 +109,23 @@ export class TaskListComponent implements OnInit, OnDestroy {
             roles.includes('ROLE_CHIEF_OFFICER') || roles.includes('CHIEF_OFFICER');
     }
 
-    private autoRefreshInterval: any;
-
     ngOnDestroy(): void {
         this.destroy$.next();
         this.destroy$.complete();
+        if (this.queryParamSub) this.queryParamSub.unsubscribe();
+        if (this.loadTasksSub) this.loadTasksSub.unsubscribe();
     }
 
     ionViewWillEnter() {
+        this.currentUser = this.authService.currentUserValue;
+        // Reset to first page and clear list so loader shows fresh content
         this.currentPage = 0;
-        this.loadTasks(null, true);
+        this.tasks = [];
+        this.loadTasks();
     }
 
     ionViewDidEnter() {
+        if (this.autoRefreshInterval) clearInterval(this.autoRefreshInterval);
         this.autoRefreshInterval = setInterval(() => {
             this.loadTasks(null, true);
         }, 10000);
@@ -139,6 +134,12 @@ export class TaskListComponent implements OnInit, OnDestroy {
     ionViewWillLeave() {
         if (this.autoRefreshInterval) {
             clearInterval(this.autoRefreshInterval);
+            this.autoRefreshInterval = null;
+        }
+        // Cancel any in-flight load request when leaving
+        if (this.loadTasksSub) {
+            this.loadTasksSub.unsubscribe();
+            this.loadTasksSub = undefined;
         }
     }
 
@@ -155,6 +156,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
         ).subscribe(searchText => {
             this.searchText = searchText;
             this.currentPage = 0;
+            this.tasks = [];
             this.loadTasks();
         });
     }
@@ -166,6 +168,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
     setType(type: string) {
         this.taskType = type;
         this.currentPage = 0;
+        this.tasks = [];
         this.loadTasks();
     }
 
@@ -178,6 +181,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
             case 'FILTER_COMPLETED': this.statusFilter = 'COMPLETED'; break;
             default: this.statusFilter = ''; break;
         }
+        this.currentPage = 0;
+        this.tasks = [];
         this.loadTasks();
     }
 
@@ -189,6 +194,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
             case 'COMPLETED': this.activeTab = 'FILTER_COMPLETED'; break;
             default: this.activeTab = 'FILTER_ALL'; break;
         }
+        this.currentPage = 0;
+        this.tasks = [];
         this.loadTasks();
     }
 
@@ -197,11 +204,9 @@ export class TaskListComponent implements OnInit, OnDestroy {
             this.tasks = newData;
             return;
         }
-
         newData.forEach(newItem => {
             const existingIndex = this.tasks.findIndex(t => t.id === newItem.id);
             if (existingIndex > -1) {
-                // Ensure Angular detects the reassignment properly
                 this.tasks[existingIndex] = { ...this.tasks[existingIndex], ...newItem };
             } else {
                 this.tasks.push(newItem);
@@ -210,7 +215,18 @@ export class TaskListComponent implements OnInit, OnDestroy {
     }
 
     loadTasks(event: any = null, silent: boolean = false) {
-        if (!event && !silent) this.isLoading = true;
+        // Cancel any existing in-flight request
+        if (this.loadTasksSub) {
+            this.loadTasksSub.unsubscribe();
+            this.loadTasksSub = undefined;
+        }
+
+        // Show loader unless it's a silent background refresh or pull-to-refresh
+        if (!event && !silent) {
+            this.isLoading = true;
+            this.cdr.detectChanges();
+        }
+
         const filters: any = {
             page: this.currentPage,
             size: this.pageSize,
@@ -224,7 +240,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
         if (this.fromCo) filters.fromCo = true;
         if (this.departmentId) filters.departmentId = this.departmentId;
 
-        this.taskService.getTasks(filters).subscribe({
+        this.loadTasksSub = this.taskService.getTasks(filters).subscribe({
             next: (res: any) => {
                 this.isLoading = false;
                 if (res.success) {
@@ -232,17 +248,18 @@ export class TaskListComponent implements OnInit, OnDestroy {
                     this.mergeData(newData);
                     this.totalPages = res.data.totalPages;
                     this.totalElements = res.data.totalElements;
-                    this.cdr.detectChanges();
                     this.updateTabCounts();
                 }
+                this.cdr.detectChanges();
                 if (event) event.target.complete();
             },
             error: async (err: any) => {
                 this.isLoading = false;
+                this.cdr.detectChanges();
                 console.error('Error fetching tasks', err);
                 const toast = await this.toastController.create({
-                    message: `Failed to load tasks: ${err.status} - ${err.message}`,
-                    duration: 5000,
+                    message: `Failed to load tasks`,
+                    duration: 3000,
                     color: 'danger',
                     position: 'bottom'
                 });
@@ -254,11 +271,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
     updateTabCounts() {
         const fetchCount = (status: string, tabLabel: string) => {
-            const filters: any = {
-                page: 0,
-                size: 1,
-                sort: 'id,desc'
-            };
+            const filters: any = { page: 0, size: 1, sort: 'id,desc' };
             if (this.taskType && this.taskType !== '') filters.type = this.taskType;
             if (this.priorityFilter) filters.priority = this.priorityFilter;
             if (this.searchText) filters.search = this.searchText;

@@ -11,6 +11,8 @@ import { IonicModule, LoadingController, ToastController } from '@ionic/angular'
 import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { Location } from '@angular/common';
+
 @Component({
     selector: 'app-task-form',
     standalone: true,
@@ -46,10 +48,19 @@ export class TaskFormComponent implements OnInit {
         private complaintService: ComplaintService,
         private route: ActivatedRoute,
         private router: Router,
+        private location: Location,
         private loadingController: LoadingController, // Keep for save actions
         private toastController: ToastController,
         private cdr: ChangeDetectorRef
     ) { }
+
+    goBack() {
+        if (window.history.length > 1) {
+            this.location.back();
+        } else {
+            this.router.navigate(['/tabs/tasks']);
+        }
+    }
 
     ngOnInit() {}
 

@@ -18,7 +18,7 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file("C:/Users/darad/OneDrive/Desktop/Play Store Deployment/townseva-release-key.jks")
+            storeFile file("townseva-release-key.jks")
             storePassword "TownSeva@123"
             keyAlias "townseva-key"
             keyPassword "TownSeva@123"

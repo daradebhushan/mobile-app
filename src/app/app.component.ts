@@ -1,5 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { Location } from '@angular/common';
 import { PushNotifications, Token, ActionPerformed, PushNotificationSchema } from '@capacitor/push-notifications';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { FileOpener } from '@capacitor-community/file-opener';
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private menu: MenuController,
     private router: Router,
+    private location: Location,
     private authService: AuthService,
     private themeService: ThemeService,
     private zone: NgZone
@@ -38,23 +40,68 @@ export class AppComponent implements OnInit {
 
   initFallbackBackButton() {
     this.platform.backButton.subscribeWithPriority(-10, () => {
-      console.log('App fallback backbutton handler fired. Current URL:', this.router.url);
-      const currentUrl = this.router.url;
-      if (currentUrl === '/login' || currentUrl === '/tabs/home' || currentUrl === '/tabs/owner/dashboard' || currentUrl === '/') {
-        console.log('At root page, exiting app.');
+      const rawUrl = this.router.url || '';
+      const currentUrl = rawUrl.split('?')[0].split('#')[0];
+      console.log('App backbutton handler fired. Current URL:', currentUrl);
+
+      // 1. Root Landing & Primary Home pages -> Exit app
+      const isRootHome = currentUrl === '/login' ||
+                         currentUrl === '/tabs/home' ||
+                         currentUrl === '/tabs/owner/dashboard' ||
+                         currentUrl === '/' ||
+                         currentUrl === '';
+
+      if (isRootHome) {
+        console.log('At primary root home, exiting app.');
         App.exitApp();
-      } else {
-        console.log('Not at root page, redirecting to dashboard...');
+        return;
+      }
+
+      // 2. Secondary Root Tabs (Tasks, Complaints, Users, Settings, Owner Admin Management)
+      // When at the root list of these tabs, back button returns to the home dashboard
+      const isSecondaryRootTab = currentUrl === '/tabs/tasks' ||
+                                 currentUrl === '/tabs/complaints' ||
+                                 currentUrl === '/tabs/admin/users' ||
+                                 currentUrl === '/tabs/admin/departments' ||
+                                 currentUrl === '/tabs/settings' ||
+                                 currentUrl === '/tabs/admin/settings' ||
+                                 currentUrl === '/tabs/owner/admin-management';
+
+      if (isSecondaryRootTab) {
+        console.log('At secondary root tab, returning to home dashboard...');
         const user = this.authService.currentUserValue;
         if (user) {
           const roles = user.roles || [];
-          if (roles.includes('ROLE_OWNER') || roles.includes('OWNER')) {
+          if (roles.includes('ROLE_OWNER') || roles.includes('OWNER') || (user as any).role === 'OWNER') {
             this.router.navigate(['/tabs/owner/dashboard']);
           } else {
             this.router.navigate(['/tabs/home']);
           }
         } else {
           this.router.navigate(['/login']);
+        }
+        return;
+      }
+
+      // 3. Sub-pages (Task Detail, Task Form, Complaint Detail, User Form, etc.)
+      // Pop the history stack to return to previous screen
+      console.log('At sub-page, navigating back in history...');
+      if (window.history.length > 1) {
+        this.location.back();
+      } else {
+        // Fallback if no history exists (e.g. opened directly from notification or deep link)
+        if (currentUrl.includes('/tasks')) {
+          this.router.navigate(['/tabs/tasks']);
+        } else if (currentUrl.includes('/complaint')) {
+          this.router.navigate(['/tabs/complaints']);
+        } else if (currentUrl.includes('/admin/users')) {
+          this.router.navigate(['/tabs/admin/users']);
+        } else if (currentUrl.includes('/admin/departments')) {
+          this.router.navigate(['/tabs/admin/departments']);
+        } else if (currentUrl.includes('/admin/complaint-types')) {
+          this.router.navigate(['/tabs/admin/complaint-types']);
+        } else {
+          this.router.navigate(['/tabs/home']);
         }
       }
     });

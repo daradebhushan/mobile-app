@@ -40,6 +40,7 @@ export class UserListComponent implements OnInit {
     }
 
     ionViewWillEnter() {
+        this.allUsers = []; // clear stale data so skeleton shows
         this.loadData();
     }
 

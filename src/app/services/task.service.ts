@@ -74,13 +74,13 @@ export class TaskService {
     }
 
     // Attachments
-    uploadAttachments(taskId: number, files: FileList): Observable<any> {
+    uploadAttachments(taskId: number, files: File[] | FileList): Observable<any> {
         const formData = new FormData();
         Array.from(files).forEach(file => formData.append('files', file));
         return this.http.post<any>(`${this.apiUrl}/${taskId}/attachments/batch`, formData);
     }
 
-    uploadCommentAttachments(taskId: number, commentId: number, files: FileList): Observable<any> {
+    uploadCommentAttachments(taskId: number, commentId: number, files: File[] | FileList): Observable<any> {
         const formData = new FormData();
         Array.from(files).forEach(file => formData.append('files', file));
         return this.http.post<any>(`${this.apiUrl}/${taskId}/comments/${commentId}/attachments/batch`, formData);

@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+
 @Component({
     selector: 'app-chatbot-settings',
     templateUrl: './chatbot-settings.page.html',
@@ -29,8 +32,18 @@ export class ChatbotSettingsPage implements OnInit {
 
     constructor(
         private chatbotService: ChatbotService,
-        private cdr: ChangeDetectorRef
+        private cdr: ChangeDetectorRef,
+        private location: Location,
+        private router: Router
     ) { }
+
+    goBack() {
+        if (window.history.length > 1) {
+            this.location.back();
+        } else {
+            this.router.navigate(['/tabs/settings']);
+        }
+    }
 
     ngOnInit() {
         this.loadSettings();

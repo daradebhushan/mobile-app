@@ -4,13 +4,18 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { ComplaintTypeService, ComplaintType } from '../../../../services/complaint-type.service';
 
+import { Location } from '@angular/common';
+import { NavController } from '@ionic/angular';
+
 @Component({
     selector: 'app-complaint-type-list',
     template: `
     <ion-header>
         <ion-toolbar color="primary">
             <ion-buttons slot="start">
-                <ion-back-button defaultHref="/tabs/settings"></ion-back-button>
+                <ion-button (click)="goBack()">
+                    <ion-icon name="chevron-back" slot="icon-only"></ion-icon>
+                </ion-button>
             </ion-buttons>
             <ion-title>Complaint Types</ion-title>
             <ion-buttons slot="end">
@@ -54,7 +59,19 @@ export class ComplaintTypeListComponent implements OnInit {
     types: ComplaintType[] = [];
     loading = false;
 
-    constructor(private complaintTypeService: ComplaintTypeService) { }
+    constructor(
+        private complaintTypeService: ComplaintTypeService,
+        private navCtrl: NavController,
+        private location: Location
+    ) { }
+
+    goBack() {
+        if (window.history.length > 1) {
+            this.location.back();
+        } else {
+            this.navCtrl.navigateBack('/tabs/settings');
+        }
+    }
 
     ngOnInit() {
         this.loadTypes();

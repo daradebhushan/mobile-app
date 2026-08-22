@@ -110,83 +110,94 @@
     </ion-refresher>
     <div class="p-5 space-y-4 pb-32">
 
-        <!-- Loader -->
-        <div *ngIf="isLoading && tasks.length === 0" class="space-y-4">
+        <!-- Loader: shows on EVERY load (tab switch, filter, re-entry) -->
+        <div *ngIf="isLoading" class="space-y-4">
             <div *ngFor="let i of [1,2,3,4]"
                 class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-transparent modern-shadow animate-pulse">
-                <div class="h-3 bg-gray-100 rounded-full w-1/4 mb-4"></div>
-                <div class="h-5 bg-gray-100 rounded-full w-3/4 mb-6"></div>
-                <div class="flex space-x-4">
-                    <div class="h-8 bg-gray-100 rounded-xl w-24"></div>
-                    <div class="h-8 bg-gray-100 rounded-xl w-24"></div>
+                <div class="flex justify-between mb-4">
+                    <div class="h-2.5 bg-gray-100 dark:bg-gray-700 rounded-full w-1/5"></div>
+                    <div class="h-2.5 bg-gray-100 dark:bg-gray-700 rounded-full w-1/6"></div>
+                </div>
+                <div class="h-5 bg-gray-100 dark:bg-gray-700 rounded-full w-3/4 mb-3"></div>
+                <div class="h-3 bg-gray-100 dark:bg-gray-700 rounded-full w-1/2 mb-6"></div>
+                <div class="flex justify-between items-center pt-3 border-t border-gray-100 dark:border-gray-700">
+                    <div class="flex space-x-2 items-center">
+                        <div class="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded-full"></div>
+                        <div class="h-2.5 bg-gray-100 dark:bg-gray-700 rounded-full w-20"></div>
+                    </div>
+                    <div class="h-6 bg-gray-100 dark:bg-gray-700 rounded-lg w-20"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Task Items -->
-        <div *ngFor="let task of tasks; let i = index; trackBy: trackByTaskId"
-            class="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-transparent modern-shadow active:scale-[0.99] transition-all duration-300 group relative overflow-hidden animate-fade-in-up stagger-item"
-            [style.animation-delay]="i * 0.05 + 's'" (click)="openTask(task)">
 
-            <!-- Priority Indicator -->
-            <div class="absolute left-0 top-0 bottom-0 w-1.5" [ngClass]="{
-                    'bg-red-500': task.priority === 'CRITICAL',
-                    'bg-orange-500': task.priority === 'HIGH',
-                    'bg-yellow-500': task.priority === 'MEDIUM',
-                    'bg-blue-500': task.priority === 'LOW'
-                }"></div>
+        <!-- Task Items (hidden while loading to prevent stale flash) -->
+        <ng-container *ngIf="!isLoading">
+            <div *ngFor="let task of tasks; let i = index; trackBy: trackByTaskId"
+                class="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-transparent modern-shadow active:scale-[0.99] transition-all duration-300 group relative overflow-hidden animate-fade-in-up stagger-item"
+                [style.animation-delay]="i * 0.05 + 's'" (click)="openTask(task)">
 
-            <div class="pl-3">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-[10px] font-bold tracking-wider text-gray-400 uppercase">
-                        {{ task.type === 'Complaint' ? 'COMPLAINT' : 'NP-' + task.id }}
-                    </span>
-                    <div *ngIf="task.priority === 'CRITICAL'"
-                        class="flex items-center space-x-1.5 px-2 py-0.5 bg-red-50 dark:bg-red-900/20 rounded text-red-600 dark:text-red-400">
-                        <span class="w-1.5 h-1.5 bg-current rounded-full animate-pulse"></span>
-                        <span class="text-[9px] font-black uppercase tracking-widest">Critical</span>
-                    </div>
-                </div>
+                <!-- Priority Indicator -->
+                <div class="absolute left-0 top-0 bottom-0 w-1.5" [ngClass]="{
+                        'bg-red-500': task.priority === 'CRITICAL',
+                        'bg-orange-500': task.priority === 'HIGH',
+                        'bg-yellow-500': task.priority === 'MEDIUM',
+                        'bg-blue-500': task.priority === 'LOW'
+                    }"></div>
 
-                <h3
-                    class="text-lg font-bold text-gray-900 dark:text-white mb-3 leading-snug line-clamp-2 group-active:text-gray-700 transition-colors tracking-tight">
-                    {{ task.title }}
-                </h3>
-
-                <div class="flex items-center space-x-3 mb-4">
-                    <div
-                        class="flex items-center space-x-2 bg-gray-50 dark:bg-gray-900/50 px-2.5 py-1.5 rounded-lg border border-gray-100 dark:border-gray-800">
-                        <ion-icon name="calendar-clear-outline" class="text-gray-400 text-xs"></ion-icon>
-                        <span class="text-[11px] font-semibold text-gray-600 dark:text-gray-400"
-                            [class.text-red-500]="isOverdue(task)">
-                            {{ task.dueDate | date:'d MMM' }}
+                <div class="pl-3">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-[10px] font-bold tracking-wider text-gray-400 uppercase">
+                            {{ task.type === 'Complaint' ? 'COMPLAINT' : 'NP-' + task.id }}
                         </span>
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-between pt-3 border-t border-gray-50 dark:border-gray-700/50">
-                    <div class="flex items-center space-x-2">
-                        <div
-                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-[9px] font-black text-gray-600 dark:text-gray-300 ring-2 ring-white dark:ring-gray-800">
-                            {{ ((task.assignedStaff?.name || task.assignedStaffName) | slice:0:1) || '?' }}
+                        <div *ngIf="task.priority === 'CRITICAL'"
+                            class="flex items-center space-x-1.5 px-2 py-0.5 bg-red-50 dark:bg-red-900/20 rounded text-red-600 dark:text-red-400">
+                            <span class="w-1.5 h-1.5 bg-current rounded-full animate-pulse"></span>
+                            <span class="text-[9px] font-black uppercase tracking-widest">Critical</span>
                         </div>
-                        <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400 truncate max-w-[100px]">
-                            {{ task.assignedStaff?.name || task.assignedStaffName || ('UNASSIGNED' | translate) }}
-                        </span>
                     </div>
 
-                    <span class="px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest border"
-                        [ngClass]="{
-                            'bg-blue-50 text-blue-700 border-blue-100': task.status === 'IN_PROGRESS',
-                            'bg-green-50 text-green-700 border-green-100': task.status === 'COMPLETED',
-                            'bg-gray-50 text-gray-500 border-gray-100': task.status === 'TO_DO',
-                            'bg-yellow-50 text-yellow-700 border-yellow-100': task.status === 'ON_HOLD'
-                        }">
-                        {{ task.status | translate }}
-                    </span>
+                    <h3
+                        class="text-lg font-bold text-gray-900 dark:text-white mb-3 leading-snug line-clamp-2 group-active:text-gray-700 transition-colors tracking-tight">
+                        {{ task.title }}
+                    </h3>
+
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div
+                            class="flex items-center space-x-2 bg-gray-50 dark:bg-gray-900/50 px-2.5 py-1.5 rounded-lg border border-gray-100 dark:border-gray-800">
+                            <ion-icon name="calendar-clear-outline" class="text-gray-400 text-xs"></ion-icon>
+                            <span class="text-[11px] font-semibold text-gray-600 dark:text-gray-400"
+                                [class.text-red-500]="isOverdue(task)">
+                                {{ task.dueDate | date:'d MMM' }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-3 border-t border-gray-50 dark:border-gray-700/50">
+                        <div class="flex items-center space-x-2">
+                            <div
+                                class="w-6 h-6 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-[9px] font-black text-gray-600 dark:text-gray-300 ring-2 ring-white dark:ring-gray-800">
+                                {{ ((task.assignedStaff?.name || task.assignedStaffName) | slice:0:1) || '?' }}
+                            </div>
+                            <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400 truncate max-w-[100px]">
+                                {{ task.assignedStaff?.name || task.assignedStaffName || ('UNASSIGNED' | translate) }}
+                            </span>
+                        </div>
+
+                        <span class="px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest border"
+                            [ngClass]="{
+                                'bg-blue-50 text-blue-700 border-blue-100': task.status === 'IN_PROGRESS',
+                                'bg-green-50 text-green-700 border-green-100': task.status === 'COMPLETED',
+                                'bg-gray-50 text-gray-500 border-gray-100': task.status === 'TO_DO',
+                                'bg-yellow-50 text-yellow-700 border-yellow-100': task.status === 'ON_HOLD'
+                            }">
+                            {{ task.status | translate }}
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
+        </ng-container>
+
 
         <!-- Empty State -->
         <div *ngIf="tasks.length === 0 && !isLoading"

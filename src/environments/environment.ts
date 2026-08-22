@@ -1,5 +1,7 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://townseva.in'
+  apiUrl: 'http://localhost:9090'
 };
+
+
 

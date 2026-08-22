@@ -6,6 +6,9 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { LanguageService } from '../../../services/language.service';
 import { IonicModule, AlertController, ToastController } from '@ionic/angular';
 
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+
 @Component({
     selector: 'app-designation-manager',
     standalone: true,
@@ -21,8 +24,18 @@ export class DesignationManagerComponent implements OnInit {
         private designationService: DesignationService,
         private alertController: AlertController,
         private toastController: ToastController,
-        private languageService: LanguageService
+        private languageService: LanguageService,
+        private location: Location,
+        private router: Router
     ) { }
+
+    goBack() {
+        if (window.history.length > 1) {
+            this.location.back();
+        } else {
+            this.router.navigate(['/tabs/admin/users']);
+        }
+    }
 
     ngOnInit() {
         this.loadDesignations();

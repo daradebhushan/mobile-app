@@ -31,4 +31,22 @@ export class OwnerService {
     resetAdminPassword(email: string, newPassword: string): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}/users/reset-password`, { email, newPassword });
     }
+
+    getWhatsappGatewayStatus(adminId: number = 1): Observable<any> {
+        let params = new HttpParams().set('adminId', adminId);
+        return this.http.get<any>(`${this.apiUrl}/whatsapp/gateway`, { params });
+    }
+
+    unlinkWhatsappGateway(adminId: number = 1): Observable<any> {
+        let params = new HttpParams().set('adminId', adminId);
+        return this.http.post<any>(`${this.apiUrl}/whatsapp/gateway/unlink`, {}, { params });
+    }
+
+    getAdminWhatsappConfig(adminId: number): Observable<any> {
+        return this.http.get<any>(`${this.apiUrl}/admins/${adminId}/whatsapp`);
+    }
+
+    updateAdminWhatsappConfig(adminId: number, data: any): Observable<any> {
+        return this.http.put<any>(`${this.apiUrl}/admins/${adminId}/whatsapp`, data);
+    }
 }

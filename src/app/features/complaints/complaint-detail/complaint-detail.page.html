@@ -1,37 +1,46 @@
 <ion-header class="ion-no-border group relative z-50">
     <div class="bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 px-2 py-2 shadow-sm transition-all duration-300 relative flex items-center"
         style="padding-top: calc(0.5rem + var(--ion-safe-area-top));">
-        <ion-buttons slot="start">
-            <ion-back-button defaultHref="/tabs/complaints" class="text-gray-800 dark:text-white"
-                icon="chevron-back"></ion-back-button>
-        </ion-buttons>
+        <button (click)="goBack()" class="w-10 h-10 rounded-full flex items-center justify-center text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 active:scale-95 transition-all mr-2">
+            <ion-icon name="chevron-back" class="text-2xl"></ion-icon>
+        </button>
         <h1 class="text-sm font-black uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 mx-auto pr-8">
             {{ 'COMPLAINT_DETAILS' | translate }}
         </h1>
     </div>
 </ion-header>
 
-<ion-content class="bg-[#F8FAFC] dark:bg-[#0B0F19]">
+<ion-content [scrollY]="true" [fullscreen]="true" class="bg-[#F8FAFC] dark:bg-[#0B0F19]">
 
-    <!-- Loading State -->
-    <div *ngIf="loading" class="flex flex-col items-center justify-center h-full space-y-4">
-        <div class="relative w-12 h-12 flex items-center justify-center">
-            <div class="absolute inset-0 border-4 border-gray-200 dark:border-gray-800 rounded-full"></div>
-            <div class="absolute inset-0 border-4 border-saffron-500 rounded-full border-t-transparent animate-spin">
+    <!-- Skeleton Loading State -->
+    <div *ngIf="isLoading" class="p-4 pt-2 pb-32 space-y-4 animate-pulse">
+        <!-- Status Hero skeleton -->
+        <div class="mx-4 mt-2 rounded-[2.5rem] bg-gray-100 dark:bg-gray-800 h-48"></div>
+        <!-- Info cards skeleton -->
+        <div class="px-4 grid grid-cols-2 gap-3">
+            <div *ngFor="let i of [1,2,3,4]" class="bg-white dark:bg-gray-900 rounded-2xl p-4 border border-gray-100 dark:border-gray-800 shadow-sm space-y-2">
+                <div class="h-3 bg-gray-100 dark:bg-gray-700 rounded-full w-16"></div>
+                <div class="h-4 bg-gray-100 dark:bg-gray-700 rounded-full w-full"></div>
             </div>
         </div>
-        <p class="text-xs text-gray-400 dark:text-gray-500 font-bold tracking-widest uppercase">Loading Details...</p>
+        <!-- Description skeleton -->
+        <div class="mx-4 bg-white dark:bg-gray-900 rounded-2xl p-5 border border-gray-100 dark:border-gray-800 shadow-sm space-y-2">
+            <div class="h-3 bg-gray-100 dark:bg-gray-700 rounded-full w-24 mb-3"></div>
+            <div class="h-3 bg-gray-100 dark:bg-gray-700 rounded-full w-full"></div>
+            <div class="h-3 bg-gray-100 dark:bg-gray-700 rounded-full w-4/5"></div>
+            <div class="h-3 bg-gray-100 dark:bg-gray-700 rounded-full w-2/3"></div>
+        </div>
     </div>
 
     <!-- Error State -->
-    <div *ngIf="!loading && !complaint" class="flex flex-col items-center justify-center h-full px-6 text-center">
+    <div *ngIf="!isLoading && !complaint" class="flex flex-col items-center justify-center h-full px-6 text-center">
         <div class="w-20 h-20 bg-gray-100 dark:bg-gray-900 rounded-full flex items-center justify-center mb-6">
             <ion-icon name="alert-circle-outline" class="text-4xl text-gray-400 dark:text-gray-600"></ion-icon>
         </div>
         <p class="text-gray-500 dark:text-gray-400 font-medium">We couldn't find that complaint.</p>
     </div>
 
-    <div class="pb-32" *ngIf="!loading && complaint">
+    <div class="pb-32" *ngIf="!isLoading && complaint">
 
         <!-- Top Status Hero Section -->
         <div class="relative px-6 pt-10 pb-10 mx-4 mt-2 rounded-[2.5rem] shadow-xl shadow-gray-200/50 dark:shadow-black/50 overflow-hidden mb-8 border border-white/50 dark:border-gray-800/50 backdrop-blur-3xl"
@@ -148,9 +157,14 @@
                     <p
                         class="text-[9px] uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 font-extrabold mb-1.5 opacity-80">
                         {{ 'COMPLAINT_TYPE' | translate }}</p>
-                    <p
-                        class="text-[14px] font-black text-gray-900 dark:text-white leading-tight line-clamp-2 relative z-10">
-                        {{ complaint.complaintTypeName || 'General' }}</p>
+                    <p class="text-[14px] font-black text-gray-900 dark:text-white leading-tight line-clamp-3 relative z-10">
+                        <span class="block">
+                            {{ complaint.complaintTypeName || 'General' }}
+                        </span>
+                        <span *ngIf="complaint.subComplaintType && complaint.subComplaintType !== complaint.complaintTypeName" class="text-[12px] font-bold text-gray-500 dark:text-gray-400 block mt-1 leading-snug">
+                            ({{ complaint.subComplaintType }})
+                        </span>
+                    </p>
                 </div>
 
                 <!-- Citizen Card (If Available) -->
@@ -408,15 +422,38 @@
                     </div>
                 </div>
 
-                <!-- Chat Input Area -->
-                <div class="mt-8 flex gap-3 relative" *ngIf="canManageComplaintActions && complaint.status !== 'REJECTED'">
-                    <input type="text" [(ngModel)]="newComment" placeholder="Add an update or comment..."
-                        class="flex-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl text-gray-900 dark:text-white border border-white/60 dark:border-gray-800/60 rounded-[2rem] pl-6 pr-16 py-5 shadow-lg shadow-gray-200/20 dark:shadow-black/20 text-[14px] font-bold focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder-gray-400 w-full outline-none">
+                <!-- Chat Input Area with Attachment -->
+                <div class="mt-8 relative" *ngIf="canManageComplaintActions && complaint.status !== 'REJECTED'">
+                    <!-- Selected File Preview Chip -->
+                    <div *ngIf="selectedCommentFile" class="flex items-center gap-2 mb-2 px-2 animate-fade-in">
+                        <div class="bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800 text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-xs">
+                            <ion-icon name="attach" class="text-sm"></ion-icon>
+                            <span class="max-w-[160px] truncate">{{ selectedCommentFile.name }}</span>
+                            <button type="button" (click)="removeCommentFile()" class="text-gray-400 hover:text-red-500 ml-1 flex items-center">
+                                <ion-icon name="close-circle" class="text-sm"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
 
-                    <button (click)="addComment()" [disabled]="!newComment.trim()"
-                        class="absolute right-2 top-2 bottom-2 aspect-square rounded-[1.6rem] bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center shadow-xl shadow-blue-500/30 disabled:from-gray-200 disabled:to-gray-300 dark:disabled:from-gray-800 dark:disabled:to-gray-900 disabled:text-gray-400 transition-all active:scale-90 hover:scale-105 disabled:hover:scale-100 disabled:shadow-none pointer-events-auto z-10">
-                        <ion-icon name="send" class="text-xl ml-1"></ion-icon>
-                    </button>
+                    <div class="flex gap-2 items-center relative">
+                        <input type="file" #complaintFileInput accept="image/*,application/pdf,.doc,.docx,.xls,.xlsx" class="hidden" (change)="onCommentFileSelected($event)">
+
+                        <!-- Attachment Trigger Button -->
+                        <button type="button" (click)="complaintFileInput.click()"
+                            class="h-[52px] w-[52px] rounded-[1.6rem] bg-white/90 dark:bg-gray-900/90 text-gray-600 dark:text-gray-300 border border-white/60 dark:border-gray-800/60 flex items-center justify-center active:scale-90 hover:scale-105 shadow-sm transition-all shrink-0">
+                            <ion-icon name="attach" class="text-2xl rotate-[-45deg]"></ion-icon>
+                        </button>
+
+                        <div class="flex-1 relative">
+                            <input type="text" [(ngModel)]="newComment" placeholder="Add an update or note..."
+                                class="w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl text-gray-900 dark:text-white border border-white/60 dark:border-gray-800/60 rounded-[2rem] pl-5 pr-14 py-4 shadow-lg shadow-gray-200/20 dark:shadow-black/20 text-[14px] font-bold focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder-gray-400 outline-none">
+
+                            <button (click)="addComment()" [disabled]="!newComment.trim() && !selectedCommentFile"
+                                class="absolute right-1.5 top-1.5 bottom-1.5 aspect-square rounded-[1.5rem] bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center shadow-xl shadow-blue-500/30 disabled:from-gray-200 disabled:to-gray-300 dark:disabled:from-gray-800 dark:disabled:to-gray-900 disabled:text-gray-400 transition-all active:scale-90 hover:scale-105 disabled:hover:scale-100 disabled:shadow-none pointer-events-auto z-10">
+                                <ion-icon name="send" class="text-lg ml-0.5"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 

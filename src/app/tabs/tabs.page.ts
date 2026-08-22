@@ -13,15 +13,14 @@ import { map, Observable, Subscription } from 'rxjs';
     standalone: true,
     imports: [IonicModule, CommonModule, TranslatePipe]
 })
-export class TabsPage implements OnDestroy {
+export class TabsPage {
     isOwner$: Observable<boolean>;
     isAdmin$: Observable<boolean>;
     isStaff$: Observable<boolean>;
-    private backButtonSub?: Subscription;
 
     @ViewChild('tabs', { static: false }) tabs!: IonTabs;
 
-    constructor(private authService: AuthService, private platform: Platform) {
+    constructor(private authService: AuthService) {
         this.isOwner$ = this.authService.user$.pipe(
             map(user => {
                 if (!user) return false;
@@ -48,63 +47,5 @@ export class TabsPage implements OnDestroy {
         this.isStaff$ = this.authService.user$.pipe(
             map(user => !!user && (user.roles.includes('ROLE_STAFF') || user.roles.includes('STAFF')))
         );
-    }
-
-    ionViewDidEnter() {
-        // Clean up any existing subscription to prevent duplicates
-        if (this.backButtonSub) {
-            this.backButtonSub.unsubscribe();
-        }
-
-        this.backButtonSub = this.platform.backButton.subscribeWithPriority(-1, async () => {
-            const selectedTab = this.tabs.getSelected();
-
-            // If we are NOT on home/dashboard tab (and at root of that tab), go to home.
-            // Note: Router Outlet handles depth within a tab properly by default (priority > -1).
-            // This -1 priority only catches when Router Outlet didn't handle it (i.e. at root of tab).
-
-            if (selectedTab !== 'home' && selectedTab !== 'owner/dashboard') {
-                // Check if user is owner or regular to redirect to correct dashboard
-                // We can simply try to navigate to home first if permitted, logic can be inferred
-                // But simpler: just switch tab
-                const isOwner = await this.isOwnerPromise();
-                if (isOwner) {
-                    if (selectedTab !== 'owner/dashboard') {
-                        this.tabs.select('owner/dashboard');
-                    } else {
-                        App.exitApp();
-                    }
-                } else {
-                    if (selectedTab !== 'home') {
-                        this.tabs.select('home');
-                    } else {
-                        App.exitApp();
-                    }
-                }
-            } else {
-                // Already on home/dashboard, exit app
-                App.exitApp();
-            }
-        });
-    }
-
-    ionViewWillLeave() {
-        if (this.backButtonSub) {
-            this.backButtonSub.unsubscribe();
-            this.backButtonSub = undefined;
-        }
-    }
-
-    ngOnDestroy() {
-        if (this.backButtonSub) {
-            this.backButtonSub.unsubscribe();
-        }
-    }
-
-    // Helper to get owner status as promise
-    private async isOwnerPromise(): Promise<boolean> {
-        let isOwner = false;
-        this.isOwner$.subscribe(val => isOwner = val).unsubscribe();
-        return isOwner;
     }
 }

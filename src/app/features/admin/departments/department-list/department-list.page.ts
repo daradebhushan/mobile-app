@@ -13,6 +13,7 @@ import { IonicModule, AlertController } from '@ionic/angular';
 })
 export class DepartmentListComponent implements OnInit {
     departments: any[] = [];
+    isLoading: boolean = false;
 
     constructor(
         private departmentService: DepartmentService,
@@ -31,7 +32,8 @@ export class DepartmentListComponent implements OnInit {
     private autoRefreshInterval: any;
 
     ionViewWillEnter() {
-        this.loadDepartments(null, true);
+        this.departments = []; // clear stale data so skeleton shows
+        this.loadDepartments();
     }
 
     ionViewDidEnter() {
@@ -65,8 +67,14 @@ export class DepartmentListComponent implements OnInit {
     }
 
     loadDepartments(event: any = null, silent: boolean = false) {
+        if (!event && !silent) {
+            this.isLoading = true;
+            this.departments = [];
+            this.cdr.detectChanges();
+        }
         this.departmentService.getAllDepartments().subscribe({
             next: (res: any) => {
+                this.isLoading = false;
                 if (res.success) {
                     const newData = res.data.content || res.data || [];
                     this.mergeData(newData);
@@ -77,7 +85,9 @@ export class DepartmentListComponent implements OnInit {
                 if (event) event.target.complete();
             },
             error: (err) => {
+                this.isLoading = false;
                 console.error('Error fetching departments', err);
+                this.cdr.detectChanges();
                 if (event) event.target.complete();
             }
         });

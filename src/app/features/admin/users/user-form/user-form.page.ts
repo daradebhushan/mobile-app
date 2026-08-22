@@ -8,6 +8,8 @@ import { TranslatePipe } from '../../../../core/pipes/translate.pipe';
 import { IonicModule, NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 
+import { Location } from '@angular/common';
+
 @Component({
     selector: 'app-user-form-page',
     standalone: true,
@@ -42,8 +44,17 @@ export class UserFormPageComponent implements OnInit {
         private designationService: DesignationService,
         private route: ActivatedRoute,
         private navCtrl: NavController,
+        private location: Location,
         private cdr: ChangeDetectorRef
     ) { }
+
+    goBack() {
+        if (window.history.length > 1) {
+            this.location.back();
+        } else {
+            this.navCtrl.navigateBack('/tabs/admin/users');
+        }
+    }
 
     ionViewWillEnter() {
         this.resetForm();

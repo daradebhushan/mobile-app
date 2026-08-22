@@ -5,16 +5,19 @@ import { TaskService } from '../../../services/task.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonicModule, AlertController, ToastController, Platform } from '@ionic/angular';
+import { IonicModule, AlertController, ToastController, Platform, ModalController } from '@ionic/angular';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { FileOpener } from '@capacitor-community/file-opener';
 import { Share } from '@capacitor/share';
 import { LocalNotifications } from '@capacitor/local-notifications';
 
+import { Location } from '@angular/common';
+import { ImageModalComponent } from '../../complaints/complaint-detail/image-modal.component';
+
 @Component({
     selector: 'app-task-detail',
     standalone: true,
-    imports: [CommonModule, FormsModule, TranslatePipe, IonicModule],
+    imports: [CommonModule, FormsModule, TranslatePipe, IonicModule, ImageModalComponent],
     templateUrl: './task-detail.page.html',
 })
 export class TaskDetailComponent implements OnInit {
@@ -26,53 +29,79 @@ export class TaskDetailComponent implements OnInit {
     taskId: number | null = null;
     statusOptions = ['TO_DO', 'IN_PROGRESS', 'ON_HOLD', 'COMPLETED'];
 
-    // Comment Editing State
+    // Comment Editing & Attachments State
     editingCommentId: number | null = null;
     editedCommentText: string = '';
     currentUser: any = null;
+    commentFiles: File[] = [];
+    isCommentUploading = false;
 
     constructor(
         private taskService: TaskService,
         private authService: AuthService,
         private route: ActivatedRoute,
         private router: Router,
+        private location: Location,
         private cdr: ChangeDetectorRef,
         private alertController: AlertController,
         private toastController: ToastController,
+        private modalController: ModalController,
         private platform: Platform
     ) { }
 
+    goBack() {
+        if (window.history.length > 1) {
+            this.location.back();
+        } else {
+            this.router.navigate(['/tabs/tasks']);
+        }
+    }
+
     ngOnInit() {
         this.currentUser = this.authService.currentUserValue;
+        // Read taskId here for initial setup only
         const taskIdParam = this.route.snapshot.paramMap.get('taskId');
         if (taskIdParam) {
             this.taskId = +taskIdParam;
         }
     }
 
+    isLoading: boolean = false;
+
     ionViewWillEnter() {
+        this.currentUser = this.authService.currentUserValue;
+        // Always re-read taskId on every entry to handle navigation to different tasks
+        const taskIdParam = this.route.snapshot.paramMap.get('taskId');
+        if (taskIdParam) {
+            this.taskId = +taskIdParam;
+        }
         if (this.taskId) {
+            // Clear stale data first so skeleton shows instead of stale content
+            this.task = null;
+            this.comments = [];
+            this.attachments = [];
             this.loadTask(this.taskId);
         }
     }
 
     loadTask(id: number) {
+        this.isLoading = true;
+        this.cdr.detectChanges();
         this.taskService.getTaskById(id).subscribe({
             next: (res: any) => {
+                this.isLoading = false;
                 if (res.success) {
                     this.task = res.data;
-                    console.log('DEBUG: Loaded Task:', this.task); // Log the full object
-                    if (this.task.relatedComplaint) {
-                        console.log('DEBUG: Related Complaint found:', this.task.relatedComplaint);
-                    } else {
-                        console.log('DEBUG: No Related Complaint in task object');
-                    }
                     this.loadComments();
                     this.loadAttachments();
                     this.cdr.detectChanges();
                 }
             },
-            error: (err: any) => console.error('TaskDetail: API Error:', err)
+            error: (err: any) => {
+                this.isLoading = false;
+                this.cdr.detectChanges();
+                console.error('TaskDetail: API Error:', err);
+            }
         });
     }
 
@@ -300,39 +329,84 @@ export class TaskDetailComponent implements OnInit {
     // ... inside TaskDetailComponent
 
     // Comment Attachments
-    newCommentFiles: FileList | null = null;
+    onCommentFilesSelected(event: any) {
+        if (event.target.files && event.target.files.length > 0) {
+            const files: FileList = event.target.files;
+            for (let i = 0; i < files.length; i++) {
+                this.commentFiles.push(files[i]);
+            }
+            // Reset the input value so selecting the same file again triggers change
+            event.target.value = '';
+            this.cdr.detectChanges();
+        }
+    }
 
-    onCommentFileSelected(event: any) {
-        this.newCommentFiles = event.target.files;
+    removeCommentFile(index: number) {
+        this.commentFiles.splice(index, 1);
+        this.cdr.detectChanges();
+    }
+
+    isImageFile(fileName: string): boolean {
+        if (!fileName) return false;
+        const ext = fileName.split('.').pop()?.toLowerCase();
+        return ['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp', 'svg'].includes(ext || '');
+    }
+
+    async openImagePreview(url: string) {
+        const modal = await this.modalController.create({
+            component: ImageModalComponent,
+            componentProps: { imageUrl: url }
+        });
+        await modal.present();
     }
 
     addComment() {
-        if ((!this.newComment.trim() && (!this.newCommentFiles || this.newCommentFiles.length === 0)) || !this.taskId) return;
+        const hasText = this.newComment && this.newComment.trim().length > 0;
+        const hasFiles = this.commentFiles && this.commentFiles.length > 0;
+        if ((!hasText && !hasFiles) || !this.taskId || this.isCommentUploading) return;
 
-        this.taskService.addComment(this.taskId, this.newComment).subscribe({
+        const commentText = hasText ? this.newComment.trim() : '📎 Attached file(s)';
+        this.isCommentUploading = true;
+
+        this.taskService.addComment(this.taskId, commentText).subscribe({
             next: (res: any) => {
                 if (res.success) {
                     const commentId = res.data.id;
-                    if (this.newCommentFiles && this.newCommentFiles.length > 0) {
-                        this.taskService.uploadCommentAttachments(this.taskId!, commentId, this.newCommentFiles).subscribe({
+                    if (hasFiles) {
+                        this.taskService.uploadCommentAttachments(this.taskId!, commentId, this.commentFiles).subscribe({
                             next: () => {
                                 this.resetCommentInput();
+                                this.isCommentUploading = false;
                                 this.loadComments();
+                                this.loadAttachments();
                             },
-                            error: (err) => console.error('Failed to upload comment attachments', err)
+                            error: (err) => {
+                                console.error('Failed to upload comment attachments', err);
+                                this.isCommentUploading = false;
+                                this.resetCommentInput();
+                                this.loadComments();
+                            }
                         });
                     } else {
                         this.resetCommentInput();
+                        this.isCommentUploading = false;
                         this.loadComments();
                     }
+                } else {
+                    this.isCommentUploading = false;
                 }
+            },
+            error: (err) => {
+                console.error('Failed to add comment', err);
+                this.isCommentUploading = false;
             }
         });
     }
 
     resetCommentInput() {
         this.newComment = '';
-        this.newCommentFiles = null;
+        this.commentFiles = [];
+        this.cdr.detectChanges();
     }
 
     startEditing(comment: any) {

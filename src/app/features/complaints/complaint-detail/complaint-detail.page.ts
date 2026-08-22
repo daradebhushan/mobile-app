@@ -13,6 +13,8 @@ import { LocalNotifications } from '@capacitor/local-notifications';
 import { ImageModalComponent } from './image-modal.component';
 import { AuthService } from '../../../services/auth/auth.service';
 
+import { Location } from '@angular/common';
+
 @Component({
     selector: 'app-complaint-detail',
     standalone: true,
@@ -24,11 +26,12 @@ export class ComplaintDetailPage implements OnInit {
     complaint: Complaint | null = null;
     complaintId: number | null = null;
     newComment: string = '';
-    loading = false;
+    isLoading = false;
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
+        private location: Location,
         private complaintService: ComplaintService,
         private cdr: ChangeDetectorRef,
         private alertController: AlertController,
@@ -39,6 +42,14 @@ export class ComplaintDetailPage implements OnInit {
         private sanitizer: DomSanitizer,
         private authService: AuthService
     ) { }
+
+    goBack() {
+        if (window.history.length > 1) {
+            this.location.back();
+        } else {
+            this.router.navigate(['/tabs/complaints']);
+        }
+    }
 
     get isAdmin(): boolean {
         const user = this.authService.currentUserValue;
@@ -57,6 +68,20 @@ export class ComplaintDetailPage implements OnInit {
         const idParam = this.route.snapshot.paramMap.get('id');
         if (idParam) {
             this.complaintId = +idParam;
+        }
+    }
+
+    ionViewWillEnter() {
+        // Re-read ID on every entry to handle navigation between different complaints
+        const idParam = this.route.snapshot.paramMap.get('id');
+        if (idParam) {
+            this.complaintId = +idParam;
+        }
+        if (this.complaintId) {
+            // Clear stale data so skeleton shows immediately
+            this.complaint = null;
+            this.attachmentImages = {};
+            this.attachmentLoadErrors = {};
             this.loadComplaint();
         }
     }
@@ -67,35 +92,27 @@ export class ComplaintDetailPage implements OnInit {
 
     loadComplaint() {
         if (!this.complaintId) return;
-        this.loading = true;
+        this.isLoading = true;
         this.mainPhotoError = false;
         this.complaintService.getComplaintById(this.complaintId).subscribe({
             next: (res) => {
-                this.complaint = res; // Backend returns DTO directly
+                this.complaint = res;
                 if (this.complaint) {
                     if (this.complaint.photoUrl === 'null') {
                         this.complaint.photoUrl = undefined;
                     }
                     this.safePhotoUrl = this.getSafeUrl(this.complaint.photoUrl);
-                    console.log('Original Photo URL:', this.complaint.photoUrl);
-                    console.log('Safe Photo URL:', this.safePhotoUrl);
 
-                    // Fetch as Blob to bypass ngrok warning
                     if (this.complaint.photoUrl) {
                         this.loadMainPhotoBlob(this.complaint.photoUrl);
                     }
 
-                    // CLEANUP: Remove Sub-Issue from Description and Metadata
                     if (this.complaint.description) {
                         let desc = this.complaint.description.trim();
-
-                        // 1. Remove "--- Additional Details ---" and everything after it
                         const metadataMarker = "--- Additional Details ---";
                         if (desc.includes(metadataMarker)) {
                             desc = desc.split(metadataMarker)[0].trim();
                         }
-
-                        // 2. Remove Sub-Issue suffix if present (OLD logic, keeping just in case)
                         if (this.complaint.subComplaintType) {
                             const subIssue = this.complaint.subComplaintType.trim();
                             if (desc.toLowerCase().startsWith(subIssue.toLowerCase())) {
@@ -107,13 +124,14 @@ export class ComplaintDetailPage implements OnInit {
                     }
                 }
                 this.loadAttachmentImages();
-                this.loading = false;
+                this.isLoading = false;
                 this.cdr.detectChanges();
             },
             error: (err) => {
                 console.error('Failed to load complaint', err);
                 this.showToast('Failed to load complaint. Check network/backend.', 'danger');
-                this.loading = false;
+                this.isLoading = false;
+                this.cdr.detectChanges();
             }
         });
     }
@@ -269,8 +287,18 @@ export class ComplaintDetailPage implements OnInit {
 
     openLocation() {
         if (this.complaint?.location) {
-            // Primitive check if it's coordinates or text
-            const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.complaint.location)}`;
+            let locText = this.complaint.location;
+            
+            // Extract the URL if we stored it like "lat,lng (URL)"
+            const urlMatch = locText.match(/\((https:\/\/maps\.google\.com\/\?q=[^)]+)\)/);
+            if (urlMatch && urlMatch[1]) {
+                window.open(urlMatch[1], '_system');
+                return;
+            } 
+            
+            // Remove any URL in parenthesis just in case
+            locText = locText.replace(/\(https:\/\/maps\.google\.com[^)]+\)/g, '').trim();
+            const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locText)}`;
             window.open(url, '_system');
         }
     }

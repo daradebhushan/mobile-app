@@ -6,6 +6,8 @@ import { TranslatePipe } from '../../../../core/pipes/translate.pipe';
 import { IonicModule, NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 
+import { Location } from '@angular/common';
+
 @Component({
     selector: 'app-department-form-page',
     standalone: true,
@@ -27,8 +29,17 @@ export class DepartmentFormPageComponent implements OnInit {
         private departmentService: DepartmentService,
         private route: ActivatedRoute,
         private navCtrl: NavController,
+        private location: Location,
         private cdr: ChangeDetectorRef
     ) { }
+
+    goBack() {
+        if (window.history.length > 1) {
+            this.location.back();
+        } else {
+            this.navCtrl.navigateBack('/tabs/admin/departments');
+        }
+    }
 
     ionViewWillEnter() {
         // Reset state

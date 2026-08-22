@@ -86,6 +86,7 @@ export class ComplaintListComponent implements OnInit, OnDestroy {
 
     setTab(tabLabel: string) {
         this.activeTab = tabLabel;
+        this.filteredComplaints = []; // clear to show skeleton
         this.applyFilters();
     }
 
@@ -112,9 +113,13 @@ export class ComplaintListComponent implements OnInit, OnDestroy {
             this.fetchSubscription.unsubscribe();
         }
 
-        if (!event && !silent) this.loading = true;
+        // Show loader on EVERY load unless it's silent background refresh or pull-to-refresh
+        if (!event && !silent) {
+            this.loading = true;
+            this.filteredComplaints = []; // clear so skeleton appears
+            this.cdr.detectChanges();
+        }
 
-        // Fetch ALL and filter client-side for now, as backend filter wasn't implemented robustly yet
         this.fetchSubscription = this.complaintService.getComplaints()
             .subscribe({
                 next: (data: Complaint[]) => {

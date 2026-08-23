@@ -36,7 +36,7 @@
                 class="w-full bg-transparent border-none text-gray-700 dark:text-gray-200 text-[12px] font-bold uppercase tracking-widest pl-11 pr-10 py-4 focus:ring-0 appearance-none outline-none">
                 <option [ngValue]="null">{{ 'ALL_DEPARTMENTS' | translate }}</option>
                 <option [ngValue]="-1">No Department / General</option>
-                <option *ngFor="let dept of departments" [ngValue]="dept.id">{{ dept.name }}</option>
+                <option *ngFor="let dept of departments" [ngValue]="dept.id">{{ langService.currentLang() === 'MR' && dept.nameMr ? dept.nameMr : dept.name }}</option>
             </select>
             <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
                 <ion-icon name="chevron-down" class="text-gray-400 text-sm"></ion-icon>
@@ -101,7 +101,7 @@
                                 <div
                                     class="flex items-center text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest truncate">
                                     <ion-icon name="business" class="mr-1.5 text-blue-500 text-[11px]"></ion-icon>
-                                    {{ user.department?.name || ('GENERAL' | translate) }}
+                                    {{ user.department ? (langService.currentLang() === 'MR' && user.department.nameMr ? user.department.nameMr : user.department.name) : ('GENERAL' | translate) }}
                                 </div>
                                 <div *ngIf="user.designation"
                                     class="flex items-center text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest truncate">

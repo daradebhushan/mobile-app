@@ -16,7 +16,7 @@ import { Browser } from '@capacitor/browser';
     templateUrl: './settings.page.html',
 })
 export class SettingsPageComponent implements OnInit {
-    orgName: string = 'Maharashtra Nagar Panchayat';
+    orgName: string = 'Loknagar Administration';
     orgLogo: string | null = null;
     username: string = '';
     userRole: string = 'Nagar Panchayat';

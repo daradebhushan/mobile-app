@@ -25,6 +25,8 @@ export class TaskDetailComponent implements OnInit {
     comments: any[] = [];
     attachments: any[] = [];
     newComment: string = '';
+    
+    public apiUrl = environment.apiUrl;
     updatingStatus = false;
     taskId: number | null = null;
     statusOptions = ['TO_DO', 'IN_PROGRESS', 'ON_HOLD', 'COMPLETED'];
@@ -368,7 +370,7 @@ export class TaskDetailComponent implements OnInit {
         const commentText = hasText ? this.newComment.trim() : '📎 Attached file(s)';
         this.isCommentUploading = true;
 
-        this.taskService.addComment(this.taskId, commentText).subscribe({
+        this.taskService.addComment(this.taskId, commentText, hasFiles).subscribe({
             next: (res: any) => {
                 if (res.success) {
                     const commentId = res.data.id;

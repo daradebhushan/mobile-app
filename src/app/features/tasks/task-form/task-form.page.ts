@@ -8,6 +8,7 @@ import { ComplaintService } from '../../../services/complaint.service';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule, LoadingController, ToastController } from '@ionic/angular';
+import { LanguageService } from '../../../services/language.service';
 import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -51,7 +52,8 @@ export class TaskFormComponent implements OnInit {
         private location: Location,
         private loadingController: LoadingController, // Keep for save actions
         private toastController: ToastController,
-        private cdr: ChangeDetectorRef
+        private cdr: ChangeDetectorRef,
+        public langService: LanguageService
     ) { }
 
     goBack() {

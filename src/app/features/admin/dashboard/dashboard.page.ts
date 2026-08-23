@@ -5,6 +5,7 @@ import { UserService } from '../../../services/user.service';
 import { DashboardService } from '../../../services/dashboard.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { ToastController, LoadingController } from '@ionic/angular';
+import { LanguageService } from '../../../services/language.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,7 +41,8 @@ export class DashboardPage implements OnInit {
     private dashboardService: DashboardService,
     private authService: AuthService,
     private toastController: ToastController,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    public langService: LanguageService
   ) { }
 
   ngOnInit() {
@@ -105,6 +107,7 @@ export class DashboardPage implements OnInit {
         if (this.stats && this.stats.departmentStats) {
           this.staffDistribution = this.stats.departmentStats.map((dept: any) => ({
             name: dept.name,
+            nameMr: dept.nameMr,
             count: dept.count,
             id: dept.id
           }));

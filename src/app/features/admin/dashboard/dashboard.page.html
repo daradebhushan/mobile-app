@@ -277,7 +277,7 @@
         <div *ngFor="let dept of staffDistribution" (click)="navigateTo('/tabs/admin/users', {departmentId: dept.id})"
           class="bg-gray-50 dark:bg-gray-800 p-4 rounded-2xl border border-gray-100 dark:border-gray-700 flex flex-col items-center justify-center text-center active:bg-orange-50 dark:active:bg-orange-900/10 transition-all">
           <div class="font-extrabold text-2xl text-gray-900 dark:text-white mb-1">{{ dept.count }}</div>
-          <div class="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-tight">{{ dept.name }}
+          <div class="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-tight">{{ langService.currentLang() === 'MR' && dept.nameMr ? dept.nameMr : dept.name }}
           </div>
         </div>
       </div>

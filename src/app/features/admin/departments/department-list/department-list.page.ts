@@ -4,6 +4,7 @@ import { RouterModule, Router } from '@angular/router';
 import { DepartmentService } from '../../../../services/department.service';
 import { TranslatePipe } from '../../../../core/pipes/translate.pipe';
 import { IonicModule, AlertController } from '@ionic/angular';
+import { LanguageService } from '../../../../services/language.service';
 
 @Component({
     selector: 'app-department-list',
@@ -19,7 +20,8 @@ export class DepartmentListComponent implements OnInit {
         private departmentService: DepartmentService,
         private cdr: ChangeDetectorRef,
         private router: Router,
-        private alertController: AlertController
+        private alertController: AlertController,
+        public langService: LanguageService
     ) { }
 
     ngOnInit(): void {

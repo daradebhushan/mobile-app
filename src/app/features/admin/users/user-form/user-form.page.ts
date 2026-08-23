@@ -6,6 +6,7 @@ import { DepartmentService } from '../../../../services/department.service';
 import { DesignationService } from '../../../../services/designation.service';
 import { TranslatePipe } from '../../../../core/pipes/translate.pipe';
 import { IonicModule, NavController } from '@ionic/angular';
+import { LanguageService } from '../../../../services/language.service';
 import { ActivatedRoute } from '@angular/router';
 
 import { Location } from '@angular/common';
@@ -45,7 +46,8 @@ export class UserFormPageComponent implements OnInit {
         private route: ActivatedRoute,
         private navCtrl: NavController,
         private location: Location,
-        private cdr: ChangeDetectorRef
+        private cdr: ChangeDetectorRef,
+        public langService: LanguageService
     ) { }
 
     goBack() {

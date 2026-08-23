@@ -57,8 +57,8 @@ export class TaskService {
     }
 
     // Comments
-    addComment(taskId: number, text: string): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}/${taskId}/comments`, { text });
+    addComment(taskId: number, text: string, hasAttachments: boolean = false): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}/${taskId}/comments`, { text, hasAttachments });
     }
 
     getComments(taskId: number): Observable<any> {

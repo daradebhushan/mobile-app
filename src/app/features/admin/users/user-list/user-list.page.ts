@@ -6,6 +6,7 @@ import { UserService } from '../../../../services/user.service';
 import { DepartmentService } from '../../../../services/department.service';
 import { TranslatePipe } from '../../../../core/pipes/translate.pipe';
 import { IonicModule, AlertController } from '@ionic/angular';
+import { LanguageService } from '../../../../services/language.service';
 
 @Component({
     selector: 'app-user-list',
@@ -26,7 +27,8 @@ export class UserListComponent implements OnInit {
         private cdr: ChangeDetectorRef,
         private route: ActivatedRoute,
         private router: Router,
-        private alertController: AlertController
+        private alertController: AlertController,
+        public langService: LanguageService
     ) { }
 
     ngOnInit(): void {

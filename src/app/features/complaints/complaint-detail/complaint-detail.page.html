@@ -187,7 +187,8 @@
                             <p
                                 class="text-xs font-bold text-gray-500 dark:text-gray-400 mt-1 flex items-center space-x-1">
                                 <ion-icon name="call" class="text-[10px]"></ion-icon>
-                                <span>{{ complaint.citizenMobile || 'N/A' }}</span>
+                                <a *ngIf="complaint.citizenMobile" [href]="'tel:' + complaint.citizenMobile" class="text-blue-500 hover:underline">{{ complaint.citizenMobile }}</a>
+                                <span *ngIf="!complaint.citizenMobile">N/A</span>
                             </p>
                         </div>
                     </div>

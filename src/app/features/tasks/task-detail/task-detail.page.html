@@ -181,9 +181,9 @@
                     <div *ngIf="comment.attachments?.length" class="mt-3 pt-3 border-t border-gray-100 dark:border-gray-800 flex flex-wrap gap-2.5">
                         <div *ngFor="let att of comment.attachments">
                             <!-- Image Thumbnail Preview -->
-                            <div *ngIf="isImageFile(att.fileName)" (click)="openImagePreview('/api/tasks/attachments/' + att.id + '/download')"
+                            <div *ngIf="isImageFile(att.fileName)" (click)="openImagePreview(apiUrl + '/api/tasks/attachments/' + att.id + '/download')"
                                 class="relative w-20 h-20 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm cursor-pointer active:scale-95 transition-transform group">
-                                <img [src]="'/api/tasks/attachments/' + att.id + '/download'" [alt]="att.fileName" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                                <img [src]="apiUrl + '/api/tasks/attachments/' + att.id + '/download'" [alt]="att.fileName" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                                 <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                                     <ion-icon name="eye" class="text-white text-lg"></ion-icon>
                                 </div>

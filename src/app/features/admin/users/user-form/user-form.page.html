@@ -145,7 +145,7 @@
                     <select [(ngModel)]="userForm.departmentId" name="departmentId"
                         class="w-full bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-[1.25rem] pl-11 pr-5 py-4 text-[14px] font-bold text-gray-700 dark:text-white appearance-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 focus:bg-white transition-all">
                         <option [ngValue]="null">General / No Department</option>
-                        <option *ngFor="let dept of departments" [ngValue]="dept.id">{{ dept.name }}</option>
+                        <option *ngFor="let dept of departments" [ngValue]="dept.id">{{ langService.currentLang() === 'MR' && dept.nameMr ? dept.nameMr : dept.name }}</option>
                     </select>
                     <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
                         <ion-icon name="chevron-down" class="text-gray-400"></ion-icon>

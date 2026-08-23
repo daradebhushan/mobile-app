@@ -1,9 +1,9 @@
 export const TRANSLATIONS = {
     'EN': {
         // Common
-        'APP_TITLE': 'Nagar Panchayat Administration',
-        'APP_SUBTITLE': 'Government of Maharashtra',
-        'MARATHI_TITLE': 'नगर पंचायत प्रशासन',
+        'APP_TITLE': 'Nagar Parishad Administration',
+        'APP_SUBTITLE': 'Local Governance',
+        'MARATHI_TITLE': 'नगर परिषद प्रशासन',
         'SAVE': 'Save',
         'CANCEL': 'Cancel',
         'DELETE': 'Delete',
@@ -27,7 +27,7 @@ export const TRANSLATIONS = {
         'SELECT_ROLE': 'Select your role to continue',
         'CONTINUE_AS': 'Continue as Selected Role',
         'PROCESSING': 'Processing...',
-        'VERSION': 'Version 1.0.0 • Powered by Government of Maharashtra',
+        'VERSION': 'Version 1.0.0 • Powered by Loknagar Administration',
 
         // Layout & Header
         'HEADER_TITLE': 'Nagar Parishad',
@@ -125,6 +125,7 @@ export const TRANSLATIONS = {
         'FILTER': 'Filter',
         'TASK': 'Task',
         'STATUS_ON_HOLD': 'On Hold',
+        'SEARCH_COMPLAINTS': 'Search complaints...',
 
         // Complaints
         'COMPLAINT_LIST': 'Complaints',
@@ -324,9 +325,9 @@ export const TRANSLATIONS = {
     },
     'MR': {
         // Common
-        'APP_TITLE': 'नगर पंचायत प्रशासन',
-        'APP_SUBTITLE': 'महाराष्ट्र शासन',
-        'MARATHI_TITLE': 'Nagar Panchayat Administration',
+        'APP_TITLE': 'नगर परिषद प्रशासन',
+        'APP_SUBTITLE': 'स्थानिक स्वराज्य संस्था',
+        'MARATHI_TITLE': 'Nagar Parishad Administration',
         'SAVE': 'जतन करा',
         'CANCEL': 'रद्द करा',
         'DELETE': 'काढून टाका',
@@ -351,7 +352,7 @@ export const TRANSLATIONS = {
         'SELECT_ROLE': 'कृपया आपली भूमिका निवडा',
         'CONTINUE_AS': 'निवडलेल्या भूमिकेसह पुढे जा',
         'PROCESSING': 'प्रक्रिया होत आहे...',
-        'VERSION': 'आवृत्ती 1.0.0 • महाराष्ट्र शासनाद्वारे समर्थित',
+        'VERSION': 'आवृत्ती 1.0.0 • लोकनगर प्रशासनाद्वारे समर्थित',
 
         // Layout & Header
         'HEADER_TITLE': 'नगर परिषद',
@@ -459,6 +460,7 @@ export const TRANSLATIONS = {
         'FILTER': 'फिल्टर',
         'TASK': 'काम',
         'STATUS_ON_HOLD': 'होल्डवर',
+        'SEARCH_COMPLAINTS': 'तक्रारी शोधा...',
 
         // Complaints
         'COMPLAINT_LIST': 'तक्रारी',

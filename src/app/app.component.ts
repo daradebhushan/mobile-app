@@ -145,17 +145,35 @@ export class AppComponent implements OnInit {
       } catch (error) {
         console.error('Error requesting notifications permissions', error);
       }
-      // Push notifications registration can be added here if needed in future
-      // this.registerPush();
+      // Initialize remote push notifications
+      this.registerPush();
     }
   }
 
   setupLocalNotificationListener() {
+    if (Capacitor.getPlatform() === 'android') {
+      LocalNotifications.createChannel({
+        id: 'townseva_high_priority',
+        name: 'Townseva Alerts',
+        description: 'Urgent task and complaint alerts',
+        importance: 5, // NotificationManager.IMPORTANCE_HIGH
+        visibility: 1, // NotificationCompat.VISIBILITY_PUBLIC
+        sound: 'default',
+        vibration: true,
+        lights: true,
+        lightColor: '#2563eb'
+      }).catch(err => console.error('Error creating local notification channel', err));
+    }
+
     LocalNotifications.addListener('localNotificationActionPerformed', async (notificationEvent) => {
       console.log('Local notification action performed', notificationEvent);
 
       const extra = notificationEvent.notification.extra;
-      if (extra && extra.filePath) {
+      if (extra && extra.route) {
+        this.zone.run(() => {
+          this.router.navigateByUrl(extra.route);
+        });
+      } else if (extra && extra.filePath) {
         console.log('Attempting to open file from notification:', extra.filePath);
         try {
           console.log('Notification opening file:', extra.filePath, 'type:', extra.contentType);
@@ -207,6 +225,24 @@ export class AppComponent implements OnInit {
   }
 
   private registerPush() {
+    if (Capacitor.getPlatform() === 'android') {
+      PushNotifications.createChannel({
+        id: 'townseva_high_priority',
+        name: 'Townseva Alerts',
+        description: 'Urgent task and complaint alerts',
+        importance: 5, // NotificationManager.IMPORTANCE_HIGH
+        visibility: 1, // NotificationCompat.VISIBILITY_PUBLIC
+        sound: 'default',
+        vibration: true,
+        lights: true,
+        lightColor: '#2563eb'
+      }).then(() => {
+        console.log('Push notification channel townseva_high_priority created');
+      }).catch(err => {
+        console.error('Error creating push notification channel', err);
+      });
+    }
+
     PushNotifications.requestPermissions().then((result) => {
       if (result.receive === 'granted') {
         PushNotifications.register();
@@ -215,8 +251,28 @@ export class AppComponent implements OnInit {
       }
     });
 
+    let pendingPushToken: string | null = null;
+
     PushNotifications.addListener('registration', (token: Token) => {
       console.log('Push registration success, token: ' + token.value);
+      pendingPushToken = token.value;
+      
+      if (this.authService.getToken()) {
+        this.authService.registerPushToken(pendingPushToken).subscribe({
+          next: () => console.log('Push token successfully registered with backend.'),
+          error: (err) => console.error('Failed to register push token with backend:', err)
+        });
+      }
+    });
+
+    // When the user logs in, if we have a pending token, send it
+    this.authService.user$.subscribe(user => {
+      if (user && pendingPushToken) {
+        this.authService.registerPushToken(pendingPushToken).subscribe({
+          next: () => console.log('Push token registered after login.'),
+          error: (err) => console.error('Failed to register push token after login:', err)
+        });
+      }
     });
 
     PushNotifications.addListener('registrationError', (error: any) => {
@@ -224,11 +280,31 @@ export class AppComponent implements OnInit {
     });
 
     PushNotifications.addListener('pushNotificationReceived', (notification: PushNotificationSchema) => {
-      console.log('Push received: ' + JSON.stringify(notification));
+      console.log('Push received (foreground): ' + JSON.stringify(notification));
+      // Show as heads-up floating notification banner even when foregrounded in app
+      LocalNotifications.schedule({
+        notifications: [
+          {
+            title: notification.title || 'Townseva Notice',
+            body: notification.body || '',
+            id: Math.floor(Math.random() * 100000) + 1,
+            schedule: { at: new Date(Date.now() + 50) },
+            sound: 'default',
+            channelId: 'townseva_high_priority',
+            extra: notification.data || {}
+          }
+        ]
+      }).catch(err => console.error('Error scheduling foreground heads-up banner', err));
     });
 
     PushNotifications.addListener('pushNotificationActionPerformed', (notification: ActionPerformed) => {
       console.log('Push action performed: ' + JSON.stringify(notification));
+      const data = notification.notification.data;
+      if (data && data.route) {
+        this.zone.run(() => {
+          this.router.navigateByUrl(data.route);
+        });
+      }
     });
   }
 }

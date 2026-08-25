@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "717907915897",
+    "project_id": "loknagar-30ed3",
+    "storage_bucket": "loknagar-30ed3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717907915897:android:2a017e05829fc9110d90a8",
+        "android_client_info": {
+          "package_name": "com.nagar.parishad.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZycdm07OejAtgzDVeG189Ufu7hkoIl8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

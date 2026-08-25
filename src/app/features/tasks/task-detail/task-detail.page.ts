@@ -13,6 +13,7 @@ import { LocalNotifications } from '@capacitor/local-notifications';
 
 import { Location } from '@angular/common';
 import { ImageModalComponent } from '../../complaints/complaint-detail/image-modal.component';
+import { environment } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-task-detail',
@@ -212,7 +213,7 @@ export class TaskDetailComponent implements OnInit {
                         const savedFile = await Filesystem.writeFile({
                             path: sanitizedName,
                             data: base64,
-                            directory: Directory.Cache,
+                            directory: Directory.Documents,
                         });
 
                         let resolvedMimeType = blob.type;

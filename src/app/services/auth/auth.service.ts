@@ -41,6 +41,7 @@ import { Router } from '@angular/router';
 export class AuthService {
     private apiUrl = `${environment.apiUrl}/api/auth`;
     private userSubject = new BehaviorSubject<User | null>(null);
+    private organizationLogoSubject = new BehaviorSubject<string | null>(null);
     private currentToken: string | null = null;
 
     constructor(
@@ -56,6 +57,14 @@ export class AuthService {
 
     get user$() {
         return this.userSubject.asObservable();
+    }
+
+    public get organizationLogo$(): Observable<string | null> {
+        return this.organizationLogoSubject.asObservable();
+    }
+
+    public registerPushToken(token: string): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/api/user/register-push-token`, { token }, { headers: { 'ngrok-skip-browser-warning': 'true' } });
     }
 
     get currentUserValue() {

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ForgotPasswordPageRoutingModule } from './forgot-password-routing.module';
 
 import { ForgotPasswordPage } from './forgot-password.page';
+import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ForgotPasswordPageRoutingModule
+    ForgotPasswordPageRoutingModule,
+    TranslatePipe
   ],
   declarations: [ForgotPasswordPage]
 })

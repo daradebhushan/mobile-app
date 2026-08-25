@@ -356,7 +356,7 @@ export class ComplaintDetailPage implements OnInit {
                         const savedFile = await Filesystem.writeFile({
                             path: sanitizedName,
                             data: base64,
-                            directory: Directory.Cache,
+                            directory: Directory.Documents,
                         });
 
                         let resolvedMimeType = blob.type;

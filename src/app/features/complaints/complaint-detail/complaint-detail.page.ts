@@ -65,10 +65,13 @@ export class ComplaintDetailPage implements OnInit {
     }
 
     ngOnInit() {
-        const idParam = this.route.snapshot.paramMap.get('id');
-        if (idParam) {
-            this.complaintId = +idParam;
-        }
+        this.route.paramMap.subscribe(params => {
+            const idParam = params.get('id');
+            if (idParam) {
+                this.complaintId = +idParam;
+                this.loadComplaint();
+            }
+        });
     }
 
     ionViewWillEnter() {
@@ -77,9 +80,8 @@ export class ComplaintDetailPage implements OnInit {
         if (idParam) {
             this.complaintId = +idParam;
         }
-        if (this.complaintId) {
+        if (this.complaintId && !this.complaint) {
             // Clear stale data so skeleton shows immediately
-            this.complaint = null;
             this.attachmentImages = {};
             this.attachmentLoadErrors = {};
             this.loadComplaint();

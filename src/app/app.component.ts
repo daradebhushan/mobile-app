@@ -150,6 +150,37 @@ export class AppComponent implements OnInit {
     }
   }
 
+  private navigateToRoute(rawRoute: string) {
+    if (!rawRoute) return;
+    let target = rawRoute.trim();
+    if (!target.startsWith('/')) {
+      target = '/' + target;
+    }
+
+    // Normalize route aliases
+    if (target.startsWith('/complaints/')) {
+      const parts = target.split('/');
+      const id = parts[2];
+      target = `/complaint-detail/${id}`;
+    } else if (target.startsWith('/tasks/')) {
+      const parts = target.split('/');
+      const id = parts[2];
+      target = `/tabs/tasks/${id}`;
+    } else if (target === '/complaints') {
+      target = '/tabs/complaints';
+    } else if (target === '/tasks') {
+      target = '/tabs/tasks';
+    }
+
+    console.log('[Router Navigation] Navigating to normalized route:', target);
+    this.zone.run(() => {
+      this.router.navigateByUrl(target).catch(err => {
+        console.warn('navigateByUrl failed, attempting navigate:', err);
+        this.router.navigate([target]);
+      });
+    });
+  }
+
   setupLocalNotificationListener() {
     if (Capacitor.getPlatform() === 'android') {
       LocalNotifications.createChannel({
@@ -169,22 +200,24 @@ export class AppComponent implements OnInit {
       console.log('Local notification action performed', notificationEvent);
 
       const extra = notificationEvent.notification.extra;
-      if (extra && extra.route) {
-        this.zone.run(() => {
-          this.router.navigateByUrl(extra.route);
-        });
-      } else if (extra && extra.filePath) {
-        console.log('Attempting to open file from notification:', extra.filePath);
-        try {
-          console.log('Notification opening file:', extra.filePath, 'type:', extra.contentType);
-          await FileOpener.open({
-            filePath: extra.filePath,
-            contentType: extra.contentType || 'application/octet-stream', // Fallback
-            openWithDefault: false
-          });
-          console.log('FileOpener resolved successfully from notification');
-        } catch (e) {
-          console.error('Error opening file from notification', e);
+      if (extra) {
+        if (extra.route) {
+          this.navigateToRoute(extra.route);
+        } else if (extra.taskId) {
+          this.navigateToRoute(`/tabs/tasks/${extra.taskId}`);
+        } else if (extra.filePath) {
+          console.log('Attempting to open file from notification:', extra.filePath);
+          try {
+            console.log('Notification opening file:', extra.filePath, 'type:', extra.contentType);
+            await FileOpener.open({
+              filePath: extra.filePath,
+              contentType: extra.contentType || 'application/octet-stream', // Fallback
+              openWithDefault: false
+            });
+            console.log('FileOpener resolved successfully from notification');
+          } catch (e) {
+            console.error('Error opening file from notification', e);
+          }
         }
       }
     });
@@ -300,10 +333,12 @@ export class AppComponent implements OnInit {
     PushNotifications.addListener('pushNotificationActionPerformed', (notification: ActionPerformed) => {
       console.log('Push action performed: ' + JSON.stringify(notification));
       const data = notification.notification.data;
-      if (data && data.route) {
-        this.zone.run(() => {
-          this.router.navigateByUrl(data.route);
-        });
+      if (data) {
+        if (data.route) {
+          this.navigateToRoute(data.route);
+        } else if (data.taskId) {
+          this.navigateToRoute(`/tabs/tasks/${data.taskId}`);
+        }
       }
     });
   }

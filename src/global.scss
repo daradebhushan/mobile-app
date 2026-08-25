@@ -176,12 +176,166 @@ ion-item {
 
 /* Custom Badge */
 .status-badge {
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 10px;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    font-size: 11px;
     font-weight: 700;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Modern 2026 Card Component */
+.modern-card {
+    background: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+
+    &:active {
+        transform: scale(0.985);
+    }
+
+    .dark & {
+        background: #111827;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.35);
+    }
+}
+
+/* Status Pulse Indicator */
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        border-radius: 50%;
+        background: inherit;
+        opacity: 0.4;
+        animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+}
+
+/* Modern Gradient Buttons */
+.saffron-gradient-btn {
+    background: linear-gradient(135deg, #FF6B00 0%, #EA580C 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 8px 20px -4px rgba(255, 107, 0, 0.4) !important;
+    border-radius: 18px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.03em !important;
+    transition: all 0.2s ease !important;
+
+    &:active {
+        transform: scale(0.96) !important;
+        box-shadow: 0 4px 10px -2px rgba(255, 107, 0, 0.3) !important;
+    }
+}
+
+/* Ambient Saffron Mesh Backgrounds */
+.saffron-mesh-bg {
+    background: radial-gradient(circle at 10% 10%, rgba(255, 107, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 90% 90%, rgba(245, 158, 11, 0.06) 0%, transparent 50%);
+}
+
+.dark .saffron-mesh-bg {
+    background: radial-gradient(circle at 10% 10%, rgba(255, 107, 0, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 90% 90%, rgba(245, 158, 11, 0.08) 0%, transparent 60%);
+}
+
+/* Floating Glass Tab Dock */
+ion-tab-bar.floating-glass-dock {
+    position: absolute !important;
+    bottom: 12px !important;
+    left: 14px !important;
+    right: 14px !important;
+    width: auto !important;
+    border-radius: 32px !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+    height: 64px !important;
+    padding: 4px 8px !important;
+    z-index: 100 !important;
+
+    ion-tab-button {
+        background: transparent !important;
+        border-radius: 24px !important;
+        margin: 2px 4px !important;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        --color: #64748b !important;
+        --color-selected: #FF6B00 !important;
+
+        ion-icon {
+            font-size: 22px !important;
+            transition: transform 0.25s ease !important;
+        }
+
+        ion-label {
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.02em !important;
+            margin-top: 2px !important;
+        }
+
+        &.tab-selected {
+            background: rgba(255, 107, 0, 0.1) !important;
+            --color: #FF6B00 !important;
+
+            ion-icon {
+                transform: scale(1.15) translateY(-1px) !important;
+                color: #FF6B00 !important;
+            }
+        }
+    }
+}
+
+.dark ion-tab-bar.floating-glass-dock {
+    background: rgba(15, 23, 42, 0.92) !important;
+    border: 1px solid rgba(255, 255, 255, 0.09) !important;
+    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.6) !important;
+
+    ion-tab-button {
+        --color: #94a3b8 !important;
+        --color-selected: #FF8533 !important;
+
+        &.tab-selected {
+            background: rgba(255, 107, 0, 0.18) !important;
+            --color: #FF8533 !important;
+
+            ion-icon {
+                color: #FF8533 !important;
+            }
+        }
+    }
 }
 
 /* Animations */

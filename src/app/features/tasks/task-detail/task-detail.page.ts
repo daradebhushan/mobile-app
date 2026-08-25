@@ -62,11 +62,13 @@ export class TaskDetailComponent implements OnInit {
 
     ngOnInit() {
         this.currentUser = this.authService.currentUserValue;
-        // Read taskId here for initial setup only
-        const taskIdParam = this.route.snapshot.paramMap.get('taskId');
-        if (taskIdParam) {
-            this.taskId = +taskIdParam;
-        }
+        this.route.paramMap.subscribe(params => {
+            const taskIdParam = params.get('taskId');
+            if (taskIdParam) {
+                this.taskId = +taskIdParam;
+                this.loadTask(this.taskId);
+            }
+        });
     }
 
     isLoading: boolean = false;
@@ -78,9 +80,7 @@ export class TaskDetailComponent implements OnInit {
         if (taskIdParam) {
             this.taskId = +taskIdParam;
         }
-        if (this.taskId) {
-            // Clear stale data first so skeleton shows instead of stale content
-            this.task = null;
+        if (this.taskId && !this.task) {
             this.comments = [];
             this.attachments = [];
             this.loadTask(this.taskId);

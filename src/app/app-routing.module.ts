@@ -166,6 +166,26 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'complaints/:id',
+    redirectTo: 'complaint-detail/:id',
+    pathMatch: 'full'
+  },
+  {
+    path: 'complaints',
+    redirectTo: 'tabs/complaints',
+    pathMatch: 'full'
+  },
+  {
+    path: 'tasks/:taskId',
+    redirectTo: 'tabs/tasks/:taskId',
+    pathMatch: 'full'
+  },
+  {
+    path: 'tasks',
+    redirectTo: 'tabs/tasks',
+    pathMatch: 'full'
+  },
+  {
     path: 'admin/chatbot',
     loadComponent: () => import('./features/admin/chatbot/chatbot-settings.page').then(m => m.ChatbotSettingsPage),
     canActivate: [authGuard],

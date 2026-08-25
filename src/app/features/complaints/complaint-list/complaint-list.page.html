@@ -1,32 +1,39 @@
 <ion-header class="ion-no-border relative z-50">
     <!-- Premium Glass Header -->
-    <div class="bg-white/95 dark:bg-[#0B0F19]/95 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/80 px-5 pt-4 pb-4 shadow-sm transition-all duration-300 relative"
-        style="padding-top: calc(1rem + var(--ion-safe-area-top));">
+    <div class="bg-white/95 dark:bg-[#0B0F19]/95 backdrop-blur-xl border-b border-gray-100 dark:border-gray-800/80 px-5 pt-4 pb-3 shadow-sm transition-all duration-300 relative"
+        style="padding-top: calc(0.85rem + var(--ion-safe-area-top));">
 
         <!-- Title Row -->
-        <div class="mb-5 flex justify-between items-end">
-            <h2 class="text-3xl font-black text-gray-900 dark:text-white tracking-tight">{{ 'NAV_COMPLAINTS' | translate
-                }}</h2>
+        <div class="mb-4 flex justify-between items-center">
+            <div>
+                <span class="text-[10px] font-black text-orange-600 dark:text-orange-400 uppercase tracking-widest">Citizens Grievance</span>
+                <h2 class="text-2xl font-black text-gray-900 dark:text-white tracking-tight leading-none">{{ 'NAV_COMPLAINTS' | translate }}</h2>
+            </div>
+            <div class="px-3 py-1.5 rounded-2xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200/60 dark:border-orange-800/40 text-orange-600 dark:text-orange-400 text-xs font-black">
+                {{ filteredComplaints.length }} Total
+            </div>
         </div>
 
         <!-- Modern Search Row -->
-        <div class="relative w-full mb-5">
+        <div class="relative w-full mb-3.5">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <ion-icon name="search-outline"
-                    class="text-gray-400 dark:text-gray-500 text-xl transition-colors"></ion-icon>
+                <ion-icon name="search-outline" class="text-orange-500 text-lg"></ion-icon>
             </div>
             <input type="text" [(ngModel)]="searchText" (ngModelChange)="onSearch()"
-                class="block w-full pl-12 pr-4 py-3.5 bg-gray-100 dark:bg-gray-900 border-none rounded-[1.5rem] text-[15px] font-medium text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-saffron-500/50 focus:bg-white dark:focus:bg-gray-800 transition-all shadow-inner"
+                class="block w-full pl-11 pr-10 py-3 bg-gray-100/90 dark:bg-gray-900 border-none rounded-[20px] text-[14px] font-semibold text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-orange-500/40 focus:bg-white dark:focus:bg-gray-800 transition-all shadow-inner"
                 [placeholder]="'SEARCH_COMPLAINTS' | translate">
+            <button *ngIf="searchText" (click)="searchText = ''; onSearch()" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                <ion-icon name="close-circle" class="text-lg"></ion-icon>
+            </button>
         </div>
 
         <!-- Premium Pill Tabs Row -->
-        <div class="flex space-x-2.5 overflow-x-auto scrollbar-hide pb-2 snap-x -mx-2 px-2">
+        <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1.5 snap-x -mx-1 px-1">
             <button *ngFor="let tab of tabs" (click)="setTab(tab.label)"
-                class="snap-center px-5 py-2.5 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all duration-300 flex items-center whitespace-nowrap active:scale-[0.97] border"
+                class="snap-center px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-wider transition-all duration-300 flex items-center whitespace-nowrap active:scale-95 border"
                 [ngClass]="activeTab === tab.label 
-            ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 border-transparent shadow-md font-black' 
-            : 'bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800'">
+            ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white border-transparent shadow-md shadow-orange-500/25' 
+            : 'bg-white/80 dark:bg-gray-900/80 text-gray-500 dark:text-gray-400 border-gray-200/80 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800'">
                 {{ tab.label | translate }}
             </button>
         </div>
@@ -38,10 +45,10 @@
         <ion-refresher-content pullingIcon="chevron-down-circle-outline"></ion-refresher-content>
     </ion-refresher>
 
-    <div class="p-4 pb-32 pt-6">
-        <!-- Skeleton Loader: shown on every fetch (tab switch, filter change, re-entry) -->
-        <div *ngIf="loading" class="space-y-5">
-            <div *ngFor="let i of [1,2,3,4,5]"
+    <div class="p-4 pb-32 pt-4">
+        <!-- Skeleton Loader -->
+        <div *ngIf="loading" class="space-y-4">
+            <div *ngFor="let i of [1,2,3,4]"
                 class="bg-white dark:bg-gray-900 rounded-[24px] p-5 border border-gray-100/80 dark:border-gray-800/80 shadow-sm animate-pulse">
                 <div class="flex justify-between items-center mb-4">
                     <div class="h-3 bg-gray-100 dark:bg-gray-800 rounded-full w-24"></div>
@@ -52,99 +59,82 @@
                     <div class="h-8 bg-gray-100 dark:bg-gray-800 rounded-xl w-24"></div>
                     <div class="h-8 bg-gray-100 dark:bg-gray-800 rounded-xl w-28"></div>
                 </div>
-                <div class="flex justify-between items-center border-t border-gray-100 dark:border-gray-800 pt-4">
-                    <div class="h-3 bg-gray-100 dark:bg-gray-800 rounded-full w-20"></div>
-                    <div class="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full"></div>
-                </div>
             </div>
         </div>
 
         <!-- Beautiful Empty State -->
         <div *ngIf="!loading && filteredComplaints.length === 0"
-            class="flex flex-col items-center justify-center py-24 text-center px-6">
+            class="flex flex-col items-center justify-center py-20 text-center px-6">
             <div
-                class="w-24 h-24 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-full flex items-center justify-center mb-6 shadow-inner ring-4 ring-white dark:ring-gray-950">
-                <ion-icon name="folder-open-outline" class="text-4xl text-gray-300 dark:text-gray-600"></ion-icon>
+                class="w-20 h-20 bg-gradient-to-br from-orange-100 to-amber-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl flex items-center justify-center mb-5 shadow-inner ring-4 ring-white dark:ring-gray-900 text-orange-500">
+                <ion-icon name="folder-open-outline" class="text-3xl"></ion-icon>
             </div>
-            <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">{{ 'NO_RECORDS' | translate
-                }}</h3>
-            <p class="text-gray-500 dark:text-gray-400 text-sm max-w-[240px] leading-relaxed">You're all caught up! No
-                complaints found in this category.</p>
+            <h3 class="text-xl font-black text-gray-900 dark:text-white mb-1.5 tracking-tight">{{ 'NO_RECORDS' | translate }}</h3>
+            <p class="text-gray-500 dark:text-gray-400 text-xs max-w-[240px] leading-relaxed">No complaints found in this category.</p>
         </div>
 
-        <!-- Dynamic Complaint Cards (hidden while loading) -->
-        <div *ngIf="!loading" class="space-y-5">
+        <!-- Dynamic Complaint Cards -->
+        <div *ngIf="!loading" class="space-y-4">
             <div *ngFor="let complaint of filteredComplaints; trackBy: trackById" (click)="openComplaint(complaint)"
-                class="group bg-white dark:bg-gray-900 rounded-[24px] p-5 relative overflow-hidden active:scale-[0.98] transition-all duration-300 border border-gray-100/80 dark:border-gray-800/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)]">
-
-                <!-- Card Glow Effect (Dark Mode) -->
-                <div
-                    class="absolute -inset-1 bg-gradient-to-r from-saffron-500/0 via-saffron-500/5 to-saffron-500/0 opacity-0 group-hover:opacity-100 dark:group-hover:opacity-20 transition-opacity blur-xl">
-                </div>
+                class="modern-card p-5 active:scale-[0.985] transition-all duration-200 group">
 
                 <div class="relative z-10">
-                    <!-- Header: ID & Status -->
-                    <div class="flex justify-between items-center mb-4">
+                    <!-- Header: ID & Status Badge -->
+                    <div class="flex justify-between items-center mb-3">
                         <div class="flex items-center space-x-2">
-                            <div class="w-2 h-2 rounded-full"
-                                [ngClass]="complaint.status === 'PENDING' ? 'bg-orange-500 animate-pulse' : (complaint.status === 'ACCEPTED' ? 'bg-blue-500' : 'bg-green-500')">
-                            </div>
-                            <span
-                                class="text-[11px] font-black tracking-[0.15em] text-gray-400 dark:text-gray-500 uppercase">
+                            <span class="status-dot" [ngClass]="complaint.status === 'CONVERTED_TO_TASK' ? 'bg-emerald-500' : (complaint.status === 'ACCEPTED' ? 'bg-blue-500' : (complaint.status === 'REJECTED' ? 'bg-rose-500' : 'bg-amber-500'))"></span>
+                            <span class="text-[11px] font-black tracking-widest text-gray-400 dark:text-gray-500 uppercase">
                                 {{ complaint.complaintNo }}
                             </span>
                         </div>
                         <span
-                            class="px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider shadow-sm ring-1 ring-inset"
+                            class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm ring-1 ring-inset"
                             [ngClass]="getStatusClass(complaint.status)">
                             {{ complaint.status }}
                         </span>
                     </div>
 
                     <!-- Title / Citizen Name -->
-                    <h3 class="text-lg font-black text-gray-900 dark:text-white mb-4 leading-snug line-clamp-2 pr-4">
+                    <h3 class="text-base font-black text-gray-900 dark:text-white mb-3 leading-snug line-clamp-2">
                         {{ complaint.citizenName || 'Anonymous' }}<span
-                            class="text-gray-400 dark:text-gray-600 font-medium">'s Report</span>
+                            class="text-gray-400 dark:text-gray-500 font-normal"> - {{ complaint.description || 'Civic Report' }}</span>
                     </h3>
 
-                    <!-- Quick Info Pills -->
-                    <div class="flex items-center gap-2 mb-5 overflow-x-auto scrollbar-hide pb-1">
+                    <!-- Quick Info Chips -->
+                    <div class="flex items-center gap-2 mb-4 overflow-x-auto scrollbar-hide pb-1">
                         <div
-                            class="flex-shrink-0 flex items-center space-x-1.5 bg-gray-50 dark:bg-gray-800/50 px-3 py-2 rounded-xl border border-gray-100 dark:border-gray-800">
-                            <ion-icon name="calendar-outline"
-                                class="text-gray-400 dark:text-gray-500 text-sm"></ion-icon>
+                            class="flex-shrink-0 flex items-center space-x-1.5 bg-gray-50 dark:bg-gray-800/70 px-3 py-1.5 rounded-xl border border-gray-100 dark:border-gray-800">
+                            <ion-icon name="calendar-outline" class="text-orange-500 text-xs"></ion-icon>
                             <span class="text-[11px] font-bold text-gray-600 dark:text-gray-300">
-                                {{ complaint.createdAt | date:'MMM dd' }}
+                                {{ complaint.createdAt | date:'MMM dd, yyyy' }}
                             </span>
                         </div>
                         <div
-                            class="flex-shrink-0 flex items-center space-x-1.5 bg-gray-50 dark:bg-gray-800/50 px-3 py-2 rounded-xl border border-gray-100 dark:border-gray-800 max-w-[140px]">
-                            <ion-icon name="business-outline"
-                                class="text-indigo-400 dark:text-indigo-500 text-sm"></ion-icon>
+                            class="flex-shrink-0 flex items-center space-x-1.5 bg-gray-50 dark:bg-gray-800/70 px-3 py-1.5 rounded-xl border border-gray-100 dark:border-gray-800 max-w-[160px]">
+                            <ion-icon name="business-outline" class="text-blue-500 text-xs"></ion-icon>
                             <span class="text-[11px] font-bold text-gray-600 dark:text-gray-300 truncate">
-                                {{ complaint.departmentName || 'General' }}
+                                {{ complaint.departmentName || 'General Dept' }}
                             </span>
                         </div>
                     </div>
 
-                    <!-- Card Footer: Media & Chevron -->
+                    <!-- Card Footer: Media indicator & Arrow -->
                     <div
-                        class="flex items-center justify-between border-t border-gray-100 dark:border-gray-800 pt-4 mt-2">
+                        class="flex items-center justify-between border-t border-gray-100/80 dark:border-gray-800/80 pt-3.5 mt-1">
                         <div class="flex items-center space-x-2">
                             <div *ngIf="complaint.photoUrl"
-                                class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400">
-                                <ion-icon name="images" class="text-sm"></ion-icon>
+                                class="flex items-center justify-center w-7 h-7 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-800/40">
+                                <ion-icon name="image" class="text-xs"></ion-icon>
                             </div>
-                            <span class="text-[10px] font-bold uppercase tracking-widest"
-                                [ngClass]="complaint.photoUrl ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400 dark:text-gray-600'">
-                                {{ complaint.photoUrl ? 'Image Attached' : 'Text Only' }}
+                            <span class="text-[10px] font-bold uppercase tracking-wider"
+                                [ngClass]="complaint.photoUrl ? 'text-blue-600 dark:text-blue-400 font-black' : 'text-gray-400 dark:text-gray-500'">
+                                {{ complaint.photoUrl ? 'Photo Attached' : 'Details Only' }}
                             </span>
                         </div>
 
                         <div
-                            class="w-8 h-8 rounded-full bg-gray-50 dark:bg-gray-800 flex items-center justify-center group-hover:bg-gray-100 dark:group-hover:bg-gray-700 transition-colors">
-                            <ion-icon name="arrow-forward"
-                                class="text-sm text-gray-400 dark:text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white transition-colors"></ion-icon>
+                            class="w-7 h-7 rounded-xl bg-orange-50 dark:bg-orange-950/30 text-orange-600 dark:text-orange-400 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-all">
+                            <ion-icon name="arrow-forward" class="text-xs"></ion-icon>
                         </div>
                     </div>
                 </div>

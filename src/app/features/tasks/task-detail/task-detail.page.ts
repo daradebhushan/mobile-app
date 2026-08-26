@@ -463,11 +463,12 @@ export class TaskDetailComponent implements OnInit {
 
     canEdit(comment: any): boolean {
         if (this.canManageTask) return true;
-        return this.currentUser && comment.user && (this.currentUser.id === comment.user.id || this.currentUser.username === comment.user.username);
+        const user = this.currentUser || this.authService.currentUserValue;
+        return !!user && !!comment.user && (Number(user.id) === Number(comment.user.id) || user.username === comment.user.username || user.email === comment.user.email);
     }
 
     get isAdmin(): boolean {
-        const user = this.authService.currentUserValue;
+        const user = this.currentUser || this.authService.currentUserValue;
         const role = (user as any)?.role;
         return user?.roles?.includes('ROLE_OWNER') || user?.roles?.includes('ROLE_ADMIN') ||
             user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN') ||
@@ -475,13 +476,25 @@ export class TaskDetailComponent implements OnInit {
             role === 'OWNER' || role === 'ADMIN' || role === 'CHIEF_OFFICER' || false;
     }
 
+    get isDeptHead(): boolean {
+        const user = this.currentUser || this.authService.currentUserValue;
+        const role = (user as any)?.role;
+        return user?.roles?.includes('ROLE_DEPARTMENT_HEAD') || user?.roles?.includes('DEPARTMENT_HEAD') ||
+            role === 'ROLE_DEPARTMENT_HEAD' || role === 'DEPARTMENT_HEAD' || false;
+    }
+
     get isStaff(): boolean {
-        const user = this.currentUser;
-        return user?.role === 'STAFF' || user?.roles?.includes('ROLE_STAFF') || user?.roles?.includes('STAFF');
+        const user = this.currentUser || this.authService.currentUserValue;
+        const role = (user as any)?.role;
+        return user?.roles?.includes('ROLE_STAFF') || user?.roles?.includes('STAFF') ||
+            role === 'ROLE_STAFF' || role === 'STAFF' || false;
     }
 
     get isAssignedStaff(): boolean {
-        return !!this.task?.assignedStaff?.id && !!this.currentUser && this.task.assignedStaff.id === this.currentUser.id;
+        const user = this.currentUser || this.authService.currentUserValue;
+        if (!this.task || !user) return false;
+        const staffId = this.task?.assignedStaff?.id || this.task?.assignedStaffId;
+        return staffId != null && Number(staffId) === Number(user.id);
     }
 
     get canManageTask(): boolean {
@@ -489,11 +502,12 @@ export class TaskDetailComponent implements OnInit {
     }
 
     get canUpdateTaskStatus(): boolean {
-        return this.canManageTask || (this.isStaff && this.isAssignedStaff);
+        return this.canManageTask || this.isDeptHead || (this.isStaff && this.isAssignedStaff);
     }
 
     get canCommentOnTask(): boolean {
-        return this.canManageTask || (this.isStaff && this.isAssignedStaff);
+        const user = this.currentUser || this.authService.currentUserValue;
+        return !!user;
     }
 
     updateStatus(newStatus: string) {

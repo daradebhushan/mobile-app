@@ -243,12 +243,12 @@
 </ion-content>
 
 <!-- Comment Input Bar with Attachment Support -->
-<div *ngIf="canCommentOnTask" class="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-[#0B0F19]/95 backdrop-blur-xl border-t border-gray-200/50 dark:border-gray-800/50 p-3 pb-6 z-50">
+<ion-footer *ngIf="canCommentOnTask" class="ion-no-border bg-white/95 dark:bg-[#0B0F19]/95 backdrop-blur-xl border-t border-gray-200/50 dark:border-gray-800/50 p-3 pb-6 z-50">
     <div class="max-w-screen-md mx-auto">
         <!-- Selected Files Preview Chips -->
         <div *ngIf="commentFiles?.length" class="flex flex-wrap gap-2 mb-2 px-1">
             <div *ngFor="let f of commentFiles; let idx = index"
-                class="bg-orange-50 dark:bg-orange-950/40 text-saffron-600 dark:text-saffron-400 border border-saffron-200 dark:border-saffron-800/50 text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-xs animate-fade-in">
+                class="bg-orange-50 dark:bg-orange-950/40 text-orange-600 dark:text-orange-400 border border-orange-200 dark:border-orange-800/50 text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-xs animate-fade-in">
                 <ion-icon [name]="isImageFile(f.name) ? 'image' : 'document-text'" class="text-sm"></ion-icon>
                 <span class="max-w-[130px] truncate">{{ f.name }}</span>
                 <button type="button" (click)="removeCommentFile(idx)" class="text-gray-400 hover:text-red-500 ml-0.5 flex items-center">
@@ -273,10 +273,10 @@
 
             <!-- Send Button -->
             <button (click)="addComment()" [disabled]="(!newComment.trim() && commentFiles.length === 0) || isCommentUploading"
-                class="h-[50px] w-[50px] flex items-center justify-center bg-gradient-to-br from-saffron-500 to-orange-600 text-white rounded-[1.25rem] shadow-lg active:scale-90 transition-all shrink-0 disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none">
+                class="h-[50px] w-[50px] flex items-center justify-center bg-gradient-to-br from-orange-500 to-amber-600 text-white rounded-[1.25rem] shadow-lg active:scale-90 transition-all shrink-0 disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none">
                 <ion-spinner *ngIf="isCommentUploading" name="crescent" color="light" class="w-5 h-5"></ion-spinner>
                 <ion-icon *ngIf="!isCommentUploading" name="send" class="text-xl ml-0.5"></ion-icon>
             </button>
         </div>
     </div>
-</div>
+</ion-footer>
